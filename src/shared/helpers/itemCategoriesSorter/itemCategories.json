@@ -1,0 +1,4828 @@
+{
+  "r": {
+    "redstone": {
+      "display_name": "Редстоуновий пил",
+      "categories": ["redstone_blocks", "ingredients"]
+    },
+    "redstone_torch": {
+      "display_name": "Редстоуновий смолоскип",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "redstone_block": {
+      "display_name": "Блок редстоуну",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "repeater": {
+      "display_name": "Редстоуновий повторювач",
+      "categories": ["redstone_blocks"]
+    },
+    "redstone_lamp": {
+      "display_name": "Редстоунова лампа",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "redstone_ore": {
+      "display_name": "Редстоунова руда",
+      "categories": ["redstone_blocks", "nature_blocks"]
+    },
+    "recovery_compass": {
+      "display_name": "Компас відновлення",
+      "categories": ["tools"]
+    },
+    "rail": {
+      "display_name": "Рейки",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "rooted_dirt": {
+      "display_name": "Кореневий ґрунт",
+      "categories": ["nature_blocks"]
+    },
+    "red_sand": {
+      "display_name": "Червоний пісок",
+      "categories": ["nature_blocks"]
+    },
+    "red_sandstone": {
+      "display_name": "Червоний пісковик",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "raw_iron_block": {
+      "display_name": "Блок необробленого заліза",
+      "categories": ["nature_blocks"]
+    },
+    "raw_copper_block": {
+      "display_name": "Блок необробленої міді",
+      "categories": ["nature_blocks"]
+    },
+    "raw_gold_block": {
+      "display_name": "Блок необробленого золота",
+      "categories": ["nature_blocks"]
+    },
+    "red_mushroom_block": {
+      "display_name": "Блок червоного гриба",
+      "categories": ["nature_blocks"]
+    },
+    "red_mushroom": {
+      "display_name": "Червоний гриб",
+      "categories": ["nature_blocks"]
+    },
+    "red_tulip": {
+      "display_name": "Червоний тюльпан",
+      "categories": ["nature_blocks"]
+    },
+    "rose_bush": {
+      "display_name": "Трояндовий кущ",
+      "categories": ["nature_blocks"]
+    },
+    "raw_iron": {
+      "display_name": "Необроблене залізо",
+      "categories": ["ingredients"]
+    },
+    "raw_copper": {
+      "display_name": "Необроблена мідь",
+      "categories": ["ingredients"]
+    },
+    "raw_gold": {
+      "display_name": "Необроблене золото",
+      "categories": ["ingredients"]
+    },
+    "rabbit_hide": {
+      "display_name": "Кроляча шкурка",
+      "categories": ["ingredients"]
+    },
+    "red_dye": {
+      "display_name": "Червоний барвник",
+      "categories": ["ingredients"]
+    },
+    "rabbit_foot": {
+      "display_name": "Кроляча лапка",
+      "categories": ["ingredients"]
+    },
+    "raiser_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Вирощувач>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "rib_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Ребра>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "rabbit": {
+      "display_name": "Сира кролятина",
+      "categories": ["foods_and_potions"]
+    },
+    "rotten_flesh": {
+      "display_name": "Гнила плоть",
+      "categories": ["foods_and_potions"]
+    },
+    "rabbit_stew": {
+      "display_name": "Тушкований кролик",
+      "categories": ["foods_and_potions"]
+    },
+    "reinforced_deepslate": {
+      "display_name": "Посилений глибосланець",
+      "categories": ["build_blocks"]
+    },
+    "red_sandstone_stairs": {
+      "display_name": "Сходи з червоного пісковику",
+      "categories": ["build_blocks"]
+    },
+    "red_sandstone_slab": {
+      "display_name": "Плита з червоного пісковику",
+      "categories": ["build_blocks"]
+    },
+    "red_sandstone_wall": {
+      "display_name": "Стіна з червоного пісковику",
+      "categories": ["build_blocks"]
+    },
+    "red_nether_bricks": {
+      "display_name": "Червона незерська цегла",
+      "categories": ["build_blocks"]
+    },
+    "red_nether_brick_stairs": {
+      "display_name": "Сходи з червоної незерської цегли",
+      "categories": ["build_blocks"]
+    },
+    "red_nether_brick_slab": {
+      "display_name": "Плита з червоної незерської цегли",
+      "categories": ["build_blocks"]
+    },
+    "red_nether_brick_wall": {
+      "display_name": "Стіна з червоної незерської цегли",
+      "categories": ["build_blocks"]
+    },
+    "red_wool": {
+      "display_name": "Червона вовна",
+      "categories": ["color_blocks"]
+    },
+    "red_carpet": {
+      "display_name": "Червоний килим",
+      "categories": ["color_blocks"]
+    },
+    "red_terracotta": {
+      "display_name": "Червона кераміка",
+      "categories": ["color_blocks"]
+    },
+    "red_concrete": {
+      "display_name": "Червоний бетон",
+      "categories": ["color_blocks"]
+    },
+    "red_concrete_powder": {
+      "display_name": "Червоний цемент",
+      "categories": ["color_blocks"]
+    },
+    "red_glazed_terracotta": {
+      "display_name": "Червона глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "red_stained_glass": {
+      "display_name": "Червоне скло",
+      "categories": ["color_blocks"]
+    },
+    "red_stained_glass_pane": {
+      "display_name": "Червона шиба",
+      "categories": ["color_blocks"]
+    },
+    "red_shulker_box": {
+      "display_name": "Червона шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "red_bed": {
+      "display_name": "Червоне ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "red_candle": {
+      "display_name": "Червона свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "red_banner": {
+      "display_name": "Червоний стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "respawn_anchor": {
+      "display_name": "Якір відродження",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "c": {
+    "comparator": {
+      "display_name": "Редстоуновий компаратор",
+      "categories": ["redstone_blocks"]
+    },
+    "calibrated_sculk_sensor": {
+      "display_name": "Відкалібрований скалковий сенсор",
+      "categories": ["redstone_blocks"]
+    },
+    "chest": {
+      "display_name": "Скриня",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "chiseled_bookshelf": {
+      "display_name": "Різьблена книжкова полиця",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "composter": {
+      "display_name": "Компостер",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "cauldron": {
+      "display_name": "Казан",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "chainmail_helmet": {
+      "display_name": "Кольчужний шолом",
+      "categories": ["weapons"]
+    },
+    "chainmail_chestplate": {
+      "display_name": "Кольчужний нагрудник",
+      "categories": ["weapons"]
+    },
+    "chainmail_leggings": {
+      "display_name": "Кольчужні наголінники",
+      "categories": ["weapons"]
+    },
+    "chainmail_boots": {
+      "display_name": "Кольчужні чоботи",
+      "categories": ["weapons"]
+    },
+    "crossbow": {
+      "display_name": "Арбалет",
+      "categories": ["weapons"]
+    },
+    "cod_bucket": {
+      "display_name": "Відро з тріскою",
+      "categories": ["tools"]
+    },
+    "compass": {
+      "display_name": "Компас",
+      "categories": ["tools"]
+    },
+    "clock": {
+      "display_name": "Годинник",
+      "categories": ["tools"]
+    },
+    "carrot_on_a_stick": {
+      "display_name": "Морква на паличці",
+      "categories": ["tools"]
+    },
+    "cherry_boat": {
+      "display_name": "Вишневий човен",
+      "categories": ["tools"]
+    },
+    "cherry_chest_boat": {
+      "display_name": "Вишневий човен зі скринею",
+      "categories": ["tools"]
+    },
+    "chest_minecart": {
+      "display_name": "Вагонетка зі скринею",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "coarse_dirt": {
+      "display_name": "Загрубілий ґрунт",
+      "categories": ["nature_blocks"]
+    },
+    "clay": {
+      "display_name": "Глина",
+      "categories": ["nature_blocks"]
+    },
+    "calcite": {
+      "display_name": "Кальцит",
+      "categories": ["nature_blocks"]
+    },
+    "crying_obsidian": {
+      "display_name": "Плакучий обсидіан",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "crimson_nylium": {
+      "display_name": "Багряний нілій",
+      "categories": ["nature_blocks"]
+    },
+    "coal_ore": {
+      "display_name": "Вугільна руда",
+      "categories": ["nature_blocks"]
+    },
+    "copper_ore": {
+      "display_name": "Мідна руда",
+      "categories": ["nature_blocks"]
+    },
+    "cherry_log": {
+      "display_name": "Вишнева колода",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "crimson_stem": {
+      "display_name": "Багряне стебло",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "cherry_leaves": {
+      "display_name": "Вишневе листя",
+      "categories": ["nature_blocks"]
+    },
+    "cherry_sapling": {
+      "display_name": "Паросток вишні",
+      "categories": ["nature_blocks"]
+    },
+    "crimson_fungus": {
+      "display_name": "Багряний гриб",
+      "categories": ["nature_blocks"]
+    },
+    "cornflower": {
+      "display_name": "Волошка",
+      "categories": ["nature_blocks"]
+    },
+    "cactus": {
+      "display_name": "Кактус",
+      "categories": ["nature_blocks"]
+    },
+    "crimson_roots": {
+      "display_name": "Багряне коріння",
+      "categories": ["nature_blocks"]
+    },
+    "chorus_plant": {
+      "display_name": "Рослина хорусу",
+      "categories": ["nature_blocks"]
+    },
+    "chorus_flower": {
+      "display_name": "Квітка хорусу",
+      "categories": ["nature_blocks"]
+    },
+    "cocoa_beans": {
+      "display_name": "Какао-боби",
+      "categories": ["nature_blocks"]
+    },
+    "carved_pumpkin": {
+      "display_name": "Вирізаний гарбуз",
+      "categories": ["nature_blocks"]
+    },
+    "cobweb": {
+      "display_name": "Павутиння",
+      "categories": ["nature_blocks"]
+    },
+    "coal": {
+      "display_name": "Вугілля",
+      "categories": ["ingredients"]
+    },
+    "charcoal": {
+      "display_name": "Деревне вугілля",
+      "categories": ["ingredients"]
+    },
+    "copper_ingot": {
+      "display_name": "Мідний злиток",
+      "categories": ["ingredients"]
+    },
+    "clay_ball": {
+      "display_name": "Глиняна кулька",
+      "categories": ["ingredients"]
+    },
+    "cyan_dye": {
+      "display_name": "Бірюзовий барвник",
+      "categories": ["ingredients"]
+    },
+    "creeper_banner_pattern": {
+      "display_name": "Шаблон стяга",
+      "categories": ["ingredients"],
+      "description": ["Емблема кріпера"]
+    },
+    "coast_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Берег>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "chorus_fruit": {
+      "display_name": "Фрукт хорусу",
+      "categories": ["foods_and_potions"]
+    },
+    "carrot": {
+      "display_name": "Морква",
+      "categories": ["foods_and_potions"]
+    },
+    "cooked_beef": {
+      "display_name": "Стейк",
+      "categories": ["foods_and_potions"]
+    },
+    "cooked_porkchop": {
+      "display_name": "Смажена свинина",
+      "categories": ["foods_and_potions"]
+    },
+    "cooked_mutton": {
+      "display_name": "Смажена баранина",
+      "categories": ["foods_and_potions"]
+    },
+    "chicken": {
+      "display_name": "Сира курятина",
+      "categories": ["foods_and_potions"]
+    },
+    "cooked_chicken": {
+      "display_name": "Смажена курятина",
+      "categories": ["foods_and_potions"]
+    },
+    "cooked_rabbit": {
+      "display_name": "Смажена кролятина",
+      "categories": ["foods_and_potions"]
+    },
+    "cod": {
+      "display_name": "Сира тріска",
+      "categories": ["foods_and_potions"]
+    },
+    "cooked_cod": {
+      "display_name": "Смажена тріска",
+      "categories": ["foods_and_potions"]
+    },
+    "cooked_salmon": {
+      "display_name": "Смажений лосось",
+      "categories": ["foods_and_potions"]
+    },
+    "cookie": {
+      "display_name": "Печиво",
+      "categories": ["foods_and_potions"]
+    },
+    "cake": {
+      "display_name": "Торт",
+      "categories": ["foods_and_potions"]
+    },
+    "cherry_wood": {
+      "display_name": "Вишнева деревина",
+      "categories": ["build_blocks"]
+    },
+    "cherry_planks": {
+      "display_name": "Вишневі дошки",
+      "categories": ["build_blocks"]
+    },
+    "cherry_stairs": {
+      "display_name": "Вишневі сходи",
+      "categories": ["build_blocks"]
+    },
+    "cherry_slab": {
+      "display_name": "Вишнева плита",
+      "categories": ["build_blocks"]
+    },
+    "cherry_fence": {
+      "display_name": "Вишневий паркан",
+      "categories": ["build_blocks"]
+    },
+    "cherry_fence_gate": {
+      "display_name": "Вишнева хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "cherry_door": {
+      "display_name": "Вишневі двері",
+      "categories": ["build_blocks"]
+    },
+    "cherry_trapdoor": {
+      "display_name": "Вишневий люк",
+      "categories": ["build_blocks"]
+    },
+    "cherry_pressure_plate": {
+      "display_name": "Вишнева натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "cherry_button": {
+      "display_name": "Вишнева кнопка",
+      "categories": ["build_blocks"]
+    },
+    "crimson_hyphae": {
+      "display_name": "Багряні гіфи",
+      "categories": ["build_blocks"]
+    },
+    "crimson_planks": {
+      "display_name": "Багряні дошки",
+      "categories": ["build_blocks"]
+    },
+    "crimson_stairs": {
+      "display_name": "Багряні сходи",
+      "categories": ["build_blocks"]
+    },
+    "crimson_slab": {
+      "display_name": "Багряна плита",
+      "categories": ["build_blocks"]
+    },
+    "crimson_fence": {
+      "display_name": "Багряний паркан",
+      "categories": ["build_blocks"]
+    },
+    "crimson_fence_gate": {
+      "display_name": "Багряна хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "crimson_door": {
+      "display_name": "Багряні двері",
+      "categories": ["build_blocks"]
+    },
+    "crimson_trapdoor": {
+      "display_name": "Багряний люк",
+      "categories": ["build_blocks"]
+    },
+    "crimson_pressure_plate": {
+      "display_name": "Багряна натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "crimson_button": {
+      "display_name": "Багряна кнопка",
+      "categories": ["build_blocks"]
+    },
+    "cobblestone": {
+      "display_name": "Кругляк",
+      "categories": ["build_blocks"]
+    },
+    "cobblestone_stairs": {
+      "display_name": "Сходи з кругляку",
+      "categories": ["build_blocks"]
+    },
+    "cobblestone_slab": {
+      "display_name": "Плита з кругляку",
+      "categories": ["build_blocks"]
+    },
+    "cobblestone_wall": {
+      "display_name": "Стіна з кругляку",
+      "categories": ["build_blocks"]
+    },
+    "cracked_stone_bricks": {
+      "display_name": "Тріснута кам'яна цегла",
+      "categories": ["build_blocks"]
+    },
+    "chiseled_stone_bricks": {
+      "display_name": "Різьблена кам'яна цегла",
+      "categories": ["build_blocks"]
+    },
+    "cobbled_deepslate": {
+      "display_name": "Глибосланцевий кругляк",
+      "categories": ["build_blocks"]
+    },
+    "cobbled_deepslate_stairs": {
+      "display_name": "Сходи з глибосланцевого кругляку",
+      "categories": ["build_blocks"]
+    },
+    "cobbled_deepslate_slab": {
+      "display_name": "Плита з глибосланцевого кругляку",
+      "categories": ["build_blocks"]
+    },
+    "cobbled_deepslate_wall": {
+      "display_name": "Стіна з глибосланцевого кругляку",
+      "categories": ["build_blocks"]
+    },
+    "chiseled_deepslate": {
+      "display_name": "Різьблений глибосланець",
+      "categories": ["build_blocks"]
+    },
+    "cracked_deepslate_bricks": {
+      "display_name": "Тріснута глибосланцева цегла",
+      "categories": ["build_blocks"]
+    },
+    "cracked_deepslate_tiles": {
+      "display_name": "Тріснуті глибосланцеві кахлі",
+      "categories": ["build_blocks"]
+    },
+    "chiseled_sandstone": {
+      "display_name": "Різьблений пісковик",
+      "categories": ["build_blocks"]
+    },
+    "cut_sandstone": {
+      "display_name": "Тесаний пісковик",
+      "categories": ["build_blocks"]
+    },
+    "cut_sandstone_slab": {
+      "display_name": "Плита з тесаного пісковику",
+      "categories": ["build_blocks"]
+    },
+    "chiseled_red_sandstone": {
+      "display_name": "Різьблений червоний пісковик",
+      "categories": ["build_blocks"]
+    },
+    "cut_red_sandstone": {
+      "display_name": "Тесаний червоний пісковик",
+      "categories": ["build_blocks"]
+    },
+    "cut_red_sandstone_slab": {
+      "display_name": "Плита з тесаного червоного пісковику",
+      "categories": ["build_blocks"]
+    },
+    "cracked_nether_bricks": {
+      "display_name": "Тріснута незерська цегла",
+      "categories": ["build_blocks"]
+    },
+    "chiseled_nether_bricks": {
+      "display_name": "Різьблена незерська цегла",
+      "categories": ["build_blocks"]
+    },
+    "chiseled_polished_blackstone": {
+      "display_name": "Різьблений полірований чорнокамінь",
+      "categories": ["build_blocks"]
+    },
+    "cracked_polished_blackstone_bricks": {
+      "display_name": "Тріснута полірована чорнокам'яна цегла",
+      "categories": ["build_blocks"]
+    },
+    "coal_block": {
+      "display_name": "Блок вугілля",
+      "categories": ["build_blocks"]
+    },
+    "chain": {
+      "display_name": "Ланцюг",
+      "categories": ["build_blocks", "functional_blocks"]
+    },
+    "chiseled_quartz_block": {
+      "display_name": "Різьблений кварцовий блок",
+      "categories": ["build_blocks"]
+    },
+    "copper_block": {
+      "display_name": "Блок міді",
+      "categories": ["build_blocks"]
+    },
+    "cut_copper": {
+      "display_name": "Тесана мідь",
+      "categories": ["build_blocks"]
+    },
+    "cut_copper_stairs": {
+      "display_name": "Тесані мідні сходи",
+      "categories": ["build_blocks"]
+    },
+    "cut_copper_slab": {
+      "display_name": "Тесана мідна плита",
+      "categories": ["build_blocks"]
+    },
+    "cyan_wool": {
+      "display_name": "Бірюзова вовна",
+      "categories": ["color_blocks"]
+    },
+    "cyan_carpet": {
+      "display_name": "Бірюзовий килим",
+      "categories": ["color_blocks"]
+    },
+    "cyan_terracotta": {
+      "display_name": "Бірюзова кераміка",
+      "categories": ["color_blocks"]
+    },
+    "cyan_concrete": {
+      "display_name": "Бірюзовий бетон",
+      "categories": ["color_blocks"]
+    },
+    "cyan_concrete_powder": {
+      "display_name": "Бірюзовий цемент",
+      "categories": ["color_blocks"]
+    },
+    "cyan_glazed_terracotta": {
+      "display_name": "Бірюзова глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "cyan_stained_glass": {
+      "display_name": "Бірюзове скло",
+      "categories": ["color_blocks"]
+    },
+    "cyan_stained_glass_pane": {
+      "display_name": "Бірюзова шиба",
+      "categories": ["color_blocks"]
+    },
+    "cyan_shulker_box": {
+      "display_name": "Бірюзова шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "cyan_bed": {
+      "display_name": "Бірюзове ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "candle": {
+      "display_name": "Свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "cyan_candle": {
+      "display_name": "Бірюзова свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "cyan_banner": {
+      "display_name": "Бірюзовий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "crafting_table": {
+      "display_name": "Верстак",
+      "categories": ["functional_blocks"]
+    },
+    "cartography_table": {
+      "display_name": "Картографічний стіл",
+      "categories": ["functional_blocks"]
+    },
+    "campfire": {
+      "display_name": "Багаття",
+      "categories": ["functional_blocks"]
+    },
+    "chipped_anvil": {
+      "display_name": "Надщерблене ковадло",
+      "categories": ["functional_blocks"]
+    },
+    "conduit": {
+      "display_name": "Провідник",
+      "categories": ["functional_blocks"]
+    },
+    "cherry_sign": {
+      "display_name": "Вишнева табличка",
+      "categories": ["functional_blocks"]
+    },
+    "cherry_hanging_sign": {
+      "display_name": "Вишнева вивіска",
+      "categories": ["functional_blocks"]
+    },
+    "crimson_sign": {
+      "display_name": "Багряна табличка",
+      "categories": ["functional_blocks"]
+    },
+    "crimson_hanging_sign": {
+      "display_name": "Багряна вивіска",
+      "categories": ["functional_blocks"]
+    },
+    "creeper_head": {
+      "display_name": "Голова кріпера",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "t": {
+    "target": {
+      "display_name": "Мішень",
+      "categories": ["redstone_blocks"]
+    },
+    "tripwire_hook": {
+      "display_name": "Гак для розтяжки",
+      "categories": ["redstone_blocks"]
+    },
+    "trapped_chest": {
+      "display_name": "Скриня-пастка",
+      "categories": ["redstone_blocks"]
+    },
+    "trident": {
+      "display_name": "Тризубець",
+      "categories": ["weapons"]
+    },
+    "turtle_helmet": {
+      "display_name": "Панцир черепахи",
+      "categories": ["weapons", "ingredients"]
+    },
+    "totem_of_undying": {
+      "display_name": "Тотем безсмертя",
+      "categories": ["weapons"]
+    },
+    "tnt": {
+      "display_name": "Динаміт",
+      "categories": ["weapons", "redstone_blocks"]
+    },
+    "tropical_fish_bucket": {
+      "display_name": "Відро з тропічною рибою",
+      "categories": ["tools"]
+    },
+    "tadpole_bucket": {
+      "display_name": "Відро з пуголовком",
+      "categories": ["tools"]
+    },
+    "tnt_minecart": {
+      "display_name": "Вагонетка з динамітом",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "tuff": {
+      "display_name": "Туф",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "torchflower": {
+      "display_name": "Смолоскипник",
+      "categories": ["nature_blocks"]
+    },
+    "twisting_vines": {
+      "display_name": "Кручені лози",
+      "categories": ["nature_blocks"]
+    },
+    "tall_grass": {
+      "display_name": "Висока трава",
+      "categories": ["nature_blocks"]
+    },
+    "turtle_egg": {
+      "display_name": "Яйце черепахи",
+      "categories": ["nature_blocks"]
+    },
+    "torchflower_seeds": {
+      "display_name": "Насіння смолоскипника",
+      "categories": ["nature_blocks"]
+    },
+    "tube_coral_block": {
+      "display_name": "Блок трубчастого корала",
+      "categories": ["nature_blocks"]
+    },
+    "tube_coral": {
+      "display_name": "Трубчастий корал",
+      "categories": ["nature_blocks"]
+    },
+    "tube_coral_fan": {
+      "display_name": "Віяло з трубчастих коралів",
+      "categories": ["nature_blocks"]
+    },
+    "turtle_scute": {
+      "display_name": "Щиток черепахи",
+      "categories": ["ingredients"]
+    },
+    "tide_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Хвилі>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "tropical_fish": {
+      "display_name": "Тропічна риба",
+      "categories": ["foods_and_potions"]
+    },
+    "terracotta": {
+      "display_name": "Кераміка",
+      "categories": ["color_blocks"]
+    },
+    "tinted_glass": {
+      "display_name": "Тоноване скло",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "torch": {
+      "display_name": "Смолоскип",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "l": {
+    "lever": {
+      "display_name": "Важіль",
+      "categories": ["redstone_blocks"]
+    },
+    "light_weighted_pressure_plate": {
+      "display_name": "Легка вагова плита",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "lectern": {
+      "display_name": "Аналой",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "lightning_rod": {
+      "display_name": "Блискавковідвід",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "leather_helmet": {
+      "display_name": "Шкіряна шапка",
+      "categories": ["weapons"]
+    },
+    "leather_chestplate": {
+      "display_name": "Шкіряна туніка",
+      "categories": ["weapons"]
+    },
+    "leather_leggings": {
+      "display_name": "Шкіряні штани",
+      "categories": ["weapons"]
+    },
+    "leather_boots": {
+      "display_name": "Шкіряні чоботи",
+      "categories": ["weapons"]
+    },
+    "leather_horse_armor": {
+      "display_name": "Шкіряні кінські обладунки",
+      "categories": ["weapons"]
+    },
+    "lava_bucket": {
+      "display_name": "Відро лави",
+      "categories": ["tools"]
+    },
+    "lead": {
+      "display_name": "Повідець",
+      "categories": ["tools"]
+    },
+    "lapis_ore": {
+      "display_name": "Лазуритова руда",
+      "categories": ["nature_blocks"]
+    },
+    "large_amethyst_bud": {
+      "display_name": "Великий зародок аметиста",
+      "categories": ["nature_blocks"]
+    },
+    "lily_of_the_valley": {
+      "display_name": "Конвалія",
+      "categories": ["nature_blocks"]
+    },
+    "large_fern": {
+      "display_name": "Велика папороть",
+      "categories": ["nature_blocks"]
+    },
+    "lilac": {
+      "display_name": "Бузок",
+      "categories": ["nature_blocks"]
+    },
+    "lily_pad": {
+      "display_name": "Латаття",
+      "categories": ["nature_blocks"]
+    },
+    "lapis_lazuli": {
+      "display_name": "Лазурит",
+      "categories": ["ingredients"]
+    },
+    "leather": {
+      "display_name": "Шкіра",
+      "categories": ["ingredients"]
+    },
+    "light_gray_dye": {
+      "display_name": "Світло-сірий барвник",
+      "categories": ["ingredients"]
+    },
+    "lime_dye": {
+      "display_name": "Лаймовий барвник",
+      "categories": ["ingredients"]
+    },
+    "light_blue_dye": {
+      "display_name": "Блакитний барвник",
+      "categories": ["ingredients"]
+    },
+    "lapis_block": {
+      "display_name": "Блок лазуриту",
+      "categories": ["build_blocks"]
+    },
+    "light_gray_wool": {
+      "display_name": "Світло-сіра вовна",
+      "categories": ["color_blocks"]
+    },
+    "lime_wool": {
+      "display_name": "Лаймова вовна",
+      "categories": ["color_blocks"]
+    },
+    "light_blue_wool": {
+      "display_name": "Блакитна вовна",
+      "categories": ["color_blocks"]
+    },
+    "light_gray_carpet": {
+      "display_name": "Світло-сірий килим",
+      "categories": ["color_blocks"]
+    },
+    "lime_carpet": {
+      "display_name": "Лаймовий килим",
+      "categories": ["color_blocks"]
+    },
+    "light_blue_carpet": {
+      "display_name": "Блакитний килим",
+      "categories": ["color_blocks"]
+    },
+    "light_gray_terracotta": {
+      "display_name": "Світло-сіра кераміка",
+      "categories": ["color_blocks"]
+    },
+    "lime_terracotta": {
+      "display_name": "Лаймова кераміка",
+      "categories": ["color_blocks"]
+    },
+    "light_blue_terracotta": {
+      "display_name": "Блакитна кераміка",
+      "categories": ["color_blocks"]
+    },
+    "light_gray_concrete": {
+      "display_name": "Світло-сірий бетон",
+      "categories": ["color_blocks"]
+    },
+    "lime_concrete": {
+      "display_name": "Лаймовий бетон",
+      "categories": ["color_blocks"]
+    },
+    "light_blue_concrete": {
+      "display_name": "Блакитний бетон",
+      "categories": ["color_blocks"]
+    },
+    "light_gray_concrete_powder": {
+      "display_name": "Світло-сірий цемент",
+      "categories": ["color_blocks"]
+    },
+    "lime_concrete_powder": {
+      "display_name": "Лаймовий цемент",
+      "categories": ["color_blocks"]
+    },
+    "light_blue_concrete_powder": {
+      "display_name": "Блакитний цемент",
+      "categories": ["color_blocks"]
+    },
+    "light_gray_glazed_terracotta": {
+      "display_name": "Світло-сіра глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "lime_glazed_terracotta": {
+      "display_name": "Лаймова глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "light_blue_glazed_terracotta": {
+      "display_name": "Блакитна глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "light_gray_stained_glass": {
+      "display_name": "Світло-сіре скло",
+      "categories": ["color_blocks"]
+    },
+    "lime_stained_glass": {
+      "display_name": "Лаймове скло",
+      "categories": ["color_blocks"]
+    },
+    "light_blue_stained_glass": {
+      "display_name": "Блакитне скло",
+      "categories": ["color_blocks"]
+    },
+    "light_gray_stained_glass_pane": {
+      "display_name": "Світло-сіра шиба",
+      "categories": ["color_blocks"]
+    },
+    "lime_stained_glass_pane": {
+      "display_name": "Лаймова шиба",
+      "categories": ["color_blocks"]
+    },
+    "light_blue_stained_glass_pane": {
+      "display_name": "Блакитна шиба",
+      "categories": ["color_blocks"]
+    },
+    "light_gray_shulker_box": {
+      "display_name": "Світло-сіра шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "lime_shulker_box": {
+      "display_name": "Лаймова шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "light_blue_shulker_box": {
+      "display_name": "Блакитна шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "light_gray_bed": {
+      "display_name": "Світло-сіре ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "lime_bed": {
+      "display_name": "Лаймове ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "light_blue_bed": {
+      "display_name": "Блакитне ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "light_gray_candle": {
+      "display_name": "Світло-сіра свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "lime_candle": {
+      "display_name": "Лаймова свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "light_blue_candle": {
+      "display_name": "Блакитна свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "light_gray_banner": {
+      "display_name": "Світло-сірий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "lime_banner": {
+      "display_name": "Лаймовий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "light_blue_banner": {
+      "display_name": "Блакитний стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "lantern": {
+      "display_name": "Ліхтар",
+      "categories": ["functional_blocks"]
+    },
+    "loom": {
+      "display_name": "Ткацький верстат",
+      "categories": ["functional_blocks"]
+    },
+    "lodestone": {
+      "display_name": "Магнетит",
+      "categories": ["functional_blocks"]
+    },
+    "ladder": {
+      "display_name": "Драбина",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "o": {
+    "oak_button": {
+      "display_name": "Дубова кнопка",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "oak_pressure_plate": {
+      "display_name": "Дубова натискна плита",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "observer": {
+      "display_name": "Спостерігач",
+      "categories": ["redstone_blocks"]
+    },
+    "oak_door": {
+      "display_name": "Дубові двері",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "oak_fence_gate": {
+      "display_name": "Дубова хвіртка",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "oak_trapdoor": {
+      "display_name": "Дубовий люк",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "oak_boat": {
+      "display_name": "Дубовий човен",
+      "categories": ["tools"]
+    },
+    "oak_chest_boat": {
+      "display_name": "Дубовий човен зі скринею",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "obsidian": {
+      "display_name": "Обсидіан",
+      "categories": ["nature_blocks"]
+    },
+    "oak_log": {
+      "display_name": "Дубова колода",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "oak_leaves": {
+      "display_name": "Дубове листя",
+      "categories": ["nature_blocks"]
+    },
+    "oak_sapling": {
+      "display_name": "Паросток дуба",
+      "categories": ["nature_blocks"]
+    },
+    "orange_tulip": {
+      "display_name": "Помаранчевий тюльпан",
+      "categories": ["nature_blocks"]
+    },
+    "oxeye_daisy": {
+      "display_name": "Ромашка",
+      "categories": ["nature_blocks"]
+    },
+    "ochre_froglight": {
+      "display_name": "Вохристе жаб'яче світло",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "orange_dye": {
+      "display_name": "Помаранчевий барвник",
+      "categories": ["ingredients"]
+    },
+    "oak_wood": {
+      "display_name": "Дубова деревина",
+      "categories": ["build_blocks"]
+    },
+    "oak_planks": {
+      "display_name": "Дубові дошки",
+      "categories": ["build_blocks"]
+    },
+    "oak_stairs": {
+      "display_name": "Дубові сходи",
+      "categories": ["build_blocks"]
+    },
+    "oak_slab": {
+      "display_name": "Дубова плита",
+      "categories": ["build_blocks"]
+    },
+    "oak_fence": {
+      "display_name": "Дубовий паркан",
+      "categories": ["build_blocks"]
+    },
+    "oxidized_copper": {
+      "display_name": "Окиснена мідь",
+      "categories": ["build_blocks"]
+    },
+    "oxidized_cut_copper": {
+      "display_name": "Окиснена тесана мідь",
+      "categories": ["build_blocks"]
+    },
+    "oxidized_cut_copper_stairs": {
+      "display_name": "Окиснені тесані мідні сходи",
+      "categories": ["build_blocks"]
+    },
+    "oxidized_cut_copper_slab": {
+      "display_name": "Окиснена тесана мідна плита",
+      "categories": ["build_blocks"]
+    },
+    "orange_wool": {
+      "display_name": "Помаранчева вовна",
+      "categories": ["color_blocks"]
+    },
+    "orange_carpet": {
+      "display_name": "Помаранчевий килим",
+      "categories": ["color_blocks"]
+    },
+    "orange_terracotta": {
+      "display_name": "Помаранчева кераміка",
+      "categories": ["color_blocks"]
+    },
+    "orange_concrete": {
+      "display_name": "Помаранчевий бетон",
+      "categories": ["color_blocks"]
+    },
+    "orange_concrete_powder": {
+      "display_name": "Помаранчевий цемент",
+      "categories": ["color_blocks"]
+    },
+    "orange_glazed_terracotta": {
+      "display_name": "Помаранчева глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "orange_stained_glass": {
+      "display_name": "Помаранчеве скло",
+      "categories": ["color_blocks"]
+    },
+    "orange_stained_glass_pane": {
+      "display_name": "Помаранчева шиба",
+      "categories": ["color_blocks"]
+    },
+    "orange_shulker_box": {
+      "display_name": "Помаранчева шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "orange_bed": {
+      "display_name": "Помаранчеве ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "orange_candle": {
+      "display_name": "Помаранчева свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "orange_banner": {
+      "display_name": "Помаранчевий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "oak_sign": {
+      "display_name": "Дубова табличка",
+      "categories": ["functional_blocks"]
+    },
+    "oak_hanging_sign": {
+      "display_name": "Дубова вивіска",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "s": {
+    "stone_button": {
+      "display_name": "Кам'яна кнопка",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "stone_pressure_plate": {
+      "display_name": "Кам'яна натискна плита",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "sculk_sensor": {
+      "display_name": "Скалковий сенсор",
+      "categories": ["redstone_blocks", "nature_blocks"]
+    },
+    "sculk_shrieker": {
+      "display_name": "Скалковий крикун",
+      "categories": ["redstone_blocks", "nature_blocks"]
+    },
+    "scute": {
+      "display_name": "Черепок",
+      "categories": ["ingredients"]
+    },
+    "string": {
+      "display_name": "Нитка",
+      "categories": ["redstone_blocks", "ingredients"]
+    },
+    "sticky_piston": {
+      "display_name": "Липкий поршень",
+      "categories": ["redstone_blocks"]
+    },
+    "slime_block": {
+      "display_name": "Слизовий блок",
+      "categories": ["redstone_blocks", "nature_blocks"]
+    },
+    "stone_sword": {
+      "display_name": "Кам'яний меч",
+      "categories": ["weapons"]
+    },
+    "stone_axe": {
+      "display_name": "Кам'яна сокира",
+      "categories": ["weapons", "tools"]
+    },
+    "shield": {
+      "display_name": "Щит",
+      "categories": ["weapons"]
+    },
+    "snowball": {
+      "display_name": "Сніжка",
+      "categories": ["weapons", "ingredients"]
+    },
+    "spectral_arrow": {
+      "display_name": "Спектральна стріла",
+      "categories": ["weapons"]
+    },
+    "stone_shovel": {
+      "display_name": "Кам'яна лопата",
+      "categories": ["tools"]
+    },
+    "stone_pickaxe": {
+      "display_name": "Кам'яне кайло",
+      "categories": ["tools"]
+    },
+    "stone_hoe": {
+      "display_name": "Кам'яна мотика",
+      "categories": ["tools"]
+    },
+    "salmon_bucket": {
+      "display_name": "Відро з лососем",
+      "categories": ["tools"]
+    },
+    "shears": {
+      "display_name": "Ножиці",
+      "categories": ["tools"]
+    },
+    "spyglass": {
+      "display_name": "Підзорна труба",
+      "categories": ["tools"]
+    },
+    "saddle": {
+      "display_name": "Сідло",
+      "categories": ["tools"]
+    },
+    "spruce_boat": {
+      "display_name": "Смерековий човен",
+      "categories": ["tools"]
+    },
+    "spruce_chest_boat": {
+      "display_name": "Смерековий човен зі скринею",
+      "categories": ["tools"]
+    },
+    "sand": {
+      "display_name": "Пісок",
+      "categories": ["nature_blocks"]
+    },
+    "sandstone": {
+      "display_name": "Пісковик",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "snow_block": {
+      "display_name": "Сніговий блок",
+      "categories": ["nature_blocks"]
+    },
+    "snow": {
+      "display_name": "Сніг",
+      "categories": ["nature_blocks"]
+    },
+    "stone": {
+      "display_name": "Камінь",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "soul_sand": {
+      "display_name": "Пісок душ",
+      "categories": ["nature_blocks"]
+    },
+    "soul_soil": {
+      "display_name": "Ґрунт душ",
+      "categories": ["nature_blocks"]
+    },
+    "smooth_basalt": {
+      "display_name": "Гладкий базальт",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "small_amethyst_bud": {
+      "display_name": "Малий зародок аметиста",
+      "categories": ["nature_blocks"]
+    },
+    "spruce_log": {
+      "display_name": "Смерекова колода",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "spruce_leaves": {
+      "display_name": "Смерекове листя",
+      "categories": ["nature_blocks"]
+    },
+    "shroomlight": {
+      "display_name": "Світлогриб",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "spruce_sapling": {
+      "display_name": "Паросток смереки",
+      "categories": ["nature_blocks"]
+    },
+    "short_grass": {
+      "display_name": "Низька трава",
+      "categories": ["nature_blocks"]
+    },
+    "spore_blossom": {
+      "display_name": "Спороцвіт",
+      "categories": ["nature_blocks"]
+    },
+    "sugar_cane": {
+      "display_name": "Цукрова тростина",
+      "categories": ["nature_blocks"]
+    },
+    "sunflower": {
+      "display_name": "Соняшник",
+      "categories": ["nature_blocks"]
+    },
+    "small_dripleaf": {
+      "display_name": "Малий краплелист",
+      "categories": ["nature_blocks"]
+    },
+    "sniffer_egg": {
+      "display_name": "Яйце нюхача",
+      "categories": ["nature_blocks"]
+    },
+    "sweet_berries": {
+      "display_name": "Солодкі ягоди",
+      "categories": ["nature_blocks", "foods_and_potions"]
+    },
+    "seagrass": {
+      "display_name": "Морська трава",
+      "categories": ["nature_blocks"]
+    },
+    "sea_pickle": {
+      "display_name": "Морський огірок",
+      "categories": ["nature_blocks"]
+    },
+    "sponge": {
+      "display_name": "Губка",
+      "categories": ["nature_blocks"]
+    },
+    "sculk": {
+      "display_name": "Скалк",
+      "categories": ["nature_blocks"]
+    },
+    "sculk_vein": {
+      "display_name": "Скалкова жила",
+      "categories": ["nature_blocks"]
+    },
+    "sculk_catalyst": {
+      "display_name": "Скалковий каталізатор",
+      "categories": ["nature_blocks"]
+    },
+    "stick": {
+      "display_name": "Палиця",
+      "categories": ["ingredients"]
+    },
+    "slime_ball": {
+      "display_name": "Слизова кулька",
+      "categories": ["ingredients"]
+    },
+    "shulker_shell": {
+      "display_name": "Панцир шалкера",
+      "categories": ["ingredients"]
+    },
+    "sugar": {
+      "display_name": "Цукор",
+      "categories": ["ingredients"]
+    },
+    "spider_eye": {
+      "display_name": "Павуче око",
+      "categories": ["ingredients", "foods_and_potions"]
+    },
+    "skull_banner_pattern": {
+      "display_name": "Шаблон стяга",
+      "categories": ["ingredients"],
+      "description": ["Емблема черепа"]
+    },
+    "sheaf_pottery_sherd": {
+      "display_name": "Гончарний черепок «Сніп»",
+      "categories": ["ingredients"]
+    },
+    "shelter_pottery_sherd": {
+      "display_name": "Гончарний черепок «Укриття»",
+      "categories": ["ingredients"]
+    },
+    "skull_pottery_sherd": {
+      "display_name": "Гончарний черепок «Череп»",
+      "categories": ["ingredients"]
+    },
+    "snort_pottery_sherd": {
+      "display_name": "Гончарний черепок «Нюхач»",
+      "categories": ["ingredients"]
+    },
+    "sentry_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Варта>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "shaper_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Скульптор>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "silence_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Тиша>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "snout_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Рило>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "spire_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Вежа>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "salmon": {
+      "display_name": "Сирий лосось",
+      "categories": ["foods_and_potions"]
+    },
+    "suspicious_stew": {
+      "display_name": "Підозріла юшка",
+      "categories": ["foods_and_potions"]
+    },
+    "stripped_oak_log": {
+      "display_name": "Обтесана дубова колода",
+      "categories": ["build_blocks"]
+    },
+    "stripped_oak_wood": {
+      "display_name": "Обтесана дубова деревина",
+      "categories": ["build_blocks"]
+    },
+    "spruce_wood": {
+      "display_name": "Смерекова деревина",
+      "categories": ["build_blocks"]
+    },
+    "stripped_spruce_log": {
+      "display_name": "Обтесана смерекова колода",
+      "categories": ["build_blocks"]
+    },
+    "stripped_spruce_wood": {
+      "display_name": "Обтесана смерекова деревина",
+      "categories": ["build_blocks"]
+    },
+    "spruce_planks": {
+      "display_name": "Смерекові дошки",
+      "categories": ["build_blocks"]
+    },
+    "spruce_stairs": {
+      "display_name": "Смерекові сходи",
+      "categories": ["build_blocks"]
+    },
+    "spruce_slab": {
+      "display_name": "Смерекова плита",
+      "categories": ["build_blocks"]
+    },
+    "spruce_fence": {
+      "display_name": "Смерековий паркан",
+      "categories": ["build_blocks"]
+    },
+    "spruce_fence_gate": {
+      "display_name": "Смерекова хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "spruce_door": {
+      "display_name": "Смерекові двері",
+      "categories": ["build_blocks"]
+    },
+    "spruce_trapdoor": {
+      "display_name": "Смерековий люк",
+      "categories": ["build_blocks"]
+    },
+    "spruce_pressure_plate": {
+      "display_name": "Смерекова натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "spruce_button": {
+      "display_name": "Смерекова кнопка",
+      "categories": ["build_blocks"]
+    },
+    "stripped_birch_log": {
+      "display_name": "Обтесана березова колода",
+      "categories": ["build_blocks"]
+    },
+    "stripped_birch_wood": {
+      "display_name": "Обтесана березова деревина",
+      "categories": ["build_blocks"]
+    },
+    "stripped_jungle_log": {
+      "display_name": "Обтесана тропічна колода",
+      "categories": ["build_blocks"]
+    },
+    "stripped_jungle_wood": {
+      "display_name": "Обтесана тропічна деревина",
+      "categories": ["build_blocks"]
+    },
+    "stripped_acacia_log": {
+      "display_name": "Обтесана акацієва колода",
+      "categories": ["build_blocks"]
+    },
+    "stripped_acacia_wood": {
+      "display_name": "Обтесана акацієва деревина",
+      "categories": ["build_blocks"]
+    },
+    "stripped_dark_oak_log": {
+      "display_name": "Обтесана темно-дубова колода",
+      "categories": ["build_blocks"]
+    },
+    "stripped_dark_oak_wood": {
+      "display_name": "Обтесана темно-дубова деревина",
+      "categories": ["build_blocks"]
+    },
+    "stripped_mangrove_log": {
+      "display_name": "Обтесана мангрова колода",
+      "categories": ["build_blocks"]
+    },
+    "stripped_mangrove_wood": {
+      "display_name": "Обтесана мангрова деревина",
+      "categories": ["build_blocks"]
+    },
+    "stripped_cherry_log": {
+      "display_name": "Обтесана вишнева колода",
+      "categories": ["build_blocks"]
+    },
+    "stripped_cherry_wood": {
+      "display_name": "Обтесана вишнева деревина",
+      "categories": ["build_blocks"]
+    },
+    "stripped_bamboo_block": {
+      "display_name": "Блок обтесаного бамбука",
+      "categories": ["build_blocks"]
+    },
+    "stripped_crimson_stem": {
+      "display_name": "Обтесане багряне стебло",
+      "categories": ["build_blocks"]
+    },
+    "stripped_crimson_hyphae": {
+      "display_name": "Обтесані багряні гіфи",
+      "categories": ["build_blocks"]
+    },
+    "stripped_warped_stem": {
+      "display_name": "Обтесане химерне стебло",
+      "categories": ["build_blocks"]
+    },
+    "stripped_warped_hyphae": {
+      "display_name": "Обтесані химерні гіфи",
+      "categories": ["build_blocks"]
+    },
+    "stone_stairs": {
+      "display_name": "Кам'яні сходи",
+      "categories": ["build_blocks"]
+    },
+    "stone_slab": {
+      "display_name": "Кам'яна плита",
+      "categories": ["build_blocks"]
+    },
+    "smooth_stone": {
+      "display_name": "Гладкий камінь",
+      "categories": ["build_blocks"]
+    },
+    "smooth_stone_slab": {
+      "display_name": "Плита з гладкого каменю",
+      "categories": ["build_blocks"]
+    },
+    "stone_bricks": {
+      "display_name": "Кам'яна цегла",
+      "categories": ["build_blocks"]
+    },
+    "stone_brick_stairs": {
+      "display_name": "Сходи з кам'яної цегли",
+      "categories": ["build_blocks"]
+    },
+    "stone_brick_slab": {
+      "display_name": "Плита з кам'яної цегли",
+      "categories": ["build_blocks"]
+    },
+    "stone_brick_wall": {
+      "display_name": "Стіна з кам'яної цегли",
+      "categories": ["build_blocks"]
+    },
+    "sandstone_stairs": {
+      "display_name": "Пісковикові сходи",
+      "categories": ["build_blocks"]
+    },
+    "sandstone_slab": {
+      "display_name": "Пісковикова плита",
+      "categories": ["build_blocks"]
+    },
+    "sandstone_wall": {
+      "display_name": "Пісковикова стіна",
+      "categories": ["build_blocks"]
+    },
+    "smooth_sandstone": {
+      "display_name": "Гладкий пісковик",
+      "categories": ["build_blocks"]
+    },
+    "smooth_sandstone_stairs": {
+      "display_name": "Сходи з гладкого пісковику",
+      "categories": ["build_blocks"]
+    },
+    "smooth_sandstone_slab": {
+      "display_name": "Плита з гладкого пісковику",
+      "categories": ["build_blocks"]
+    },
+    "smooth_red_sandstone": {
+      "display_name": "Гладкий червоний пісковик",
+      "categories": ["build_blocks"]
+    },
+    "smooth_red_sandstone_stairs": {
+      "display_name": "Сходи з гладкого червоного пісковику",
+      "categories": ["build_blocks"]
+    },
+    "smooth_red_sandstone_slab": {
+      "display_name": "Плита з гладкого червоного пісковику",
+      "categories": ["build_blocks"]
+    },
+    "sea_lantern": {
+      "display_name": "Морський ліхтар",
+      "categories": ["build_blocks", "functional_blocks"]
+    },
+    "smooth_quartz": {
+      "display_name": "Гладкий кварцовий блок",
+      "categories": ["build_blocks"]
+    },
+    "smooth_quartz_stairs": {
+      "display_name": "Сходи з гладкого кварцу",
+      "categories": ["build_blocks"]
+    },
+    "smooth_quartz_slab": {
+      "display_name": "Плита з гладкого кварцу",
+      "categories": ["build_blocks"]
+    },
+    "shulker_box": {
+      "display_name": "Шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "soul_torch": {
+      "display_name": "Смолоскип душ",
+      "categories": ["functional_blocks"]
+    },
+    "soul_lantern": {
+      "display_name": "Ліхтар душ",
+      "categories": ["functional_blocks"]
+    },
+    "stonecutter": {
+      "display_name": "Каменеріз",
+      "categories": ["functional_blocks"]
+    },
+    "smithing_table": {
+      "display_name": "Ковальський стіл",
+      "categories": ["functional_blocks"]
+    },
+    "smoker": {
+      "display_name": "Коптильня",
+      "categories": ["functional_blocks"]
+    },
+    "soul_campfire": {
+      "display_name": "Багаття душ",
+      "categories": ["functional_blocks"]
+    },
+    "scaffolding": {
+      "display_name": "Риштування",
+      "categories": ["functional_blocks"]
+    },
+    "suspicious_sand": {
+      "display_name": "Підозрілий пісок",
+      "categories": ["functional_blocks"]
+    },
+    "suspicious_gravel": {
+      "display_name": "Підозрілий гравій",
+      "categories": ["functional_blocks"]
+    },
+    "spruce_sign": {
+      "display_name": "Смерекова табличка",
+      "categories": ["functional_blocks"]
+    },
+    "spruce_hanging_sign": {
+      "display_name": "Смерекова вивіска",
+      "categories": ["functional_blocks"]
+    },
+    "skeleton_skull": {
+      "display_name": "Череп скелета",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "h": {
+    "heavy_weighted_pressure_plate": {
+      "display_name": "Важка вагова плита",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "honey_block": {
+      "display_name": "Медовий блок",
+      "categories": ["redstone_blocks", "nature_blocks"]
+    },
+    "hopper": {
+      "display_name": "Лійка",
+      "categories": ["redstone_blocks"]
+    },
+    "hopper_minecart": {
+      "display_name": "Вагонетка з лійкою",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "hanging_roots": {
+      "display_name": "Звисаюче коріння",
+      "categories": ["nature_blocks"]
+    },
+    "horn_coral_block": {
+      "display_name": "Блок рогового корала",
+      "categories": ["nature_blocks"]
+    },
+    "horn_coral": {
+      "display_name": "Роговий корал",
+      "categories": ["nature_blocks"]
+    },
+    "horn_coral_fan": {
+      "display_name": "Віяло з рогових коралів",
+      "categories": ["nature_blocks"]
+    },
+    "hay_block": {
+      "display_name": "Копиця соломи",
+      "categories": ["nature_blocks"]
+    },
+    "honeycomb_block": {
+      "display_name": "Блок медових стільників",
+      "categories": ["nature_blocks"]
+    },
+    "honeycomb": {
+      "display_name": "Медові стільники",
+      "categories": ["ingredients"]
+    },
+    "heart_of_the_sea": {
+      "display_name": "Серце моря",
+      "categories": ["ingredients"]
+    },
+    "heart_pottery_sherd": {
+      "display_name": "Гончарний черепок «Серце»",
+      "categories": ["ingredients"]
+    },
+    "heartbreak_pottery_sherd": {
+      "display_name": "Гончарний черепок «Розбите серце»",
+      "categories": ["ingredients"]
+    },
+    "howl_pottery_sherd": {
+      "display_name": "Гончарний черепок «Виття»",
+      "categories": ["ingredients"]
+    },
+    "host_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Господар>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "honey_bottle": {
+      "display_name": "Пляшка меду",
+      "categories": ["foods_and_potions"]
+    }
+  },
+  "a": {
+    "amethyst_block": {
+      "display_name": "Блок аметиста",
+      "categories": ["redstone_blocks", "nature_blocks", "build_blocks"]
+    },
+    "armor_stand": {
+      "display_name": "Стійка для обладунків",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "arrow": {
+      "display_name": "Стріла",
+      "categories": ["weapons"]
+    },
+    "axolotl_bucket": {
+      "display_name": "Відро з аксолотлем",
+      "categories": ["tools"]
+    },
+    "acacia_boat": {
+      "display_name": "Акацієвий човен",
+      "categories": ["tools"]
+    },
+    "acacia_chest_boat": {
+      "display_name": "Акацієвий човен зі скринею",
+      "categories": ["tools"]
+    },
+    "activator_rail": {
+      "display_name": "Активаторні рейки",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "andesite": {
+      "display_name": "Андезит",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "ancient_debris": {
+      "display_name": "Стародавні залишки",
+      "categories": ["nature_blocks", "ingredients"]
+    },
+    "amethyst_cluster": {
+      "display_name": "Аметистова друза",
+      "categories": ["nature_blocks"]
+    },
+    "acacia_log": {
+      "display_name": "Акацієва колода",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "acacia_leaves": {
+      "display_name": "Акацієве листя",
+      "categories": ["nature_blocks"]
+    },
+    "azalea_leaves": {
+      "display_name": "Азалієве листя",
+      "categories": ["nature_blocks"]
+    },
+    "acacia_sapling": {
+      "display_name": "Паросток акації",
+      "categories": ["nature_blocks"]
+    },
+    "azalea": {
+      "display_name": "Азалія",
+      "categories": ["nature_blocks"]
+    },
+    "allium": {
+      "display_name": "Різанець",
+      "categories": ["nature_blocks"]
+    },
+    "azure_bluet": {
+      "display_name": "Черемша",
+      "categories": ["nature_blocks"]
+    },
+    "amethyst_shard": {
+      "display_name": "Аметистовий уламок",
+      "categories": ["ingredients"]
+    },
+    "armadillo_scute": {
+      "display_name": "Щиток броненосця",
+      "categories": ["ingredients"]
+    },
+    "angler_pottery_sherd": {
+      "display_name": "Гончарний черепок «Рибалка»",
+      "categories": ["ingredients"]
+    },
+    "archer_pottery_sherd": {
+      "display_name": "Гончарний черепок «Лучник»",
+      "categories": ["ingredients"]
+    },
+    "arms_up_pottery_sherd": {
+      "display_name": "Гончарний черепок «Руки догори»",
+      "categories": ["ingredients"]
+    },
+    "apple": {
+      "display_name": "Яблуко",
+      "categories": ["foods_and_potions"]
+    },
+    "acacia_wood": {
+      "display_name": "Акацієва деревина",
+      "categories": ["build_blocks"]
+    },
+    "acacia_planks": {
+      "display_name": "Акацієві дошки",
+      "categories": ["build_blocks"]
+    },
+    "acacia_stairs": {
+      "display_name": "Акацієві сходи",
+      "categories": ["build_blocks"]
+    },
+    "acacia_slab": {
+      "display_name": "Акацієва плита",
+      "categories": ["build_blocks"]
+    },
+    "acacia_fence": {
+      "display_name": "Акацієвий паркан",
+      "categories": ["build_blocks"]
+    },
+    "acacia_fence_gate": {
+      "display_name": "Акацієва хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "acacia_door": {
+      "display_name": "Акацієві двері",
+      "categories": ["build_blocks"]
+    },
+    "acacia_trapdoor": {
+      "display_name": "Акацієвий люк",
+      "categories": ["build_blocks"]
+    },
+    "acacia_pressure_plate": {
+      "display_name": "Акацієва натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "acacia_button": {
+      "display_name": "Акацієва кнопка",
+      "categories": ["build_blocks"]
+    },
+    "andesite_stairs": {
+      "display_name": "Андезитові сходи",
+      "categories": ["build_blocks"]
+    },
+    "andesite_slab": {
+      "display_name": "Андезитова плита",
+      "categories": ["build_blocks"]
+    },
+    "andesite_wall": {
+      "display_name": "Андезитова стіна",
+      "categories": ["build_blocks"]
+    },
+    "anvil": {
+      "display_name": "Ковадло",
+      "categories": ["functional_blocks"]
+    },
+    "acacia_sign": {
+      "display_name": "Акацієва табличка",
+      "categories": ["functional_blocks"]
+    },
+    "acacia_hanging_sign": {
+      "display_name": "Акацієва вивіска",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "w": {
+    "white_wool": {
+      "display_name": "Біла вовна",
+      "categories": ["redstone_blocks", "color_blocks"]
+    },
+    "wooden_sword": {
+      "display_name": "Дерев'яний меч",
+      "categories": ["weapons"]
+    },
+    "wooden_axe": {
+      "display_name": "Дерев'яна сокира",
+      "categories": ["weapons", "tools"]
+    },
+    "wolf_armor": {
+      "display_name": "Вовчі обладунки",
+      "categories": ["weapons"]
+    },
+    "wooden_shovel": {
+      "display_name": "Дерев'яна лопата",
+      "categories": ["tools"]
+    },
+    "wooden_pickaxe": {
+      "display_name": "Дерев'яне кайло",
+      "categories": ["tools"]
+    },
+    "wooden_hoe": {
+      "display_name": "Дерев'яна мотика",
+      "categories": ["tools"]
+    },
+    "water_bucket": {
+      "display_name": "Відро води",
+      "categories": ["tools"]
+    },
+    "writable_book": {
+      "display_name": "Книга й перо",
+      "categories": ["tools"]
+    },
+    "warped_fungus_on_a_stick": {
+      "display_name": "Химерний гриб на паличці",
+      "categories": ["tools"]
+    },
+    "warped_nylium": {
+      "display_name": "Химерний нілій",
+      "categories": ["nature_blocks"]
+    },
+    "warped_stem": {
+      "display_name": "Химерне стебло",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "warped_wart_block": {
+      "display_name": "Блок химерного наросту",
+      "categories": ["nature_blocks"]
+    },
+    "warped_fungus": {
+      "display_name": "Химерний гриб",
+      "categories": ["nature_blocks"]
+    },
+    "white_tulip": {
+      "display_name": "Білий тюльпан",
+      "categories": ["nature_blocks"]
+    },
+    "wither_rose": {
+      "display_name": "Троянда візера",
+      "categories": ["nature_blocks"]
+    },
+    "warped_roots": {
+      "display_name": "Химерне коріння",
+      "categories": ["nature_blocks"]
+    },
+    "weeping_vines": {
+      "display_name": "Плакучі лози",
+      "categories": ["nature_blocks"]
+    },
+    "wheat_seeds": {
+      "display_name": "Насіння пшениці",
+      "categories": ["nature_blocks"]
+    },
+    "wet_sponge": {
+      "display_name": "Мокра губка",
+      "categories": ["nature_blocks"]
+    },
+    "wheat": {
+      "display_name": "Пшениця",
+      "categories": ["ingredients"]
+    },
+    "white_dye": {
+      "display_name": "Білий барвник",
+      "categories": ["ingredients"]
+    },
+    "wild_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Дикість>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "wayfinder_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Шляхошукач>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "ward_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Боронитель>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "warped_hyphae": {
+      "display_name": "Химерні гіфи",
+      "categories": ["build_blocks"]
+    },
+    "warped_planks": {
+      "display_name": "Химерні дошки",
+      "categories": ["build_blocks"]
+    },
+    "warped_stairs": {
+      "display_name": "Химерні сходи",
+      "categories": ["build_blocks"]
+    },
+    "warped_slab": {
+      "display_name": "Химерна плита",
+      "categories": ["build_blocks"]
+    },
+    "warped_fence": {
+      "display_name": "Химерний паркан",
+      "categories": ["build_blocks"]
+    },
+    "warped_fence_gate": {
+      "display_name": "Химерна хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "warped_door": {
+      "display_name": "Химерні двері",
+      "categories": ["build_blocks"]
+    },
+    "warped_trapdoor": {
+      "display_name": "Химерний люк",
+      "categories": ["build_blocks"]
+    },
+    "warped_pressure_plate": {
+      "display_name": "Химерна натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "warped_button": {
+      "display_name": "Химерна кнопка",
+      "categories": ["build_blocks"]
+    },
+    "weathered_copper": {
+      "display_name": "Вивітрена мідь",
+      "categories": ["build_blocks"]
+    },
+    "weathered_cut_copper": {
+      "display_name": "Вивітрена тесана мідь",
+      "categories": ["build_blocks"]
+    },
+    "weathered_cut_copper_stairs": {
+      "display_name": "Вивітрені тесані мідні сходи",
+      "categories": ["build_blocks"]
+    },
+    "weathered_cut_copper_slab": {
+      "display_name": "Вивітрена тесана мідна плита",
+      "categories": ["build_blocks"]
+    },
+    "waxed_copper_block": {
+      "display_name": "Вощений блок міді",
+      "categories": ["build_blocks"]
+    },
+    "waxed_cut_copper": {
+      "display_name": "Вощена тесана мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_cut_copper_stairs": {
+      "display_name": "Вощені тесані мідні сходи",
+      "categories": ["build_blocks"]
+    },
+    "waxed_cut_copper_slab": {
+      "display_name": "Вощена тесана мідна плита",
+      "categories": ["build_blocks"]
+    },
+    "waxed_exposed_copper": {
+      "display_name": "Вощена наражена мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_exposed_cut_copper": {
+      "display_name": "Вощена наражена тесана мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_exposed_cut_copper_stairs": {
+      "display_name": "Вощені наражені тесані мідні сходи",
+      "categories": ["build_blocks"]
+    },
+    "waxed_exposed_cut_copper_slab": {
+      "display_name": "Вощена наражена тесана мідна плита",
+      "categories": ["build_blocks"]
+    },
+    "waxed_weathered_copper": {
+      "display_name": "Вощена вивітрена мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_weathered_cut_copper": {
+      "display_name": "Вощена вивітрена тесана мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_weathered_cut_copper_stairs": {
+      "display_name": "Вощені вивітрені тесані мідні сходи",
+      "categories": ["build_blocks"]
+    },
+    "waxed_weathered_cut_copper_slab": {
+      "display_name": "Вощена вивітрена тесана мідна плита",
+      "categories": ["build_blocks"]
+    },
+    "waxed_oxidized_copper": {
+      "display_name": "Вощена окиснена мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_oxidized_cut_copper": {
+      "display_name": "Вощена окиснена тесана мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_oxidized_cut_copper_stairs": {
+      "display_name": "Вощені окиснені тесані мідні сходи",
+      "categories": ["build_blocks"]
+    },
+    "waxed_oxidized_cut_copper_slab": {
+      "display_name": "Вощена окиснена тесана мідна плита",
+      "categories": ["build_blocks"]
+    },
+    "white_carpet": {
+      "display_name": "Білий килим",
+      "categories": ["color_blocks"]
+    },
+    "white_terracotta": {
+      "display_name": "Біла кераміка",
+      "categories": ["color_blocks"]
+    },
+    "white_concrete": {
+      "display_name": "Білий бетон",
+      "categories": ["color_blocks"]
+    },
+    "white_concrete_powder": {
+      "display_name": "Білий цемент",
+      "categories": ["color_blocks"]
+    },
+    "white_glazed_terracotta": {
+      "display_name": "Біла глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "white_stained_glass": {
+      "display_name": "Біле скло",
+      "categories": ["color_blocks"]
+    },
+    "white_stained_glass_pane": {
+      "display_name": "Біла шиба",
+      "categories": ["color_blocks"]
+    },
+    "white_shulker_box": {
+      "display_name": "Біла шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "white_bed": {
+      "display_name": "Біле ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "white_candle": {
+      "display_name": "Біла свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "white_banner": {
+      "display_name": "Білий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "warped_sign": {
+      "display_name": "Химерна табличка",
+      "categories": ["functional_blocks"]
+    },
+    "warped_hanging_sign": {
+      "display_name": "Химерна вивіска",
+      "categories": ["functional_blocks"]
+    },
+    "wither_skeleton_skull": {
+      "display_name": "Череп візера-скелета",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "d": {
+    "daylight_detector": {
+      "display_name": "Детектор денного світла",
+      "categories": ["redstone_blocks"]
+    },
+    "dispenser": {
+      "display_name": "Роздавач",
+      "categories": ["redstone_blocks"]
+    },
+    "dropper": {
+      "display_name": "Викидач",
+      "categories": ["redstone_blocks"]
+    },
+    "decorated_pot": {
+      "display_name": "Оздоблений горщик",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "diamond_sword": {
+      "display_name": "Діамантовий меч",
+      "categories": ["weapons"]
+    },
+    "diamond_axe": {
+      "display_name": "Діамантова сокира",
+      "categories": ["weapons", "tools"]
+    },
+    "diamond_helmet": {
+      "display_name": "Діамантовий шолом",
+      "categories": ["weapons"]
+    },
+    "diamond_chestplate": {
+      "display_name": "Діамантовий нагрудник",
+      "categories": ["weapons"]
+    },
+    "diamond_leggings": {
+      "display_name": "Діамантові наголінники",
+      "categories": ["weapons"]
+    },
+    "diamond_boots": {
+      "display_name": "Діамантові чоботи",
+      "categories": ["weapons"]
+    },
+    "diamond_horse_armor": {
+      "display_name": "Діамантові кінські обладунки",
+      "categories": ["weapons"]
+    },
+    "diamond_shovel": {
+      "display_name": "Діамантова лопата",
+      "categories": ["tools"]
+    },
+    "diamond_pickaxe": {
+      "display_name": "Діамантове кайло",
+      "categories": ["tools"]
+    },
+    "diamond_hoe": {
+      "display_name": "Діамантова мотика",
+      "categories": ["tools"]
+    },
+    "dark_oak_boat": {
+      "display_name": "Темно-дубовий човен",
+      "categories": ["tools"]
+    },
+    "dark_oak_chest_boat": {
+      "display_name": "Темно-дубовий човен зі скринею",
+      "categories": ["tools"]
+    },
+    "detector_rail": {
+      "display_name": "Детекторні рейки",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "dirt_path": {
+      "display_name": "Ґрунтова стежка",
+      "categories": ["nature_blocks"]
+    },
+    "dirt": {
+      "display_name": "Ґрунт",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate": {
+      "display_name": "Глибосланець",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "diorite": {
+      "display_name": "Діорит",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "dripstone_block": {
+      "display_name": "Сталактитовий блок",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate_coal_ore": {
+      "display_name": "Глибосланцева вугільна руда",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate_iron_ore": {
+      "display_name": "Глибосланцева залізна руда",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate_copper_ore": {
+      "display_name": "Глибосланцева мідна руда",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate_gold_ore": {
+      "display_name": "Глибосланцева золота руда",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate_redstone_ore": {
+      "display_name": "Глибосланцева редстоунова руда",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate_emerald_ore": {
+      "display_name": "Глибосланцева смарагдова руда",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate_lapis_ore": {
+      "display_name": "Глибосланцева лазуритова руда",
+      "categories": ["nature_blocks"]
+    },
+    "diamond_ore": {
+      "display_name": "Діамантова руда",
+      "categories": ["nature_blocks"]
+    },
+    "deepslate_diamond_ore": {
+      "display_name": "Глибосланцева діамантова руда",
+      "categories": ["nature_blocks"]
+    },
+    "dark_oak_log": {
+      "display_name": "Темно-дубова колода",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "dark_oak_leaves": {
+      "display_name": "Темно-дубове листя",
+      "categories": ["nature_blocks"]
+    },
+    "dark_oak_sapling": {
+      "display_name": "Паросток темного дуба",
+      "categories": ["nature_blocks"]
+    },
+    "dead_bush": {
+      "display_name": "Мертвий кущ",
+      "categories": ["nature_blocks"]
+    },
+    "dandelion": {
+      "display_name": "Кульбаба",
+      "categories": ["nature_blocks"]
+    },
+    "dried_kelp_block": {
+      "display_name": "Блок висушеної ламінарії",
+      "categories": ["nature_blocks"]
+    },
+    "dead_tube_coral_block": {
+      "display_name": "Блок мертвого трубчастого корала",
+      "categories": ["nature_blocks"]
+    },
+    "dead_brain_coral_block": {
+      "display_name": "Блок мертвого мозкового корала",
+      "categories": ["nature_blocks"]
+    },
+    "dead_bubble_coral_block": {
+      "display_name": "Блок мертвого бульбашкового корала",
+      "categories": ["nature_blocks"]
+    },
+    "dead_fire_coral_block": {
+      "display_name": "Блок мертвого вогняного корала",
+      "categories": ["nature_blocks"]
+    },
+    "dead_horn_coral_block": {
+      "display_name": "Блок мертвого рогового корала",
+      "categories": ["nature_blocks"]
+    },
+    "dead_tube_coral": {
+      "display_name": "Мертвий трубчастий корал",
+      "categories": ["nature_blocks"]
+    },
+    "dead_brain_coral": {
+      "display_name": "Мертвий мозковий корал",
+      "categories": ["nature_blocks"]
+    },
+    "dead_bubble_coral": {
+      "display_name": "Мертвий бульбашковий корал",
+      "categories": ["nature_blocks"]
+    },
+    "dead_fire_coral": {
+      "display_name": "Мертвий вогняний корал",
+      "categories": ["nature_blocks"]
+    },
+    "dead_horn_coral": {
+      "display_name": "Мертвий роговий корал",
+      "categories": ["nature_blocks"]
+    },
+    "dead_tube_coral_fan": {
+      "display_name": "Віяло з мертвих трубчастих коралів",
+      "categories": ["nature_blocks"]
+    },
+    "dead_brain_coral_fan": {
+      "display_name": "Віяло з мертвих мозкових коралів",
+      "categories": ["nature_blocks"]
+    },
+    "dead_bubble_coral_fan": {
+      "display_name": "Віяло з мертвих бульбашкових коралів",
+      "categories": ["nature_blocks"]
+    },
+    "dead_fire_coral_fan": {
+      "display_name": "Віяло з мертвих вогняних коралів",
+      "categories": ["nature_blocks"]
+    },
+    "dead_horn_coral_fan": {
+      "display_name": "Віяло з мертвих рогових коралів",
+      "categories": ["nature_blocks"]
+    },
+    "diamond": {
+      "display_name": "Діамант",
+      "categories": ["ingredients"]
+    },
+    "disc_fragment_5": {
+      "display_name": "Фрагмент платівки",
+      "categories": ["ingredients"]
+    },
+    "dragon_breath": {
+      "display_name": "Дихання дракона",
+      "categories": ["ingredients"]
+    },
+    "danger_pottery_sherd": {
+      "display_name": "Гончарний черепок «Небезпека»",
+      "categories": ["ingredients"]
+    },
+    "dune_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Дюна>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "dried_kelp": {
+      "display_name": "Висушена ламінарія",
+      "categories": ["foods_and_potions"]
+    },
+    "dark_oak_wood": {
+      "display_name": "Темно-дубова деревина",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_planks": {
+      "display_name": "Темно-дубові дошки",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_stairs": {
+      "display_name": "Темно-дубові сходи",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_slab": {
+      "display_name": "Темно-дубова плита",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_fence": {
+      "display_name": "Темно-дубовий паркан",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_fence_gate": {
+      "display_name": "Темно-дубова хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_door": {
+      "display_name": "Темно-дубові двері",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_trapdoor": {
+      "display_name": "Темно-дубовий люк",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_pressure_plate": {
+      "display_name": "Темно-дубова натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "dark_oak_button": {
+      "display_name": "Темно-дубова кнопка",
+      "categories": ["build_blocks"]
+    },
+    "diorite_stairs": {
+      "display_name": "Діоритові сходи",
+      "categories": ["build_blocks"]
+    },
+    "diorite_slab": {
+      "display_name": "Діоритова плита",
+      "categories": ["build_blocks"]
+    },
+    "diorite_wall": {
+      "display_name": "Діоритова стіна",
+      "categories": ["build_blocks"]
+    },
+    "deepslate_bricks": {
+      "display_name": "Глибосланцева цегла",
+      "categories": ["build_blocks"]
+    },
+    "deepslate_brick_stairs": {
+      "display_name": "Сходи з глибосланцевої цегли",
+      "categories": ["build_blocks"]
+    },
+    "deepslate_brick_slab": {
+      "display_name": "Плита з глибосланцевої цегли",
+      "categories": ["build_blocks"]
+    },
+    "deepslate_brick_wall": {
+      "display_name": "Стіна з глибосланцевої цегли",
+      "categories": ["build_blocks"]
+    },
+    "deepslate_tiles": {
+      "display_name": "Глибосланцеві кахлі",
+      "categories": ["build_blocks"]
+    },
+    "deepslate_tile_stairs": {
+      "display_name": "Сходи з глибосланцевих кахлів",
+      "categories": ["build_blocks"]
+    },
+    "deepslate_tile_slab": {
+      "display_name": "Плита з глибосланцевих кахлів",
+      "categories": ["build_blocks"]
+    },
+    "deepslate_tile_wall": {
+      "display_name": "Стіна з глибосланцевих кахлів",
+      "categories": ["build_blocks"]
+    },
+    "dark_prismarine": {
+      "display_name": "Темний призмарин",
+      "categories": ["build_blocks"]
+    },
+    "dark_prismarine_stairs": {
+      "display_name": "Сходи з темного призмарину",
+      "categories": ["build_blocks"]
+    },
+    "dark_prismarine_slab": {
+      "display_name": "Плита з темного призмарину",
+      "categories": ["build_blocks"]
+    },
+    "diamond_block": {
+      "display_name": "Блок діаманта",
+      "categories": ["build_blocks"]
+    },
+    "damaged_anvil": {
+      "display_name": "Пошкоджене ковадло",
+      "categories": ["functional_blocks"]
+    },
+    "dark_oak_sign": {
+      "display_name": "Темно-дубова табличка",
+      "categories": ["functional_blocks"]
+    },
+    "dark_oak_hanging_sign": {
+      "display_name": "Темно-дубова вивіска",
+      "categories": ["functional_blocks"]
+    },
+    "dragon_head": {
+      "display_name": "Голова дракона",
+      "categories": ["functional_blocks"]
+    },
+    "dragon_egg": {
+      "display_name": "Яйце дракона",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "p": {
+    "piston": {
+      "display_name": "Поршень",
+      "categories": ["redstone_blocks"]
+    },
+    "pufferfish_bucket": {
+      "display_name": "Відро зі скелезубом",
+      "categories": ["tools"]
+    },
+    "powder_snow_bucket": {
+      "display_name": "Відро із сипким снігом",
+      "categories": ["tools"]
+    },
+    "powered_rail": {
+      "display_name": "Електризовані рейки",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "podzol": {
+      "display_name": "Підзол",
+      "categories": ["nature_blocks"]
+    },
+    "packed_ice": {
+      "display_name": "Сухий лід",
+      "categories": ["nature_blocks"]
+    },
+    "pointed_dripstone": {
+      "display_name": "Загострений сталактит",
+      "categories": ["nature_blocks"]
+    },
+    "prismarine": {
+      "display_name": "Призмарин",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "poppy": {
+      "display_name": "Мак",
+      "categories": ["nature_blocks"]
+    },
+    "pink_tulip": {
+      "display_name": "Рожевий тюльпан",
+      "categories": ["nature_blocks"]
+    },
+    "pink_petals": {
+      "display_name": "Рожеві пелюстки",
+      "categories": ["nature_blocks"]
+    },
+    "peony": {
+      "display_name": "Півонія",
+      "categories": ["nature_blocks"]
+    },
+    "pitcher_plant": {
+      "display_name": "Глечник",
+      "categories": ["nature_blocks"]
+    },
+    "pumpkin_seeds": {
+      "display_name": "Насіння гарбуза",
+      "categories": ["nature_blocks"]
+    },
+    "pitcher_pod": {
+      "display_name": "Стручок глечника",
+      "categories": ["nature_blocks"]
+    },
+    "pumpkin": {
+      "display_name": "Гарбуз",
+      "categories": ["nature_blocks"]
+    },
+    "pearlescent_froglight": {
+      "display_name": "Перламутрове жаб'яче світло",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "prismarine_shard": {
+      "display_name": "Призмариновий уламок",
+      "categories": ["ingredients"]
+    },
+    "prismarine_crystals": {
+      "display_name": "Призмаринові кристали",
+      "categories": ["ingredients"]
+    },
+    "popped_chorus_fruit": {
+      "display_name": "Спечений фрукт хорусу",
+      "categories": ["ingredients"]
+    },
+    "purple_dye": {
+      "display_name": "Фіолетовий барвник",
+      "categories": ["ingredients"]
+    },
+    "pink_dye": {
+      "display_name": "Рожевий барвник",
+      "categories": ["ingredients"]
+    },
+    "paper": {
+      "display_name": "Папір",
+      "categories": ["ingredients"]
+    },
+    "pufferfish": {
+      "display_name": "Скелезуб",
+      "categories": ["ingredients", "foods_and_potions"]
+    },
+    "phantom_membrane": {
+      "display_name": "Перетинка фантома",
+      "categories": ["ingredients"]
+    },
+    "piglin_banner_pattern": {
+      "display_name": "Шаблон стяга",
+      "categories": ["ingredients"],
+      "description": ["Рило"]
+    },
+    "plenty_pottery_sherd": {
+      "display_name": "Гончарний черепок «Достаток»",
+      "categories": ["ingredients"]
+    },
+    "prize_pottery_sherd": {
+      "display_name": "Гончарний черепок «Нагорода»",
+      "categories": ["ingredients"]
+    },
+    "potato": {
+      "display_name": "Картопля",
+      "categories": ["foods_and_potions"]
+    },
+    "poisonous_potato": {
+      "display_name": "Отруйна картопля",
+      "categories": ["foods_and_potions"]
+    },
+    "porkchop": {
+      "display_name": "Сира свинина",
+      "categories": ["foods_and_potions"]
+    },
+    "pumpkin_pie": {
+      "display_name": "Гарбузовий пиріг",
+      "categories": ["foods_and_potions"]
+    },
+    "polished_granite": {
+      "display_name": "Полірований граніт",
+      "categories": ["build_blocks"]
+    },
+    "polished_granite_stairs": {
+      "display_name": "Сходи з полірованого граніту",
+      "categories": ["build_blocks"]
+    },
+    "polished_granite_slab": {
+      "display_name": "Плита з полірованого граніту",
+      "categories": ["build_blocks"]
+    },
+    "polished_diorite": {
+      "display_name": "Полірований діорит",
+      "categories": ["build_blocks"]
+    },
+    "polished_diorite_stairs": {
+      "display_name": "Сходи з полірованого діориту",
+      "categories": ["build_blocks"]
+    },
+    "polished_diorite_slab": {
+      "display_name": "Плита з полірованого діориту",
+      "categories": ["build_blocks"]
+    },
+    "polished_andesite": {
+      "display_name": "Полірований андезит",
+      "categories": ["build_blocks"]
+    },
+    "polished_andesite_stairs": {
+      "display_name": "Сходи з полірованого андезиту",
+      "categories": ["build_blocks"]
+    },
+    "polished_andesite_slab": {
+      "display_name": "Плита з полірованого андезиту",
+      "categories": ["build_blocks"]
+    },
+    "polished_deepslate": {
+      "display_name": "Полірований глибосланець",
+      "categories": ["build_blocks"]
+    },
+    "polished_deepslate_stairs": {
+      "display_name": "Сходи з полірованого глибосланцю",
+      "categories": ["build_blocks"]
+    },
+    "polished_deepslate_slab": {
+      "display_name": "Плита з полірованого глибосланцю",
+      "categories": ["build_blocks"]
+    },
+    "polished_deepslate_wall": {
+      "display_name": "Стіна з полірованого глибосланцю",
+      "categories": ["build_blocks"]
+    },
+    "packed_mud": {
+      "display_name": "Спресоване багно",
+      "categories": ["build_blocks"]
+    },
+    "prismarine_stairs": {
+      "display_name": "Призмаринові сходи",
+      "categories": ["build_blocks"]
+    },
+    "prismarine_slab": {
+      "display_name": "Призмаринова плита",
+      "categories": ["build_blocks"]
+    },
+    "prismarine_wall": {
+      "display_name": "Призмаринова стіна",
+      "categories": ["build_blocks"]
+    },
+    "prismarine_bricks": {
+      "display_name": "Призмаринова цегла",
+      "categories": ["build_blocks"]
+    },
+    "prismarine_brick_stairs": {
+      "display_name": "Сходи з призмаринової цегли",
+      "categories": ["build_blocks"]
+    },
+    "prismarine_brick_slab": {
+      "display_name": "Плита з призмаринової цегли",
+      "categories": ["build_blocks"]
+    },
+    "polished_basalt": {
+      "display_name": "Полірований базальт",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone": {
+      "display_name": "Полірований чорнокамінь",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone_stairs": {
+      "display_name": "Сходи з полірованого чорнокаменю",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone_slab": {
+      "display_name": "Плита з полірованого чорнокаменю",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone_wall": {
+      "display_name": "Стіна з полірованого чорнокаменю",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone_pressure_plate": {
+      "display_name": "Натискна плита з полірованого чорнокаменю",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone_button": {
+      "display_name": "Кнопка з полірованого чорнокаменю",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone_bricks": {
+      "display_name": "Полірована чорнокам'яна цегла",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone_brick_stairs": {
+      "display_name": "Сходи з полірованої чорнокам'яної цегли",
+      "categories": ["build_blocks"]
+    },
+    "polished_blackstone_brick_slab": {
+      "display_name": "Плита з полірованої чорнокам'яної цегли",
+      "categories": ["build_blocks"]
+    },
+    "purpur_block": {
+      "display_name": "Блок пурпуру",
+      "categories": ["build_blocks"]
+    },
+    "purpur_pillar": {
+      "display_name": "Колона з пурпуру",
+      "categories": ["build_blocks"]
+    },
+    "purpur_stairs": {
+      "display_name": "Сходи з пурпуру",
+      "categories": ["build_blocks"]
+    },
+    "purpur_slab": {
+      "display_name": "Плита з пурпуру",
+      "categories": ["build_blocks"]
+    },
+    "purple_wool": {
+      "display_name": "Фіолетова вовна",
+      "categories": ["color_blocks"]
+    },
+    "pink_wool": {
+      "display_name": "Рожева вовна",
+      "categories": ["color_blocks"]
+    },
+    "purple_carpet": {
+      "display_name": "Фіолетовий килим",
+      "categories": ["color_blocks"]
+    },
+    "pink_carpet": {
+      "display_name": "Рожевий килим",
+      "categories": ["color_blocks"]
+    },
+    "purple_terracotta": {
+      "display_name": "Фіолетова кераміка",
+      "categories": ["color_blocks"]
+    },
+    "pink_terracotta": {
+      "display_name": "Рожева кераміка",
+      "categories": ["color_blocks"]
+    },
+    "purple_concrete": {
+      "display_name": "Фіолетовий бетон",
+      "categories": ["color_blocks"]
+    },
+    "pink_concrete": {
+      "display_name": "Рожевий бетон",
+      "categories": ["color_blocks"]
+    },
+    "purple_concrete_powder": {
+      "display_name": "Фіолетовий цемент",
+      "categories": ["color_blocks"]
+    },
+    "pink_concrete_powder": {
+      "display_name": "Рожевий цемент",
+      "categories": ["color_blocks"]
+    },
+    "purple_glazed_terracotta": {
+      "display_name": "Фіолетова глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "pink_glazed_terracotta": {
+      "display_name": "Рожева глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "purple_stained_glass": {
+      "display_name": "Фіолетове скло",
+      "categories": ["color_blocks"]
+    },
+    "pink_stained_glass": {
+      "display_name": "Рожеве скло",
+      "categories": ["color_blocks"]
+    },
+    "purple_stained_glass_pane": {
+      "display_name": "Фіолетова шиба",
+      "categories": ["color_blocks"]
+    },
+    "pink_stained_glass_pane": {
+      "display_name": "Рожева шиба",
+      "categories": ["color_blocks"]
+    },
+    "purple_shulker_box": {
+      "display_name": "Фіолетова шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "pink_shulker_box": {
+      "display_name": "Рожева шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "purple_bed": {
+      "display_name": "Фіолетове ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "pink_bed": {
+      "display_name": "Рожеве ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "purple_candle": {
+      "display_name": "Фіолетова свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "pink_candle": {
+      "display_name": "Рожева свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "purple_banner": {
+      "display_name": "Фіолетовий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "pink_banner": {
+      "display_name": "Рожевий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "painting": {
+      "display_name": "Картина",
+      "categories": ["functional_blocks"]
+    },
+    "player_head": {
+      "display_name": "Голова гравця",
+      "categories": ["functional_blocks"]
+    },
+    "piglin_head": {
+      "display_name": "Голова піґліна",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "b": {
+    "barrel": {
+      "display_name": "Діжка",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "bell": {
+      "display_name": "Дзвін",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "big_dripleaf": {
+      "display_name": "Великий краплелист",
+      "categories": ["redstone_blocks", "nature_blocks"]
+    },
+    "bow": {
+      "display_name": "Лук",
+      "categories": ["weapons"]
+    },
+    "bucket": {
+      "display_name": "Відро",
+      "categories": ["tools"]
+    },
+    "bone_meal": {
+      "display_name": "Кісткове борошно",
+      "categories": ["tools", "ingredients"]
+    },
+    "brush": {
+      "display_name": "Щітка",
+      "categories": ["tools"]
+    },
+    "birch_boat": {
+      "display_name": "Березовий човен",
+      "categories": ["tools"]
+    },
+    "birch_chest_boat": {
+      "display_name": "Березовий човен зі скринею",
+      "categories": ["tools"]
+    },
+    "bamboo_raft": {
+      "display_name": "Бамбуковий пліт",
+      "categories": ["tools"]
+    },
+    "bamboo_chest_raft": {
+      "display_name": "Бамбуковий пліт зі скринею",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "blue_ice": {
+      "display_name": "Синій лід",
+      "categories": ["nature_blocks"]
+    },
+    "bone_block": {
+      "display_name": "Кістяний блок",
+      "categories": ["nature_blocks"]
+    },
+    "blackstone": {
+      "display_name": "Чорнокамінь",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "basalt": {
+      "display_name": "Базальт",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "budding_amethyst": {
+      "display_name": "Родючий аметист",
+      "categories": ["nature_blocks"]
+    },
+    "birch_log": {
+      "display_name": "Березова колода",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "birch_leaves": {
+      "display_name": "Березове листя",
+      "categories": ["nature_blocks"]
+    },
+    "brown_mushroom_block": {
+      "display_name": "Блок коричневого гриба",
+      "categories": ["nature_blocks"]
+    },
+    "birch_sapling": {
+      "display_name": "Паросток берези",
+      "categories": ["nature_blocks"]
+    },
+    "brown_mushroom": {
+      "display_name": "Коричневий гриб",
+      "categories": ["nature_blocks"]
+    },
+    "blue_orchid": {
+      "display_name": "Блакитна орхідея",
+      "categories": ["nature_blocks"]
+    },
+    "bamboo": {
+      "display_name": "Бамбук",
+      "categories": ["nature_blocks"]
+    },
+    "beetroot_seeds": {
+      "display_name": "Насіння буряка",
+      "categories": ["nature_blocks"]
+    },
+    "brain_coral_block": {
+      "display_name": "Блок мозкового корала",
+      "categories": ["nature_blocks"]
+    },
+    "bubble_coral_block": {
+      "display_name": "Блок бульбашкового корала",
+      "categories": ["nature_blocks"]
+    },
+    "brain_coral": {
+      "display_name": "Мозковий корал",
+      "categories": ["nature_blocks"]
+    },
+    "bubble_coral": {
+      "display_name": "Бульбашковий корал",
+      "categories": ["nature_blocks"]
+    },
+    "brain_coral_fan": {
+      "display_name": "Віяло з мозкових коралів",
+      "categories": ["nature_blocks"]
+    },
+    "bubble_coral_fan": {
+      "display_name": "Віяло з бульбашкових коралів",
+      "categories": ["nature_blocks"]
+    },
+    "bee_nest": {
+      "display_name": "Бджолине гніздо",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "bedrock": {
+      "display_name": "Корінна порода",
+      "categories": ["nature_blocks"]
+    },
+    "bone": {
+      "display_name": "Кістка",
+      "categories": ["ingredients"]
+    },
+    "blaze_rod": {
+      "display_name": "Стрижень пломеня",
+      "categories": ["ingredients"]
+    },
+    "black_dye": {
+      "display_name": "Чорний барвник",
+      "categories": ["ingredients"]
+    },
+    "brown_dye": {
+      "display_name": "Коричневий барвник",
+      "categories": ["ingredients"]
+    },
+    "blue_dye": {
+      "display_name": "Синій барвник",
+      "categories": ["ingredients"]
+    },
+    "bowl": {
+      "display_name": "Миска",
+      "categories": ["ingredients"]
+    },
+    "brick": {
+      "display_name": "Цеглина",
+      "categories": ["ingredients"]
+    },
+    "book": {
+      "display_name": "Книга",
+      "categories": ["ingredients"]
+    },
+    "blaze_powder": {
+      "display_name": "Порох пломеня",
+      "categories": ["ingredients"]
+    },
+    "blade_pottery_sherd": {
+      "display_name": "Гончарний черепок «Лезо»",
+      "categories": ["ingredients"]
+    },
+    "brewer_pottery_sherd": {
+      "display_name": "Гончарний черепок «Варильник»",
+      "categories": ["ingredients"]
+    },
+    "burn_pottery_sherd": {
+      "display_name": "Гончарний черепок «Полум'я»",
+      "categories": ["ingredients"]
+    },
+    "baked_potato": {
+      "display_name": "Запечена картопля",
+      "categories": ["foods_and_potions"]
+    },
+    "beetroot": {
+      "display_name": "Буряк",
+      "categories": ["foods_and_potions"]
+    },
+    "beef": {
+      "display_name": "Сира яловичина",
+      "categories": ["foods_and_potions"]
+    },
+    "bread": {
+      "display_name": "Хліб",
+      "categories": ["foods_and_potions"]
+    },
+    "beetroot_soup": {
+      "display_name": "Борщ",
+      "categories": ["foods_and_potions"]
+    },
+    "birch_wood": {
+      "display_name": "Березова деревина",
+      "categories": ["build_blocks"]
+    },
+    "birch_planks": {
+      "display_name": "Березові дошки",
+      "categories": ["build_blocks"]
+    },
+    "birch_stairs": {
+      "display_name": "Березові сходи",
+      "categories": ["build_blocks"]
+    },
+    "birch_slab": {
+      "display_name": "Березова плита",
+      "categories": ["build_blocks"]
+    },
+    "birch_fence": {
+      "display_name": "Березовий паркан",
+      "categories": ["build_blocks"]
+    },
+    "birch_fence_gate": {
+      "display_name": "Березова хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "birch_door": {
+      "display_name": "Березові двері",
+      "categories": ["build_blocks"]
+    },
+    "birch_trapdoor": {
+      "display_name": "Березовий люк",
+      "categories": ["build_blocks"]
+    },
+    "birch_pressure_plate": {
+      "display_name": "Березова натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "birch_button": {
+      "display_name": "Березова кнопка",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_block": {
+      "display_name": "Блок бамбука",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_planks": {
+      "display_name": "Бамбукові дошки",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_mosaic": {
+      "display_name": "Бамбукова мозаїка",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_stairs": {
+      "display_name": "Бамбукові сходи",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_mosaic_stairs": {
+      "display_name": "Сходи з бамбукової мозаїки",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_slab": {
+      "display_name": "Бамбукова плита",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_mosaic_slab": {
+      "display_name": "Плита з бамбукової мозаїки",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_fence": {
+      "display_name": "Бамбуковий паркан",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_fence_gate": {
+      "display_name": "Бамбукова хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_door": {
+      "display_name": "Бамбукові двері",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_trapdoor": {
+      "display_name": "Бамбуковий люк",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_pressure_plate": {
+      "display_name": "Бамбукова натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "bamboo_button": {
+      "display_name": "Бамбукова кнопка",
+      "categories": ["build_blocks"]
+    },
+    "bricks": {
+      "display_name": "Цегла",
+      "categories": ["build_blocks"]
+    },
+    "brick_stairs": {
+      "display_name": "Цегляні сходи",
+      "categories": ["build_blocks"]
+    },
+    "brick_slab": {
+      "display_name": "Цегляна плита",
+      "categories": ["build_blocks"]
+    },
+    "brick_wall": {
+      "display_name": "Цегляна стіна",
+      "categories": ["build_blocks"]
+    },
+    "blackstone_stairs": {
+      "display_name": "Чорнокам'яні сходи",
+      "categories": ["build_blocks"]
+    },
+    "blackstone_slab": {
+      "display_name": "Чорнокам'яна плита",
+      "categories": ["build_blocks"]
+    },
+    "blackstone_wall": {
+      "display_name": "Чорнокам'яна стіна",
+      "categories": ["build_blocks"]
+    },
+    "black_wool": {
+      "display_name": "Чорна вовна",
+      "categories": ["color_blocks"]
+    },
+    "brown_wool": {
+      "display_name": "Коричнева вовна",
+      "categories": ["color_blocks"]
+    },
+    "blue_wool": {
+      "display_name": "Синя вовна",
+      "categories": ["color_blocks"]
+    },
+    "black_carpet": {
+      "display_name": "Чорний килим",
+      "categories": ["color_blocks"]
+    },
+    "brown_carpet": {
+      "display_name": "Коричневий килим",
+      "categories": ["color_blocks"]
+    },
+    "blue_carpet": {
+      "display_name": "Синій килим",
+      "categories": ["color_blocks"]
+    },
+    "black_terracotta": {
+      "display_name": "Чорна кераміка",
+      "categories": ["color_blocks"]
+    },
+    "brown_terracotta": {
+      "display_name": "Коричнева кераміка",
+      "categories": ["color_blocks"]
+    },
+    "blue_terracotta": {
+      "display_name": "Синя кераміка",
+      "categories": ["color_blocks"]
+    },
+    "black_concrete": {
+      "display_name": "Чорний бетон",
+      "categories": ["color_blocks"]
+    },
+    "brown_concrete": {
+      "display_name": "Коричневий бетон",
+      "categories": ["color_blocks"]
+    },
+    "blue_concrete": {
+      "display_name": "Синій бетон",
+      "categories": ["color_blocks"]
+    },
+    "black_concrete_powder": {
+      "display_name": "Чорний цемент",
+      "categories": ["color_blocks"]
+    },
+    "brown_concrete_powder": {
+      "display_name": "Коричневий цемент",
+      "categories": ["color_blocks"]
+    },
+    "blue_concrete_powder": {
+      "display_name": "Синій цемент",
+      "categories": ["color_blocks"]
+    },
+    "black_glazed_terracotta": {
+      "display_name": "Чорна глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "brown_glazed_terracotta": {
+      "display_name": "Коричнева глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "blue_glazed_terracotta": {
+      "display_name": "Синя глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "black_stained_glass": {
+      "display_name": "Чорне скло",
+      "categories": ["color_blocks"]
+    },
+    "brown_stained_glass": {
+      "display_name": "Коричневе скло",
+      "categories": ["color_blocks"]
+    },
+    "blue_stained_glass": {
+      "display_name": "Синє скло",
+      "categories": ["color_blocks"]
+    },
+    "black_stained_glass_pane": {
+      "display_name": "Чорна шиба",
+      "categories": ["color_blocks"]
+    },
+    "brown_stained_glass_pane": {
+      "display_name": "Коричнева шиба",
+      "categories": ["color_blocks"]
+    },
+    "blue_stained_glass_pane": {
+      "display_name": "Синя шиба",
+      "categories": ["color_blocks"]
+    },
+    "black_shulker_box": {
+      "display_name": "Чорна шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "brown_shulker_box": {
+      "display_name": "Коричнева шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "blue_shulker_box": {
+      "display_name": "Синя шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "black_bed": {
+      "display_name": "Чорне ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "brown_bed": {
+      "display_name": "Коричневе ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "blue_bed": {
+      "display_name": "Синє ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "black_candle": {
+      "display_name": "Чорна свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "brown_candle": {
+      "display_name": "Коричнева свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "blue_candle": {
+      "display_name": "Синя свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "black_banner": {
+      "display_name": "Чорний стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "brown_banner": {
+      "display_name": "Коричневий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "blue_banner": {
+      "display_name": "Синій стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "blast_furnace": {
+      "display_name": "Плавильна піч",
+      "categories": ["functional_blocks"]
+    },
+    "brewing_stand": {
+      "display_name": "Варильна стійка",
+      "categories": ["functional_blocks"]
+    },
+    "beacon": {
+      "display_name": "Маяк",
+      "categories": ["functional_blocks"]
+    },
+    "beehive": {
+      "display_name": "Вулик",
+      "categories": ["functional_blocks"]
+    },
+    "bookshelf": {
+      "display_name": "Книжкова полиця",
+      "categories": ["functional_blocks"]
+    },
+    "birch_sign": {
+      "display_name": "Березова табличка",
+      "categories": ["functional_blocks"]
+    },
+    "birch_hanging_sign": {
+      "display_name": "Березова вивіска",
+      "categories": ["functional_blocks"]
+    },
+    "bamboo_sign": {
+      "display_name": "Бамбукова табличка",
+      "categories": ["functional_blocks"]
+    },
+    "bamboo_hanging_sign": {
+      "display_name": "Бамбукова вивіска",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "f": {
+    "furnace": {
+      "display_name": "Піч",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "firework_rocket": {
+      "display_name": "Феєрверкова ракета",
+      "categories": ["weapons", "tools"]
+    },
+    "fishing_rod": {
+      "display_name": "Вудка",
+      "categories": ["tools"]
+    },
+    "flint_and_steel": {
+      "display_name": "Кресало",
+      "categories": ["tools"]
+    },
+    "fire_charge": {
+      "display_name": "Заряд полум'я",
+      "categories": ["tools", "ingredients"]
+    },
+    "furnace_minecart": {
+      "display_name": "Вагонетка з піччю",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "farmland": {
+      "display_name": "Рілля",
+      "categories": ["nature_blocks"]
+    },
+    "flowering_azalea_leaves": {
+      "display_name": "Квітучо-азалієве листя",
+      "categories": ["nature_blocks"]
+    },
+    "flowering_azalea": {
+      "display_name": "Квітуча азалія",
+      "categories": ["nature_blocks"]
+    },
+    "fern": {
+      "display_name": "Папороть",
+      "categories": ["nature_blocks"]
+    },
+    "frogspawn": {
+      "display_name": "Жаб'яча ікра",
+      "categories": ["nature_blocks"]
+    },
+    "fire_coral_block": {
+      "display_name": "Блок вогняного корала",
+      "categories": ["nature_blocks"]
+    },
+    "fire_coral": {
+      "display_name": "Вогняний корал",
+      "categories": ["nature_blocks"]
+    },
+    "fire_coral_fan": {
+      "display_name": "Віяло з вогняних коралів",
+      "categories": ["nature_blocks"]
+    },
+    "flint": {
+      "display_name": "Кремінь",
+      "categories": ["ingredients"]
+    },
+    "feather": {
+      "display_name": "Перо",
+      "categories": ["ingredients"]
+    },
+    "firework_star": {
+      "display_name": "Феєрверкова зірка",
+      "categories": ["ingredients"]
+    },
+    "fermented_spider_eye": {
+      "display_name": "Оброблене павуче око",
+      "categories": ["ingredients"]
+    },
+    "flower_banner_pattern": {
+      "display_name": "Шаблон стяга",
+      "categories": ["ingredients"],
+      "description": ["Емблема квітки"]
+    },
+    "friend_pottery_sherd": {
+      "display_name": "Гончарний черепок «Друг»",
+      "categories": ["ingredients"]
+    },
+    "fletching_table": {
+      "display_name": "Стіл лучника",
+      "categories": ["functional_blocks"]
+    },
+    "flower_pot": {
+      "display_name": "Квітковий горщик",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "j": {
+    "jukebox": {
+      "display_name": "Програвач",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "jungle_boat": {
+      "display_name": "Тропічний човен",
+      "categories": ["tools"]
+    },
+    "jungle_chest_boat": {
+      "display_name": "Тропічний човен зі скринею",
+      "categories": ["tools"]
+    },
+    "jungle_log": {
+      "display_name": "Тропічна колода",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "jungle_leaves": {
+      "display_name": "Тропічне листя",
+      "categories": ["nature_blocks"]
+    },
+    "jungle_sapling": {
+      "display_name": "Паросток тропічного дерева",
+      "categories": ["nature_blocks"]
+    },
+    "jack_o_lantern": {
+      "display_name": "Ліхтар Джека",
+      "categories": ["nature_blocks"]
+    },
+    "jungle_wood": {
+      "display_name": "Тропічна деревина",
+      "categories": ["build_blocks"]
+    },
+    "jungle_planks": {
+      "display_name": "Тропічні дошки",
+      "categories": ["build_blocks"]
+    },
+    "jungle_stairs": {
+      "display_name": "Тропічні сходи",
+      "categories": ["build_blocks"]
+    },
+    "jungle_slab": {
+      "display_name": "Тропічна плита",
+      "categories": ["build_blocks"]
+    },
+    "jungle_fence": {
+      "display_name": "Тропічний паркан",
+      "categories": ["build_blocks"]
+    },
+    "jungle_fence_gate": {
+      "display_name": "Тропічна хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "jungle_door": {
+      "display_name": "Тропічні двері",
+      "categories": ["build_blocks"]
+    },
+    "jungle_trapdoor": {
+      "display_name": "Тропічний люк",
+      "categories": ["build_blocks"]
+    },
+    "jungle_pressure_plate": {
+      "display_name": "Тропічна натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "jungle_button": {
+      "display_name": "Тропічна кнопка",
+      "categories": ["build_blocks"]
+    },
+    "jungle_sign": {
+      "display_name": "Тропічна табличка",
+      "categories": ["functional_blocks"]
+    },
+    "jungle_hanging_sign": {
+      "display_name": "Тропічна вивіска",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "n": {
+    "note_block": {
+      "display_name": "Нотний блок",
+      "categories": ["redstone_blocks", "functional_blocks"]
+    },
+    "netherite_sword": {
+      "display_name": "Незеритовий меч",
+      "categories": ["weapons"]
+    },
+    "netherite_helmet": {
+      "display_name": "Незеритовий шолом",
+      "categories": ["weapons"]
+    },
+    "netherite_chestplate": {
+      "display_name": "Незеритовий нагрудник",
+      "categories": ["weapons"]
+    },
+    "netherite_leggings": {
+      "display_name": "Незеритові наголінники",
+      "categories": ["weapons"]
+    },
+    "netherite_boots": {
+      "display_name": "Незеритові чоботи",
+      "categories": ["weapons"]
+    },
+    "netherite_shovel": {
+      "display_name": "Незеритова лопата",
+      "categories": ["tools"]
+    },
+    "netherite_pickaxe": {
+      "display_name": "Незеритове кайло",
+      "categories": ["tools"]
+    },
+    "netherite_axe": {
+      "display_name": "Незеритова сокира",
+      "categories": ["tools", "weapons"]
+    },
+    "netherite_hoe": {
+      "display_name": "Незеритова мотика",
+      "categories": ["tools"]
+    },
+    "name_tag": {
+      "display_name": "Ярлик",
+      "categories": ["tools"]
+    },
+    "netherrack": {
+      "display_name": "Незерак",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "nether_gold_ore": {
+      "display_name": "Незерська золота руда",
+      "categories": ["nature_blocks"]
+    },
+    "nether_quartz_ore": {
+      "display_name": "Незерська кварцова руда",
+      "categories": ["nature_blocks"]
+    },
+    "nether_wart_block": {
+      "display_name": "Блок незерського наросту",
+      "categories": ["nature_blocks"]
+    },
+    "nether_sprouts": {
+      "display_name": "Незерські паростки",
+      "categories": ["nature_blocks"]
+    },
+    "nether_wart": {
+      "display_name": "Незерський наріст",
+      "categories": ["nature_blocks", "ingredients"]
+    },
+    "netherite_scrap": {
+      "display_name": "Незеритовий уламок",
+      "categories": ["ingredients"]
+    },
+    "netherite_ingot": {
+      "display_name": "Незеритовий злиток",
+      "categories": ["ingredients"]
+    },
+    "nautilus_shell": {
+      "display_name": "Мушля навтилуса",
+      "categories": ["ingredients"]
+    },
+    "nether_star": {
+      "display_name": "Зірка Незеру",
+      "categories": ["ingredients"]
+    },
+    "nether_brick": {
+      "display_name": "Незерська цеглина",
+      "categories": ["ingredients"]
+    },
+    "netherite_upgrade_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Незеритове покращення",
+        "null",
+        "Застосовується до:",
+        "blue$ Діамантове спорядження",
+        "Складники:",
+        "blue$ Незеритовий злиток"
+      ]
+    },
+    "nether_bricks": {
+      "display_name": "Незерська цегла",
+      "categories": ["build_blocks"]
+    },
+    "nether_brick_stairs": {
+      "display_name": "Сходи з незерської цегли",
+      "categories": ["build_blocks"]
+    },
+    "nether_brick_slab": {
+      "display_name": "Плита з незерської цегли",
+      "categories": ["build_blocks"]
+    },
+    "nether_brick_wall": {
+      "display_name": "Стіна з незерської цегли",
+      "categories": ["build_blocks"]
+    },
+    "nether_brick_fence": {
+      "display_name": "Паркан із незерської цегли",
+      "categories": ["build_blocks"]
+    },
+    "netherite_block": {
+      "display_name": "Блок незериту",
+      "categories": ["build_blocks"]
+    }
+  },
+  "i": {
+    "iron_door": {
+      "display_name": "Залізні двері",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "iron_trapdoor": {
+      "display_name": "Залізний люк",
+      "categories": ["redstone_blocks", "build_blocks"]
+    },
+    "iron_sword": {
+      "display_name": "Залізний меч",
+      "categories": ["weapons"]
+    },
+    "iron_axe": {
+      "display_name": "Залізна сокира",
+      "categories": ["weapons", "tools"]
+    },
+    "iron_helmet": {
+      "display_name": "Залізний шолом",
+      "categories": ["weapons"]
+    },
+    "iron_chestplate": {
+      "display_name": "Залізний нагрудник",
+      "categories": ["weapons"]
+    },
+    "iron_leggings": {
+      "display_name": "Залізні наголінники",
+      "categories": ["weapons"]
+    },
+    "iron_boots": {
+      "display_name": "Залізні чоботи",
+      "categories": ["weapons"]
+    },
+    "iron_horse_armor": {
+      "display_name": "Залізні кінські обладунки",
+      "categories": ["weapons"]
+    },
+    "iron_shovel": {
+      "display_name": "Залізна лопата",
+      "categories": ["tools"]
+    },
+    "iron_pickaxe": {
+      "display_name": "Залізне кайло",
+      "categories": ["tools"]
+    },
+    "iron_hoe": {
+      "display_name": "Залізна мотика",
+      "categories": ["tools"]
+    },
+    "ice": {
+      "display_name": "Лід",
+      "categories": ["nature_blocks"]
+    },
+    "iron_ore": {
+      "display_name": "Залізна руда",
+      "categories": ["nature_blocks"]
+    },
+    "iron_nugget": {
+      "display_name": "Залізний самородок",
+      "categories": ["ingredients"]
+    },
+    "iron_ingot": {
+      "display_name": "Залізний злиток",
+      "categories": ["ingredients"]
+    },
+    "ink_sac": {
+      "display_name": "Чорнильний мішок",
+      "categories": ["ingredients"]
+    },
+    "iron_block": {
+      "display_name": "Блок заліза",
+      "categories": ["build_blocks"]
+    },
+    "iron_bars": {
+      "display_name": "Залізні ґрати",
+      "categories": ["build_blocks"]
+    },
+    "item_frame": {
+      "display_name": "Рамка для предметів",
+      "categories": ["functional_blocks"]
+    },
+    "infested_stone": {
+      "display_name": "Заражений камінь",
+      "categories": ["functional_blocks"]
+    },
+    "infested_cobblestone": {
+      "display_name": "Заражений кругляк",
+      "categories": ["functional_blocks"]
+    },
+    "infested_stone_bricks": {
+      "display_name": "Заражена кам'яна цегла",
+      "categories": ["functional_blocks"]
+    },
+    "infested_mossy_stone_bricks": {
+      "display_name": "Заражена моховита кам'яна цегла",
+      "categories": ["functional_blocks"]
+    },
+    "infested_cracked_stone_bricks": {
+      "display_name": "Заражена тріснута кам'яна цегла",
+      "categories": ["functional_blocks"]
+    },
+    "infested_chiseled_stone_bricks": {
+      "display_name": "Заражена різьблена кам'яна цегла",
+      "categories": ["functional_blocks"]
+    },
+    "infested_deepslate": {
+      "display_name": "Заражений глибосланець",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "g": {
+    "golden_sword": {
+      "display_name": "Золотий меч",
+      "categories": ["weapons"]
+    },
+    "golden_axe": {
+      "display_name": "Золота сокира",
+      "categories": ["weapons", "tools"]
+    },
+    "golden_helmet": {
+      "display_name": "Золотий шолом",
+      "categories": ["weapons"]
+    },
+    "golden_chestplate": {
+      "display_name": "Золотий нагрудник",
+      "categories": ["weapons"]
+    },
+    "golden_leggings": {
+      "display_name": "Золоті наголінники",
+      "categories": ["weapons"]
+    },
+    "golden_boots": {
+      "display_name": "Золоті чоботи",
+      "categories": ["weapons"]
+    },
+    "golden_horse_armor": {
+      "display_name": "Золоті кінські обладунки",
+      "categories": ["weapons"]
+    },
+    "golden_shovel": {
+      "display_name": "Золота лопата",
+      "categories": ["tools"]
+    },
+    "golden_pickaxe": {
+      "display_name": "Золоте кайло",
+      "categories": ["tools"]
+    },
+    "golden_hoe": {
+      "display_name": "Золота мотика",
+      "categories": ["tools"]
+    },
+    "goat_horn": {
+      "display_name": "Козячий ріг",
+      "categories": ["tools"]
+    },
+    "grass_block": {
+      "display_name": "Трав'яний блок",
+      "categories": ["nature_blocks"]
+    },
+    "gravel": {
+      "display_name": "Гравій",
+      "categories": ["nature_blocks"]
+    },
+    "granite": {
+      "display_name": "Граніт",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "gold_ore": {
+      "display_name": "Золота руда",
+      "categories": ["nature_blocks"]
+    },
+    "glowstone": {
+      "display_name": "Світлокамінь",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "glow_lichen": {
+      "display_name": "Світлолишайник",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "glow_berries": {
+      "display_name": "Сяйні ягоди",
+      "categories": ["nature_blocks", "foods_and_potions"]
+    },
+    "gold_nugget": {
+      "display_name": "Золотий самородок",
+      "categories": ["ingredients"]
+    },
+    "gold_ingot": {
+      "display_name": "Золотий злиток",
+      "categories": ["ingredients"]
+    },
+    "glow_ink_sac": {
+      "display_name": "Сяйний чорнильний мішок",
+      "categories": ["ingredients"]
+    },
+    "gray_dye": {
+      "display_name": "Сірий барвник",
+      "categories": ["ingredients"]
+    },
+    "green_dye": {
+      "display_name": "Зелений барвник",
+      "categories": ["ingredients"]
+    },
+    "glass_bottle": {
+      "display_name": "Скляна пляшка",
+      "categories": ["ingredients"]
+    },
+    "glowstone_dust": {
+      "display_name": "Пил світлокаменю",
+      "categories": ["ingredients"]
+    },
+    "gunpowder": {
+      "display_name": "Порох",
+      "categories": ["ingredients"]
+    },
+    "glistering_melon_slice": {
+      "display_name": "Блискуча скибка кавуна",
+      "categories": ["ingredients"]
+    },
+    "golden_carrot": {
+      "display_name": "Золота морква",
+      "categories": ["ingredients", "foods_and_potions"]
+    },
+    "ghast_tear": {
+      "display_name": "Сльоза ґаста",
+      "categories": ["ingredients"]
+    },
+    "globe_banner_pattern": {
+      "display_name": "Шаблон стяга",
+      "categories": ["ingredients"],
+      "description": ["Глобус"]
+    },
+    "golden_apple": {
+      "display_name": "Золоте яблуко",
+      "categories": ["foods_and_potions"]
+    },
+    "granite_stairs": {
+      "display_name": "Гранітні сходи",
+      "categories": ["build_blocks"]
+    },
+    "granite_slab": {
+      "display_name": "Гранітна плита",
+      "categories": ["build_blocks"]
+    },
+    "granite_wall": {
+      "display_name": "Гранітна стіна",
+      "categories": ["build_blocks"]
+    },
+    "gilded_blackstone": {
+      "display_name": "Позолочений чорнокамінь",
+      "categories": ["build_blocks"]
+    },
+    "gold_block": {
+      "display_name": "Блок золота",
+      "categories": ["build_blocks"]
+    },
+    "gray_wool": {
+      "display_name": "Сіра вовна",
+      "categories": ["color_blocks"]
+    },
+    "green_wool": {
+      "display_name": "Зелена вовна",
+      "categories": ["color_blocks"]
+    },
+    "gray_carpet": {
+      "display_name": "Сірий килим",
+      "categories": ["color_blocks"]
+    },
+    "green_carpet": {
+      "display_name": "Зелений килим",
+      "categories": ["color_blocks"]
+    },
+    "gray_terracotta": {
+      "display_name": "Сіра кераміка",
+      "categories": ["color_blocks"]
+    },
+    "green_terracotta": {
+      "display_name": "Зелена кераміка",
+      "categories": ["color_blocks"]
+    },
+    "gray_concrete": {
+      "display_name": "Сірий бетон",
+      "categories": ["color_blocks"]
+    },
+    "green_concrete": {
+      "display_name": "Зелений бетон",
+      "categories": ["color_blocks"]
+    },
+    "gray_concrete_powder": {
+      "display_name": "Сірий цемент",
+      "categories": ["color_blocks"]
+    },
+    "green_concrete_powder": {
+      "display_name": "Зелений цемент",
+      "categories": ["color_blocks"]
+    },
+    "gray_glazed_terracotta": {
+      "display_name": "Сіра глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "green_glazed_terracotta": {
+      "display_name": "Зелена глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "glass": {
+      "display_name": "Скло",
+      "categories": ["color_blocks"]
+    },
+    "gray_stained_glass": {
+      "display_name": "Сіре скло",
+      "categories": ["color_blocks"]
+    },
+    "green_stained_glass": {
+      "display_name": "Зелене скло",
+      "categories": ["color_blocks"]
+    },
+    "glass_pane": {
+      "display_name": "Шиба",
+      "categories": ["color_blocks"]
+    },
+    "gray_stained_glass_pane": {
+      "display_name": "Сіра шиба",
+      "categories": ["color_blocks"]
+    },
+    "green_stained_glass_pane": {
+      "display_name": "Зелена шиба",
+      "categories": ["color_blocks"]
+    },
+    "gray_shulker_box": {
+      "display_name": "Сіра шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "green_shulker_box": {
+      "display_name": "Зелена шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "gray_bed": {
+      "display_name": "Сіре ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "green_bed": {
+      "display_name": "Зелене ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "gray_candle": {
+      "display_name": "Сіра свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "green_candle": {
+      "display_name": "Зелена свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "gray_banner": {
+      "display_name": "Сірий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "green_banner": {
+      "display_name": "Зелений стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "grindstone": {
+      "display_name": "Точило",
+      "categories": ["functional_blocks"]
+    },
+    "glow_item_frame": {
+      "display_name": "Сяйна рамка для предметів",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "e": {
+    "end_crystal": {
+      "display_name": "Кристал Енду",
+      "categories": ["weapons", "functional_blocks"]
+    },
+    "egg": {
+      "display_name": "Яйце",
+      "categories": ["weapons", "ingredients"]
+    },
+    "ender_pearl": {
+      "display_name": "Перлина Енду",
+      "categories": ["tools", "ingredients"]
+    },
+    "ender_eye": {
+      "display_name": "Око Енду",
+      "categories": ["tools", "ingredients", "functional_blocks"]
+    },
+    "elytra": {
+      "display_name": "Елітри",
+      "categories": ["tools"]
+    },
+    "end_stone": {
+      "display_name": "Камінь Енду",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "emerald_ore": {
+      "display_name": "Смарагдова руда",
+      "categories": ["nature_blocks"]
+    },
+    "emerald": {
+      "display_name": "Смарагд",
+      "categories": ["ingredients"]
+    },
+    "echo_shard": {
+      "display_name": "Уламок відлуння",
+      "categories": ["ingredients"]
+    },
+    "explorer_pottery_sherd": {
+      "display_name": "Гончарний черепок «Дослідник»",
+      "categories": ["ingredients"]
+    },
+    "eye_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Око>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
+    "experience_bottle": {
+      "display_name": "Пляшка чарів",
+      "categories": ["ingredients"]
+    },
+    "enchanted_golden_apple": {
+      "display_name": "Зачароване золоте яблуко",
+      "categories": ["foods_and_potions"]
+    },
+    "end_stone_bricks": {
+      "display_name": "Цегла з каменю Енду",
+      "categories": ["build_blocks"]
+    },
+    "end_stone_brick_stairs": {
+      "display_name": "Сходи з цегли Енду",
+      "categories": ["build_blocks"]
+    },
+    "end_stone_brick_slab": {
+      "display_name": "Плита з цегли Енду",
+      "categories": ["build_blocks"]
+    },
+    "end_stone_brick_wall": {
+      "display_name": "Стіна з цегли Енду",
+      "categories": ["build_blocks"]
+    },
+    "emerald_block": {
+      "display_name": "Блок смарагда",
+      "categories": ["build_blocks"]
+    },
+    "exposed_copper": {
+      "display_name": "Наражена мідь",
+      "categories": ["build_blocks"]
+    },
+    "exposed_cut_copper": {
+      "display_name": "Наражена тесана мідь",
+      "categories": ["build_blocks"]
+    },
+    "exposed_cut_copper_stairs": {
+      "display_name": "Наражені тесані мідні сходи",
+      "categories": ["build_blocks"]
+    },
+    "exposed_cut_copper_slab": {
+      "display_name": "Наражена тесана мідна плита",
+      "categories": ["build_blocks"]
+    },
+    "end_rod": {
+      "display_name": "Стрижень Енду",
+      "categories": ["functional_blocks"]
+    },
+    "enchanted_book": {
+      "display_name": "Зачарована книга",
+      "categories": ["functional_blocks"]
+    },
+    "enchanting_table": {
+      "display_name": "Стіл зачарування",
+      "categories": ["functional_blocks"]
+    },
+    "ender_chest": {
+      "display_name": "Скриня Енду",
+      "categories": ["functional_blocks"]
+    },
+    "end_portal_frame": {
+      "display_name": "Рамка порталу в Енд",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "m": {
+    "milk_bucket": {
+      "display_name": "Відро молока",
+      "categories": ["tools", "foods_and_potions"]
+    },
+    "map": {
+      "display_name": "Порожня мапа",
+      "categories": ["tools"]
+    },
+    "mangrove_boat": {
+      "display_name": "Мангровий човен",
+      "categories": ["tools"]
+    },
+    "mangrove_chest_boat": {
+      "display_name": "Мангровий човен зі скринею",
+      "categories": ["tools"]
+    },
+    "minecart": {
+      "display_name": "Вагонетка",
+      "categories": ["tools", "redstone_blocks"]
+    },
+    "music_disc_13": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_cat": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_blocks": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_chirp": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_far": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_mall": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_mellohi": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_stal": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_strad": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_ward": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_11": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_wait": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_otherside": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_relic": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_5": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "music_disc_pigstep": {
+      "display_name": "Платівка",
+      "categories": ["tools"]
+    },
+    "mycelium": {
+      "display_name": "Грибниця",
+      "categories": ["nature_blocks"]
+    },
+    "mud": {
+      "display_name": "Багно",
+      "categories": ["nature_blocks"]
+    },
+    "moss_block": {
+      "display_name": "Моховий блок",
+      "categories": ["nature_blocks"]
+    },
+    "moss_carpet": {
+      "display_name": "Моховий покрив",
+      "categories": ["nature_blocks"]
+    },
+    "magma_block": {
+      "display_name": "Магматичний блок",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "medium_amethyst_bud": {
+      "display_name": "Середній зародок аметиста",
+      "categories": ["nature_blocks"]
+    },
+    "mangrove_log": {
+      "display_name": "Мангрова колода",
+      "categories": ["nature_blocks", "build_blocks"]
+    },
+    "mangrove_roots": {
+      "display_name": "Мангрове коріння",
+      "categories": ["nature_blocks"]
+    },
+    "muddy_mangrove_roots": {
+      "display_name": "Багнисте мангрове коріння",
+      "categories": ["nature_blocks"]
+    },
+    "mushroom_stem": {
+      "display_name": "Ніжка гриба",
+      "categories": ["nature_blocks"]
+    },
+    "mangrove_leaves": {
+      "display_name": "Мангрове листя",
+      "categories": ["nature_blocks"]
+    },
+    "mangrove_propagule": {
+      "display_name": "Мангровий живець",
+      "categories": ["nature_blocks"]
+    },
+    "melon_seeds": {
+      "display_name": "Насіння кавуна",
+      "categories": ["nature_blocks"]
+    },
+    "melon": {
+      "display_name": "Кавун",
+      "categories": ["nature_blocks"]
+    },
+    "magenta_dye": {
+      "display_name": "Пурпуровий барвник",
+      "categories": ["ingredients"]
+    },
+    "magma_cream": {
+      "display_name": "Магматичний крем",
+      "categories": ["ingredients"]
+    },
+    "mojang_banner_pattern": {
+      "display_name": "Шаблон стяга",
+      "categories": ["ingredients"],
+      "description": ["Річ"]
+    },
+    "miner_pottery_sherd": {
+      "display_name": "Гончарний черепок «Шахтар»",
+      "categories": ["ingredients"]
+    },
+    "mourner_pottery_sherd": {
+      "display_name": "Гончарний черепок «Жалобник»",
+      "categories": ["ingredients"]
+    },
+    "melon_slice": {
+      "display_name": "Скибка кавуна",
+      "categories": ["foods_and_potions"]
+    },
+    "mutton": {
+      "display_name": "Сира баранина",
+      "categories": ["foods_and_potions"]
+    },
+    "mushroom_stew": {
+      "display_name": "Тушковані гриби",
+      "categories": ["foods_and_potions"]
+    },
+    "mangrove_wood": {
+      "display_name": "Мангрова деревина",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_planks": {
+      "display_name": "Мангрові дошки",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_stairs": {
+      "display_name": "Мангрові сходи",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_slab": {
+      "display_name": "Мангрова плита",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_fence": {
+      "display_name": "Мангровий паркан",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_fence_gate": {
+      "display_name": "Мангрова хвіртка",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_door": {
+      "display_name": "Мангрові двері",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_trapdoor": {
+      "display_name": "Мангровий люк",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_pressure_plate": {
+      "display_name": "Мангрова натискна плита",
+      "categories": ["build_blocks"]
+    },
+    "mangrove_button": {
+      "display_name": "Мангрова кнопка",
+      "categories": ["build_blocks"]
+    },
+    "mossy_cobblestone": {
+      "display_name": "Моховитий кругляк",
+      "categories": ["build_blocks"]
+    },
+    "mossy_cobblestone_stairs": {
+      "display_name": "Сходи з моховитого кругляку",
+      "categories": ["build_blocks"]
+    },
+    "mossy_cobblestone_slab": {
+      "display_name": "Плита з моховитого кругляку",
+      "categories": ["build_blocks"]
+    },
+    "mossy_cobblestone_wall": {
+      "display_name": "Стіна з моховитого кругляку",
+      "categories": ["build_blocks"]
+    },
+    "mossy_stone_bricks": {
+      "display_name": "Моховита кам'яна цегла",
+      "categories": ["build_blocks"]
+    },
+    "mossy_stone_brick_stairs": {
+      "display_name": "Сходи з моховитої кам'яної цегли",
+      "categories": ["build_blocks"]
+    },
+    "mossy_stone_brick_slab": {
+      "display_name": "Плита з моховитої кам'яної цегли",
+      "categories": ["build_blocks"]
+    },
+    "mossy_stone_brick_wall": {
+      "display_name": "Стіна з моховитої кам'яної цегли",
+      "categories": ["build_blocks"]
+    },
+    "mud_bricks": {
+      "display_name": "Лимпач",
+      "categories": ["build_blocks"]
+    },
+    "mud_brick_stairs": {
+      "display_name": "Сходи з лимпачу",
+      "categories": ["build_blocks"]
+    },
+    "mud_brick_slab": {
+      "display_name": "Плита з лимпачу",
+      "categories": ["build_blocks"]
+    },
+    "mud_brick_wall": {
+      "display_name": "Стіна з лимпачу",
+      "categories": ["build_blocks"]
+    },
+    "magenta_wool": {
+      "display_name": "Пурпурова вовна",
+      "categories": ["color_blocks"]
+    },
+    "magenta_carpet": {
+      "display_name": "Пурпуровий килим",
+      "categories": ["color_blocks"]
+    },
+    "magenta_terracotta": {
+      "display_name": "Пурпурова кераміка",
+      "categories": ["color_blocks"]
+    },
+    "magenta_concrete": {
+      "display_name": "Пурпуровий бетон",
+      "categories": ["color_blocks"]
+    },
+    "magenta_concrete_powder": {
+      "display_name": "Пурпуровий цемент",
+      "categories": ["color_blocks"]
+    },
+    "magenta_glazed_terracotta": {
+      "display_name": "Пурпурова глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "magenta_stained_glass": {
+      "display_name": "Пурпурове скло",
+      "categories": ["color_blocks"]
+    },
+    "magenta_stained_glass_pane": {
+      "display_name": "Пурпурова шиба",
+      "categories": ["color_blocks"]
+    },
+    "magenta_shulker_box": {
+      "display_name": "Пурпурова шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "magenta_bed": {
+      "display_name": "Пурпурове ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "magenta_candle": {
+      "display_name": "Пурпурова свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "magenta_banner": {
+      "display_name": "Пурпуровий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "mangrove_sign": {
+      "display_name": "Мангрова табличка",
+      "categories": ["functional_blocks"]
+    },
+    "mangrove_hanging_sign": {
+      "display_name": "Мангрова вивіска",
+      "categories": ["functional_blocks"]
+    }
+  },
+  "v": {
+    "vine": {
+      "display_name": "Лози",
+      "categories": ["nature_blocks"]
+    },
+    "verdant_froglight": {
+      "display_name": "Зелене жаб'яче світло",
+      "categories": ["nature_blocks", "functional_blocks"]
+    },
+    "vex_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Бісик>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    }
+  },
+  "k": {
+    "kelp": {
+      "display_name": "Ламінарія",
+      "categories": ["nature_blocks"]
+    }
+  },
+  "q": {
+    "quartz": {
+      "display_name": "Незерський кварц",
+      "categories": ["ingredients"]
+    },
+    "quartz_block": {
+      "display_name": "Блок кварцу",
+      "categories": ["build_blocks"]
+    },
+    "quartz_stairs": {
+      "display_name": "Кварцові сходи",
+      "categories": ["build_blocks"]
+    },
+    "quartz_slab": {
+      "display_name": "Кварцова плита",
+      "categories": ["build_blocks"]
+    },
+    "quartz_bricks": {
+      "display_name": "Кварцова цегла",
+      "categories": ["build_blocks"]
+    },
+    "quartz_pillar": {
+      "display_name": "Кварцова колона",
+      "categories": ["build_blocks"]
+    }
+  },
+  "y": {
+    "yellow_dye": {
+      "display_name": "Жовтий барвник",
+      "categories": ["ingredients"]
+    },
+    "yellow_wool": {
+      "display_name": "Жовта вовна",
+      "categories": ["color_blocks"]
+    },
+    "yellow_carpet": {
+      "display_name": "Жовтий килим",
+      "categories": ["color_blocks"]
+    },
+    "yellow_terracotta": {
+      "display_name": "Жовта кераміка",
+      "categories": ["color_blocks"]
+    },
+    "yellow_concrete": {
+      "display_name": "Жовтий бетон",
+      "categories": ["color_blocks"]
+    },
+    "yellow_concrete_powder": {
+      "display_name": "Жовтий цемент",
+      "categories": ["color_blocks"]
+    },
+    "yellow_glazed_terracotta": {
+      "display_name": "Жовта глазурована кераміка",
+      "categories": ["color_blocks"]
+    },
+    "yellow_stained_glass": {
+      "display_name": "Жовте скло",
+      "categories": ["color_blocks"]
+    },
+    "yellow_stained_glass_pane": {
+      "display_name": "Жовта шиба",
+      "categories": ["color_blocks"]
+    },
+    "yellow_shulker_box": {
+      "display_name": "Жовта шалкерова коробка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "yellow_bed": {
+      "display_name": "Жовте ліжко",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "yellow_candle": {
+      "display_name": "Жовта свічка",
+      "categories": ["color_blocks", "functional_blocks"]
+    },
+    "yellow_banner": {
+      "display_name": "Жовтий стяг",
+      "categories": ["color_blocks", "functional_blocks"]
+    }
+  },
+  "z": {
+    "zombie_head": {
+      "display_name": "Голова зомбі",
+      "categories": ["functional_blocks"]
+    }
+  }
+}

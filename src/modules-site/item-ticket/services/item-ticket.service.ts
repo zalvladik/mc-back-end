@@ -12,7 +12,10 @@ import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { UserInventoryService } from 'src/modules-site/user-inventory/services'
 
-import type { CreateItemTicketResponseDto } from '../dtos-response'
+import type {
+  CreateItemTicketResponseDto,
+  GetItemsFromTicketResponseDto,
+} from '../dtos-response'
 
 @Injectable()
 export class ItemTicketService {
@@ -27,6 +30,29 @@ export class ItemTicketService {
   async getItemTickets(id: number): Promise<ItemTicket[]> {
     return this.itemTicketRepository.find({
       where: { inventory: { id } },
+    })
+  }
+
+  async getItemsFromTicket(
+    userInventory: number,
+    itemTicketId: number,
+  ): Promise<GetItemsFromTicketResponseDto[]> {
+    const itemTicket = await this.itemTicketRepository.findOne({
+      where: { id: itemTicketId, inventory: { id: userInventory } },
+    })
+
+    if (!itemTicket) throw new NotFoundException('Ticket not found')
+
+    return this.itemRepository.find({
+      where: { itemTicket: { id: itemTicketId } },
+      select: [
+        'id',
+        'amount',
+        'type',
+        'display_name',
+        'description',
+        'categories',
+      ],
     })
   }
 

@@ -1,5 +1,3 @@
-import type { TransformFnParams } from 'class-transformer'
-import { Transform } from 'class-transformer'
 import {
   ArrayMaxSize,
   ArrayNotEmpty,
@@ -15,11 +13,4 @@ export class CreateItemTicketBodyDto {
   @IsNumber({}, { each: true })
   @ArrayMaxSize(27)
   itemIds: number[]
-}
-
-export class GetItemsFromTicketParamDto {
-  @IsNotEmpty()
-  @Transform(({ value }: TransformFnParams) => Number(value))
-  @IsNumber()
-  itemTicketId: number
 }

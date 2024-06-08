@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 
 import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
@@ -14,8 +14,11 @@ import { UserInventoryService } from 'src/modules-site/user-inventory/services'
 
 import type {
   CreateItemTicketResponseDto,
+  DeleteItemTicketResponseDto,
   GetItemsFromTicketResponseDto,
+  RemoveItemsFromTicketResponseDto,
 } from '../dtos-response'
+import type { DeleteItemTicketProps } from '../types'
 
 @Injectable()
 export class ItemTicketService {
@@ -101,5 +104,65 @@ export class ItemTicketService {
     await this.itemTicketRepository.save(newItemTicket)
 
     return { id: newItemTicket.id, items: itemIds }
+  }
+
+  async removeItemsFromTicket(
+    itemIds: number[],
+    userInventoryId: number,
+  ): Promise<RemoveItemsFromTicketResponseDto[]> {
+    const itemsCount = await this.itemRepository.count({
+      where: { id: In(itemIds), inventory: { id: userInventoryId } },
+    })
+
+    if (itemsCount < itemIds.length)
+      throw new NotFoundException('Item not found')
+
+    await this.itemRepository.update(
+      { id: In(itemIds), inventory: { id: userInventoryId } },
+      { itemTicket: null },
+    )
+
+    return this.itemRepository.find({
+      where: { id: In(itemIds), inventory: { id: userInventoryId } },
+      select: [
+        'id',
+        'amount',
+        'type',
+        'display_name',
+        'description',
+        'categories',
+      ],
+    })
+  }
+
+  async deleteItemTicket({
+    itemIds,
+    userInventoryId,
+    itemTicketId,
+  }: DeleteItemTicketProps): Promise<DeleteItemTicketResponseDto[]> {
+    const deletedItemTicket =
+      await this.itemTicketRepository.delete(itemTicketId)
+
+    if (deletedItemTicket.affected !== 1) {
+      throw new NotFoundException('Item ticket not found')
+    }
+
+    const itemsResponse = await this.itemRepository.find({
+      where: { id: In(itemIds), inventory: { id: userInventoryId } },
+      select: [
+        'id',
+        'amount',
+        'type',
+        'display_name',
+        'description',
+        'categories',
+      ],
+    })
+
+    if (itemsResponse.length !== itemIds.length) {
+      throw new NotFoundException('Item id not found')
+    }
+
+    return itemsResponse
   }
 }

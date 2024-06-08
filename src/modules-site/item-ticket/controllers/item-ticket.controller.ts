@@ -1,10 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Param,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common'
 
@@ -13,20 +15,28 @@ import { User } from 'src/shared/decorators/user.decorator'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 
 import type { ItemTicket } from 'src/entities/item-ticket.entity'
+import { RolesGuard } from 'src/shared/guards/roles.guard'
+import { RoleEnum } from 'src/shared/enums'
+import { Roles } from 'src/shared/decorators/roles.decorator'
 import { ItemTicketService } from '../services'
 
 import {
   CreateItemTicketBodyDto,
+  DeleteItemTicketBodyDto,
   GetItemsFromTicketParamDto,
+  RemoveItemsFromTicketBodyDto,
 } from '../dtos-request'
 
 import type {
   CreateItemTicketResponseDto,
+  DeleteItemTicketResponseDto,
   GetItemsFromTicketResponseDto,
+  RemoveItemsFromTicketResponseDto,
 } from '../dtos-response'
 
 @Controller('item_ticket')
-@UseGuards(AuthGuard)
+@UseGuards(AuthGuard, RolesGuard)
+@Roles(RoleEnum.USER)
 export class ItemTicketController {
   constructor(private readonly itemTicketService: ItemTicketService) {}
 
@@ -50,6 +60,15 @@ export class ItemTicketController {
     )
   }
 
+  @Put()
+  @HttpCode(200)
+  async removeItemsFromTicket(
+    @User() { userInventory }: GetUserDto,
+    @Body() { itemIds }: RemoveItemsFromTicketBodyDto,
+  ): Promise<RemoveItemsFromTicketResponseDto[]> {
+    return this.itemTicketService.removeItemsFromTicket(itemIds, userInventory)
+  }
+
   @Post()
   @HttpCode(201)
   async createItemToket(
@@ -57,5 +76,18 @@ export class ItemTicketController {
     @Body() { itemIds }: CreateItemTicketBodyDto,
   ): Promise<CreateItemTicketResponseDto> {
     return this.itemTicketService.createItemTicket(itemIds, userInventory)
+  }
+
+  @Delete()
+  @HttpCode(200)
+  async deleteItemTicket(
+    @User() { userInventory }: GetUserDto,
+    @Body() { itemIds, itemTicketId }: DeleteItemTicketBodyDto,
+  ): Promise<DeleteItemTicketResponseDto[]> {
+    return this.itemTicketService.deleteItemTicket({
+      itemIds,
+      itemTicketId,
+      userInventoryId: userInventory,
+    })
   }
 }

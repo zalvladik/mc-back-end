@@ -12,6 +12,9 @@ import { ApiTags } from '@nestjs/swagger'
 import type { Advancements } from 'src/entities/advancements.entity'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 
+import { RolesGuard } from 'src/shared/guards/roles.guard'
+import { RoleEnum } from 'src/shared/enums'
+import { Roles } from 'src/shared/decorators/roles.decorator'
 import { UserAdvancementsService } from '../services'
 
 import {
@@ -21,7 +24,8 @@ import {
 
 @Controller('user/advancements')
 @ApiTags('user/advancements')
-@UseGuards(AuthGuard)
+@UseGuards(AuthGuard, RolesGuard)
+@Roles(RoleEnum.USER)
 export class UserAdvancementsController {
   constructor(
     private readonly userAdvancementsService: UserAdvancementsService,

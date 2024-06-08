@@ -19,16 +19,9 @@ export class UserService {
   async getByID(id: number): Promise<GetProfileResponseDto> {
     return this.userRepository.findOne({
       where: { id },
-      select: ['id', 'realname', 'lastlogin'],
+      select: ['id', 'realname', 'lastlogin', 'role'],
     })
   }
-
-  // async getRefreshToken(id: number) {
-  //   return this.userRepository.findOne({
-  //     where: { id },
-  //     select: ['refreshToken'],
-  //   })
-  // }
 
   async getUserById(userId: number): Promise<any> {
     const user = await this.userRepository.findOne({ where: { id: userId } })
@@ -44,14 +37,5 @@ export class UserService {
     if (!user) throw new NotFoundException('User not found')
 
     return user
-  }
-
-  async postUserUUID(realname: string, uuid: string): Promise<void> {
-    const newUserUUID = this.userUUIDRepository.create()
-
-    newUserUUID.realname = realname
-    newUserUUID.uuid = uuid
-
-    await this.userUUIDRepository.save(newUserUUID)
   }
 }

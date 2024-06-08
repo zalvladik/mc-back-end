@@ -13,17 +13,20 @@ import { ApiTags } from '@nestjs/swagger'
 import type { Lot } from 'src/entities/lot.entity'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 
-import { AuctionService } from '../services'
-
+import { RolesGuard } from 'src/shared/guards/roles.guard'
+import { RoleEnum } from 'src/shared/enums'
+import { Roles } from 'src/shared/decorators/roles.decorator'
 import {
   BuyLotBodyDto,
   CreateLotBodyDto,
   DeleteLotQuaryDto,
 } from '../dtos-request'
+import { AuctionService } from '../services'
 
 @Controller('auction')
 @ApiTags('auction')
-@UseGuards(AuthGuard)
+@UseGuards(AuthGuard, RolesGuard)
+@Roles(RoleEnum.USER)
 export class AuctionController {
   constructor(private readonly auctionService: AuctionService) {}
 

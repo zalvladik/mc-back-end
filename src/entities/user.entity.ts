@@ -8,6 +8,7 @@ import {
   Unique,
 } from 'typeorm'
 
+import { RoleEnum } from 'src/shared/enums'
 import { Advancements } from './advancements.entity'
 import { UserInventory } from './user-inventory.entity'
 
@@ -23,6 +24,20 @@ export class User {
 
   @Column({ type: 'varchar', length: 255 })
   realname: string
+
+  @Column({
+    type: 'set',
+    enum: [
+      RoleEnum.ADMIN,
+      RoleEnum.MODERATOR,
+      RoleEnum.HELPER,
+      RoleEnum.POLICE,
+      RoleEnum.USER,
+    ],
+    default: [RoleEnum.USER],
+    nullable: false,
+  })
+  role: RoleEnum[]
 
   @Column({
     type: 'varchar',

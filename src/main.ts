@@ -17,7 +17,6 @@ async function bootstrap(): Promise<void> {
     origin: [config.get('CLIENT_URL'), 'http://localhost:25565'],
     credentials: true,
   })
-
   app.useStaticAssets(join(__dirname, '..', 'public'), { prefix: '/public/' })
 
   app.use(cookieParser())

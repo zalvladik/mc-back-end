@@ -4,6 +4,9 @@ import { ApiTags } from '@nestjs/swagger'
 import { User } from 'src/shared/decorators/user.decorator'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 
+import { RolesGuard } from 'src/shared/guards/roles.guard'
+import { RoleEnum } from 'src/shared/enums'
+import { Roles } from 'src/shared/decorators/roles.decorator'
 import { UserSkinService } from '../services'
 
 import { GetUserDto } from '../dtos-request'
@@ -11,7 +14,8 @@ import type { GetUserSkinRsponseDto } from '../dtos-response'
 
 @Controller('user/skin')
 @ApiTags('user/skin')
-@UseGuards(AuthGuard)
+@UseGuards(AuthGuard, RolesGuard)
+@Roles(RoleEnum.USER)
 export class UserSkinController {
   constructor(private readonly userSkinService: UserSkinService) {}
 

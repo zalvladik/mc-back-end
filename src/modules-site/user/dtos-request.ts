@@ -19,16 +19,6 @@ export class PutAdvancementsBodyDto {
   data: object
 }
 
-export class PostUserUuidBodyDto {
-  @IsNotEmpty()
-  @IsString()
-  realname: string
-
-  @IsNotEmpty()
-  @IsString()
-  uuid: string
-}
-
 export class GetUserDto {
   @IsEmpty()
   @IsNumber()

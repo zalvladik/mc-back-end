@@ -12,7 +12,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Request, Response } from 'express'
 
 import { GetUserDto } from 'src/modules-site/user-inventory/dtos-request'
-import { THIRTY_DAYS } from 'src/shared/constants/thirty_days'
+import { THIRTY_DAYS } from 'src/shared/constants'
 import { User } from 'src/shared/decorators/user.decorator'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 import { RefreshTokenGuard } from 'src/shared/guards/refresh-token.guard'

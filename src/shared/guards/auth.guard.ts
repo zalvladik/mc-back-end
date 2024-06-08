@@ -32,6 +32,8 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException('invalid AccessToken')
     }
 
+    context.switchToHttp().getRequest().user = req.user
+
     return true
   }
 }

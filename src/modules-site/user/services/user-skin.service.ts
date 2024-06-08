@@ -36,7 +36,15 @@ export class UserSkinService {
       where: { uuid: player.uuid },
     })
 
-    if (!srPlayer) throw new NotFoundException(`${realname} not found`)
+    if (!srPlayer) {
+      const srPlayerSkin = await this.srPlayerSkinRepository.findOne({
+        where: { last_known_name: realname },
+      })
+
+      if (!srPlayerSkin) throw new NotFoundException(`${realname} not found`)
+
+      return this.decodeBase64ToJson(srPlayerSkin.value)
+    }
 
     const srPlayerSkin = await this.srPlayerSkinRepository.findOne({
       where: { uuid: srPlayer.skin_identifier },

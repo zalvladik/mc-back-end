@@ -28,7 +28,7 @@ export class AuthService {
     const userMeta = await this.userRepository.findOne({
       where: { realname },
       relations: ['userInventory', 'advancements'],
-      select: ['id', 'realname', 'lastlogin', 'password'],
+      select: ['id', 'realname', 'lastlogin', 'password', 'role'],
     })
 
     if (!userMeta) throw new NotFoundException(`${realname} was not found`)
@@ -51,6 +51,8 @@ export class AuthService {
 
     await this.tokenService.create(user.id, tokens.refreshToken)
 
+    // await this.userRepository.update(user.id, { role: ['user'] })
+
     return { ...tokens, user }
   }
 
@@ -65,7 +67,7 @@ export class AuthService {
     const userMeta = await this.userRepository.findOne({
       where: { realname },
       relations: ['userInventory', 'advancements'],
-      select: ['id', 'realname', 'lastlogin'],
+      select: ['id', 'realname', 'lastlogin', 'role'],
     })
 
     if (!userMeta) throw new NotFoundException(`${realname} was not found`)

@@ -44,7 +44,7 @@ export class ItemTicketService {
       where: { id: itemTicketId, inventory: { id: userInventory } },
     })
 
-    if (!itemTicket) throw new NotFoundException('Ticket not found')
+    if (!itemTicket) throw new NotFoundException('Квиток не знайдено')
 
     return this.itemRepository.find({
       where: { itemTicket: { id: itemTicketId } },
@@ -72,7 +72,10 @@ export class ItemTicketService {
     })
 
     if (coune >= 5) {
-      throw new HttpException('To much item tickets', HttpStatus.BAD_REQUEST)
+      throw new HttpException(
+        '{"messages":["У вас може бути","тільки 5 квитків"]}',
+        HttpStatus.BAD_REQUEST,
+      )
     }
 
     const arrayItems = await this.itemRepository
@@ -83,7 +86,7 @@ export class ItemTicketService {
       .getMany()
 
     if (!(arrayItems.length === itemIds.length)) {
-      throw new NotFoundException('Item not found')
+      throw new NotFoundException('Предмет не знайдено')
     }
 
     const newItemTicket = this.itemTicketRepository.create()
@@ -115,7 +118,7 @@ export class ItemTicketService {
     })
 
     if (itemsCount < itemIds.length)
-      throw new NotFoundException('Item not found')
+      throw new NotFoundException('Предмет не знайдено')
 
     await this.itemRepository.update(
       { id: In(itemIds), inventory: { id: userInventoryId } },
@@ -140,14 +143,22 @@ export class ItemTicketService {
     userInventoryId,
     itemTicketId,
   }: DeleteItemTicketProps): Promise<DeleteItemTicketResponseDto[]> {
+    const itemsIsExist = await this.itemRepository.count({
+      where: { id: In(itemIds), inventory: { id: userInventoryId } },
+    })
+
+    if (itemsIsExist !== itemIds.length) {
+      throw new NotFoundException('Предмет не знайдено')
+    }
+
     const deletedItemTicket =
       await this.itemTicketRepository.delete(itemTicketId)
 
     if (deletedItemTicket.affected !== 1) {
-      throw new NotFoundException('Item ticket not found')
+      throw new NotFoundException('Квиток не знайдено')
     }
 
-    const itemsResponse = await this.itemRepository.find({
+    return this.itemRepository.find({
       where: { id: In(itemIds), inventory: { id: userInventoryId } },
       select: [
         'id',
@@ -158,11 +169,5 @@ export class ItemTicketService {
         'categories',
       ],
     })
-
-    if (itemsResponse.length !== itemIds.length) {
-      throw new NotFoundException('Item id not found')
-    }
-
-    return itemsResponse
   }
 }

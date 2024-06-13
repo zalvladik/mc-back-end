@@ -21,7 +21,7 @@ export class ItemTicketService {
       relations: ['items'],
     })
 
-    if (!itemTicket) throw new NotFoundException('Item ticket not found')
+    if (!itemTicket) throw new NotFoundException('Квиток не знайдено')
 
     return { countSlots: itemTicket.items.length }
   }

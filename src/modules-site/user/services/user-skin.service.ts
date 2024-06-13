@@ -30,7 +30,7 @@ export class UserSkinService {
       where: { realname },
     })
 
-    if (!player) throw new NotFoundException(`${realname} not found`)
+    if (!player) throw new NotFoundException(`Гравця ${realname} не знайдено`)
 
     const srPlayer = await this.srPlayerRepository.findOne({
       where: { uuid: player.uuid },
@@ -41,7 +41,8 @@ export class UserSkinService {
         where: { last_known_name: realname },
       })
 
-      if (!srPlayerSkin) throw new NotFoundException(`${realname} not found`)
+      if (!srPlayerSkin)
+        throw new NotFoundException(`Гравця ${realname} не знайдено`)
 
       return this.decodeBase64ToJson(srPlayerSkin.value)
     }
@@ -50,7 +51,8 @@ export class UserSkinService {
       where: { uuid: srPlayer.skin_identifier },
     })
 
-    if (!srPlayerSkin) throw new NotFoundException(`${realname} not found`)
+    if (!srPlayerSkin)
+      throw new NotFoundException(`Гравця ${realname} не знайдено`)
 
     return this.decodeBase64ToJson(srPlayerSkin.value)
   }

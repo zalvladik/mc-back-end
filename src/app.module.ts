@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
-import { AuctionModule } from 'src/modules-site/auction/auction.module'
+import { LotModule } from 'src/modules-site/lot/lot.module'
 import { AuthModule } from 'src/modules-site/auth/auth.module'
 import { ItemTicketModule } from 'src/modules-site/item-ticket/item-ticket.module'
 import { UserModule } from 'src/modules-site/user/user.module'
@@ -18,7 +18,7 @@ const siteModule = [
   TokenModule,
   UserModule,
   UserInventoryModule,
-  AuctionModule,
+  LotModule,
   ItemTicketModule,
 ]
 

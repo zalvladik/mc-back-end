@@ -34,7 +34,7 @@ export class UserInventoryItemsService {
       where: { realname },
     })
 
-    if (!userInventory) throw new NotFoundException('User not found')
+    if (!userInventory) throw new NotFoundException('Гравця не знайдено')
 
     try {
       const items = itemsData.map((item: ItemDto) => {
@@ -63,7 +63,7 @@ export class UserInventoryItemsService {
 
       await this.itemRepository.save(items)
     } catch (error) {
-      throw new BadRequestException('Item not found')
+      throw new BadRequestException('Предмет не знайдено')
     }
   }
 
@@ -75,7 +75,7 @@ export class UserInventoryItemsService {
       relations: ['items'],
     })
 
-    if (!itemTicket) throw new NotFoundException('Item ticket not found')
+    if (!itemTicket) throw new NotFoundException('Квиток не знайдено')
 
     await this.itemTicketRepository.remove(itemTicket)
     await this.itemRepository.remove(itemTicket.items)

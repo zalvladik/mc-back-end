@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
 import { Item } from 'src/entities/item.entity'
-import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { UserInventory } from 'src/entities/user-inventory.entity'
 
 import {
@@ -20,10 +19,7 @@ import {
 import { AuthModule } from '../auth/auth.module'
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([UserInventory, Item, ItemTicket]),
-    AuthModule,
-  ],
+  imports: [TypeOrmModule.forFeature([UserInventory, Item]), AuthModule],
   controllers: [
     UserInventoryMoneyController,
     UserInventoryController,

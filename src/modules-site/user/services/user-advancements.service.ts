@@ -23,7 +23,8 @@ export class UserAdvancementsService {
       where: { realname },
     })
 
-    if (!userAdvancements) throw new NotFoundException('User not founded')
+    if (!userAdvancements)
+      throw new NotFoundException(`Гравця ${realname} не знайдено`)
 
     return userAdvancements
   }

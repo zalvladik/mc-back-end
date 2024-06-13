@@ -15,9 +15,9 @@ import {
   UserInventoryService,
 } from 'src/modules-site/user-inventory/services'
 
-import { AuctionController } from './controllers'
+import { LotController } from './controllers'
 
-import { AuctionService } from './services'
+import { LotService } from './services'
 
 @Module({
   imports: [
@@ -27,8 +27,8 @@ import { AuctionService } from './services'
   controllers: [
     UserInventoryController,
     UserInventoryMoneyController,
-    AuctionController,
+    LotController,
   ],
-  providers: [UserInventoryService, UserInventoryMoneyService, AuctionService],
+  providers: [UserInventoryService, UserInventoryMoneyService, LotService],
 })
-export class AuctionModule {}
+export class LotModule {}

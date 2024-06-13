@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
+import { CategoryEnum } from 'src/shared/enums'
 import { ItemTicket } from './item-ticket.entity'
 import { Lot } from './lot.entity'
 import { UserInventory } from './user-inventory.entity'
@@ -28,8 +29,22 @@ export class Item {
   @Column('simple-array', { nullable: true })
   description?: string[]
 
-  @Column('simple-array', { nullable: false })
-  categories: string[]
+  @Column({
+    type: 'set',
+    enum: [
+      CategoryEnum.BUILD_BLOCKS,
+      CategoryEnum.COLOR_BLOCKS,
+      CategoryEnum.FOODS_AND_POTIONS,
+      CategoryEnum.FUNCTIONAL_BLOCKS,
+      CategoryEnum.INGREDIENTS,
+      CategoryEnum.NATURE_BLOCKS,
+      CategoryEnum.REDSTONE_BLOCKS,
+      CategoryEnum.TOOLS,
+      CategoryEnum.WEAPONS,
+    ],
+    nullable: false,
+  })
+  categories: CategoryEnum[]
 
   @Column({ type: 'text', nullable: false })
   serialized: string

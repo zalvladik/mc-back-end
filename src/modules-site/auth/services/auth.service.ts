@@ -1,6 +1,5 @@
 import {
-  HttpException,
-  HttpStatus,
+  BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common'
@@ -38,7 +37,7 @@ export class AuthService {
     const isPassEquals = await bcrypt.compare(password, passwordBD)
 
     if (!isPassEquals) {
-      throw new HttpException('Incorrect password', HttpStatus.BAD_REQUEST)
+      throw new BadRequestException('Неправильний пароль')
     }
 
     const user = {
@@ -50,8 +49,6 @@ export class AuthService {
     const tokens = this.tokenService.generateTokens(user)
 
     await this.tokenService.create(user.id, tokens.refreshToken)
-
-    // await this.userRepository.update(user.id, { role: ['user'] })
 
     return { ...tokens, user }
   }
@@ -70,7 +67,7 @@ export class AuthService {
       select: ['id', 'realname', 'lastlogin', 'role'],
     })
 
-    if (!userMeta) throw new NotFoundException(`${realname} was not found`)
+    if (!userMeta) throw new NotFoundException(`Гравця ${realname} не знайдено`)
 
     const user = {
       ...userMeta,

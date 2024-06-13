@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
 import { User } from 'src/entities/user.entity'
-import { UserUUID } from 'src/entities/user-uuid.entity'
 import type { GetProfileResponseDto } from '../dtos-response'
 
 @Injectable()
@@ -12,8 +11,6 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    @InjectRepository(UserUUID)
-    private readonly userUUIDRepository: Repository<UserUUID>,
   ) {}
 
   async getByID(id: number): Promise<GetProfileResponseDto> {
@@ -26,7 +23,7 @@ export class UserService {
   async getUserById(userId: number): Promise<any> {
     const user = await this.userRepository.findOne({ where: { id: userId } })
 
-    if (!user) throw new NotFoundException('User not found')
+    if (!user) throw new NotFoundException(`Гравця не знайдено`)
 
     return user
   }
@@ -34,7 +31,7 @@ export class UserService {
   async getUserByRealname(realname: string): Promise<any> {
     const user = await this.userRepository.findOne({ where: { realname } })
 
-    if (!user) throw new NotFoundException('User not found')
+    if (!user) throw new NotFoundException(`Гравця ${realname} не знайдено`)
 
     return user
   }

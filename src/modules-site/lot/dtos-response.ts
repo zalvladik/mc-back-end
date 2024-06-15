@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import type { Item } from 'src/entities/item.entity'
 
-type ItemLotResponseDto = Omit<Item, 'serialized' | 'lot'>
+export type ItemLotResponseDto = Omit<Item, 'serialized' | 'lot'>
 
 export class CreateLotResponseDto {
   @ApiProperty({ example: 20 })

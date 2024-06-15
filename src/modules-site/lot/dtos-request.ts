@@ -33,20 +33,6 @@ export class BuyLotBodyDto {
   lotId: number
 }
 
-export class GetUserLotsQuaryDto {
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  page?: number
-
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  limit?: number
-}
-
 export class GetLotsQuaryDto {
   @IsOptional()
   @Type(() => Number)
@@ -66,5 +52,5 @@ export class GetLotsQuaryDto {
 
   @IsOptional()
   @IsString()
-  display_nameOrtype?: string
+  display_nameOrType?: string
 }

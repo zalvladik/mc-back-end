@@ -14,7 +14,7 @@ import { Lot } from 'src/entities/lot.entity'
 import { UserInventoryService } from 'src/modules-site/user-inventory/services'
 import { didExistItemInInventory } from 'src/shared/helpers/didExistItemInInventory'
 
-import type { CreateLotServiceT, GetUserLotsT } from '../types'
+import type { CreateLotServiceT, GetUserLotsProps } from '../types'
 import type {
   CreateLotResponseDto,
   DeleteUserLotResponseDto,
@@ -36,7 +36,7 @@ export class LotService {
     page = 1,
     limit = 8,
     category,
-    display_nameOrtype,
+    display_nameOrType,
   }: GetLotsQuaryDto): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
@@ -59,11 +59,11 @@ export class LotService {
       })
     }
 
-    if (display_nameOrtype) {
+    if (display_nameOrType) {
       queryBuilder.andWhere(
-        '(item.display_name LIKE :display_nameOrtype OR item.type LIKE :display_nameOrtype)',
+        '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType)',
         {
-          display_nameOrtype: `%${display_nameOrtype}%`,
+          display_nameOrType: `%${display_nameOrType}%`,
         },
       )
     }
@@ -78,17 +78,11 @@ export class LotService {
     }
   }
 
-  async getUserLots({
-    page = 1,
-    limit = 8,
-    userInventory,
-  }: GetUserLotsT): Promise<GetLotsResponseDto> {
-    const queryBuilder = this.lotRepository
+  async getUserLots({ userInventory }: GetUserLotsProps): Promise<Lot[]> {
+    return this.lotRepository
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.item', 'item')
-      .where('item.inventory.id = :id', { userInventory })
-      .skip((page - 1) * limit)
-      .take(limit)
+      .where('item.inventory.id = :userInventory', { userInventory })
       .select([
         'lot',
         'item.id',
@@ -98,21 +92,14 @@ export class LotService {
         'item.description',
         'item.categories',
       ])
-
-    const [lots, totalItems] = await queryBuilder.getManyAndCount()
-
-    const totalPages = Math.ceil(totalItems / limit)
-
-    return {
-      totalPages,
-      lots,
-    }
+      .getMany()
   }
 
   async createLot({
     userInventoryId,
     itemId,
     price,
+    realname,
   }: CreateLotServiceT): Promise<CreateLotResponseDto> {
     const userInventory =
       await this.userInventoryService.findUserInventoryById(userInventoryId)
@@ -131,6 +118,7 @@ export class LotService {
     }
 
     const newLot = this.lotRepository.create({
+      realname,
       price,
       item: currentItem,
     })

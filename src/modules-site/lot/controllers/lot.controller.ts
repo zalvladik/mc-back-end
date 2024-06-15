@@ -18,12 +18,12 @@ import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
 import { User } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
+import type { Lot } from 'src/entities/lot.entity'
 import {
   BuyLotBodyDto,
   CreateLotBodyDto,
   DeleteLotQuaryDto,
   GetLotsQuaryDto,
-  GetUserLotsQuaryDto,
 } from '../dtos-request'
 import { LotService } from '../services'
 import type {
@@ -44,26 +44,24 @@ export class LotController {
   async getLots(
     @Query() payload: GetLotsQuaryDto,
   ): Promise<GetLotsResponseDto> {
-    return this.lotService.getLots(payload)
+    return this.lotService.getLots({ ...payload })
   }
 
   @Get('user')
   @HttpCode(200)
-  async getUserLots(
-    @User() { userInventory }: GetUserDto,
-    @Query() payload: GetUserLotsQuaryDto,
-  ): Promise<GetLotsResponseDto> {
-    return this.lotService.getUserLots({ userInventory, ...payload })
+  async getUserLots(@User() { userInventory }: GetUserDto): Promise<Lot[]> {
+    return this.lotService.getUserLots({ userInventory })
   }
 
   @Post()
   @HttpCode(201)
   async createLot(
     @Body() body: CreateLotBodyDto,
-    @User() { userInventory }: GetUserDto,
+    @User() { userInventory, realname }: GetUserDto,
   ): Promise<CreateLotResponseDto> {
     return this.lotService.createLot({
       ...body,
+      realname,
       userInventoryId: userInventory,
     })
   }

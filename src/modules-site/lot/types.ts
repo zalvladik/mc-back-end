@@ -1,9 +1,8 @@
-import type { GetUserLotsQuaryDto } from './dtos-request'
-
 export type CreateLotServiceT = {
   userInventoryId: number
   itemId: number
   price: number
+  realname: string
 }
 
-export type GetUserLotsT = GetUserLotsQuaryDto & { userInventory: number }
+export type GetUserLotsProps = { userInventory: number }

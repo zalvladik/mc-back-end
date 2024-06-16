@@ -14,7 +14,7 @@ async function bootstrap(): Promise<void> {
   const config = app.get(ConfigService)
 
   app.enableCors({
-    origin: '*',
+    origin: [config.get('CLIENT_URL'), 'http://localhost:25565'],
     credentials: true,
   })
   app.useStaticAssets(join(__dirname, '..', 'public'), { prefix: '/public/' })

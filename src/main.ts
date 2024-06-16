@@ -1,5 +1,4 @@
 import { ValidationPipe } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import type { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
@@ -7,6 +6,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import cookieParser from 'cookie-parser'
 import { join } from 'path'
 
+import { ConfigService } from '@nestjs/config'
 import { AppModule } from './app.module'
 
 async function bootstrap(): Promise<void> {
@@ -14,7 +14,11 @@ async function bootstrap(): Promise<void> {
   const config = app.get(ConfigService)
 
   app.enableCors({
-    origin: ['*'],
+    origin: [
+      config.get('CLIENT_URL'),
+      'http://localhost:3001',
+      'http://localhost:25565',
+    ],
     credentials: true,
   })
   app.useStaticAssets(join(__dirname, '..', 'public'), { prefix: '/public/' })

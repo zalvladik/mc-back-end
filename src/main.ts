@@ -6,21 +6,16 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import cookieParser from 'cookie-parser'
 import { join } from 'path'
 
-import { ConfigService } from '@nestjs/config'
 import { AppModule } from './app.module'
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
-  const config = app.get(ConfigService)
 
   app.enableCors({
-    origin: [
-      config.get('CLIENT_URL'),
-      'http://localhost:3001',
-      'http://localhost:25565',
-    ],
+    origin: true,
     credentials: true,
   })
+
   app.useStaticAssets(join(__dirname, '..', 'public'), { prefix: '/public/' })
 
   app.use(cookieParser())

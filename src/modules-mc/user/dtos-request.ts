@@ -5,7 +5,7 @@ import { IsNotEmpty, IsObject, IsString } from 'class-validator'
 export class PutAdvancementsBodyDto {
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ example: 'France sword' })
+  @ApiProperty({ example: 'France' })
   realname: string
 
   @IsNotEmpty()

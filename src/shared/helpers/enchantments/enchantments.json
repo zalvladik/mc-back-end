@@ -37,9 +37,9 @@
   },
   "without_lvl": {
     "aqua_affinity": "Рідність води",
-    "binding_curse": "Прокляття прив'язування",
+    "binding_curse": "{\"text\": \"Прокляття прив'язування\"_ \"color\": \"#fc5454\"_ \"textShadow\": \"#3e1515\"}",
     "channeling": "Блискавиця",
-    "vanishing_curse": "Прокляття зникнення",
+    "vanishing_curse": "{\"text\": \"Прокляття зникнення\"_ \"color\": \"#fc5454\"_ \"textShadow\": \"#3e1515\"}",
     "silk_touch": "Шовковий дотик",
     "mending": "Лагодження",
     "multishot": "Мультипостріл",

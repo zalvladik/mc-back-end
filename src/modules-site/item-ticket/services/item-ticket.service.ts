@@ -54,6 +54,7 @@ export class ItemTicketService {
         'type',
         'display_name',
         'description',
+        'enchants',
         'categories',
       ],
     })
@@ -133,6 +134,7 @@ export class ItemTicketService {
         'type',
         'display_name',
         'description',
+        'enchants',
         'categories',
       ],
     })
@@ -166,6 +168,7 @@ export class ItemTicketService {
         'type',
         'display_name',
         'description',
+        'enchants',
         'categories',
       ],
     })

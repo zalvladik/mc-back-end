@@ -63,10 +63,6 @@ export class ItemDto {
   serialized: string
 
   @IsString()
-  @ApiProperty({ example: ['luck_of_the_sea$3', 'infinity$1', 'infinity$3'] })
-  stored_enchants: string[]
-
-  @IsString()
   @ApiProperty({ example: ['protection$4', 'sharpness$5'] })
   enchants: string[]
 }

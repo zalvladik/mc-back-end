@@ -3875,9 +3875,9 @@
         "Незеритове покращення",
         "null",
         "Застосовується до:",
-        "blue$ Діамантове спорядження",
+        "{\"text\": \"Діамантове спорядження\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
         "Складники:",
-        "blue$ Незеритовий злиток"
+        "{\"text\": \"Незеритовий злиток\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
       ]
     },
     "nether_bricks": {
@@ -4415,67 +4415,83 @@
     },
     "music_disc_13": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - 13"]
     },
     "music_disc_cat": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - cat"]
     },
     "music_disc_blocks": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - blocks"]
     },
     "music_disc_chirp": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - chirp"]
     },
     "music_disc_far": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - far"]
     },
     "music_disc_mall": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - mall"]
     },
     "music_disc_mellohi": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - mellohi"]
     },
     "music_disc_stal": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - stal"]
     },
     "music_disc_strad": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - strad"]
     },
     "music_disc_ward": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - ward"]
     },
     "music_disc_11": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - 11"]
     },
     "music_disc_wait": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["C418 - wait"]
     },
     "music_disc_otherside": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["Лейна Рейд - otherside"]
     },
     "music_disc_relic": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["Аарон Шероф - Relic"]
     },
     "music_disc_5": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["Самюель Оберг - 5"]
     },
     "music_disc_pigstep": {
       "display_name": "Платівка",
-      "categories": ["tools"]
+      "categories": ["tools"],
+      "description": ["Лейна Рейд - Pigstep"]
     },
     "mycelium": {
       "display_name": "Грибниця",

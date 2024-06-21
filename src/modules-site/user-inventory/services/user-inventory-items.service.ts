@@ -24,6 +24,7 @@ export class UserInventoryItemsService {
         'type',
         'display_name',
         'description',
+        'enchants',
         'categories',
       ],
     })

@@ -50,6 +50,7 @@ export class LotService {
         'item.type',
         'item.display_name',
         'item.description',
+        'item.enchants',
         'item.categories',
       ])
 
@@ -90,6 +91,7 @@ export class LotService {
         'item.type',
         'item.display_name',
         'item.description',
+        'item.enchants',
         'item.categories',
       ])
       .getMany()
@@ -177,6 +179,7 @@ export class LotService {
         'type',
         'display_name',
         'description',
+        'enchants',
         'categories',
       ],
     })

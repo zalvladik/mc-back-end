@@ -29,6 +29,9 @@ export class Item {
   @Column('simple-array', { nullable: true })
   description?: string[]
 
+  @Column('simple-array', { nullable: true })
+  enchants?: string[]
+
   @Column({
     type: 'set',
     enum: [

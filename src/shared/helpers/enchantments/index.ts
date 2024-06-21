@@ -20,7 +20,7 @@ const enchantmentsData: Enchantments = enchantments
 export const enchantmentDescription = (
   enchantmentsArray: string[],
 ): string[] => {
-  const description = enchantmentsArray.map(item => {
+  const enchants = enchantmentsArray.map(item => {
     const [enchantment, level] = item.split('$')
 
     const enchantmentName = enchantmentsData.with_lvl[enchantment]
@@ -32,5 +32,5 @@ export const enchantmentDescription = (
     return `${enchantmentName} ${enchantmentLevel}`
   })
 
-  return description
+  return enchants
 }

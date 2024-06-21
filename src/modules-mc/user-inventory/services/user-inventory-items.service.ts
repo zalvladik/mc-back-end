@@ -37,29 +37,29 @@ export class UserInventoryItemsService {
     if (!userInventory) throw new NotFoundException('Гравця не знайдено')
 
     try {
-      const items = itemsData.map((item: ItemDto) => {
-        const { display_name, categories, description } = itemCategoriesSorter(
-          item.type,
-        )
+      const items = itemsData.map(
+        (item: ItemDto & { description: string[] | null }) => {
+          const { display_name, categories, description } =
+            itemCategoriesSorter(item.type)
 
-        const result = {
-          ...item,
-          inventory: userInventory,
-          display_name: item.display_name || display_name,
-          categories,
-          description,
-        }
+          let result = {
+            ...item,
+            inventory: userInventory,
+            display_name: item.display_name || display_name,
+            categories,
+          }
 
-        if (item.enchants || item.stored_enchants) {
-          const description = enchantmentDescription(
-            item.enchants || item.stored_enchants,
-          )
+          if (description) result = { ...result, description }
 
-          return { ...result, description }
-        }
+          if (item.enchants?.length) {
+            const enchants = enchantmentDescription(item.enchants)
 
-        return result
-      })
+            result = { ...result, enchants }
+          }
+
+          return result
+        },
+      )
 
       await this.itemRepository.save(items)
     } catch (error) {

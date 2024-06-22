@@ -19,6 +19,7 @@ import { Roles } from 'src/shared/decorators/roles.decorator'
 import { User } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
 import type { Lot } from 'src/entities/lot.entity'
+import type { Item } from 'src/entities/item.entity'
 import {
   BuyLotBodyDto,
   CreateLotBodyDto,
@@ -68,8 +69,11 @@ export class LotController {
 
   @Put()
   @HttpCode(201)
-  async buyLot(@Body() { lotId }: BuyLotBodyDto): Promise<void> {
-    await this.lotService.buyLot(lotId, 2)
+  async buyLot(
+    @Body() { lotId }: BuyLotBodyDto,
+    @User() { userInventory }: GetUserDto,
+  ): Promise<Item> {
+    return this.lotService.buyLot(lotId, userInventory)
   }
 
   @Delete()

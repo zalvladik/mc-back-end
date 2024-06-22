@@ -135,7 +135,7 @@ export class LotService {
     return { id: newLot.id, price, item: { ...rest } }
   }
 
-  async buyLot(lotId: number, byuerUserInventoryId: number): Promise<void> {
+  async buyLot(lotId: number, byuerUserInventoryId: number): Promise<Item> {
     const lotMetaData = await this.lotRepository.findOne({
       where: { id: lotId },
       relations: ['item', 'item.inventory'],
@@ -168,6 +168,8 @@ export class LotService {
 
     await this.itemRepository.save(updatedItem)
     await this.deleteLot(lotId)
+
+    return updatedItem
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {

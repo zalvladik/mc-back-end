@@ -4,11 +4,14 @@ import type { Item } from 'src/entities/item.entity'
 export type ItemLotResponseDto = Omit<Item, 'serialized' | 'lot'>
 
 export class CreateLotResponseDto {
+  @ApiProperty({ example: 123 })
+  id: number
+
   @ApiProperty({ example: 20 })
   price: number
 
-  @ApiProperty({ example: 123 })
-  id: number
+  @ApiProperty({ example: 'France' })
+  realname: string
 
   item: ItemLotResponseDto
 }

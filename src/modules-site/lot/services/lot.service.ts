@@ -132,7 +132,7 @@ export class LotService {
 
     const { serialized, lot, ...rest } = currentItem
 
-    return { id: newLot.id, price, item: { ...rest } }
+    return { id: newLot.id, price, item: { ...rest }, realname }
   }
 
   async buyLot(lotId: number, byuerUserInventoryId: number): Promise<Item> {

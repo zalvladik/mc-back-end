@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-export class GetMoneyToUserInventoryResponseDto {
+export class GetMoneyToUserResponseDto {
   @ApiProperty({ example: 50 })
   moneyBefore: number
 
@@ -8,7 +8,7 @@ export class GetMoneyToUserInventoryResponseDto {
   moneyAfter: number
 }
 
-export class AddMoneyToUserInventoryResponseDto {
+export class AddMoneyToUserResponseDto {
   @ApiProperty({ example: 50 })
   moneyBefore: number
 
@@ -16,7 +16,7 @@ export class AddMoneyToUserInventoryResponseDto {
   moneyAfter: number
 }
 
-export class PullItemsFromInventoryResponseDto {
+export class PullItemsFromUserResponseDto {
   @ApiProperty({
     example: [
       'rdvb2ddDtMAAZSXRlbVNAYmVyhqyVHQuU4IsCAAB4cAAADnR0AAZSQUJCSVQ...',

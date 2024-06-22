@@ -9,16 +9,20 @@ import { User } from 'src/entities/user.entity'
 import { UserUUID } from 'src/entities/user-uuid.entity'
 import { TokenService } from 'src/shared/services/token/token.service'
 
+import { Item } from 'src/entities/item.entity'
+
 import {
   UserAdvancementsController,
   UserController,
   UserSkinController,
+  UserItemsController,
 } from './controllers'
 
 import {
   UserAdvancementsService,
-  UserService,
   UserSkinService,
+  UserItemsService,
+  UserService,
 } from './services'
 
 import { AuthModule } from '../auth/auth.module'
@@ -30,13 +34,20 @@ import { AuthModule } from '../auth/auth.module'
       UserUUID,
       Advancements,
       SrPlayer,
+      Item,
       SrPlayerSkin,
     ]),
     AuthModule,
   ],
-  controllers: [UserController, UserAdvancementsController, UserSkinController],
+  controllers: [
+    UserController,
+    UserItemsController,
+    UserAdvancementsController,
+    UserSkinController,
+  ],
   providers: [
     UserService,
+    UserItemsService,
     UserAdvancementsService,
     JwtService,
     TokenService,

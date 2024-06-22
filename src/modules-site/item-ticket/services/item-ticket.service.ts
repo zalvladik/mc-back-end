@@ -10,7 +10,7 @@ import { In, Repository } from 'typeorm'
 
 import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
-import { UserInventoryService } from 'src/modules-site/user-inventory/services'
+import { User } from 'src/entities/user.entity'
 
 import type {
   CreateItemTicketResponseDto,
@@ -23,25 +23,26 @@ import type { DeleteItemTicketProps } from '../types'
 @Injectable()
 export class ItemTicketService {
   constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
     @InjectRepository(ItemTicket)
     private readonly itemTicketRepository: Repository<ItemTicket>,
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
-    private readonly userInventoryService: UserInventoryService,
   ) {}
 
   async getItemTickets(id: number): Promise<ItemTicket[]> {
     return this.itemTicketRepository.find({
-      where: { inventory: { id } },
+      where: { user: { id } },
     })
   }
 
   async getItemsFromTicket(
-    userInventory: number,
+    userId: number,
     itemTicketId: number,
   ): Promise<GetItemsFromTicketResponseDto[]> {
     const itemTicket = await this.itemTicketRepository.findOne({
-      where: { id: itemTicketId, inventory: { id: userInventory } },
+      where: { id: itemTicketId, user: { id: userId } },
     })
 
     if (!itemTicket) throw new NotFoundException('Квиток не знайдено')
@@ -62,12 +63,12 @@ export class ItemTicketService {
 
   async createItemTicket(
     itemIds: number[],
-    userInventoryId: number,
+    userId: number,
   ): Promise<CreateItemTicketResponseDto> {
     const coune = await this.itemTicketRepository.count({
       where: {
-        inventory: {
-          id: userInventoryId,
+        user: {
+          id: userId,
         },
       },
     })
@@ -82,7 +83,7 @@ export class ItemTicketService {
     const arrayItems = await this.itemRepository
       .createQueryBuilder('items')
       .whereInIds(itemIds)
-      .andWhere('items.inventory.id = :userInventoryId', { userInventoryId })
+      .andWhere('items.user.id = :userId', { userId })
       .andWhere('items.itemTicket IS NULL')
       .getMany()
 
@@ -99,10 +100,11 @@ export class ItemTicketService {
       }
     })
 
-    const userInventory =
-      await this.userInventoryService.getUserInvenory(userInventoryId)
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    })
 
-    newItemTicket.inventory = userInventory
+    newItemTicket.user = user
     newItemTicket.items = updatedItems
 
     await this.itemTicketRepository.save(newItemTicket)
@@ -112,22 +114,22 @@ export class ItemTicketService {
 
   async removeItemsFromTicket(
     itemIds: number[],
-    userInventoryId: number,
+    userId: number,
   ): Promise<RemoveItemsFromTicketResponseDto[]> {
     const itemsCount = await this.itemRepository.count({
-      where: { id: In(itemIds), inventory: { id: userInventoryId } },
+      where: { id: In(itemIds), user: { id: userId } },
     })
 
     if (itemsCount < itemIds.length)
       throw new NotFoundException('Предмет не знайдено')
 
     await this.itemRepository.update(
-      { id: In(itemIds), inventory: { id: userInventoryId } },
+      { id: In(itemIds), user: { id: userId } },
       { itemTicket: null },
     )
 
     return this.itemRepository.find({
-      where: { id: In(itemIds), inventory: { id: userInventoryId } },
+      where: { id: In(itemIds), user: { id: userId } },
       select: [
         'id',
         'amount',
@@ -142,11 +144,11 @@ export class ItemTicketService {
 
   async deleteItemTicket({
     itemIds,
-    userInventoryId,
+    userId,
     itemTicketId,
   }: DeleteItemTicketProps): Promise<DeleteItemTicketResponseDto[]> {
     const itemsIsExist = await this.itemRepository.count({
-      where: { id: In(itemIds), inventory: { id: userInventoryId } },
+      where: { id: In(itemIds), user: { id: userId } },
     })
 
     if (itemsIsExist !== itemIds.length) {
@@ -161,7 +163,7 @@ export class ItemTicketService {
     }
 
     return this.itemRepository.find({
-      where: { id: In(itemIds), inventory: { id: userInventoryId } },
+      where: { id: In(itemIds), user: { id: userId } },
       select: [
         'id',
         'amount',

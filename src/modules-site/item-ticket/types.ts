@@ -1,5 +1,5 @@
 export type DeleteItemTicketProps = {
   itemIds: number[]
-  userInventoryId: number
+  userId: number
   itemTicketId: number
 }

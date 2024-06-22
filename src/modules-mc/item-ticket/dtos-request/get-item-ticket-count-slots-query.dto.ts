@@ -5,7 +5,7 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 export class GetItemTicketsCountSlotQueryDto {
   @IsNotEmpty()
   @IsString()
-  realname: string
+  username: string
 
   @IsNotEmpty()
   @Transform(({ value }: TransformFnParams) => Number(value))

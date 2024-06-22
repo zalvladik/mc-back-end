@@ -10,7 +10,7 @@ import {
 import { CategoryEnum } from 'src/shared/enums'
 import { ItemTicket } from './item-ticket.entity'
 import { Lot } from './lot.entity'
-import { UserInventory } from './user-inventory.entity'
+import { User } from './user.entity'
 
 @Entity({ name: 'items' })
 export class Item {
@@ -52,9 +52,9 @@ export class Item {
   @Column({ type: 'text', nullable: false })
   serialized: string
 
-  @ManyToOne(() => UserInventory, userInventory => userInventory.items)
-  @JoinColumn({ name: 'inventory_id' })
-  inventory: UserInventory
+  @ManyToOne(() => User, user => user.items)
+  @JoinColumn({ name: 'user_id' })
+  user: User
 
   @ManyToOne(() => ItemTicket, itemTicket => itemTicket.items, {
     onDelete: 'SET NULL',

@@ -11,7 +11,7 @@ export class CreateLotResponseDto {
   price: number
 
   @ApiProperty({ example: 'France' })
-  realname: string
+  username: string
 
   item: ItemLotResponseDto
 }

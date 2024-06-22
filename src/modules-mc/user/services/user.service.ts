@@ -12,10 +12,10 @@ export class UserService {
     private readonly userUUIDRepository: Repository<UserUUID>,
   ) {}
 
-  async postUserUUID(realname: string, uuid: string): Promise<void> {
+  async postUserUUID(username: string, uuid: string): Promise<void> {
     const newUserUUID = this.userUUIDRepository.create()
 
-    newUserUUID.realname = realname
+    newUserUUID.username = username
     newUserUUID.uuid = uuid
 
     await this.userUUIDRepository.save(newUserUUID)

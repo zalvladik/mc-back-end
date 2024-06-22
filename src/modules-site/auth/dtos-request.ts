@@ -6,7 +6,7 @@ export class CredentialDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({ example: 'France' })
-  realname: string
+  username: string
 
   @IsNotEmpty()
   @IsString()

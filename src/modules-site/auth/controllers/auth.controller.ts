@@ -11,9 +11,9 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { Request, Response } from 'express'
 
-import { GetUserDto } from 'src/modules-site/user-inventory/dtos-request'
+import { GetUserDto } from 'src/modules-site/user/dtos-request'
 import { THIRTY_DAYS } from 'src/shared/constants'
-import { User } from 'src/shared/decorators/user.decorator'
+import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 import { RefreshTokenGuard } from 'src/shared/guards/refresh-token.guard'
 
@@ -37,10 +37,10 @@ export class AuthController {
     type: AuthUserResponseDto,
   })
   async login(
-    @Body() { realname, password }: CredentialDto,
+    @Body() { username, password }: CredentialDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<AuthUserResponseDto> {
-    const userData = await this.authService.login(realname, password)
+    const userData = await this.authService.login(username, password)
 
     res.cookie('refreshToken', userData.refreshToken, {
       maxAge: THIRTY_DAYS,
@@ -62,7 +62,7 @@ export class AuthController {
   @UseGuards(AuthGuard)
   async logout(
     @Res({ passthrough: true }) res: Response,
-    @User() { id }: GetUserDto,
+    @UserDecorator() { id }: GetUserDto,
   ): Promise<void> {
     this.authService.logout(id)
 

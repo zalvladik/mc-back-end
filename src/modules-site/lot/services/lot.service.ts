@@ -11,10 +11,9 @@ import { Repository } from 'typeorm'
 
 import { Item } from 'src/entities/item.entity'
 import { Lot } from 'src/entities/lot.entity'
-import { UserInventoryService } from 'src/modules-site/user-inventory/services'
-import { didExistItemInInventory } from 'src/shared/helpers/didExistItemInInventory'
 
-import type { CreateLotServiceT, GetUserLotsProps } from '../types'
+import { User } from 'src/entities/user.entity'
+import type { CreateLotServiceT } from '../types'
 import type {
   CreateLotResponseDto,
   DeleteUserLotResponseDto,
@@ -25,7 +24,8 @@ import type { GetLotsQuaryDto } from '../dtos-request'
 @Injectable()
 export class LotService {
   constructor(
-    private readonly userInventoryService: UserInventoryService,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
     @InjectRepository(Lot)
     private readonly lotRepository: Repository<Lot>,
     @InjectRepository(Item)
@@ -79,11 +79,11 @@ export class LotService {
     }
   }
 
-  async getUserLots({ userInventory }: GetUserLotsProps): Promise<Lot[]> {
+  async getUserLots(userId: number): Promise<Lot[]> {
     return this.lotRepository
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.item', 'item')
-      .where('item.inventory.id = :userInventory', { userInventory })
+      .where('item.user.id = :userId', { userId })
       .select([
         'lot',
         'item.id',
@@ -98,73 +98,67 @@ export class LotService {
   }
 
   async createLot({
-    userInventoryId,
+    userId,
     itemId,
     price,
-    realname,
+    username,
   }: CreateLotServiceT): Promise<CreateLotResponseDto> {
-    const userInventory =
-      await this.userInventoryService.findUserInventoryById(userInventoryId)
-
-    const didExistItem = didExistItemInInventory(userInventory.items, itemId)
-
-    if (!didExistItem) throw new NotFoundException('Предмет не знайдено')
-
-    const currentItem = await this.itemRepository.findOne({
-      where: { id: didExistItem.id },
+    const itemForLot = await this.itemRepository.findOne({
+      where: { id: itemId, user: { id: userId } },
       relations: ['lot'],
     })
 
-    if (currentItem.lot) {
+    if (!itemForLot) throw new NotFoundException('Предмет не знайдено')
+
+    if (itemForLot.lot) {
       throw new ConflictException('Для цього предмет уже виставлений лот')
     }
 
     const newLot = this.lotRepository.create({
-      realname,
+      username,
       price,
-      item: currentItem,
+      item: itemForLot,
     })
 
-    currentItem.lot = newLot
+    itemForLot.lot = newLot
 
     await this.lotRepository.save(newLot)
-    await this.itemRepository.save(currentItem)
+    await this.itemRepository.save(itemForLot)
 
-    const { serialized, lot, ...rest } = currentItem
+    const { serialized, lot, ...rest } = itemForLot
 
-    return { id: newLot.id, price, item: { ...rest }, realname }
+    return { id: newLot.id, price, item: { ...rest }, username }
   }
 
-  async buyLot(lotId: number, byuerUserInventoryId: number): Promise<Item> {
+  async buyLot(lotId: number, byuerUserId: number): Promise<Item> {
     const lotMetaData = await this.lotRepository.findOne({
       where: { id: lotId },
-      relations: ['item', 'item.inventory'],
+      relations: ['item', 'item.user'],
     })
 
     if (!lotMetaData) throw new NotFoundException('Лот не знайдено')
 
-    const buyerUserInventory =
-      await this.userInventoryService.findUserInventoryById(
-        byuerUserInventoryId,
-      )
+    const buyerUser = await this.userRepository.findOne({
+      where: { user: { id: byuerUserId } },
+    })
 
-    if (!buyerUserInventory) {
-      throw new NotFoundException("Buyer's inventory not found")
+    if (!buyerUser) {
+      throw new NotFoundException('Покупця з таким ніком не існує')
     }
 
-    if (lotMetaData.price > buyerUserInventory.money) {
-      throw new HttpException('Not enough money', HttpStatus.PAYMENT_REQUIRED)
+    if (lotMetaData.price > buyerUser.money) {
+      throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
     }
 
-    const sellerUserInventory = lotMetaData.item.inventory
+    const sellerUser = lotMetaData.item.user
 
-    buyerUserInventory.money -= lotMetaData.price
-    sellerUserInventory.money += lotMetaData.price
+    buyerUser.money -= lotMetaData.price
+    sellerUser.money += lotMetaData.price
 
-    const updatedItem = { ...lotMetaData.item, inventory: buyerUserInventory }
+    const updatedItem = { ...lotMetaData.item, user: buyerUser }
 
-    await this.userInventoryService.updateUserInventory(buyerUserInventory)
-    await this.userInventoryService.updateUserInventory(sellerUserInventory)
+    await this.userRepository.save(buyerUser)
+    await this.userRepository.save(sellerUser)
 
     await this.itemRepository.save(updatedItem)
     await this.deleteLot(lotId)

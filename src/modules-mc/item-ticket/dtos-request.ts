@@ -12,7 +12,7 @@ import {
 export class GetItemTicketsCountSlotQueryDto {
   @IsNotEmpty()
   @IsString()
-  realname: string
+  username: string
 
   @IsNotEmpty()
   @Transform(({ value }: TransformFnParams) => Number(value))

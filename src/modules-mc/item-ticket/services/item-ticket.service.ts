@@ -14,10 +14,10 @@ export class ItemTicketService {
 
   async getItemTicketsCountSlots(
     id: number,
-    realname: string,
+    username: string,
   ): Promise<{ countSlots: number }> {
     const itemTicket = await this.itemTicketRepository.findOne({
-      where: { id, inventory: { realname } },
+      where: { id, user: { username } },
       relations: ['items'],
     })
 

@@ -1,14 +1,31 @@
 import { ApiProperty } from '@nestjs/swagger'
 
+import type { Item } from 'src/entities/item.entity'
+
+export class GetMoneyToUserResponseDto {
+  @ApiProperty({ example: 50 })
+  moneyBefore: number
+
+  @ApiProperty({ example: 100 })
+  moneyAfter: number
+}
+
+export class AddMoneyToUserResponseDto {
+  @ApiProperty({ example: 50 })
+  moneyBefore: number
+
+  @ApiProperty({ example: 100 })
+  moneyAfter: number
+}
+
+export type GetItemsFromUserResponseDto = Omit<Item, 'serialized'>
+
 export class GetProfileResponseDto {
   @ApiProperty({ example: 1 })
   id: number
 
   @ApiProperty({ example: 'France' })
-  realname: string
-
-  @ApiProperty({ example: '3294756312' })
-  lastlogin: string
+  username: string
 }
 
 export class TexturesSkin {

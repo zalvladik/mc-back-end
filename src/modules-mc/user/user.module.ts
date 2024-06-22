@@ -9,9 +9,21 @@ import { User } from 'src/entities/user.entity'
 import { UserUUID } from 'src/entities/user-uuid.entity'
 import { TokenService } from 'src/shared/services/token/token.service'
 
-import { UserAdvancementsController, UserController } from './controllers'
+import { Item } from 'src/entities/item.entity'
+import { ItemTicket } from 'src/entities/item-ticket.entity'
+import {
+  UserAdvancementsController,
+  UserController,
+  UserItemsController,
+  UserMoneyController,
+} from './controllers'
 
-import { UserAdvancementsService, UserService } from './services'
+import {
+  UserAdvancementsService,
+  UserService,
+  UserItemsService,
+  UserMoneyService,
+} from './services'
 
 @Module({
   imports: [
@@ -21,9 +33,23 @@ import { UserAdvancementsService, UserService } from './services'
       Advancements,
       SrPlayer,
       SrPlayerSkin,
+      Item,
+      ItemTicket,
     ]),
   ],
-  controllers: [UserController, UserAdvancementsController],
-  providers: [UserService, UserAdvancementsService, JwtService, TokenService],
+  controllers: [
+    UserController,
+    UserAdvancementsController,
+    UserMoneyController,
+    UserItemsController,
+  ],
+  providers: [
+    UserService,
+    UserAdvancementsService,
+    JwtService,
+    TokenService,
+    UserMoneyService,
+    UserItemsService,
+  ],
 })
 export class McUserModule {}

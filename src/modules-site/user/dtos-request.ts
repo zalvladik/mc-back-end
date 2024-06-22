@@ -1,48 +1,44 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-import {
-  IsEmpty,
-  IsNotEmpty,
-  IsNumber,
-  IsObject,
-  IsString,
-} from 'class-validator'
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
-export class PutAdvancementsBodyDto {
+export class PostUserUuidBodyDto {
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ example: 'France sword' })
-  realname: string
+  username: string
 
   @IsNotEmpty()
-  @IsObject()
-  data: object
+  @IsString()
+  uuid: string
+}
+
+export class GetMoneyFromUserQueryDto {
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'France' })
+  username: string
 }
 
 export class GetUserDto {
-  @IsEmpty()
+  @IsNotEmpty()
   @IsNumber()
   id: number
 
-  @IsEmpty()
+  @IsNotEmpty()
   @IsString()
-  realname: string
+  username: string
 
-  @IsEmpty()
-  @IsString()
-  lastlogin: string
+  @IsNotEmpty()
+  @IsNumber()
+  money: number
 
-  @IsEmpty()
-  @IsString()
-  userInventory: number
-
-  @IsEmpty()
-  @IsString()
+  @IsNotEmpty()
+  @IsNumber()
   advancements: string
 }
 
 export class GetAdvancementsParamDto {
   @IsNotEmpty()
   @IsString()
-  realname: string
+  username: string
 }

@@ -3,6 +3,7 @@ import {
   Entity,
   Index,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   Unique,
@@ -10,20 +11,18 @@ import {
 
 import { RoleEnum } from 'src/shared/enums'
 import { Advancements } from './advancements.entity'
-import { UserInventory } from './user-inventory.entity'
+import { ItemTicket } from './item-ticket.entity'
+import { Item } from './item.entity'
 
 @Entity({ name: 'users' })
-@Unique(['realname', 'username'])
-@Index(['realname'])
+@Unique(['id', 'username'])
+@Index(['username'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column({ type: 'varchar', length: 255 })
   username: string
-
-  @Column({ type: 'varchar', length: 255 })
-  realname: string
 
   @Column({
     type: 'set',
@@ -47,66 +46,30 @@ export class User {
   })
   password: string
 
-  @Column({
-    type: 'varchar',
-    length: 40,
-    charset: 'ascii',
-    collation: 'ascii_bin',
-    nullable: true,
-  })
-  ip: string
+  // @Column({ type: 'varchar', length: 50, nullable: true })
+  // lastlogin: string
 
-  @Column({ type: 'varchar', length: 50, nullable: true })
-  lastlogin: string
+  // @Column({ type: 'bigint', default: 0 })
+  // regdate: number
 
-  @Column({ type: 'double', default: 0 })
-  x: number
+  // @Column({ type: 'smallint', default: 0 })
+  // isLogged: number
 
-  @Column({ type: 'double', default: 0 })
-  y: number
+  @Column({ type: 'smallint', nullable: false, default: 0 })
+  money: number
 
-  @Column({ type: 'double', default: 0 })
-  z: number
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User
 
-  @Column({ type: 'varchar', length: 255, default: 'world' })
-  world: string
+  @OneToMany(() => Item, item => item.user)
+  items: Item[]
 
-  @Column({ type: 'bigint', default: 0 })
-  regdate: number
-
-  @Column({
-    type: 'varchar',
-    length: 40,
-    charset: 'ascii',
-    collation: 'ascii_bin',
-    nullable: true,
-  })
-  regip: string
-
-  @Column({ type: 'float', nullable: true })
-  yaw: number
-
-  @Column({ type: 'float', nullable: true })
-  pitch: number
-
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  email: string
-
-  @Column({ type: 'smallint', default: 0 })
-  isLogged: number
-
-  @Column({ type: 'smallint', default: 0 })
-  hasSession: number
-
-  @Column({ type: 'varchar', length: 32, nullable: true })
-  totp: string
+  @OneToMany(() => ItemTicket, itemTicket => itemTicket.user)
+  itemTickets: ItemTicket[]
 
   @Column({ length: 2000, nullable: true })
   refreshToken?: string
-
-  @OneToOne(() => UserInventory)
-  @JoinColumn({ name: 'user_inventory_id' })
-  userInventory: UserInventory
 
   @OneToOne(() => Advancements)
   @JoinColumn({ name: 'advancements_id' })

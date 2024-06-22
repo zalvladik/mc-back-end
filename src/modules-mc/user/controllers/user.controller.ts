@@ -12,8 +12,8 @@ export class UserController {
 
   @Post('userUUID')
   async postUserUUID(
-    @Body() { realname, uuid }: PostUserUuidBodyDto,
+    @Body() { username, uuid }: PostUserUuidBodyDto,
   ): Promise<void> {
-    await this.userService.postUserUUID(realname, uuid)
+    await this.userService.postUserUUID(username, uuid)
   }
 }

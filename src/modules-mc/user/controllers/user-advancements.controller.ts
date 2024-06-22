@@ -15,8 +15,8 @@ export class UserAdvancementsController {
   @Put()
   @HttpCode(201)
   async putAdvancements(
-    @Body() { realname, data }: PutAdvancementsBodyDto,
+    @Body() { username, data }: PutAdvancementsBodyDto,
   ): Promise<void> {
-    await this.userAdvancementsService.putAdvancements(realname, data)
+    await this.userAdvancementsService.putAdvancements(username, data)
   }
 }

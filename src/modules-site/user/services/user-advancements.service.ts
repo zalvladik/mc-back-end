@@ -14,22 +14,22 @@ export class UserAdvancementsService {
 
   async getAdvancements(): Promise<Advancements[]> {
     return this.advancementsRepository.find({
-      select: ['realname', 'rating', 'id'],
+      select: ['username', 'rating', 'id'],
     })
   }
 
-  async getUserAdvancementsByRealName(realname: string): Promise<Advancements> {
+  async getUserAdvancementsByUserName(username: string): Promise<Advancements> {
     const userAdvancements = await this.advancementsRepository.findOne({
-      where: { realname },
+      where: { username },
     })
 
     if (!userAdvancements)
-      throw new NotFoundException(`Гравця ${realname} не знайдено`)
+      throw new NotFoundException(`Гравця ${username} не знайдено`)
 
     return userAdvancements
   }
 
-  async putAdvancements(realname: string, data: object): Promise<void> {
+  async putAdvancements(username: string, data: object): Promise<void> {
     const userAdvancements = Object.entries(data).reduce(
       (result, [key, { done }]) => {
         if (!done) return result
@@ -58,7 +58,7 @@ export class UserAdvancementsService {
     )
 
     const userAdvancement = await this.advancementsRepository.findOne({
-      where: { realname },
+      where: { username },
     })
 
     userAdvancement.advancements = userAdvancements

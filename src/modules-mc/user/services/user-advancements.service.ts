@@ -12,7 +12,7 @@ export class UserAdvancementsService {
     private readonly advancementsRepository: Repository<Advancements>,
   ) {}
 
-  async putAdvancements(realname: string, data: object): Promise<void> {
+  async putAdvancements(username: string, data: object): Promise<void> {
     const userAdvancements = Object.entries(data).reduce(
       (result, [key, { done }]) => {
         if (!done) return result
@@ -41,7 +41,7 @@ export class UserAdvancementsService {
     )
 
     const userAdvancement = await this.advancementsRepository.findOne({
-      where: { realname },
+      where: { username },
     })
 
     userAdvancement.advancements = userAdvancements

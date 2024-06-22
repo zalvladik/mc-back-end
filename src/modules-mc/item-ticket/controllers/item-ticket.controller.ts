@@ -13,11 +13,11 @@ export class ItemTicketController {
   @Get('countSlots')
   @HttpCode(200)
   async getItemToketsCountSlots(
-    @Query() { realname, itemTicketId }: GetItemTicketsCountSlotQueryDto,
+    @Query() { username, itemTicketId }: GetItemTicketsCountSlotQueryDto,
   ): Promise<{ countSlots: number }> {
     return this.itemTicketService.getItemTicketsCountSlots(
       itemTicketId,
-      realname,
+      username,
     )
   }
 }

@@ -10,10 +10,10 @@ export class AuthUser {
   id: number
 
   @ApiProperty({ example: 'France' })
-  realname: string
+  username: string
 
-  @ApiProperty({ example: '53453734634' })
-  lastlogin: string
+  @ApiProperty({ example: 100 })
+  money: number
 }
 
 export class AuthUserResponseDto {

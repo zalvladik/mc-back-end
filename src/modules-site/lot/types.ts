@@ -1,8 +1,6 @@
 export type CreateLotServiceT = {
-  userInventoryId: number
+  userId: number
   itemId: number
   price: number
-  realname: string
+  username: string
 }
-
-export type GetUserLotsProps = { userInventory: number }

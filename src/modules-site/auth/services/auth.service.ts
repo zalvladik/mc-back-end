@@ -21,16 +21,16 @@ export class AuthService {
   ) {}
 
   async login(
-    realname: string,
+    username: string,
     password: string,
   ): Promise<AuthUserResponseDto> {
     const userMeta = await this.userRepository.findOne({
-      where: { realname },
-      relations: ['userInventory', 'advancements'],
-      select: ['id', 'realname', 'lastlogin', 'password', 'role'],
+      where: { username },
+      relations: ['advancements'],
+      select: ['id', 'username', 'password', 'role', 'money'],
     })
 
-    if (!userMeta) throw new NotFoundException(`${realname} was not found`)
+    if (!userMeta) throw new NotFoundException(`${username} was not found`)
 
     const { password: passwordBD, ...rest } = userMeta
 
@@ -43,7 +43,6 @@ export class AuthService {
     const user = {
       ...rest,
       advancements: rest.advancements.id,
-      userInventory: rest.userInventory.id,
     }
 
     const tokens = this.tokenService.generateTokens(user)
@@ -59,20 +58,19 @@ export class AuthService {
 
   async refresh(oldRefreshToken: string): Promise<AuthUserResponseDto> {
     const userData = this.tokenService.validateRefreshToken(oldRefreshToken)
-    const { id, realname } = userData
+    const { id, username } = userData
 
     const userMeta = await this.userRepository.findOne({
-      where: { realname },
-      relations: ['userInventory', 'advancements'],
-      select: ['id', 'realname', 'lastlogin', 'role'],
+      where: { username },
+      relations: ['advancements'],
+      select: ['id', 'username', 'role', 'money'],
     })
 
-    if (!userMeta) throw new NotFoundException(`Гравця ${realname} не знайдено`)
+    if (!userMeta) throw new NotFoundException(`Гравця ${username} не знайдено`)
 
     const user = {
       ...userMeta,
       advancements: userMeta.advancements.id,
-      userInventory: userMeta.userInventory.id,
     }
 
     const tokens = this.tokenService.generateTokens(user)

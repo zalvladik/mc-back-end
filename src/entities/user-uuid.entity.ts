@@ -9,5 +9,5 @@ export class UserUUID {
   uuid: string
 
   @Column({ length: 255, nullable: false })
-  realname: string
+  username: string
 }

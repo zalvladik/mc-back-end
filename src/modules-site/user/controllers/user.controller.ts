@@ -1,7 +1,7 @@
 import { Controller, Get, UseGuards } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 
-import { User } from 'src/shared/decorators/user.decorator'
+import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 
 import { RolesGuard } from 'src/shared/guards/roles.guard'
@@ -20,7 +20,9 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async getProfile(@User() { id }: GetUserDto): Promise<GetProfileResponseDto> {
+  async getProfile(
+    @UserDecorator() { id }: GetUserDto,
+  ): Promise<GetProfileResponseDto> {
     return this.userService.getByID(id)
   }
 }

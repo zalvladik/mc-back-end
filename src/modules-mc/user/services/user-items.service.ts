@@ -9,32 +9,29 @@ import { Repository } from 'typeorm'
 
 import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
-import { UserInventory } from 'src/entities/user-inventory.entity'
-import type { ItemDto } from 'src/modules-mc/user-inventory/dtos-request'
+import { User } from 'src/entities/user.entity'
+import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
-import type { PullItemsFromInventoryResponseDto } from '../dtos-responses'
+import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
-export class UserInventoryItemsService {
+export class UserItemsService {
   constructor(
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
-    @InjectRepository(UserInventory)
-    private readonly userInventoryRepository: Repository<UserInventory>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
     @InjectRepository(ItemTicket)
     private readonly itemTicketRepository: Repository<ItemTicket>,
   ) {}
 
-  async addItemsToInventory(
-    itemsData: ItemDto[],
-    realname: string,
-  ): Promise<void> {
-    const userInventory = await this.userInventoryRepository.findOne({
-      where: { realname },
+  async addItemsToUser(itemsData: ItemDto[], username: string): Promise<void> {
+    const user = await this.userRepository.findOne({
+      where: { username },
     })
 
-    if (!userInventory) throw new NotFoundException('Гравця не знайдено')
+    if (!user) throw new NotFoundException('Гравця не знайдено')
 
     try {
       const items = itemsData.map(
@@ -44,7 +41,7 @@ export class UserInventoryItemsService {
 
           let result = {
             ...item,
-            inventory: userInventory,
+            user,
             display_name: item.display_name || display_name,
             categories,
           }
@@ -67,9 +64,9 @@ export class UserInventoryItemsService {
     }
   }
 
-  async pullItemsFromInventory(
+  async pullItemsFromUser(
     itemTicketId: number,
-  ): Promise<PullItemsFromInventoryResponseDto> {
+  ): Promise<PullItemsFromUserResponseDto> {
     const itemTicket = await this.itemTicketRepository.findOne({
       where: { id: itemTicketId },
       relations: ['items'],

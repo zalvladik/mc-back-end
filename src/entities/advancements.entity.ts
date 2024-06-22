@@ -17,7 +17,7 @@ export class Advancements {
   advancements: string[]
 
   @Column({ length: 255, nullable: false })
-  realname: string
+  username: string
 
   @Column({ type: 'int', nullable: false, default: 0 })
   rating: number

@@ -1,7 +1,7 @@
 import { Controller, Get, UseGuards } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 
-import { User } from 'src/shared/decorators/user.decorator'
+import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 
 import { RolesGuard } from 'src/shared/guards/roles.guard'
@@ -20,9 +20,9 @@ export class UserSkinController {
   constructor(private readonly userSkinService: UserSkinService) {}
 
   @Get()
-  async getSkinByRealName(
-    @User() { realname }: GetUserDto,
+  async getSkinByUserName(
+    @UserDecorator() { username }: GetUserDto,
   ): Promise<GetUserSkinRsponseDto> {
-    return this.userSkinService.getPlayerSkinByRealName(realname)
+    return this.userSkinService.getPlayerSkinByUserName(username)
   }
 }

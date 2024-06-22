@@ -23,14 +23,14 @@ export class UserSkinService {
     private readonly srPlayerSkinRepository: Repository<SrPlayerSkin>,
   ) {}
 
-  async getPlayerSkinByRealName(
-    realname: string,
+  async getPlayerSkinByUserName(
+    username: string,
   ): Promise<GetUserSkinRsponseDto> {
     const player = await this.userUUIDRepository.findOne({
-      where: { realname },
+      where: { username },
     })
 
-    if (!player) throw new NotFoundException(`Гравця ${realname} не знайдено`)
+    if (!player) throw new NotFoundException(`Гравця ${username} не знайдено`)
 
     const srPlayer = await this.srPlayerRepository.findOne({
       where: { uuid: player.uuid },
@@ -38,11 +38,11 @@ export class UserSkinService {
 
     if (!srPlayer) {
       const srPlayerSkin = await this.srPlayerSkinRepository.findOne({
-        where: { last_known_name: realname },
+        where: { last_known_name: username },
       })
 
       if (!srPlayerSkin)
-        throw new NotFoundException(`Гравця ${realname} не знайдено`)
+        throw new NotFoundException(`Гравця ${username} не знайдено`)
 
       return this.decodeBase64ToJson(srPlayerSkin.value)
     }
@@ -52,7 +52,7 @@ export class UserSkinService {
     })
 
     if (!srPlayerSkin)
-      throw new NotFoundException(`Гравця ${realname} не знайдено`)
+      throw new NotFoundException(`Гравця ${username} не знайдено`)
 
     return this.decodeBase64ToJson(srPlayerSkin.value)
   }

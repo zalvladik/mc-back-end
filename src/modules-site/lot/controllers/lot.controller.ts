@@ -16,7 +16,7 @@ import { AuthGuard } from 'src/shared/guards/auth.guard'
 import { RolesGuard } from 'src/shared/guards/roles.guard'
 import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
-import { User } from 'src/shared/decorators/user.decorator'
+import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
 import type { Lot } from 'src/entities/lot.entity'
 import type { Item } from 'src/entities/item.entity'
@@ -50,20 +50,20 @@ export class LotController {
 
   @Get('user')
   @HttpCode(200)
-  async getUserLots(@User() { userInventory }: GetUserDto): Promise<Lot[]> {
-    return this.lotService.getUserLots({ userInventory })
+  async getUserLots(@UserDecorator() { id }: GetUserDto): Promise<Lot[]> {
+    return this.lotService.getUserLots(id)
   }
 
   @Post()
   @HttpCode(201)
   async createLot(
     @Body() body: CreateLotBodyDto,
-    @User() { userInventory, realname }: GetUserDto,
+    @UserDecorator() { id, username }: GetUserDto,
   ): Promise<CreateLotResponseDto> {
     return this.lotService.createLot({
       ...body,
-      realname,
-      userInventoryId: userInventory,
+      username,
+      userId: id,
     })
   }
 
@@ -71,9 +71,9 @@ export class LotController {
   @HttpCode(201)
   async buyLot(
     @Body() { lotId }: BuyLotBodyDto,
-    @User() { userInventory }: GetUserDto,
+    @UserDecorator() { id }: GetUserDto,
   ): Promise<Item> {
-    return this.lotService.buyLot(lotId, userInventory)
+    return this.lotService.buyLot(lotId, id)
   }
 
   @Delete()

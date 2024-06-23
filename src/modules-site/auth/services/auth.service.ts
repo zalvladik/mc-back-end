@@ -30,7 +30,7 @@ export class AuthService {
       select: ['id', 'username', 'password', 'role', 'money'],
     })
 
-    if (!userMeta) throw new NotFoundException(`${username} was not found`)
+    if (!userMeta) throw new NotFoundException(`Гравця ${username} не знайдено`)
 
     const { password: passwordBD, ...rest } = userMeta
 

@@ -10,6 +10,7 @@ import { TokenModule } from 'src/shared/services/token/token.module'
 import { McUserModule } from './modules-mc/user/user.module'
 import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
+import { McAuthModule } from './modules-mc/auth/auth.module'
 
 const siteModule = [
   AuthModule,
@@ -20,7 +21,7 @@ const siteModule = [
   ItemTicketModule,
 ]
 
-const mcModule = [McItemTicketModule, McUserModule, McUserModule]
+const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]
 
 @Module({
   imports: [

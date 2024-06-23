@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
@@ -13,6 +13,14 @@ export class UserAdvancementsService {
   ) {}
 
   async putAdvancements(username: string, data: object): Promise<void> {
+    const userAdvancement = await this.advancementsRepository.findOne({
+      where: { username },
+    })
+
+    if (!userAdvancement) {
+      throw new NotFoundException(`Гравця ${username} не знайдно`)
+    }
+
     const userAdvancements = Object.entries(data).reduce(
       (result, [key, { done }]) => {
         if (!done) return result
@@ -39,10 +47,6 @@ export class UserAdvancementsService {
       },
       [],
     )
-
-    const userAdvancement = await this.advancementsRepository.findOne({
-      where: { username },
-    })
 
     userAdvancement.advancements = userAdvancements
     userAdvancement.rating = userAdvancements.length

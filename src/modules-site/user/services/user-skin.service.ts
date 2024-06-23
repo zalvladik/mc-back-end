@@ -9,14 +9,14 @@ import { Repository } from 'typeorm'
 
 import { SrPlayerSkin } from 'src/entities/sr/sr-player-skins.entity'
 import { SrPlayer } from 'src/entities/sr/sr-players.entity'
-import { UserUUID } from 'src/entities/user-uuid.entity'
+import { User } from 'src/entities/user.entity'
 import type { GetUserSkinRsponseDto } from '../dtos-response'
 
 @Injectable()
 export class UserSkinService {
   constructor(
-    @InjectRepository(UserUUID)
-    private readonly userUUIDRepository: Repository<UserUUID>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
     @InjectRepository(SrPlayer)
     private readonly srPlayerRepository: Repository<SrPlayer>,
     @InjectRepository(SrPlayerSkin)
@@ -26,8 +26,9 @@ export class UserSkinService {
   async getPlayerSkinByUserName(
     username: string,
   ): Promise<GetUserSkinRsponseDto> {
-    const player = await this.userUUIDRepository.findOne({
+    const player = await this.userRepository.findOne({
       where: { username },
+      select: ['uuid'],
     })
 
     if (!player) throw new NotFoundException(`Гравця ${username} не знайдено`)

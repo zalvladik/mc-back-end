@@ -139,7 +139,7 @@ export class LotService {
     if (!lotMetaData) throw new NotFoundException('Лот не знайдено')
 
     const buyerUser = await this.userRepository.findOne({
-      where: { user: { id: byuerUserId } },
+      where: { id: byuerUserId },
     })
 
     if (!buyerUser) {

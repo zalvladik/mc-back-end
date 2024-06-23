@@ -24,6 +24,9 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   username: string
 
+  @Column({ length: 255, nullable: false })
+  uuid: string
+
   @Column({
     type: 'set',
     enum: [
@@ -46,21 +49,8 @@ export class User {
   })
   password: string
 
-  // @Column({ type: 'varchar', length: 50, nullable: true })
-  // lastlogin: string
-
-  // @Column({ type: 'bigint', default: 0 })
-  // regdate: number
-
-  // @Column({ type: 'smallint', default: 0 })
-  // isLogged: number
-
   @Column({ type: 'smallint', nullable: false, default: 0 })
   money: number
-
-  @OneToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
-  user: User
 
   @OneToMany(() => Item, item => item.user)
   items: Item[]

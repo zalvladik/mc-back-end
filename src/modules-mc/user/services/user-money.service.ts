@@ -18,6 +18,8 @@ export class UserMoneyService {
   ) {}
 
   async getMoneyByUserName(username: string): Promise<{ money: number }> {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
     return this.userRepository.findOne({
       where: { username },
       select: ['money'],
@@ -28,6 +30,8 @@ export class UserMoneyService {
     moneyToAdd: number,
     username: string,
   ): Promise<AddMoneyToUserResponseDto> {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
     const { money: moneyBefore } = await this.getMoneyByUserName(username)
 
     await this.userRepository.increment({ username }, 'money', moneyToAdd)
@@ -39,6 +43,8 @@ export class UserMoneyService {
     moneyToRemove: number,
     username: string,
   ): Promise<GetMoneyToUserResponseDto> {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
     const { money: moneyBefore } = await this.getMoneyByUserName(username)
 
     if (moneyBefore < moneyToRemove) {

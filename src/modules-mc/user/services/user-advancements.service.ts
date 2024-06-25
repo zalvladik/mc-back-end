@@ -13,6 +13,8 @@ export class UserAdvancementsService {
   ) {}
 
   async putAdvancements(username: string, data: object): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
     const userAdvancement = await this.advancementsRepository.findOne({
       where: { username },
     })

@@ -27,6 +27,7 @@
     "prettier",
   ],
   "rules": {
+    "no-promise-executor-return": "off",
     "class-methods-use-this": "off",
     "max-classes-per-file": "off",
     "prettier/prettier": ["error", { "endOfLine": "auto", "semi": false }],

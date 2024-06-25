@@ -16,6 +16,8 @@ export class ItemTicketService {
     id: number,
     username: string,
   ): Promise<{ countSlots: number }> {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
     const itemTicket = await this.itemTicketRepository.findOne({
       where: { id, user: { username } },
       relations: ['items'],

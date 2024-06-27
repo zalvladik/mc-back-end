@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 
 import { IsNotEmpty, IsString } from 'class-validator'
 
-export class CredentialDto {
+export class RegistrationBodyDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({ example: 'France' })

@@ -27,8 +27,6 @@ export class UserItemsService {
   ) {}
 
   async addItemsToUser(itemsData: ItemDto[], username: string): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
     const user = await this.userRepository.findOne({
       where: { username },
     })
@@ -69,8 +67,6 @@ export class UserItemsService {
   async pullItemsFromUser(
     itemTicketId: number,
   ): Promise<PullItemsFromUserResponseDto> {
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
     const itemTicket = await this.itemTicketRepository.findOne({
       where: { id: itemTicketId },
       relations: ['items'],

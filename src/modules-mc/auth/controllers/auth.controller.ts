@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { AuthService } from '../services'
 
-import { CredentialDto } from '../dtos-request'
+import { RegistrationBodyDto } from '../dtos-request'
 
 @Controller('mc/auth')
 @ApiTags('Auth')
@@ -17,13 +17,13 @@ export class AuthController {
   @ApiResponse({
     status: 201,
   })
-  async register(
-    @Body() { username, password, uuid }: CredentialDto,
+  async registration(
+    @Body() { username, password, uuid }: RegistrationBodyDto,
   ): Promise<void> {
     if (password.trim().length <= 5) {
       throw new BadRequestException('Пароль закороткий')
     }
 
-    await this.authService.register(username, password, uuid)
+    await this.authService.registration(username, password, uuid)
   }
 }

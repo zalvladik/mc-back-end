@@ -13,7 +13,7 @@ export class AuthService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async register(
+  async registration(
     username: string,
     password: string,
     uuid: string,

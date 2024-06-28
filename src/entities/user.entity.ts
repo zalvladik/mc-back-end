@@ -52,6 +52,12 @@ export class User {
   @Column({ type: 'smallint', nullable: false, default: 0 })
   money: number
 
+  @Column({ type: 'bigint', nullable: false })
+  mcSession: number
+
+  @Column({ length: 255, nullable: false })
+  ip: string
+
   @OneToMany(() => Item, item => item.user)
   items: Item[]
 

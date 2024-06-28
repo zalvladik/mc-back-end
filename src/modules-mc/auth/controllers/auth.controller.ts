@@ -17,7 +17,7 @@ export class AuthController {
   @ApiResponse({
     status: 201,
   })
-  async login(
+  async register(
     @Body() { username, password, uuid }: CredentialDto,
   ): Promise<void> {
     if (password.trim().length <= 5) {

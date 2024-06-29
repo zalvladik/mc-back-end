@@ -3,4 +3,5 @@ export type CreateLotServiceT = {
   itemId: number
   price: number
   username: string
+  countLot: number
 }

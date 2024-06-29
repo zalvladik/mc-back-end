@@ -34,6 +34,14 @@ export class GetUserDto {
 
   @IsNotEmpty()
   @IsNumber()
+  countShulker: number
+
+  @IsNotEmpty()
+  @IsNumber()
+  countLot: number
+
+  @IsNotEmpty()
+  @IsNumber()
   advancements: string
 }
 

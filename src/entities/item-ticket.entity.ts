@@ -1,5 +1,6 @@
 import {
   Entity,
+  Index,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -10,6 +11,7 @@ import { Item } from './item.entity'
 import { User } from './user.entity'
 
 @Entity({ name: 'item_ticket' })
+@Index(['user'])
 export class ItemTicket {
   @PrimaryGeneratedColumn()
   id: number

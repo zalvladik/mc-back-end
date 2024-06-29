@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   HttpException,
   HttpStatus,
@@ -102,7 +103,13 @@ export class LotService {
     itemId,
     price,
     username,
+    countLot,
   }: CreateLotServiceT): Promise<CreateLotResponseDto> {
+    if (price > 64 * 27 * 9)
+      throw new BadRequestException(
+        `Надто велика ціна, максимальна - ${64 * 27 * 9}`,
+      )
+
     const itemForLot = await this.itemRepository.findOne({
       where: { id: itemId, user: { id: userId } },
       relations: ['lot'],
@@ -112,6 +119,16 @@ export class LotService {
 
     if (itemForLot.lot) {
       throw new ConflictException('Для цього предмет уже виставлений лот')
+    }
+
+    const currentLotCount = await this.lotRepository.count({
+      where: { username },
+    })
+
+    if (currentLotCount + 1 > countLot) {
+      throw new BadRequestException(
+        `У вас перевищена кількість лотів, максимально ${countLot} шт.`,
+      )
     }
 
     const newLot = this.lotRepository.create({

@@ -33,6 +33,16 @@ export class UserItemsService {
 
     if (!user) throw new NotFoundException('Гравця не знайдено')
 
+    const itemCount = await this.itemRepository.count({
+      where: { user },
+    })
+
+    if (itemCount + itemsData.length > 27 * user.countShulker) {
+      throw new BadRequestException(
+        `У вас замало місця на аккаунті, максимально ${user.countShulker} шлк.`,
+      )
+    }
+
     try {
       const items = itemsData.map(
         (item: ItemDto & { description: string[] | null }) => {

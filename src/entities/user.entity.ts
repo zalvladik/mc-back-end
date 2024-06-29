@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   OneToMany,
   OneToOne,
@@ -16,7 +15,6 @@ import { Item } from './item.entity'
 
 @Entity({ name: 'users' })
 @Unique(['id', 'username'])
-@Index(['username'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number
@@ -57,6 +55,12 @@ export class User {
 
   @OneToMany(() => ItemTicket, itemTicket => itemTicket.user)
   itemTickets: ItemTicket[]
+
+  @Column({ type: 'smallint', nullable: false, default: 2 })
+  countShulker: number
+
+  @Column({ type: 'smallint', nullable: false, default: 20 })
+  countLot: number
 
   @Column({ length: 2000, nullable: true })
   refreshToken?: string

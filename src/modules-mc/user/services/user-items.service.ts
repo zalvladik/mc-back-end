@@ -37,7 +37,7 @@ export class UserItemsService {
       where: { user },
     })
 
-    if (itemCount + itemsData.length > 27 * user.countShulker * 27) {
+    if (itemCount ?? 0 + itemsData.length > 27 * user.countShulker * 27) {
       throw new BadRequestException(
         `У вас замало місця на аккаунті, максимально ${user.countShulker} шлк.`,
       )

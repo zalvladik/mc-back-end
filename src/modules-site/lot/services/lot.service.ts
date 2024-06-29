@@ -14,7 +14,7 @@ import { Item } from 'src/entities/item.entity'
 import { Lot } from 'src/entities/lot.entity'
 
 import { User } from 'src/entities/user.entity'
-import type { CreateLotServiceT } from '../types'
+import type { ByeLotServiceT, CreateLotServiceT } from '../types'
 import type {
   CreateLotResponseDto,
   DeleteUserLotResponseDto,
@@ -147,7 +147,11 @@ export class LotService {
     return { id: newLot.id, price, item: { ...rest }, username }
   }
 
-  async buyLot(lotId: number, byuerUserId: number): Promise<Item> {
+  async buyLot({
+    lotId,
+    byuerUserId,
+    countShulker,
+  }: ByeLotServiceT): Promise<Item> {
     const lotMetaData = await this.lotRepository.findOne({
       where: { id: lotId },
       relations: ['item', 'item.user'],
@@ -165,6 +169,16 @@ export class LotService {
 
     if (lotMetaData.price > buyerUser.money) {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
+    }
+
+    const currentItemsCount = await this.itemRepository.count({
+      where: { user: { id: byuerUserId } },
+    })
+
+    if (currentItemsCount + 1 > countShulker * 27) {
+      throw new BadRequestException(
+        `У вас мало місця в інвентарі, максимально ${countShulker} шлк.`,
+      )
     }
 
     const sellerUser = lotMetaData.item.user

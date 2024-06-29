@@ -5,3 +5,9 @@ export type CreateLotServiceT = {
   username: string
   countLot: number
 }
+
+export type ByeLotServiceT = {
+  lotId: number
+  byuerUserId: number
+  countShulker: number
+}

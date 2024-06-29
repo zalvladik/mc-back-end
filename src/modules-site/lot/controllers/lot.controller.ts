@@ -72,9 +72,13 @@ export class LotController {
   @HttpCode(201)
   async buyLot(
     @Body() { lotId }: BuyLotBodyDto,
-    @UserDecorator() { id }: GetUserDto,
+    @UserDecorator() { id, countShulker }: GetUserDto,
   ): Promise<Item> {
-    return this.lotService.buyLot(lotId, id)
+    return this.lotService.buyLot({
+      lotId,
+      byuerUserId: id,
+      countShulker,
+    })
   }
 
   @Delete()

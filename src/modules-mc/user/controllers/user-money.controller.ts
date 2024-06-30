@@ -38,7 +38,7 @@ export class UserMoneyController {
 
   @Post()
   @HttpCode(201)
-  async addMoneyTo(
+  async addMoneyToUser(
     @Body() { username, money }: AddMoneyToUserBodyDto,
   ): Promise<AddMoneyToUserResponseDto> {
     return this.userMoneyService.addMoneyToUser(money, username)

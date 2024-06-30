@@ -17,7 +17,9 @@ import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
 export class UserItemsService {
-  private temporaryStorage = new Map<number, any>()
+  private itemTicketStorage = new Map<number, any>()
+
+  private itemsPostStorage = new Map<string, any>()
 
   constructor(
     @InjectRepository(Item)
@@ -28,7 +30,11 @@ export class UserItemsService {
     private readonly itemTicketRepository: Repository<ItemTicket>,
   ) {}
 
-  async addItemsToUser(itemsData: ItemDto[], username: string): Promise<void> {
+  async addItemsToUser(
+    itemsData: ItemDto[],
+    username: string,
+    itemsStorageId: string,
+  ): Promise<void> {
     const user = await this.userRepository.findOne({
       where: { username },
     })
@@ -70,10 +76,16 @@ export class UserItemsService {
         },
       )
 
-      await this.itemRepository.save(items)
+      this.itemsPostStorage.set(itemsStorageId, items)
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')
     }
+  }
+
+  async addItemsToUserConfirm(itemsStorageId: string): Promise<void> {
+    const items = this.itemsPostStorage.get(itemsStorageId)
+
+    await this.itemRepository.save(items)
   }
 
   async pullItemsFromUser(
@@ -88,13 +100,13 @@ export class UserItemsService {
 
     const data = itemTicket.items.map(item => item.serialized)
 
-    this.temporaryStorage.set(itemTicketId, itemTicket)
+    this.itemTicketStorage.set(itemTicketId, itemTicket)
 
     return { data }
   }
 
   async deleteItemsFromUser(itemTicketId: number): Promise<void> {
-    const itemTicket = this.temporaryStorage.get(itemTicketId)
+    const itemTicket = this.itemTicketStorage.get(itemTicketId)
 
     if (!itemTicket) {
       throw new NotFoundException('Квиток не знайдено у тимчасовому сховищі')
@@ -103,6 +115,6 @@ export class UserItemsService {
     await this.itemTicketRepository.remove(itemTicket)
     await this.itemRepository.remove(itemTicket.items)
 
-    this.temporaryStorage.delete(itemTicketId)
+    this.itemTicketStorage.delete(itemTicketId)
   }
 }

@@ -24,11 +24,19 @@ export class UserItemsController {
   constructor(private readonly userItemsService: UserItemsService) {}
 
   @Post()
-  @HttpCode(201)
-  async addItemsTo(
-    @Body() { username, data }: AddItemsToUserBodyDto,
+  @HttpCode(200)
+  async addItemsToUser(
+    @Body() { username, data, itemsStorageId }: AddItemsToUserBodyDto,
   ): Promise<void> {
-    await this.userItemsService.addItemsToUser(data, username)
+    await this.userItemsService.addItemsToUser(data, username, itemsStorageId)
+  }
+
+  @Post('confirm')
+  @HttpCode(201)
+  async addItemsToUserConfirm(
+    @Body() { itemsStorageId }: AddItemsToUserBodyDto,
+  ): Promise<void> {
+    await this.userItemsService.addItemsToUserConfirm(itemsStorageId)
   }
 
   @Put('/pull/:itemTicketid')

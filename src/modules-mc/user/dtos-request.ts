@@ -12,6 +12,13 @@ export class PullItemsFromUserParamDto {
   itemTicketid: number
 }
 
+export class DeleteItemsFromUserParamDto {
+  @IsNotEmpty()
+  @Transform(({ value }: TransformFnParams) => Number(value))
+  @IsNumber()
+  itemTicketid: number
+}
+
 export class PullMoneyFromUserBodyDto {
   @IsNotEmpty()
   @IsString()

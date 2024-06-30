@@ -17,6 +17,8 @@ import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
 export class UserItemsService {
+  private temporaryStorage = new Map<number, any>()
+
   constructor(
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
@@ -84,11 +86,23 @@ export class UserItemsService {
 
     if (!itemTicket) throw new NotFoundException('Квиток не знайдено')
 
+    const data = itemTicket.items.map(item => item.serialized)
+
+    this.temporaryStorage.set(itemTicketId, itemTicket)
+
+    return { data }
+  }
+
+  async deleteItemsFromUser(itemTicketId: number): Promise<void> {
+    const itemTicket = this.temporaryStorage.get(itemTicketId)
+
+    if (!itemTicket) {
+      throw new NotFoundException('Квиток не знайдено у тимчасовому сховищі')
+    }
+
     await this.itemTicketRepository.remove(itemTicket)
     await this.itemRepository.remove(itemTicket.items)
 
-    const data = itemTicket.items.map(item => item.serialized)
-
-    return { data }
+    this.temporaryStorage.delete(itemTicketId)
   }
 }

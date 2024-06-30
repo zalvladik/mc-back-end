@@ -37,11 +37,9 @@ export class UserMoneyService {
       select: ['money'],
     })
 
-    console.log({ username, moneyToAdd, moneyBefore })
-
     this.moneyStorage.set(moneyPostStorageId, {
       username,
-      updatedMoney: moneyBefore + moneyToAdd,
+      updatedMoney: moneyToAdd,
     })
 
     return { moneyBefore, moneyAfter: moneyBefore + moneyToAdd }

@@ -58,7 +58,7 @@ export class User {
   })
   role: RoleEnum[]
 
-  @Column({ type: 'bigint', nullable: false, default: 0 })
+  @Column({ type: 'smallint', nullable: false, default: 0 })
   money: number
 
   @OneToMany(() => Item, item => item.user)

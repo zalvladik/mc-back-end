@@ -14,7 +14,7 @@ import { ItemTicket } from './item-ticket.entity'
 import { Item } from './item.entity'
 
 @Entity({ name: 'users' })
-@Unique(['id', 'username'])
+@Unique(['id'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number
@@ -49,12 +49,6 @@ export class User {
 
   @Column({ type: 'smallint', nullable: false, default: 0 })
   money: number
-
-  @Column({ type: 'bigint', nullable: false })
-  mcSession: number
-
-  @Column({ length: 255, nullable: false })
-  ip: string
 
   @OneToMany(() => Item, item => item.user)
   items: Item[]

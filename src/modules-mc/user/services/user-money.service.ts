@@ -34,6 +34,8 @@ export class UserMoneyService {
   ): Promise<AddMoneyToUserResponseDto> {
     const { money: moneyBefore } = await this.getMoneyByUserName(username)
 
+    console.log({ username, moneyToAdd, moneyBefore })
+
     this.moneyStorage.set(moneyPostStorageId, {
       username,
       updatedMoney: moneyBefore + moneyToAdd,

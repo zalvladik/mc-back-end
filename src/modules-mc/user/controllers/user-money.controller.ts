@@ -45,7 +45,7 @@ export class UserMoneyController {
     return this.userMoneyService.addMoneyToUser(money, username, moneyStorageId)
   }
 
-  @Post()
+  @Post('confirm')
   @HttpCode(200)
   async addMoneyToUserConfirm(
     @Body() { moneyStorageId }: AddMoneyToUserConfirmBodyDto,

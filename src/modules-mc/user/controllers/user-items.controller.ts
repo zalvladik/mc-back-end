@@ -13,6 +13,7 @@ import { UserItemsService } from '../services'
 
 import {
   AddItemsToUserBodyDto,
+  AddItemsToUserConfirmBodyDto,
   DeleteItemsFromUserParamDto,
   PullItemsFromUserParamDto,
 } from '../dtos-request'
@@ -34,7 +35,7 @@ export class UserItemsController {
   @Post('confirm')
   @HttpCode(201)
   async addItemsToUserConfirm(
-    @Body() { itemsStorageId }: AddItemsToUserBodyDto,
+    @Body() { itemsStorageId }: AddItemsToUserConfirmBodyDto,
   ): Promise<void> {
     await this.userItemsService.addItemsToUserConfirm(itemsStorageId)
   }

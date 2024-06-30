@@ -1,4 +1,4 @@
 export type MoneyStorageDataT = {
-  moneyToRemove: number
+  updatedMoney: number
   username: string
 }

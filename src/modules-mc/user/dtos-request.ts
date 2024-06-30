@@ -30,13 +30,13 @@ export class PullMoneyFromUserBodyDto {
 
   @IsNotEmpty()
   @IsString()
-  itemsStorageId: string
+  moneyStorageId: string
 }
 
 export class PullMoneyFromUserConfirmBodyDto {
   @IsNotEmpty()
   @IsString()
-  itemsStorageId: string
+  moneyStorageId: string
 }
 
 export class GetMoneyFromUserParamDto {
@@ -54,6 +54,16 @@ export class AddMoneyToUserBodyDto {
   @IsNotEmpty()
   @IsNumber()
   money: number
+
+  @IsNotEmpty()
+  @IsString()
+  moneyStorageId: string
+}
+
+export class AddMoneyToUserConfirmBodyDto {
+  @IsNotEmpty()
+  @IsString()
+  moneyStorageId: string
 }
 
 export class ItemDto {

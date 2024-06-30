@@ -13,6 +13,7 @@ import { UserMoneyService } from '../services'
 
 import {
   AddMoneyToUserBodyDto,
+  AddMoneyToUserConfirmBodyDto,
   GetMoneyFromUserParamDto,
   PullMoneyFromUserBodyDto,
   PullMoneyFromUserConfirmBodyDto,
@@ -39,28 +40,36 @@ export class UserMoneyController {
   @Post()
   @HttpCode(201)
   async addMoneyToUser(
-    @Body() { username, money }: AddMoneyToUserBodyDto,
+    @Body() { username, money, moneyStorageId }: AddMoneyToUserBodyDto,
   ): Promise<AddMoneyToUserResponseDto> {
-    return this.userMoneyService.addMoneyToUser(money, username)
+    return this.userMoneyService.addMoneyToUser(money, username, moneyStorageId)
+  }
+
+  @Post()
+  @HttpCode(200)
+  async addMoneyToUserConfirm(
+    @Body() { moneyStorageId }: AddMoneyToUserConfirmBodyDto,
+  ): Promise<void> {
+    await this.userMoneyService.addMoneyToUserConfirm(moneyStorageId)
   }
 
   @Put()
   @HttpCode(201)
   async removeMoneyFromUser(
-    @Body() { username, money, itemsStorageId }: PullMoneyFromUserBodyDto,
+    @Body() { username, money, moneyStorageId }: PullMoneyFromUserBodyDto,
   ): Promise<GetMoneyToUserResponseDto> {
     return this.userMoneyService.removeMoneyFromUser(
       money,
       username,
-      itemsStorageId,
+      moneyStorageId,
     )
   }
 
   @Put('confirm')
   @HttpCode(201)
   async removeMoneyFromUserConfirm(
-    @Body() { itemsStorageId }: PullMoneyFromUserConfirmBodyDto,
+    @Body() { moneyStorageId }: PullMoneyFromUserConfirmBodyDto,
   ): Promise<void> {
-    await this.userMoneyService.removeMoneyFromUserConfirm(itemsStorageId)
+    await this.userMoneyService.removeMoneyFromUserConfirm(moneyStorageId)
   }
 }

@@ -30,18 +30,28 @@ export class UserMoneyService {
   async addMoneyToUser(
     moneyToAdd: number,
     username: string,
+    moneyPostStorageId: string,
   ): Promise<AddMoneyToUserResponseDto> {
     const { money: moneyBefore } = await this.getMoneyByUserName(username)
 
-    await this.userRepository.increment({ username }, 'money', moneyToAdd)
+    this.moneyStorage.set(moneyPostStorageId, {
+      username,
+      updatedMoney: moneyBefore + moneyToAdd,
+    })
 
     return { moneyBefore, moneyAfter: moneyBefore + moneyToAdd }
+  }
+
+  async addMoneyToUserConfirm(moneyPostStorageId: string): Promise<void> {
+    const { username, updatedMoney } = this.moneyStorage.get(moneyPostStorageId)
+
+    await this.userRepository.increment({ username }, 'money', updatedMoney)
   }
 
   async removeMoneyFromUser(
     moneyToRemove: number,
     username: string,
-    itemsStorageId: string,
+    moneyStorageId: string,
   ): Promise<GetMoneyToUserResponseDto> {
     const { money: moneyBefore } = await this.getMoneyByUserName(username)
 
@@ -49,14 +59,17 @@ export class UserMoneyService {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
     }
 
-    this.moneyStorage.set(itemsStorageId, { username, moneyToRemove })
+    this.moneyStorage.set(moneyStorageId, {
+      username,
+      updatedMoney: moneyToRemove,
+    })
 
     return { moneyBefore, moneyAfter: moneyBefore - moneyToRemove }
   }
 
   async removeMoneyFromUserConfirm(moneyStorageId: string): Promise<void> {
-    const { username, moneyToRemove } = this.moneyStorage.get(moneyStorageId)
+    const { username, updatedMoney } = this.moneyStorage.get(moneyStorageId)
 
-    await this.userRepository.decrement({ username }, 'money', moneyToRemove)
+    await this.userRepository.decrement({ username }, 'money', updatedMoney)
   }
 }

@@ -32,7 +32,10 @@ export class UserMoneyService {
     username: string,
     moneyPostStorageId: string,
   ): Promise<AddMoneyToUserResponseDto> {
-    const { money: moneyBefore } = await this.getMoneyByUserName(username)
+    const { money: moneyBefore } = await this.userRepository.findOne({
+      where: { username },
+      select: ['money'],
+    })
 
     console.log({ username, moneyToAdd, moneyBefore })
 
@@ -55,7 +58,10 @@ export class UserMoneyService {
     username: string,
     moneyStorageId: string,
   ): Promise<GetMoneyToUserResponseDto> {
-    const { money: moneyBefore } = await this.getMoneyByUserName(username)
+    const { money: moneyBefore } = await this.userRepository.findOne({
+      where: { username },
+      select: ['money'],
+    })
 
     if (moneyBefore < moneyToRemove) {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)

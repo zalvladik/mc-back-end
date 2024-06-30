@@ -27,6 +27,16 @@ export class PullMoneyFromUserBodyDto {
   @IsNotEmpty()
   @IsNumber()
   money: number
+
+  @IsNotEmpty()
+  @IsString()
+  itemsStorageId: string
+}
+
+export class PullMoneyFromUserConfirmBodyDto {
+  @IsNotEmpty()
+  @IsString()
+  itemsStorageId: string
 }
 
 export class GetMoneyFromUserParamDto {

@@ -9,9 +9,12 @@ import type {
   AddMoneyToUserResponseDto,
   GetMoneyToUserResponseDto,
 } from '../dtos-responses'
+import type { MoneyStorageDataT } from '../types'
 
 @Injectable()
 export class UserMoneyService {
+  private moneyStorage = new Map<string, MoneyStorageDataT>()
+
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -38,6 +41,7 @@ export class UserMoneyService {
   async removeMoneyFromUser(
     moneyToRemove: number,
     username: string,
+    itemsStorageId: string,
   ): Promise<GetMoneyToUserResponseDto> {
     const { money: moneyBefore } = await this.getMoneyByUserName(username)
 
@@ -45,8 +49,14 @@ export class UserMoneyService {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
     }
 
-    await this.userRepository.decrement({ username }, 'money', moneyToRemove)
+    this.moneyStorage.set(itemsStorageId, { username, moneyToRemove })
 
     return { moneyBefore, moneyAfter: moneyBefore - moneyToRemove }
+  }
+
+  async removeMoneyFromUserConfirm(moneyStorageId: string): Promise<void> {
+    const { username, moneyToRemove } = this.moneyStorage.get(moneyStorageId)
+
+    await this.userRepository.decrement({ username }, 'money', moneyToRemove)
   }
 }

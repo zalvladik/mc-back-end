@@ -15,6 +15,7 @@ import {
   AddMoneyToUserBodyDto,
   GetMoneyFromUserParamDto,
   PullMoneyFromUserBodyDto,
+  PullMoneyFromUserConfirmBodyDto,
 } from '../dtos-request'
 
 import type {
@@ -45,9 +46,21 @@ export class UserMoneyController {
 
   @Put()
   @HttpCode(201)
-  async removeMoneyFrom(
-    @Body() { username, money }: PullMoneyFromUserBodyDto,
+  async removeMoneyFromUser(
+    @Body() { username, money, itemsStorageId }: PullMoneyFromUserBodyDto,
   ): Promise<GetMoneyToUserResponseDto> {
-    return this.userMoneyService.removeMoneyFromUser(money, username)
+    return this.userMoneyService.removeMoneyFromUser(
+      money,
+      username,
+      itemsStorageId,
+    )
+  }
+
+  @Put('confirm')
+  @HttpCode(201)
+  async removeMoneyFromUserConfirm(
+    @Body() { itemsStorageId }: PullMoneyFromUserConfirmBodyDto,
+  ): Promise<void> {
+    await this.userMoneyService.removeMoneyFromUserConfirm(itemsStorageId)
   }
 }

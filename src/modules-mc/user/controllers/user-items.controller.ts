@@ -41,19 +41,19 @@ export class UserItemsController {
     await this.userItemsService.addItemsToUserConfirm(username, itemsStorageId)
   }
 
-  @Put('/pull/:itemTicketid')
+  @Put('/pull/:itemTicketId')
   @HttpCode(201)
   async pullItemsFromUser(
-    @Param() { itemTicketid }: PullItemsFromUserParamDto,
+    @Param() { itemTicketId }: PullItemsFromUserParamDto,
   ): Promise<PullItemsFromUserResponseDto> {
-    return this.userItemsService.pullItemsFromUser(itemTicketid)
+    return this.userItemsService.pullItemsFromUser(itemTicketId)
   }
 
   @Delete('/delete')
   @HttpCode(200)
   async deleteItemsFromUser(
-    @Query() { itemTicketid, username }: DeleteItemsFromUserQueryDto,
+    @Query() { itemTicketId, username }: DeleteItemsFromUserQueryDto,
   ): Promise<void> {
-    await this.userItemsService.deleteItemsFromUser(username, itemTicketid)
+    await this.userItemsService.deleteItemsFromUser(username, itemTicketId)
   }
 }

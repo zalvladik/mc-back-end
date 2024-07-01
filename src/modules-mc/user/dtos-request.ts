@@ -9,7 +9,7 @@ export class PullItemsFromUserParamDto {
   @IsNotEmpty()
   @Transform(({ value }: TransformFnParams) => Number(value))
   @IsNumber()
-  itemTicketid: number
+  itemTicketId: number
 }
 
 export class DeleteItemsFromUserQueryDto {
@@ -20,7 +20,7 @@ export class DeleteItemsFromUserQueryDto {
   @IsNotEmpty()
   @Transform(({ value }: TransformFnParams) => Number(value))
   @IsNumber()
-  itemTicketid: number
+  itemTicketId: number
 }
 
 export class PullMoneyFromUserBodyDto {

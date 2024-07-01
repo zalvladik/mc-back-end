@@ -5,6 +5,7 @@ import { Repository } from 'typeorm'
 
 import { User } from 'src/entities/user.entity'
 
+import { SocketService } from 'src/shared/services/socket/socket.service'
 import type {
   AddMoneyToUserResponseDto,
   GetMoneyToUserResponseDto,
@@ -18,6 +19,7 @@ export class UserMoneyService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly socketService: SocketService,
   ) {}
 
   async getMoneyByUserName(username: string): Promise<{ money: number }> {
@@ -49,6 +51,13 @@ export class UserMoneyService {
     const { username, updatedMoney } = this.moneyStorage.get(moneyPostStorageId)
 
     await this.userRepository.increment({ username }, 'money', updatedMoney)
+
+    this.socketService.updateDataAndNotifyClients({
+      username,
+      data: updatedMoney,
+      type: 'incrementMoney',
+    })
+    this.moneyStorage.delete(moneyPostStorageId)
   }
 
   async removeMoneyFromUser(

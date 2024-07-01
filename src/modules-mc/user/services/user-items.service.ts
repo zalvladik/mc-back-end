@@ -86,6 +86,8 @@ export class UserItemsService {
     const items = this.itemsPostStorage.get(itemsStorageId)
 
     await this.itemRepository.save(items)
+
+    this.itemsPostStorage.delete(itemsStorageId)
   }
 
   async pullItemsFromUser(

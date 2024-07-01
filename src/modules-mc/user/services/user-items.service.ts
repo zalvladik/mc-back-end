@@ -89,15 +89,17 @@ export class UserItemsService {
     username: string,
     itemsStorageId: string,
   ): Promise<void> {
-    const items = this.itemsPostStorage.get(itemsStorageId)
+    const items: Item[] = this.itemsPostStorage.get(itemsStorageId)
 
     await this.itemRepository.save(items)
 
     this.itemsPostStorage.delete(itemsStorageId)
 
+    const updatedData = items.map(({ serialized, user, ...rest }) => rest)
+
     this.socketService.updateDataAndNotifyClients({
       username,
-      data: items,
+      data: updatedData,
       type: SocketTypes.ADD_ITEMS,
     })
   }

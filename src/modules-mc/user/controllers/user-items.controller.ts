@@ -48,7 +48,7 @@ export class UserItemsController {
     return this.userItemsService.pullItemsFromUser(itemTicketid)
   }
 
-  @Delete('/delete/:itemTicketid')
+  @Delete('/delete/:itemTicketid/:username')
   @HttpCode(200)
   async deleteItemsFromUser(
     @Param() { itemTicketid, username }: DeleteItemsFromUserParamDto,

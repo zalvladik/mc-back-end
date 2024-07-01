@@ -136,7 +136,7 @@ export class UserItemsService {
 
     this.socketService.updateDataAndNotifyClients({
       username,
-      data: itemTicket.items,
+      data: itemTicket,
       type: SocketTypes.REMOVE_ITEMS,
     })
   }

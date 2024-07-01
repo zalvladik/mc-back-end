@@ -14,6 +14,10 @@ export class PullItemsFromUserParamDto {
 
 export class DeleteItemsFromUserParamDto {
   @IsNotEmpty()
+  @IsString()
+  username: string
+
+  @IsNotEmpty()
   @Transform(({ value }: TransformFnParams) => Number(value))
   @IsNumber()
   itemTicketid: number
@@ -111,6 +115,11 @@ export class AddItemsToUserBodyDto {
 }
 
 export class AddItemsToUserConfirmBodyDto {
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'France' })
+  username: string
+
   @IsNotEmpty()
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
   itemsStorageId: string

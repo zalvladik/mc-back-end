@@ -6,6 +6,7 @@ import { Repository } from 'typeorm'
 import { User } from 'src/entities/user.entity'
 
 import { SocketService } from 'src/shared/services/socket/socket.service'
+import { SocketTypes } from 'src/shared/constants'
 import type {
   AddMoneyToUserResponseDto,
   GetMoneyToUserResponseDto,
@@ -55,7 +56,7 @@ export class UserMoneyService {
     this.socketService.updateDataAndNotifyClients({
       username,
       data: updatedMoney,
-      type: 'incrementMoney',
+      type: SocketTypes.INCREMENT_MONEY,
     })
     this.moneyStorage.delete(moneyPostStorageId)
   }
@@ -86,5 +87,11 @@ export class UserMoneyService {
     const { username, updatedMoney } = this.moneyStorage.get(moneyStorageId)
 
     await this.userRepository.decrement({ username }, 'money', updatedMoney)
+
+    this.socketService.updateDataAndNotifyClients({
+      username,
+      data: updatedMoney,
+      type: SocketTypes.DECREMENT_MONEY,
+    })
   }
 }

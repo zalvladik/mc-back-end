@@ -35,9 +35,9 @@ export class UserItemsController {
   @Post('confirm')
   @HttpCode(201)
   async addItemsToUserConfirm(
-    @Body() { itemsStorageId }: AddItemsToUserConfirmBodyDto,
+    @Body() { itemsStorageId, username }: AddItemsToUserConfirmBodyDto,
   ): Promise<void> {
-    await this.userItemsService.addItemsToUserConfirm(itemsStorageId)
+    await this.userItemsService.addItemsToUserConfirm(username, itemsStorageId)
   }
 
   @Put('/pull/:itemTicketid')
@@ -51,8 +51,8 @@ export class UserItemsController {
   @Delete('/delete/:itemTicketid')
   @HttpCode(200)
   async deleteItemsFromUser(
-    @Param() { itemTicketid }: DeleteItemsFromUserParamDto,
+    @Param() { itemTicketid, username }: DeleteItemsFromUserParamDto,
   ): Promise<void> {
-    await this.userItemsService.deleteItemsFromUser(itemTicketid)
+    await this.userItemsService.deleteItemsFromUser(username, itemTicketid)
   }
 }

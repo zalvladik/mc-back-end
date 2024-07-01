@@ -13,6 +13,8 @@ import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
+import { SocketService } from 'src/shared/services/socket/socket.service'
+import { SocketTypes } from 'src/shared/constants'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
@@ -28,6 +30,7 @@ export class UserItemsService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(ItemTicket)
     private readonly itemTicketRepository: Repository<ItemTicket>,
+    private readonly socketService: SocketService,
   ) {}
 
   async addItemsToUser(
@@ -82,12 +85,21 @@ export class UserItemsService {
     }
   }
 
-  async addItemsToUserConfirm(itemsStorageId: string): Promise<void> {
+  async addItemsToUserConfirm(
+    username: string,
+    itemsStorageId: string,
+  ): Promise<void> {
     const items = this.itemsPostStorage.get(itemsStorageId)
 
     await this.itemRepository.save(items)
 
     this.itemsPostStorage.delete(itemsStorageId)
+
+    this.socketService.updateDataAndNotifyClients({
+      username,
+      data: items,
+      type: SocketTypes.ADD_ITEMS,
+    })
   }
 
   async pullItemsFromUser(
@@ -107,7 +119,10 @@ export class UserItemsService {
     return { data }
   }
 
-  async deleteItemsFromUser(itemTicketId: number): Promise<void> {
+  async deleteItemsFromUser(
+    username: string,
+    itemTicketId: number,
+  ): Promise<void> {
     const itemTicket = this.itemTicketStorage.get(itemTicketId)
 
     if (!itemTicket) {
@@ -118,5 +133,11 @@ export class UserItemsService {
     await this.itemRepository.remove(itemTicket.items)
 
     this.itemTicketStorage.delete(itemTicketId)
+
+    this.socketService.updateDataAndNotifyClients({
+      username,
+      data: itemTicket.items,
+      type: SocketTypes.REMOVE_ITEMS,
+    })
   }
 }

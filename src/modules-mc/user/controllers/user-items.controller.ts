@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 
@@ -14,7 +15,7 @@ import { UserItemsService } from '../services'
 import {
   AddItemsToUserBodyDto,
   AddItemsToUserConfirmBodyDto,
-  DeleteItemsFromUserParamDto,
+  DeleteItemsFromUserQueryDto,
   PullItemsFromUserParamDto,
 } from '../dtos-request'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
@@ -48,10 +49,10 @@ export class UserItemsController {
     return this.userItemsService.pullItemsFromUser(itemTicketid)
   }
 
-  @Delete('/delete/:itemTicketid/:username')
+  @Delete('/delete')
   @HttpCode(200)
   async deleteItemsFromUser(
-    @Param() { itemTicketid, username }: DeleteItemsFromUserParamDto,
+    @Query() { itemTicketid, username }: DeleteItemsFromUserQueryDto,
   ): Promise<void> {
     await this.userItemsService.deleteItemsFromUser(username, itemTicketid)
   }

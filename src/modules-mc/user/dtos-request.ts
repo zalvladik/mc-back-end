@@ -12,7 +12,7 @@ export class PullItemsFromUserParamDto {
   itemTicketid: number
 }
 
-export class DeleteItemsFromUserParamDto {
+export class DeleteItemsFromUserQueryDto {
   @IsNotEmpty()
   @IsString()
   username: string

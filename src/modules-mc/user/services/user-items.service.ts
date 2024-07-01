@@ -125,7 +125,7 @@ export class UserItemsService {
     username: string,
     itemTicketId: number,
   ): Promise<void> {
-    const itemTicket = this.itemTicketStorage.get(itemTicketId)
+    const itemTicket: ItemTicket = this.itemTicketStorage.get(itemTicketId)
 
     if (!itemTicket) {
       throw new NotFoundException('Квиток не знайдено у тимчасовому сховищі')
@@ -138,7 +138,7 @@ export class UserItemsService {
 
     this.socketService.updateDataAndNotifyClients({
       username,
-      data: itemTicket,
+      data: itemTicket.id,
       type: SocketTypes.REMOVE_ITEMS,
     })
   }

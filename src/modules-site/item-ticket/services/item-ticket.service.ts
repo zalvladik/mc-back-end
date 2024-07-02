@@ -57,6 +57,7 @@ export class ItemTicketService {
         'description',
         'enchants',
         'categories',
+        'durability',
       ],
     })
   }

@@ -24,6 +24,7 @@ export class UserItemsService {
         'description',
         'enchants',
         'categories',
+        'durability',
       ],
     })
   }

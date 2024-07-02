@@ -53,6 +53,7 @@ export class LotService {
         'item.description',
         'item.enchants',
         'item.categories',
+        'item.durability',
       ])
 
     if (category) {
@@ -94,6 +95,7 @@ export class LotService {
         'item.description',
         'item.enchants',
         'item.categories',
+        'item.durability',
       ])
       .getMany()
   }
@@ -208,6 +210,7 @@ export class LotService {
         'description',
         'enchants',
         'categories',
+        'durability',
       ],
     })
 

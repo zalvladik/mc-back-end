@@ -25,6 +25,9 @@ export class Item {
   @Column({ length: 255, nullable: false })
   type: string
 
+  @Column({ length: 255, nullable: true })
+  durability: string
+
   @Column({ length: 255, nullable: false })
   display_name: string
 

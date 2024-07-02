@@ -83,6 +83,11 @@ export class ItemDto {
 
   @IsNotEmpty()
   @IsString()
+  @ApiProperty({ example: '100 / 120' })
+  durability: string
+
+  @IsNotEmpty()
+  @IsString()
   @ApiProperty({ example: 'Супер класний меч' })
   display_name: string
 

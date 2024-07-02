@@ -138,6 +138,7 @@ export class ItemTicketService {
         'description',
         'enchants',
         'categories',
+        'durability',
       ],
     })
   }
@@ -172,6 +173,7 @@ export class ItemTicketService {
         'description',
         'enchants',
         'categories',
+        'durability',
       ],
     })
   }

@@ -11,6 +11,7 @@ import { RoleEnum } from 'src/shared/enums'
 import { Advancements } from './advancements.entity'
 import { ItemTicket } from './item-ticket.entity'
 import { Item } from './item.entity'
+// import { Shulker } from './shulker.entity'
 
 @Entity({ name: 'users' })
 export class User {
@@ -66,6 +67,9 @@ export class User {
 
   @OneToMany(() => ItemTicket, itemTicket => itemTicket.user)
   itemTickets: ItemTicket[]
+
+  // @OneToMany(() => Shulker, shulker => shulker.user)
+  // shulkers: Shulker[]
 
   @Column({ type: 'smallint', nullable: false, default: 2 })
   countShulker: number

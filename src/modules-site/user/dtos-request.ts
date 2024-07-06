@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
+import type { TransformFnParams } from 'class-transformer'
+import { Transform } from 'class-transformer'
 
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
@@ -21,6 +23,7 @@ export class GetMoneyFromUserQueryDto {
 
 export class GetShulkerItemsParamDto {
   @IsNotEmpty()
+  @Transform(({ value }: TransformFnParams) => Number(value))
   @IsNumber()
   @ApiProperty({ example: 1 })
   shulkerId: number

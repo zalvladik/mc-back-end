@@ -9,5 +9,3 @@ export class CreateItemTicketResponseDto {
 export type GetItemsFromTicketResponseDto = Omit<Item, 'serialized'>
 
 export type RemoveItemsFromTicketResponseDto = Omit<Item, 'serialized'>
-
-export type DeleteItemTicketResponseDto = Omit<Item, 'serialized'>

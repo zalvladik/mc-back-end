@@ -29,7 +29,6 @@ import {
 
 import type {
   CreateItemTicketResponseDto,
-  DeleteItemTicketResponseDto,
   GetItemsFromTicketResponseDto,
   RemoveItemsFromTicketResponseDto,
 } from '../dtos-response'
@@ -80,7 +79,7 @@ export class ItemTicketController {
   async deleteItemTicket(
     @UserDecorator() { id }: GetUserDto,
     @Body() { itemTicketId }: DeleteItemTicketBodyDto,
-  ): Promise<DeleteItemTicketResponseDto[]> {
+  ): Promise<void> {
     return this.itemTicketService.deleteItemTicket({
       itemTicketId,
       userId: id,

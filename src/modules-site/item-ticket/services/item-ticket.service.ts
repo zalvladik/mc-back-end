@@ -14,7 +14,6 @@ import { User } from 'src/entities/user.entity'
 
 import type {
   CreateItemTicketResponseDto,
-  DeleteItemTicketResponseDto,
   GetItemsFromTicketResponseDto,
   RemoveItemsFromTicketResponseDto,
 } from '../dtos-response'
@@ -147,7 +146,7 @@ export class ItemTicketService {
   async deleteItemTicket({
     userId,
     itemTicketId,
-  }: DeleteItemTicketProps): Promise<DeleteItemTicketResponseDto[]> {
+  }: DeleteItemTicketProps): Promise<void> {
     const itemTicket = await this.itemTicketRepository.findOne({
       where: { id: itemTicketId },
       relations: ['items'],
@@ -169,19 +168,5 @@ export class ItemTicketService {
     if (deletedItemTicket.affected !== 1) {
       throw new NotFoundException('Квиток не знайдено')
     }
-
-    return this.itemRepository.find({
-      where: { id: In(itemIds), user: { id: userId } },
-      select: [
-        'id',
-        'amount',
-        'type',
-        'display_name',
-        'description',
-        'enchants',
-        'categories',
-        'durability',
-      ],
-    })
   }
 }

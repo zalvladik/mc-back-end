@@ -10,11 +10,14 @@ import { TokenService } from 'src/shared/services/token/token.service'
 
 import { Item } from 'src/entities/item.entity'
 
+import { Shulker } from 'src/entities/shulker.entity'
+import { ShulkerItem } from 'src/entities/shulker-item.entity'
 import {
   UserAdvancementsController,
   UserController,
   UserSkinController,
   UserItemsController,
+  UserShulkersController,
 } from './controllers'
 
 import {
@@ -22,6 +25,7 @@ import {
   UserSkinService,
   UserItemsService,
   UserService,
+  UserShulkersService,
 } from './services'
 
 import { AuthModule } from '../auth/auth.module'
@@ -34,6 +38,8 @@ import { AuthModule } from '../auth/auth.module'
       SrPlayer,
       Item,
       SrPlayerSkin,
+      Shulker,
+      ShulkerItem,
     ]),
     AuthModule,
   ],
@@ -42,6 +48,7 @@ import { AuthModule } from '../auth/auth.module'
     UserItemsController,
     UserAdvancementsController,
     UserSkinController,
+    UserShulkersController,
   ],
   providers: [
     UserService,
@@ -50,6 +57,7 @@ import { AuthModule } from '../auth/auth.module'
     JwtService,
     TokenService,
     UserSkinService,
+    UserShulkersService,
   ],
 })
 export class UserModule {}

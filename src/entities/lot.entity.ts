@@ -21,7 +21,10 @@ export class Lot {
   @Column({ type: 'varchar', length: 255 })
   username: string
 
-  @OneToOne(() => Item, item => item.lot, { onDelete: 'CASCADE' })
+  @OneToOne(() => Item, item => item.lot, {
+    onDelete: 'CASCADE',
+    nullable: false,
+  })
   @JoinColumn({ name: 'item_id', referencedColumnName: 'id' })
   item: Item
 }

@@ -49,7 +49,9 @@ export class ShulkerItem {
   @Column({ type: 'text', nullable: false })
   serialized: string
 
-  @ManyToOne(() => Shulker, shulker => shulker.shulkerItems)
+  @ManyToOne(() => Shulker, shulker => shulker.shulkerItems, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'shulker_id' })
   shulker: Shulker
 }

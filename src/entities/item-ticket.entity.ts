@@ -20,7 +20,10 @@ export class ItemTicket {
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @OneToMany(() => Item, item => item.itemTicket, { onDelete: 'NO ACTION' })
+  @OneToMany(() => Item, item => item.itemTicket, {
+    onDelete: 'NO ACTION',
+    nullable: false,
+  })
   @JoinColumn({ name: 'item_ticket_id' })
   items: Item[]
 }

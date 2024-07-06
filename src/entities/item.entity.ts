@@ -57,7 +57,9 @@ export class Item {
   @Column({ type: 'text', nullable: false })
   serialized: string
 
-  @ManyToOne(() => User, user => user.items)
+  @ManyToOne(() => User, user => user.items, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'user_id' })
   user: User
 

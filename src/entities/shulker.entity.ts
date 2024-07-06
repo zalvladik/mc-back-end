@@ -26,7 +26,9 @@ export class Shulker {
   @Column({ length: 255, nullable: false })
   display_name: string
 
-  @OneToMany(() => ShulkerItem, shulkerItems => shulkerItems.shulker)
+  @OneToMany(() => ShulkerItem, shulkerItems => shulkerItems.shulker, {
+    nullable: false,
+  })
   shulkerItems: ShulkerItem[]
 
   @ManyToOne(() => User, user => user.shulkers)

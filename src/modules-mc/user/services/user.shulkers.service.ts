@@ -17,15 +17,12 @@ import { SocketService } from 'src/shared/services/socket/socket.service'
 import { SocketTypes } from 'src/shared/constants'
 import type { ShulkerItem } from 'src/entities/shulker-item.entity'
 import type { Shulker } from 'src/entities/shulker.entity'
+import { CacheService } from 'src/shared/services/cache'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 
 @Injectable()
 export class UserShulkersService {
-  private shulkerTicketStorage = new Map<number, any>()
-
-  private shulkerPostStorage = new Map<string, ShulkerPostStorageT>()
-
   constructor(
     @InjectRepository(Item)
     private readonly shulkerItemsRepository: Repository<ShulkerItem>,
@@ -36,12 +33,13 @@ export class UserShulkersService {
     @InjectRepository(ItemTicket)
     private readonly itemTicketRepository: Repository<ItemTicket>,
     private readonly socketService: SocketService,
+    private readonly cacheService: CacheService,
   ) {}
 
   async addShulkerToUser({
     shulkerData,
     itemsData,
-    shulkerStorageId,
+    cacheId,
     username,
   }: AddShulkerToUserProps): Promise<void> {
     const user = await this.userRepository.findOne({
@@ -85,7 +83,7 @@ export class UserShulkersService {
         },
       )
 
-      this.shulkerPostStorage.set(shulkerStorageId, {
+      this.cacheService.set(cacheId, {
         shulkerItems: items,
         shulkerData,
       })
@@ -96,12 +94,12 @@ export class UserShulkersService {
 
   async addShulkerToUserConfirm(
     username: string,
-    shulkerStorageId: string,
+    cacheId: string,
   ): Promise<void> {
     const user = await this.userRepository.findOne({ where: { username } })
 
     const { shulkerItems, shulkerData } =
-      this.shulkerPostStorage.get(shulkerStorageId)
+      this.cacheService.get<ShulkerPostStorageT>(cacheId)
 
     const newUserShulker = this.shulkerRepository.create({
       ...shulkerData,
@@ -117,7 +115,7 @@ export class UserShulkersService {
 
     await this.shulkerItemsRepository.save(updatedShulkerItems)
 
-    this.shulkerPostStorage.delete(shulkerStorageId)
+    this.cacheService.delete(cacheId)
 
     const updatedData = shulkerItems.map(({ serialized, ...rest }) => rest)
 
@@ -128,22 +126,22 @@ export class UserShulkersService {
     })
   }
 
-  async pullShulkerFromUser(
-    itemTicketId: number,
-  ): Promise<PullItemsFromUserResponseDto> {
-    const itemTicket = await this.itemTicketRepository.findOne({
-      where: { id: itemTicketId },
-      relations: ['items'],
-    })
+  // async pullShulkerFromUser(
+  //   itemTicketId: number,
+  // ): Promise<PullItemsFromUserResponseDto> {
+  //   const itemTicket = await this.itemTicketRepository.findOne({
+  //     where: { id: itemTicketId },
+  //     relations: ['items'],
+  //   })
 
-    if (!itemTicket) throw new NotFoundException('Квиток не знайдено')
+  //   if (!itemTicket) throw new NotFoundException('Квиток не знайдено')
 
-    const data = itemTicket.items.map(item => item.serialized)
+  //   const data = itemTicket.items.map(item => item.serialized)
 
-    this.shulkerTicketStorage.set(itemTicketId, itemTicket)
+  //   this.cacheService.set(itemTicketId, itemTicket)
 
-    return { data }
-  }
+  //   return { data }
+  // }
 
   //   async deleteShulkerFromUser(
   //     username: string,

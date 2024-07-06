@@ -36,12 +36,9 @@ export class UserShulkersController {
   @Post('confirm')
   @HttpCode(201)
   async addShulkerToUserConfirm(
-    @Body() { shulkerStorageId, username }: AddShulkerToUserConfirmBodyDto,
+    @Body() { cacheId, username }: AddShulkerToUserConfirmBodyDto,
   ): Promise<void> {
-    await this.userShulkersService.addShulkerToUserConfirm(
-      username,
-      shulkerStorageId,
-    )
+    await this.userShulkersService.addShulkerToUserConfirm(username, cacheId)
   }
 
   //   @Put('/pull/:shulkerTicketId')

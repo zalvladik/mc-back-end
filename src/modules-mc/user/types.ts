@@ -13,6 +13,6 @@ export type ShulkerPostStorageT = {
 export type AddShulkerToUserProps = {
   itemsData: ItemDto[]
   username: string
-  shulkerStorageId: string
+  cacheId: string
   shulkerData: ShulkerDto
 }

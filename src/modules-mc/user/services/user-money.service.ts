@@ -7,6 +7,7 @@ import { User } from 'src/entities/user.entity'
 
 import { SocketService } from 'src/shared/services/socket/socket.service'
 import { SocketTypes } from 'src/shared/constants'
+import { CacheService } from 'src/shared/services/cache'
 import type {
   AddMoneyToUserResponseDto,
   GetMoneyToUserResponseDto,
@@ -15,12 +16,11 @@ import type { MoneyStorageDataT } from '../types'
 
 @Injectable()
 export class UserMoneyService {
-  private moneyStorage = new Map<string, MoneyStorageDataT>()
-
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly socketService: SocketService,
+    private readonly cacheService: CacheService,
   ) {}
 
   async getMoneyByUserName(username: string): Promise<{ money: number }> {
@@ -40,7 +40,7 @@ export class UserMoneyService {
       select: ['money'],
     })
 
-    this.moneyStorage.set(moneyPostStorageId, {
+    this.cacheService.set(moneyPostStorageId, {
       username,
       updatedMoney: moneyToAdd,
     })
@@ -49,7 +49,8 @@ export class UserMoneyService {
   }
 
   async addMoneyToUserConfirm(moneyPostStorageId: string): Promise<void> {
-    const { username, updatedMoney } = this.moneyStorage.get(moneyPostStorageId)
+    const { username, updatedMoney } =
+      this.cacheService.get<MoneyStorageDataT>(moneyPostStorageId)
 
     await this.userRepository.increment({ username }, 'money', updatedMoney)
 
@@ -58,13 +59,13 @@ export class UserMoneyService {
       data: updatedMoney,
       type: SocketTypes.INCREMENT_MONEY,
     })
-    this.moneyStorage.delete(moneyPostStorageId)
+    this.cacheService.delete(moneyPostStorageId)
   }
 
   async removeMoneyFromUser(
     moneyToRemove: number,
     username: string,
-    moneyStorageId: string,
+    cacheId: string,
   ): Promise<GetMoneyToUserResponseDto> {
     const { money: moneyBefore } = await this.userRepository.findOne({
       where: { username },
@@ -75,7 +76,7 @@ export class UserMoneyService {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
     }
 
-    this.moneyStorage.set(moneyStorageId, {
+    this.cacheService.set(cacheId, {
       username,
       updatedMoney: moneyToRemove,
     })
@@ -84,7 +85,8 @@ export class UserMoneyService {
   }
 
   async removeMoneyFromUserConfirm(moneyStorageId: string): Promise<void> {
-    const { username, updatedMoney } = this.moneyStorage.get(moneyStorageId)
+    const { username, updatedMoney } =
+      this.cacheService.get<MoneyStorageDataT>(moneyStorageId)
 
     await this.userRepository.decrement({ username }, 'money', updatedMoney)
 

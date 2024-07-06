@@ -15,14 +15,11 @@ import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
 import { SocketTypes } from 'src/shared/constants'
+import { CacheService } from 'src/shared/services/cache'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
 export class UserItemsService {
-  private itemTicketStorage = new Map<number, any>()
-
-  private itemsPostStorage = new Map<string, any>()
-
   constructor(
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
@@ -31,6 +28,7 @@ export class UserItemsService {
     @InjectRepository(ItemTicket)
     private readonly itemTicketRepository: Repository<ItemTicket>,
     private readonly socketService: SocketService,
+    private readonly cacheService: CacheService,
   ) {}
 
   async addItemsToUser(
@@ -79,7 +77,7 @@ export class UserItemsService {
         },
       )
 
-      this.itemsPostStorage.set(itemsStorageId, items)
+      this.cacheService.set(itemsStorageId, items)
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')
     }
@@ -89,11 +87,11 @@ export class UserItemsService {
     username: string,
     itemsStorageId: string,
   ): Promise<void> {
-    const items: Item[] = this.itemsPostStorage.get(itemsStorageId)
+    const items = this.cacheService.get<Item[]>(itemsStorageId)
 
     await this.itemRepository.save(items)
 
-    this.itemsPostStorage.delete(itemsStorageId)
+    this.cacheService.delete(itemsStorageId)
 
     const updatedData = items.map(({ serialized, user, ...rest }) => rest)
 
@@ -116,7 +114,7 @@ export class UserItemsService {
 
     const data = itemTicket.items.map(item => item.serialized)
 
-    this.itemTicketStorage.set(itemTicketId, itemTicket)
+    this.cacheService.set(itemTicketId, itemTicket)
 
     return { data }
   }
@@ -125,7 +123,7 @@ export class UserItemsService {
     username: string,
     itemTicketId: number,
   ): Promise<void> {
-    const itemTicket: ItemTicket = this.itemTicketStorage.get(itemTicketId)
+    const itemTicket = this.cacheService.get<ItemTicket>(itemTicketId)
 
     if (!itemTicket) {
       throw new NotFoundException('Квиток не знайдено у тимчасовому сховищі')
@@ -134,7 +132,7 @@ export class UserItemsService {
     await this.itemTicketRepository.remove(itemTicket)
     await this.itemRepository.remove(itemTicket.items)
 
-    this.itemTicketStorage.delete(itemTicketId)
+    this.cacheService.delete(itemTicketId)
 
     this.socketService.updateDataAndNotifyClients({
       username,

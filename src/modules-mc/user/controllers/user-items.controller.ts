@@ -27,17 +27,17 @@ export class UserItemsController {
   @Post()
   @HttpCode(200)
   async addItemsToUser(
-    @Body() { username, data, itemsStorageId }: AddItemsToUserBodyDto,
+    @Body() { username, data, cacheId }: AddItemsToUserBodyDto,
   ): Promise<void> {
-    await this.userItemsService.addItemsToUser(data, username, itemsStorageId)
+    await this.userItemsService.addItemsToUser(data, username, cacheId)
   }
 
   @Post('confirm')
   @HttpCode(201)
   async addItemsToUserConfirm(
-    @Body() { itemsStorageId, username }: AddItemsToUserConfirmBodyDto,
+    @Body() { cacheId, username }: AddItemsToUserConfirmBodyDto,
   ): Promise<void> {
-    await this.userItemsService.addItemsToUserConfirm(username, itemsStorageId)
+    await this.userItemsService.addItemsToUserConfirm(username, cacheId)
   }
 
   @Put('/pull/:itemTicketId')

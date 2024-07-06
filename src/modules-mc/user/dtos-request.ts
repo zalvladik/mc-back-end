@@ -34,13 +34,13 @@ export class PullMoneyFromUserBodyDto {
 
   @IsNotEmpty()
   @IsString()
-  moneyStorageId: string
+  cacheId: string
 }
 
 export class PullMoneyFromUserConfirmBodyDto {
   @IsNotEmpty()
   @IsString()
-  moneyStorageId: string
+  cacheId: string
 }
 
 export class GetMoneyFromUserParamDto {
@@ -61,13 +61,13 @@ export class AddMoneyToUserBodyDto {
 
   @IsNotEmpty()
   @IsString()
-  moneyStorageId: string
+  cacheId: string
 }
 
 export class AddMoneyToUserConfirmBodyDto {
   @IsNotEmpty()
   @IsString()
-  moneyStorageId: string
+  cacheId: string
 }
 
 export class ItemDto {
@@ -128,7 +128,7 @@ export class AddItemsToUserBodyDto {
 
   @IsNotEmpty()
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
-  itemsStorageId: string
+  cacheId: string
 }
 
 export class AddShulkerToUserBodyDto {
@@ -147,7 +147,7 @@ export class AddShulkerToUserBodyDto {
 
   @IsNotEmpty()
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
-  shulkerStorageId: string
+  cacheId: string
 }
 
 export class AddItemsToUserConfirmBodyDto {
@@ -158,7 +158,7 @@ export class AddItemsToUserConfirmBodyDto {
 
   @IsNotEmpty()
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
-  itemsStorageId: string
+  cacheId: string
 }
 
 export class AddShulkerToUserConfirmBodyDto {
@@ -169,7 +169,7 @@ export class AddShulkerToUserConfirmBodyDto {
 
   @IsNotEmpty()
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
-  shulkerStorageId: string
+  cacheId: string
 }
 
 export class PutAdvancementsBodyDto {

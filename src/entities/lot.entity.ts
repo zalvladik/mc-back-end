@@ -23,7 +23,6 @@ export class Lot {
 
   @OneToOne(() => Item, item => item.lot, {
     onDelete: 'CASCADE',
-    nullable: false,
   })
   @JoinColumn({ name: 'item_id', referencedColumnName: 'id' })
   item: Item

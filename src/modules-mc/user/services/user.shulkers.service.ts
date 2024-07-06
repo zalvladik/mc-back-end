@@ -7,7 +7,6 @@ import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
 
-import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
@@ -15,16 +14,17 @@ import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
 import { SocketTypes } from 'src/shared/constants'
-import type { ShulkerItem } from 'src/entities/shulker-item.entity'
+import { ShulkerItem } from 'src/entities/shulker-item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
+import { giveShulkerLocal } from 'src/shared/helpers/giveShulkerLocal'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 
 @Injectable()
 export class UserShulkersService {
   constructor(
-    @InjectRepository(Item)
+    @InjectRepository(ShulkerItem)
     private readonly shulkerItemsRepository: Repository<ShulkerItem>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -83,9 +83,15 @@ export class UserShulkersService {
         },
       )
 
+      const updatedShulkerData = {
+        ...shulkerData,
+        display_name:
+          shulkerData.display_name || giveShulkerLocal(shulkerData.type),
+      }
+
       this.cacheService.set(cacheId, {
         shulkerItems: items,
-        shulkerData,
+        shulkerData: updatedShulkerData,
       })
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')

@@ -196,10 +196,6 @@
       "display_name": "Червона шиба",
       "categories": ["color_blocks"]
     },
-    "red_shulker_box": {
-      "display_name": "Червона шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
     "red_bed": {
       "display_name": "Червоне ліжко",
       "categories": ["color_blocks", "functional_blocks"]
@@ -691,10 +687,6 @@
       "display_name": "Бірюзова шиба",
       "categories": ["color_blocks"]
     },
-    "cyan_shulker_box": {
-      "display_name": "Бірюзова шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
     "cyan_bed": {
       "display_name": "Бірюзове ліжко",
       "categories": ["color_blocks", "functional_blocks"]
@@ -1051,18 +1043,6 @@
       "display_name": "Блакитна шиба",
       "categories": ["color_blocks"]
     },
-    "light_gray_shulker_box": {
-      "display_name": "Світло-сіра шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
-    "lime_shulker_box": {
-      "display_name": "Лаймова шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
-    "light_blue_shulker_box": {
-      "display_name": "Блакитна шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
     "light_gray_bed": {
       "display_name": "Світло-сіре ліжко",
       "categories": ["color_blocks", "functional_blocks"]
@@ -1248,10 +1228,6 @@
     "orange_stained_glass_pane": {
       "display_name": "Помаранчева шиба",
       "categories": ["color_blocks"]
-    },
-    "orange_shulker_box": {
-      "display_name": "Помаранчева шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
     },
     "orange_bed": {
       "display_name": "Помаранчеве ліжко",
@@ -1783,10 +1759,6 @@
     "smooth_quartz_slab": {
       "display_name": "Плита з гладкого кварцу",
       "categories": ["build_blocks"]
-    },
-    "shulker_box": {
-      "display_name": "Шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
     },
     "soul_torch": {
       "display_name": "Смолоскип душ",
@@ -2345,10 +2317,6 @@
     "white_stained_glass_pane": {
       "display_name": "Біла шиба",
       "categories": ["color_blocks"]
-    },
-    "white_shulker_box": {
-      "display_name": "Біла шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
     },
     "white_bed": {
       "display_name": "Біле ліжко",
@@ -3067,14 +3035,6 @@
       "display_name": "Рожева шиба",
       "categories": ["color_blocks"]
     },
-    "purple_shulker_box": {
-      "display_name": "Фіолетова шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
-    "pink_shulker_box": {
-      "display_name": "Рожева шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
     "purple_bed": {
       "display_name": "Фіолетове ліжко",
       "categories": ["color_blocks", "functional_blocks"]
@@ -3524,18 +3484,6 @@
     "blue_stained_glass_pane": {
       "display_name": "Синя шиба",
       "categories": ["color_blocks"]
-    },
-    "black_shulker_box": {
-      "display_name": "Чорна шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
-    "brown_shulker_box": {
-      "display_name": "Коричнева шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
-    "blue_shulker_box": {
-      "display_name": "Синя шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
     },
     "black_bed": {
       "display_name": "Чорне ліжко",
@@ -4233,14 +4181,6 @@
       "display_name": "Зелена шиба",
       "categories": ["color_blocks"]
     },
-    "gray_shulker_box": {
-      "display_name": "Сіра шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
-    "green_shulker_box": {
-      "display_name": "Зелена шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
     "gray_bed": {
       "display_name": "Сіре ліжко",
       "categories": ["color_blocks", "functional_blocks"]
@@ -4702,10 +4642,6 @@
       "display_name": "Пурпурова шиба",
       "categories": ["color_blocks"]
     },
-    "magenta_shulker_box": {
-      "display_name": "Пурпурова шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
-    },
     "magenta_bed": {
       "display_name": "Пурпурове ліжко",
       "categories": ["color_blocks", "functional_blocks"]
@@ -4817,10 +4753,6 @@
     "yellow_stained_glass_pane": {
       "display_name": "Жовта шиба",
       "categories": ["color_blocks"]
-    },
-    "yellow_shulker_box": {
-      "display_name": "Жовта шалкерова коробка",
-      "categories": ["color_blocks", "functional_blocks"]
     },
     "yellow_bed": {
       "display_name": "Жовте ліжко",

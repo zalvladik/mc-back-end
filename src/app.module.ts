@@ -41,7 +41,7 @@ const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]
     ...siteModule,
     ...mcModule,
   ],
-
+  providers: [CacheService],
   exports: [CacheService],
 })
 export class AppModule {}

@@ -16,7 +16,7 @@ import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
 import { SocketTypes } from 'src/shared/constants'
 import type { ShulkerItem } from 'src/entities/shulker-item.entity'
-import type { Shulker } from 'src/entities/shulker.entity'
+import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
@@ -28,7 +28,7 @@ export class UserShulkersService {
     private readonly shulkerItemsRepository: Repository<ShulkerItem>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    @InjectRepository(User)
+    @InjectRepository(Shulker)
     private readonly shulkerRepository: Repository<Shulker>,
     @InjectRepository(ItemTicket)
     private readonly itemTicketRepository: Repository<ItemTicket>,

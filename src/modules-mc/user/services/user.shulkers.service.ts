@@ -107,6 +107,8 @@ export class UserShulkersService {
       user,
     })
 
+    console.log('addShulkerToUserConfirm')
+
     await this.shulkerRepository.save(newUserShulker)
 
     const savedUserShulker = await this.shulkerRepository.findOne({

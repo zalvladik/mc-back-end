@@ -15,42 +15,48 @@ import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
 import { SocketTypes } from 'src/shared/constants'
+import type { ShulkerItem } from 'src/entities/shulker-item.entity'
+import type { Shulker } from 'src/entities/shulker.entity'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
+import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 
 @Injectable()
-export class UserItemsService {
-  private itemTicketStorage = new Map<number, any>()
+export class UserShulkersService {
+  private shulkerTicketStorage = new Map<number, any>()
 
-  private itemsPostStorage = new Map<string, any>()
+  private shulkerPostStorage = new Map<string, ShulkerPostStorageT>()
 
   constructor(
     @InjectRepository(Item)
-    private readonly itemRepository: Repository<Item>,
+    private readonly shulkerItemsRepository: Repository<ShulkerItem>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(User)
+    private readonly shulkerRepository: Repository<Shulker>,
     @InjectRepository(ItemTicket)
     private readonly itemTicketRepository: Repository<ItemTicket>,
     private readonly socketService: SocketService,
   ) {}
 
-  async addItemsToUser(
-    itemsData: ItemDto[],
-    username: string,
-    itemsStorageId: string,
-  ): Promise<void> {
+  async addShulkerToUser({
+    shulkerData,
+    itemsData,
+    shulkerStorageId,
+    username,
+  }: AddShulkerToUserProps): Promise<void> {
     const user = await this.userRepository.findOne({
       where: { username },
     })
 
     if (!user) throw new NotFoundException('Гравця не знайдено')
 
-    const itemCount = await this.itemRepository.count({
+    const shulkerCount = await this.shulkerRepository.count({
       where: { user },
     })
 
-    if (itemCount + itemsData.length > user.countItems) {
+    if (shulkerCount + 1 > user.countShulker) {
       throw new BadRequestException(
-        `У вас замало місця на аккаунті, максимально ${user.countItems} шт.`,
+        `У вас максимальна кількість шалкерів, ${user.countShulker} шлк.`,
       )
     }
 
@@ -79,32 +85,50 @@ export class UserItemsService {
         },
       )
 
-      this.itemsPostStorage.set(itemsStorageId, items)
+      this.shulkerPostStorage.set(shulkerStorageId, {
+        shulkerItems: items,
+        shulkerData,
+      })
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')
     }
   }
 
-  async addItemsToUserConfirm(
+  async addShulkerToUserConfirm(
     username: string,
-    itemsStorageId: string,
+    shulkerStorageId: string,
   ): Promise<void> {
-    const items: Item[] = this.itemsPostStorage.get(itemsStorageId)
+    const user = await this.userRepository.findOne({ where: { username } })
 
-    await this.itemRepository.save(items)
+    const { shulkerItems, shulkerData } =
+      this.shulkerPostStorage.get(shulkerStorageId)
 
-    this.itemsPostStorage.delete(itemsStorageId)
+    const newUserShulker = this.shulkerRepository.create({
+      ...shulkerData,
+      username,
+      user,
+    })
 
-    const updatedData = items.map(({ serialized, user, ...rest }) => rest)
+    await this.shulkerRepository.save(newUserShulker)
+
+    const updatedShulkerItems = shulkerItems.map(item => {
+      return { ...item, shulker: newUserShulker }
+    })
+
+    await this.shulkerItemsRepository.save(updatedShulkerItems)
+
+    this.shulkerPostStorage.delete(shulkerStorageId)
+
+    const updatedData = shulkerItems.map(({ serialized, ...rest }) => rest)
 
     this.socketService.updateDataAndNotifyClients({
       username,
       data: updatedData,
-      type: SocketTypes.ADD_ITEMS,
+      type: SocketTypes.ADD_SHULKER,
     })
   }
 
-  async pullItemsFromUser(
+  async pullShulkerFromUser(
     itemTicketId: number,
   ): Promise<PullItemsFromUserResponseDto> {
     const itemTicket = await this.itemTicketRepository.findOne({
@@ -116,30 +140,30 @@ export class UserItemsService {
 
     const data = itemTicket.items.map(item => item.serialized)
 
-    this.itemTicketStorage.set(itemTicketId, itemTicket)
+    this.shulkerTicketStorage.set(itemTicketId, itemTicket)
 
     return { data }
   }
 
-  async deleteItemsFromUser(
-    username: string,
-    itemTicketId: number,
-  ): Promise<void> {
-    const itemTicket: ItemTicket = this.itemTicketStorage.get(itemTicketId)
+  //   async deleteShulkerFromUser(
+  //     username: string,
+  //     itemTicketId: number,
+  //   ): Promise<void> {
+  //     const itemTicket: ItemTicket = this.shulkerTicketStorage.get(itemTicketId)
 
-    if (!itemTicket) {
-      throw new NotFoundException('Квиток не знайдено у тимчасовому сховищі')
-    }
+  //     if (!itemTicket) {
+  //       throw new NotFoundException('Квиток не знайдено у тимчасовому сховищі')
+  //     }
 
-    await this.itemTicketRepository.remove(itemTicket)
-    await this.itemRepository.remove(itemTicket.items)
+  //     await this.itemTicketRepository.remove(itemTicket)
+  //     await this.shulkerItemRepository.remove(itemTicket.items)
 
-    this.itemTicketStorage.delete(itemTicketId)
+  //     this.shulkerTicketStorage.delete(itemTicketId)
 
-    this.socketService.updateDataAndNotifyClients({
-      username,
-      data: itemTicketId,
-      type: SocketTypes.REMOVE_ITEMS,
-    })
-  }
+  //     this.socketService.updateDataAndNotifyClients({
+  //       username,
+  //       data: itemTicketId,
+  //       type: SocketTypes.REMOVE_ITEMS,
+  //     })
+  //   }
 }

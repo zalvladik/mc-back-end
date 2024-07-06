@@ -35,6 +35,7 @@ export class AuthService {
         'money',
         'countShulker',
         'countLot',
+        'countItems',
       ],
     })
 
@@ -71,7 +72,15 @@ export class AuthService {
     const userMeta = await this.userRepository.findOne({
       where: { username },
       relations: ['advancements'],
-      select: ['id', 'username', 'role', 'money', 'countShulker', 'countLot'],
+      select: [
+        'id',
+        'username',
+        'role',
+        'money',
+        'countShulker',
+        'countLot',
+        'countItems',
+      ],
     })
 
     if (!userMeta) throw new NotFoundException(`Гравця ${username} не знайдено`)

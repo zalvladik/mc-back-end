@@ -104,6 +104,18 @@ export class ItemDto {
   enchants: string[]
 }
 
+export class ShulkerDto {
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'stone' })
+  type: string
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'Супер класний меч' })
+  display_name: string
+}
+
 export class AddItemsToUserBodyDto {
   @IsNotEmpty()
   @IsString()
@@ -119,6 +131,25 @@ export class AddItemsToUserBodyDto {
   itemsStorageId: string
 }
 
+export class AddShulkerToUserBodyDto {
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'France' })
+  username: string
+
+  @IsNotEmpty()
+  @ApiProperty({ example: [ItemDto] })
+  itemsData: ItemDto[]
+
+  @IsNotEmpty()
+  @ApiProperty({ example: ShulkerDto })
+  shulkerData: ShulkerDto
+
+  @IsNotEmpty()
+  @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
+  shulkerStorageId: string
+}
+
 export class AddItemsToUserConfirmBodyDto {
   @IsNotEmpty()
   @IsString()
@@ -128,6 +159,17 @@ export class AddItemsToUserConfirmBodyDto {
   @IsNotEmpty()
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
   itemsStorageId: string
+}
+
+export class AddShulkerToUserConfirmBodyDto {
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'France' })
+  username: string
+
+  @IsNotEmpty()
+  @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
+  shulkerStorageId: string
 }
 
 export class PutAdvancementsBodyDto {

@@ -5,4 +5,5 @@ export enum SocketTypes {
   DECREMENT_MONEY,
   ADD_ITEMS,
   REMOVE_ITEMS,
+  ADD_SHULKER,
 }

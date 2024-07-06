@@ -79,10 +79,9 @@ export class ItemTicketController {
   @HttpCode(200)
   async deleteItemTicket(
     @UserDecorator() { id }: GetUserDto,
-    @Body() { itemIds, itemTicketId }: DeleteItemTicketBodyDto,
+    @Body() { itemTicketId }: DeleteItemTicketBodyDto,
   ): Promise<DeleteItemTicketResponseDto[]> {
     return this.itemTicketService.deleteItemTicket({
-      itemIds,
       itemTicketId,
       userId: id,
     })

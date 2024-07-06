@@ -145,10 +145,16 @@ export class ItemTicketService {
   }
 
   async deleteItemTicket({
-    itemIds,
     userId,
     itemTicketId,
   }: DeleteItemTicketProps): Promise<DeleteItemTicketResponseDto[]> {
+    const itemTicket = await this.itemTicketRepository.findOne({
+      where: { id: itemTicketId },
+      relations: ['items'],
+    })
+
+    const itemIds = itemTicket.items.map(item => item.id)
+
     const itemsIsExist = await this.itemRepository.count({
       where: { id: In(itemIds), user: { id: userId } },
     })

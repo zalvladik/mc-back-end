@@ -19,6 +19,13 @@ export class GetMoneyFromUserQueryDto {
   username: string
 }
 
+export class GetShulkerItemsBodyDto {
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({ example: 1 })
+  shulkerId: number
+}
+
 export class GetUserDto {
   @IsNotEmpty()
   @IsNumber()

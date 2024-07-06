@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 
 import type { Item } from 'src/entities/item.entity'
+import type { ShulkerItem } from 'src/entities/shulker-item.entity'
 
 export class GetMoneyToUserResponseDto {
   @ApiProperty({ example: 50 })
@@ -19,6 +20,8 @@ export class AddMoneyToUserResponseDto {
 }
 
 export type GetItemsFromUserResponseDto = Omit<Item, 'serialized'>
+
+export type GetShulkerItemsFromUserResponseDto = Omit<ShulkerItem, 'serialized'>
 
 export class GetProfileResponseDto {
   @ApiProperty({ example: 1 })

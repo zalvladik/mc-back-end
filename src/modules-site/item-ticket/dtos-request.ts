@@ -35,13 +35,6 @@ export class RemoveItemsFromTicketBodyDto {
 
 export class DeleteItemTicketBodyDto {
   @IsNotEmpty()
-  @IsArray()
-  @ArrayNotEmpty()
-  @IsNumber({}, { each: true })
-  @ArrayMaxSize(27)
-  itemIds: number[]
-
-  @IsNotEmpty()
   @Transform(({ value }: TransformFnParams) => Number(value))
   @IsNumber()
   itemTicketId: number

@@ -22,7 +22,6 @@ export class ItemTicket {
 
   @OneToMany(() => Item, item => item.itemTicket, {
     onDelete: 'NO ACTION',
-    nullable: false,
   })
   @JoinColumn({ name: 'item_ticket_id' })
   items: Item[]

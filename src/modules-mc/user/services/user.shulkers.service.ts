@@ -109,8 +109,12 @@ export class UserShulkersService {
 
     await this.shulkerRepository.save(newUserShulker)
 
+    const savedUserShulker = await this.shulkerRepository.findOne({
+      where: { id: newUserShulker.id },
+    })
+
     const updatedShulkerItems = shulkerItems.map(item => {
-      return { ...item, shulker: newUserShulker }
+      return { ...item, shulker: savedUserShulker }
     })
 
     await this.shulkerItemsRepository.save(updatedShulkerItems)

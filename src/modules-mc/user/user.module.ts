@@ -12,6 +12,7 @@ import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { ShulkerItem } from 'src/entities/shulker-item.entity'
+import { CacheService } from 'src/shared/services/cache'
 import {
   UserAdvancementsController,
   UserItemsController,
@@ -52,6 +53,7 @@ import {
     UserMoneyService,
     UserItemsService,
     UserShulkersService,
+    CacheService,
   ],
 })
 export class McUserModule {}

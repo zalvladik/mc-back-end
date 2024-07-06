@@ -11,7 +11,6 @@ import { McUserModule } from './modules-mc/user/user.module'
 import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
 import { McAuthModule } from './modules-mc/auth/auth.module'
-import { CacheService } from './shared/services/cache'
 
 const siteModule = [
   AuthModule,
@@ -41,7 +40,5 @@ const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]
     ...siteModule,
     ...mcModule,
   ],
-  providers: [CacheService],
-  exports: [CacheService],
 })
 export class AppModule {}

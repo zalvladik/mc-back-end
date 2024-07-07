@@ -28,7 +28,6 @@ export class LotService {
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
-      .leftJoinAndSelect('shulker.items', 'shulkerItem')
       .skip((page - 1) * limit)
       .take(limit)
       .select([
@@ -45,10 +44,6 @@ export class LotService {
         'shulker.username',
         'shulker.type',
         'shulker.display_name',
-        'shulkerItem.id',
-        'shulkerItem.amount',
-        'shulkerItem.type',
-        'shulkerItem.display_name',
       ])
 
     if (category) {
@@ -81,7 +76,6 @@ export class LotService {
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
-      .leftJoinAndSelect('shulker.items', 'shulkerItem')
       .where('item.user.id = :userId', { userId })
       .select([
         'lot',
@@ -97,10 +91,6 @@ export class LotService {
         'shulker.username',
         'shulker.type',
         'shulker.display_name',
-        'shulkerItem.id',
-        'shulkerItem.amount',
-        'shulkerItem.type',
-        'shulkerItem.display_name',
       ])
       .getMany()
   }

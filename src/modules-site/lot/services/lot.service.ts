@@ -76,7 +76,7 @@ export class LotService {
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
-      .where('item.user.id = :userId', { userId })
+      .where('lot.user.id = :userId', { userId })
       .select([
         'lot',
         'item.id',

@@ -80,6 +80,8 @@ export class LotService {
     return this.lotRepository
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.item', 'item')
+      .leftJoinAndSelect('lot.shulker', 'shulker')
+      .leftJoinAndSelect('shulker.items', 'shulkerItem')
       .where('item.user.id = :userId', { userId })
       .select([
         'lot',
@@ -91,6 +93,14 @@ export class LotService {
         'item.enchants',
         'item.categories',
         'item.durability',
+        'shulker.id',
+        'shulker.username',
+        'shulker.type',
+        'shulker.display_name',
+        'shulkerItem.id',
+        'shulkerItem.amount',
+        'shulkerItem.type',
+        'shulkerItem.display_name',
       ])
       .getMany()
   }

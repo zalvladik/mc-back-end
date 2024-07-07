@@ -128,7 +128,7 @@ export class UserShulkersService {
 
     this.socketService.updateDataAndNotifyClients({
       username,
-      data: updatedData,
+      data: { shulker: savedUserShulker, shulkerItems: updatedData },
       type: SocketTypes.ADD_SHULKER,
     })
   }

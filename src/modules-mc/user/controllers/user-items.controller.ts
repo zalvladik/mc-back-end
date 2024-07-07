@@ -30,7 +30,6 @@ export class UserItemsController {
   async addItemsToUser(
     @Body() { username, data, cacheId }: AddItemsToUserBodyDto,
   ): Promise<void> {
-    throw new NotFoundException('1')
     await this.userItemsService.addItemsToUser(data, username, cacheId)
   }
 
@@ -47,8 +46,6 @@ export class UserItemsController {
   async pullItemsFromUser(
     @Param() { itemTicketId }: PullItemsFromUserParamDto,
   ): Promise<PullItemsFromUserResponseDto> {
-    throw new NotFoundException('1')
-
     return this.userItemsService.pullItemsFromUser(itemTicketId)
   }
 

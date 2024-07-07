@@ -43,7 +43,6 @@ export class UserMoneyController {
   async addMoneyToUser(
     @Body() { username, money, cacheId }: AddMoneyToUserBodyDto,
   ): Promise<AddMoneyToUserResponseDto> {
-    throw new NotFoundException('1')
     return this.userMoneyService.addMoneyToUser(money, username, cacheId)
   }
 
@@ -60,7 +59,6 @@ export class UserMoneyController {
   async removeMoneyFromUser(
     @Body() { username, money, cacheId }: PullMoneyFromUserBodyDto,
   ): Promise<GetMoneyToUserResponseDto> {
-    throw new NotFoundException('1')
     return this.userMoneyService.removeMoneyFromUser(money, username, cacheId)
   }
 

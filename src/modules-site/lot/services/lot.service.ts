@@ -3,10 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
 
-import { Item } from 'src/entities/item.entity'
 import { Lot } from 'src/entities/lot.entity'
 
-import { User } from 'src/entities/user.entity'
 import type {
   DeleteUserLotResponseDto,
   GetLotsResponseDto,
@@ -16,12 +14,8 @@ import type { GetLotsQuaryDto } from '../dtos-request'
 @Injectable()
 export class LotService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
     @InjectRepository(Lot)
     private readonly lotRepository: Repository<Lot>,
-    @InjectRepository(Item)
-    private readonly itemRepository: Repository<Item>,
   ) {}
 
   async getLots({

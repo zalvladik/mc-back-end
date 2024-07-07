@@ -42,6 +42,7 @@ export class LotService {
         'item.durability',
         'shulker.id',
         'shulker.username',
+        'shulker.categories',
         'shulker.type',
         'shulker.display_name',
       ])
@@ -89,6 +90,7 @@ export class LotService {
         'item.durability',
         'shulker.id',
         'shulker.username',
+        'shulker.categories',
         'shulker.type',
         'shulker.display_name',
       ])

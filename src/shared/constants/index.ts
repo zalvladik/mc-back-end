@@ -6,4 +6,5 @@ export enum SocketTypes {
   ADD_ITEMS,
   REMOVE_ITEMS,
   ADD_SHULKER,
+  REMOVE_SHULKER,
 }

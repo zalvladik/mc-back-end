@@ -33,9 +33,9 @@ export class AuthService {
         'password',
         'role',
         'money',
-        'countShulker',
-        'countLot',
-        'countItems',
+        'shulkerCount',
+        'lotCount',
+        'itemCount',
       ],
     })
 
@@ -77,9 +77,9 @@ export class AuthService {
         'username',
         'role',
         'money',
-        'countShulker',
-        'countLot',
-        'countItems',
+        'shulkerCount',
+        'lotCount',
+        'itemCount',
       ],
     })
 

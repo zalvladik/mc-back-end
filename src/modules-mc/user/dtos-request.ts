@@ -150,6 +150,31 @@ export class AddShulkerToUserBodyDto {
   cacheId: string
 }
 
+export class PullShulkerBodyDto {
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({ example: 1 })
+  shulkerId: number
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'France' })
+  username: string
+}
+
+export class DeleteShulkerParamDto {
+  @IsNotEmpty()
+  @Transform(({ value }: TransformFnParams) => Number(value))
+  @IsNumber()
+  @ApiProperty({ example: 1 })
+  shulkerId: number
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'France' })
+  username: string
+}
+
 export class AddItemsToUserConfirmBodyDto {
   @IsNotEmpty()
   @IsString()

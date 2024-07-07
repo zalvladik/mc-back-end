@@ -26,3 +26,11 @@ export class PullItemsFromUserResponseDto {
   })
   data: string[]
 }
+
+export class PullShulkerResponseDto {
+  shulkerItems: string[]
+
+  shulkerName: string
+
+  shulkerType: string
+}

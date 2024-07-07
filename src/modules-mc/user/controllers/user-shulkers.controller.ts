@@ -10,14 +10,14 @@ import {
 import { ApiTags } from '@nestjs/swagger'
 
 import { UserShulkersService } from '../services'
+import type { PullShulkerResponseDto } from '../dtos-responses'
 
 import {
   AddShulkerToUserBodyDto,
   AddShulkerToUserConfirmBodyDto,
-  //   DeleteShulkerFromUserParamDto,
-  //   PullShulkerFromUserParamDto,
+  DeleteShulkerParamDto,
+  PullShulkerBodyDto,
 } from '../dtos-request'
-// import type { PullShulkersFromUserResponseDto } from '../dtos-responses'
 
 @Controller('mc/user/shulkers')
 @ApiTags('mc/user/shulkers')
@@ -41,22 +41,19 @@ export class UserShulkersController {
     await this.userShulkersService.addShulkerToUserConfirm(username, cacheId)
   }
 
-  //   @Put('/pull/:shulkerTicketId')
-  //   @HttpCode(201)
-  //   async pullShulkerFromUser(
-  //     @Param() { shulkerTicketId }: PullShulkerFromUserParamDto,
-  //   ): Promise<PullShulkersFromUserResponseDto> {
-  //     return this.userShulkersService.pullShulkerFromUser(shulkerTicketId)
-  //   }
+  @Put('')
+  @HttpCode(200)
+  async pullShulker(
+    @Body() { shulkerId, username }: PullShulkerBodyDto,
+  ): Promise<PullShulkerResponseDto> {
+    return this.userShulkersService.pullShulker(username, shulkerId)
+  }
 
-  //   @Delete('/delete/:shulkerTicketId/:username')
-  //   @HttpCode(200)
-  //   async deleteShulkerFromUser(
-  //     @Param() { shulkerTicketId, username }: DeleteShulkerFromUserParamDto,
-  //   ): Promise<void> {
-  //     await this.userShulkersService.deleteShulkerFromUser(
-  //       username,
-  //       shulkerTicketId,
-  //     )
-  //   }
+  @Delete('/:shulkerId/:username')
+  @HttpCode(200)
+  async deleteShulker(
+    @Param() { shulkerId, username }: DeleteShulkerParamDto,
+  ): Promise<void> {
+    await this.userShulkersService.deleteShulker(username, shulkerId)
+  }
 }

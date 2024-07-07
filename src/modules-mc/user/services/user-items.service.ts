@@ -46,9 +46,9 @@ export class UserItemsService {
       where: { user },
     })
 
-    if (itemCount + itemsData.length > user.countItems) {
+    if (itemCount + itemsData.length > user.itemCount) {
       throw new BadRequestException(
-        `У вас замало місця на аккаунті, максимально ${user.countItems} шт.`,
+        `У вас замало місця на аккаунті, максимально ${user.itemCount} шт.`,
       )
     }
 

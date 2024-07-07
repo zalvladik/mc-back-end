@@ -21,9 +21,9 @@ export class UserService {
         'username',
         'role',
         'money',
-        'countShulker',
-        'countLot',
-        'countItems',
+        'shulkerCount',
+        'lotCount',
+        'itemCount',
       ],
     })
   }

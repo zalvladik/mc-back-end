@@ -7,7 +7,6 @@ import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
 
-import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { enchantmentDescription } from 'src/shared/helpers/enchantments'
@@ -18,7 +17,7 @@ import { ShulkerItem } from 'src/entities/shulker-item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
 import { giveShulkerLocal } from 'src/shared/helpers/giveShulkerLocal'
-import type { PullItemsFromUserResponseDto } from '../dtos-responses'
+import type { PullShulkerResponseDto } from '../dtos-responses'
 import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 
 @Injectable()
@@ -30,8 +29,6 @@ export class UserShulkersService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Shulker)
     private readonly shulkerRepository: Repository<Shulker>,
-    @InjectRepository(ItemTicket)
-    private readonly itemTicketRepository: Repository<ItemTicket>,
     private readonly socketService: SocketService,
     private readonly cacheService: CacheService,
   ) {}
@@ -52,9 +49,9 @@ export class UserShulkersService {
       where: { user },
     })
 
-    if (shulkerCount + 1 > user.countShulker) {
+    if (shulkerCount + 1 > user.shulkerCount) {
       throw new BadRequestException(
-        `У вас максимальна кількість шалкерів, ${user.countShulker} шлк.`,
+        `У вас максимальна кількість шалкерів, ${user.shulkerCount} шлк.`,
       )
     }
 
@@ -113,8 +110,6 @@ export class UserShulkersService {
       user,
     })
 
-    console.log('addShulkerToUserConfirm')
-
     await this.shulkerRepository.save(newUserShulker)
 
     const savedUserShulker = await this.shulkerRepository.findOne({
@@ -138,42 +133,41 @@ export class UserShulkersService {
     })
   }
 
-  // async pullShulkerFromUser(
-  //   itemTicketId: number,
-  // ): Promise<PullItemsFromUserResponseDto> {
-  //   const itemTicket = await this.itemTicketRepository.findOne({
-  //     where: { id: itemTicketId },
-  //     relations: ['items'],
-  //   })
+  async pullShulker(
+    username: string,
+    shulkerId: number,
+  ): Promise<PullShulkerResponseDto> {
+    const userShulker = await this.shulkerRepository.findOne({
+      where: { username, id: shulkerId },
+      relations: ['shulkerItems'],
+    })
 
-  //   if (!itemTicket) throw new NotFoundException('Квиток не знайдено')
+    if (!userShulker) {
+      throw new NotFoundException('Шалкер з таким id не знайдено')
+    }
 
-  //   const data = itemTicket.items.map(item => item.serialized)
+    const shulkerItems = userShulker.shulkerItems.map(item => item.serialized)
 
-  //   this.cacheService.set(itemTicketId, itemTicket)
+    return {
+      shulkerName: userShulker.display_name,
+      shulkerType: userShulker.type,
+      shulkerItems,
+    }
+  }
 
-  //   return { data }
-  // }
+  async deleteShulker(username: string, shulkerId: number): Promise<void> {
+    const userShulker = await this.shulkerRepository.findOne({
+      where: { id: shulkerId },
+      relations: ['shulkerItems'],
+    })
 
-  //   async deleteShulkerFromUser(
-  //     username: string,
-  //     itemTicketId: number,
-  //   ): Promise<void> {
-  //     const itemTicket: ItemTicket = this.shulkerTicketStorage.get(itemTicketId)
+    await this.shulkerItemsRepository.remove(userShulker.shulkerItems)
+    await this.shulkerRepository.remove(userShulker)
 
-  //     if (!itemTicket) {
-  //       throw new NotFoundException('Квиток не знайдено у тимчасовому сховищі')
-  //     }
-
-  //     await this.itemTicketRepository.remove(itemTicket)
-  //     await this.shulkerItemRepository.remove(itemTicket.items)
-
-  //     this.shulkerTicketStorage.delete(itemTicketId)
-
-  //     this.socketService.updateDataAndNotifyClients({
-  //       username,
-  //       data: itemTicketId,
-  //       type: SocketTypes.REMOVE_ITEMS,
-  //     })
-  //   }
+    this.socketService.updateDataAndNotifyClients({
+      username,
+      data: shulkerId,
+      type: SocketTypes.REMOVE_SHULKER,
+    })
+  }
 }

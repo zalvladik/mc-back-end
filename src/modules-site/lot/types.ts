@@ -8,6 +8,6 @@ export type CreateLotServiceT = {
 
 export type ByeLotServiceT = {
   lotId: number
-  byuerUserId: number
-  countShulker: number
+  buyerUserId: number
+  shulkerCount: number
 }

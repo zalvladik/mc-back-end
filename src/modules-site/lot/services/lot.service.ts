@@ -151,8 +151,8 @@ export class LotService {
 
   async buyLot({
     lotId,
-    byuerUserId,
-    countShulker,
+    shulkerCount,
+    buyerUserId,
   }: ByeLotServiceT): Promise<Item> {
     const lotMetaData = await this.lotRepository.findOne({
       where: { id: lotId },
@@ -162,7 +162,7 @@ export class LotService {
     if (!lotMetaData) throw new NotFoundException('Лот не знайдено')
 
     const buyerUser = await this.userRepository.findOne({
-      where: { id: byuerUserId },
+      where: { id: buyerUserId },
     })
 
     if (!buyerUser) {
@@ -174,12 +174,12 @@ export class LotService {
     }
 
     const currentItemsCount = await this.itemRepository.count({
-      where: { user: { id: byuerUserId } },
+      where: { user: { id: buyerUserId } },
     })
 
-    if (currentItemsCount + 1 > countShulker * 27) {
+    if (currentItemsCount + 1 > shulkerCount * 27) {
       throw new BadRequestException(
-        `У вас мало місця в інвентарі, максимально ${countShulker} шлк.`,
+        `У вас мало місця в інвентарі, максимально ${shulkerCount} шлк.`,
       )
     }
 

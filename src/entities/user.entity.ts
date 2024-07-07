@@ -72,13 +72,13 @@ export class User {
   shulkers: Shulker[]
 
   @Column({ type: 'smallint', nullable: false, default: 5 })
-  countShulker: number
+  shulkerCount: number
 
   @Column({ type: 'smallint', nullable: false, default: 54 })
-  countItems: number
+  itemCount: number
 
   @Column({ type: 'smallint', nullable: false, default: 20 })
-  countLot: number
+  lotCount: number
 
   @Column({ length: 2000, nullable: true })
   refreshToken?: string

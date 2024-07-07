@@ -28,7 +28,7 @@ export class UserShulkersService {
   ): Promise<GetShulkerItemsFromUserResponseDto[]> {
     const shulker: Shulker = await this.shulkerReposetory.findOne({
       where: { id },
-      relations: ['shulkerItems'],
+      relations: ['items'],
     })
 
     if (!shulker) {

@@ -161,7 +161,7 @@ export class UserShulkersService {
   async deleteShulker(username: string, shulkerId: number): Promise<void> {
     const userShulker = await this.shulkerRepository.findOne({
       where: { id: shulkerId },
-      relations: ['shulkerItems'],
+      relations: ['items'],
     })
 
     await this.itemsRepository.remove(userShulker.items)

@@ -72,12 +72,12 @@ export class LotController {
   @HttpCode(201)
   async buyLot(
     @Body() { lotId }: BuyLotBodyDto,
-    @UserDecorator() { id, countShulker }: GetUserDto,
+    @UserDecorator() { id, shulkerCount }: GetUserDto,
   ): Promise<Item> {
     return this.lotService.buyLot({
       lotId,
-      byuerUserId: id,
-      countShulker,
+      buyerUserId: id,
+      shulkerCount,
     })
   }
 

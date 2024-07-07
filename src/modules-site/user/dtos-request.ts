@@ -44,7 +44,7 @@ export class GetUserDto {
 
   @IsNotEmpty()
   @IsNumber()
-  countShulker: number
+  shulkerCount: number
 
   @IsNotEmpty()
   @IsNumber()

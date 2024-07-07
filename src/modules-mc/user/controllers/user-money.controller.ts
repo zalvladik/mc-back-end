@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpCode,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -50,6 +51,7 @@ export class UserMoneyController {
   async addMoneyToUserConfirm(
     @Body() { cacheId }: AddMoneyToUserConfirmBodyDto,
   ): Promise<void> {
+    throw new NotFoundException('1')
     await this.userMoneyService.addMoneyToUserConfirm(cacheId)
   }
 
@@ -66,6 +68,7 @@ export class UserMoneyController {
   async removeMoneyFromUserConfirm(
     @Body() { cacheId }: PullMoneyFromUserConfirmBodyDto,
   ): Promise<void> {
+    throw new NotFoundException('1')
     await this.userMoneyService.removeMoneyFromUserConfirm(cacheId)
   }
 }

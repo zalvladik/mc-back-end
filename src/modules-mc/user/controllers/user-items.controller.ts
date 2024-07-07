@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   HttpCode,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -37,6 +38,7 @@ export class UserItemsController {
   async addItemsToUserConfirm(
     @Body() { cacheId, username }: AddItemsToUserConfirmBodyDto,
   ): Promise<void> {
+    throw new NotFoundException('1')
     await this.userItemsService.addItemsToUserConfirm(username, cacheId)
   }
 
@@ -53,6 +55,7 @@ export class UserItemsController {
   async deleteItemsFromUser(
     @Param() { itemTicketId, username }: DeleteItemsFromUserParamDto,
   ): Promise<void> {
+    throw new NotFoundException('1')
     await this.userItemsService.deleteItemsFromUser(username, itemTicketId)
   }
 }

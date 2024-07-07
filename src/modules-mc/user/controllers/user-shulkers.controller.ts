@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   HttpCode,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -38,6 +39,7 @@ export class UserShulkersController {
   async addShulkerToUserConfirm(
     @Body() { cacheId, username }: AddShulkerToUserConfirmBodyDto,
   ): Promise<void> {
+    throw new NotFoundException('1')
     await this.userShulkersService.addShulkerToUserConfirm(username, cacheId)
   }
 
@@ -54,6 +56,7 @@ export class UserShulkersController {
   async deleteShulker(
     @Param() { shulkerId, username }: DeleteShulkerParamDto,
   ): Promise<void> {
+    throw new NotFoundException('1')
     await this.userShulkersService.deleteShulker(username, shulkerId)
   }
 }

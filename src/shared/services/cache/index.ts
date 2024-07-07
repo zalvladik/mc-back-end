@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 
 @Injectable()
 export class CacheService {
@@ -13,7 +13,11 @@ export class CacheService {
   }
 
   get<T>(key: string | number): T | undefined {
-    return this.cache.get(String(key)) as T | undefined
+    const cache = this.cache.get(String(key)) as T | undefined
+
+    if (!cache) throw new NotFoundException('Кеш відсутній')
+
+    return cache
   }
 
   delete(key: string | number): void {

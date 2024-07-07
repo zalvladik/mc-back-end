@@ -125,10 +125,6 @@ export class UserItemsService {
   ): Promise<void> {
     const itemTicket = this.cacheService.get<ItemTicket>(itemTicketId)
 
-    if (!itemTicket) {
-      throw new NotFoundException('Квиток не знайдено у тимчасовому сховищі')
-    }
-
     await this.itemTicketRepository.remove(itemTicket)
     await this.itemRepository.remove(itemTicket.items)
 

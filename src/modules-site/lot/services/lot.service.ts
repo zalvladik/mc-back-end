@@ -71,12 +71,12 @@ export class LotService {
     }
   }
 
-  async getUserLots(userId: number): Promise<Lot[]> {
+  async getUserLots(username: string): Promise<Lot[]> {
     return this.lotRepository
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
-      .where('lot.user.id = :userId', { userId })
+      .where('lot.username = :username', { username })
       .select([
         'lot',
         'item.id',

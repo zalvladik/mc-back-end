@@ -41,8 +41,8 @@ export class LotController {
 
   @Get('user')
   @HttpCode(200)
-  async getUserLots(@UserDecorator() { id }: GetUserDto): Promise<Lot[]> {
-    return this.lotService.getUserLots(id)
+  async getUserLots(@UserDecorator() { username }: GetUserDto): Promise<Lot[]> {
+    return this.lotService.getUserLots(username)
   }
 
   @Delete()

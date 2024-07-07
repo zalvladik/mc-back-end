@@ -124,11 +124,23 @@ export class UserShulkersService {
 
     this.cacheService.delete(cacheId)
 
-    const updatedData = shulkerItems.map(({ serialized, ...rest }) => rest)
+    const savedItemsResult = this.shulkerItemsRepository.find({
+      where: { shulker: { id: savedUserShulker.id } },
+      select: [
+        'id',
+        'amount',
+        'categories',
+        'description',
+        'display_name',
+        'durability',
+        'enchants',
+        'type',
+      ],
+    })
 
     this.socketService.updateDataAndNotifyClients({
       username,
-      data: { shulker: savedUserShulker, shulkerItems: updatedData },
+      data: { shulker: savedUserShulker, shulkerItems: savedItemsResult },
       type: SocketTypes.ADD_SHULKER,
     })
   }

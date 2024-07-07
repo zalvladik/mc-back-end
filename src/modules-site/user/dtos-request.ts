@@ -48,6 +48,10 @@ export class GetUserDto {
 
   @IsNotEmpty()
   @IsNumber()
+  itemCount: number
+
+  @IsNotEmpty()
+  @IsNumber()
   countLot: number
 
   @IsNotEmpty()

@@ -16,7 +16,7 @@ export class DeleteLotQuaryDto {
   id: number
 }
 
-export class CreateLotBodyDto {
+export class CreateLotItemBodyDto {
   @IsNotEmpty()
   @IsNumber()
   itemId: number
@@ -27,7 +27,24 @@ export class CreateLotBodyDto {
   price: number
 }
 
-export class BuyLotBodyDto {
+export class CreateLotShulkerBodyDto {
+  @IsNotEmpty()
+  @IsNumber()
+  shulkerId: number
+
+  @IsNotEmpty()
+  @Min(1)
+  @IsNumber()
+  price: number
+}
+
+export class BuyLotItemBodyDto {
+  @IsNotEmpty()
+  @IsNumber()
+  lotId: number
+}
+
+export class BuyLotShulkerBodyDto {
   @IsNotEmpty()
   @IsNumber()
   lotId: number

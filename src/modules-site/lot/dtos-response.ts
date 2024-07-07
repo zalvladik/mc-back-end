@@ -6,7 +6,7 @@ export type ItemLotResponseDto = Omit<Item, 'serialized' | 'lot'>
 
 export type ShulkerLotResponseDto = Omit<Shulker, 'lot'>
 
-export class CreateLotItemResponseDto {
+export class CreateLotResponseDto {
   @ApiProperty({ example: 123 })
   id: number
 
@@ -25,7 +25,7 @@ export class GetLotsResponseDto {
   @ApiProperty({ example: 123 })
   totalPages: number
 
-  lots: CreateLotItemResponseDto[]
+  lots: CreateLotResponseDto[]
 }
 
 export class DeleteUserLotResponseDto {

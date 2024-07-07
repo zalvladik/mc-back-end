@@ -9,16 +9,25 @@ import { AuthModule } from 'src/modules-site/auth/auth.module'
 import { UserController } from 'src/modules-site/user/controllers'
 import { UserService } from 'src/modules-site/user/services'
 
-import { LotController } from './controllers'
+import {
+  LotItemController,
+  LotController,
+  LotShulkerController,
+} from './controllers'
 
-import { LotService } from './services'
+import { LotItemService, LotShulkerService, LotService } from './services'
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, Item, Lot, ItemTicket]),
     AuthModule,
   ],
-  controllers: [UserController, LotController],
-  providers: [UserService, LotService],
+  controllers: [
+    UserController,
+    LotItemController,
+    LotController,
+    LotShulkerController,
+  ],
+  providers: [UserService, LotItemService, LotShulkerService, LotService],
 })
 export class LotModule {}

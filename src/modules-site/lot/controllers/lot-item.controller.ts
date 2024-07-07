@@ -1,12 +1,9 @@
 import {
   Body,
   Controller,
-  Delete,
-  Get,
   HttpCode,
   Post,
   Put,
-  Query,
   UseGuards,
 } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
@@ -18,20 +15,10 @@ import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
 import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
-import type { Lot } from 'src/entities/lot.entity'
 import type { Item } from 'src/entities/item.entity'
-import {
-  BuyLotBodyDto,
-  CreateLotBodyDto,
-  DeleteLotQuaryDto,
-  GetLotsQuaryDto,
-} from '../dtos-request'
+import { BuyLotItemBodyDto, CreateLotItemBodyDto } from '../dtos-request'
 import { LotItemService } from '../services'
-import type {
-  CreateLotItemResponseDto,
-  DeleteUserLotResponseDto,
-  GetLotsResponseDto,
-} from '../dtos-response'
+import type { CreateLotResponseDto } from '../dtos-response'
 
 @Controller('lot/item')
 @ApiTags('lot/item')
@@ -40,26 +27,12 @@ import type {
 export class LotItemController {
   constructor(private readonly lotItemService: LotItemService) {}
 
-  @Get()
-  @HttpCode(200)
-  async getLots(
-    @Query() payload: GetLotsQuaryDto,
-  ): Promise<GetLotsResponseDto> {
-    return this.lotItemService.getLots({ ...payload })
-  }
-
-  @Get('user')
-  @HttpCode(200)
-  async getUserLots(@UserDecorator() { id }: GetUserDto): Promise<Lot[]> {
-    return this.lotItemService.getUserLots(id)
-  }
-
   @Post()
   @HttpCode(201)
   async createLot(
-    @Body() body: CreateLotBodyDto,
+    @Body() body: CreateLotItemBodyDto,
     @UserDecorator() { id, username, countLot }: GetUserDto,
-  ): Promise<CreateLotItemResponseDto> {
+  ): Promise<CreateLotResponseDto> {
     return this.lotItemService.createLot({
       ...body,
       username,
@@ -71,21 +44,13 @@ export class LotItemController {
   @Put()
   @HttpCode(201)
   async buyLot(
-    @Body() { lotId }: BuyLotBodyDto,
-    @UserDecorator() { id, shulkerCount }: GetUserDto,
+    @Body() { lotId }: BuyLotItemBodyDto,
+    @UserDecorator() { id, itemCount }: GetUserDto,
   ): Promise<Item> {
     return this.lotItemService.buyLot({
       lotId,
       buyerUserId: id,
-      shulkerCount,
+      itemCount,
     })
-  }
-
-  @Delete()
-  @HttpCode(200)
-  async deleteLot(
-    @Query() { id }: DeleteLotQuaryDto,
-  ): Promise<DeleteUserLotResponseDto> {
-    return this.lotItemService.deleteLot(id)
   }
 }

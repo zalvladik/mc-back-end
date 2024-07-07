@@ -9,6 +9,7 @@ import { AuthModule } from 'src/modules-site/auth/auth.module'
 import { UserController } from 'src/modules-site/user/controllers'
 import { UserService } from 'src/modules-site/user/services'
 
+import { Shulker } from 'src/entities/shulker.entity'
 import {
   LotItemController,
   LotController,
@@ -19,7 +20,7 @@ import { LotItemService, LotShulkerService, LotService } from './services'
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Item, Lot, ItemTicket]),
+    TypeOrmModule.forFeature([User, Item, Lot, ItemTicket, Shulker]),
     AuthModule,
   ],
   controllers: [

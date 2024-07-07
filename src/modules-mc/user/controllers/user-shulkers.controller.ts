@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   HttpCode,
-  NotFoundException,
   Param,
   Post,
   Put,

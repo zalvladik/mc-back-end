@@ -109,7 +109,7 @@ export class ItemTicketService {
 
     await this.itemTicketRepository.save(newItemTicket)
 
-    return { id: newItemTicket.id, items: itemIds }
+    return { id: newItemTicket.id }
   }
 
   async removeItemsFromTicket(

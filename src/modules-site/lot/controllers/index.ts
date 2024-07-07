@@ -1,3 +1,3 @@
-import { LotController } from './lot.controller'
+import { LotItemController } from './lot-item.controller'
 
-export { LotController }
+export { LotItemController }

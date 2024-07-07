@@ -14,17 +14,16 @@ import { Item } from 'src/entities/item.entity'
 import { Lot } from 'src/entities/lot.entity'
 
 import { User } from 'src/entities/user.entity'
-import { itemMeta } from 'src/shared/constants'
 import type { ByeLotServiceT, CreateLotServiceT } from '../types'
 import type {
-  CreateLotResponseDto,
+  CreateLotItemResponseDto,
   DeleteUserLotResponseDto,
   GetLotsResponseDto,
 } from '../dtos-response'
 import type { GetLotsQuaryDto } from '../dtos-request'
 
 @Injectable()
-export class LotService {
+export class LotItemService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -117,7 +116,7 @@ export class LotService {
     price,
     username,
     countLot,
-  }: CreateLotServiceT): Promise<CreateLotResponseDto> {
+  }: CreateLotServiceT): Promise<CreateLotItemResponseDto> {
     if (price > 64 * 27 * 9)
       throw new BadRequestException(
         `Надто велика ціна, максимальна - ${64 * 27 * 9}`,
@@ -211,15 +210,10 @@ export class LotService {
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {
-    const itemFromLot = await this.itemRepository.findOne({
-      where: { lot: { id } },
-      select: itemMeta,
-    })
-
     const deletedLot = await this.lotRepository.delete(id)
 
     if (!deletedLot.affected) throw new NotFoundException('Lot not found')
 
-    return { lotId: id, item: itemFromLot }
+    return { id }
   }
 }

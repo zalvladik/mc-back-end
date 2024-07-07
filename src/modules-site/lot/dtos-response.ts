@@ -1,9 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger'
 import type { Item } from 'src/entities/item.entity'
+import type { Shulker } from 'src/entities/shulker.entity'
 
 export type ItemLotResponseDto = Omit<Item, 'serialized' | 'lot'>
 
-export class CreateLotResponseDto {
+export type ShulkerLotResponseDto = Omit<Shulker, 'lot'>
+
+export class CreateLotItemResponseDto {
   @ApiProperty({ example: 123 })
   id: number
 
@@ -13,18 +16,18 @@ export class CreateLotResponseDto {
   @ApiProperty({ example: 'France' })
   username: string
 
-  item: ItemLotResponseDto
+  item?: ItemLotResponseDto
+
+  shulker?: ShulkerLotResponseDto
 }
 
 export class GetLotsResponseDto {
   @ApiProperty({ example: 123 })
   totalPages: number
 
-  lots: CreateLotResponseDto[]
+  lots: CreateLotItemResponseDto[]
 }
 
 export class DeleteUserLotResponseDto {
-  lotId: number
-
-  item: ItemLotResponseDto
+  id: number
 }

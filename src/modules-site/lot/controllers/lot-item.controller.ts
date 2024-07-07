@@ -26,32 +26,32 @@ import {
   DeleteLotQuaryDto,
   GetLotsQuaryDto,
 } from '../dtos-request'
-import { LotService } from '../services'
+import { LotItemService } from '../services'
 import type {
-  CreateLotResponseDto,
+  CreateLotItemResponseDto,
   DeleteUserLotResponseDto,
   GetLotsResponseDto,
 } from '../dtos-response'
 
-@Controller('lot')
-@ApiTags('lot')
+@Controller('lot/item')
+@ApiTags('lot/item')
 @UseGuards(AuthGuard, RolesGuard)
 @Roles(RoleEnum.USER)
-export class LotController {
-  constructor(private readonly lotService: LotService) {}
+export class LotItemController {
+  constructor(private readonly lotItemService: LotItemService) {}
 
   @Get()
   @HttpCode(200)
   async getLots(
     @Query() payload: GetLotsQuaryDto,
   ): Promise<GetLotsResponseDto> {
-    return this.lotService.getLots({ ...payload })
+    return this.lotItemService.getLots({ ...payload })
   }
 
   @Get('user')
   @HttpCode(200)
   async getUserLots(@UserDecorator() { id }: GetUserDto): Promise<Lot[]> {
-    return this.lotService.getUserLots(id)
+    return this.lotItemService.getUserLots(id)
   }
 
   @Post()
@@ -59,8 +59,8 @@ export class LotController {
   async createLot(
     @Body() body: CreateLotBodyDto,
     @UserDecorator() { id, username, countLot }: GetUserDto,
-  ): Promise<CreateLotResponseDto> {
-    return this.lotService.createLot({
+  ): Promise<CreateLotItemResponseDto> {
+    return this.lotItemService.createLot({
       ...body,
       username,
       userId: id,
@@ -74,7 +74,7 @@ export class LotController {
     @Body() { lotId }: BuyLotBodyDto,
     @UserDecorator() { id, shulkerCount }: GetUserDto,
   ): Promise<Item> {
-    return this.lotService.buyLot({
+    return this.lotItemService.buyLot({
       lotId,
       buyerUserId: id,
       shulkerCount,
@@ -86,6 +86,6 @@ export class LotController {
   async deleteLot(
     @Query() { id }: DeleteLotQuaryDto,
   ): Promise<DeleteUserLotResponseDto> {
-    return this.lotService.deleteLot(id)
+    return this.lotItemService.deleteLot(id)
   }
 }

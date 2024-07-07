@@ -1,3 +1,3 @@
-import { LotService } from './lot.service'
+import { LotItemService } from './lot-item.service'
 
-export { LotService }
+export { LotItemService }

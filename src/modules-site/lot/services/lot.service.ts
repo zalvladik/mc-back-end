@@ -42,7 +42,9 @@ export class LotService {
   }: GetLotsQuaryDto): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
-      .innerJoinAndSelect('lot.item', 'item')
+      .leftJoinAndSelect('lot.item', 'item')
+      .leftJoinAndSelect('lot.shulker', 'shulker')
+      .leftJoinAndSelect('shulker.items', 'shulkerItem')
       .skip((page - 1) * limit)
       .take(limit)
       .select([
@@ -55,6 +57,14 @@ export class LotService {
         'item.enchants',
         'item.categories',
         'item.durability',
+        'shulker.id',
+        'shulker.username',
+        'shulker.type',
+        'shulker.display_name',
+        'shulkerItem.id',
+        'shulkerItem.amount',
+        'shulkerItem.type',
+        'shulkerItem.display_name',
       ])
 
     if (category) {
@@ -65,7 +75,7 @@ export class LotService {
 
     if (display_nameOrType) {
       queryBuilder.andWhere(
-        '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType)',
+        '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)',
         {
           display_nameOrType: `%${display_nameOrType}%`,
         },

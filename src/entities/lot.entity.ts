@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 
 import { Item } from './item.entity'
+import { Shulker } from './shulker.entity'
 
 @Entity({ name: 'lots' })
 @Index(['username'])
@@ -23,7 +24,15 @@ export class Lot {
 
   @OneToOne(() => Item, item => item.lot, {
     onDelete: 'CASCADE',
+    nullable: true,
   })
   @JoinColumn({ name: 'item_id', referencedColumnName: 'id' })
   item: Item
+
+  @OneToOne(() => Shulker, shulker => shulker.lot, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  @JoinColumn({ name: 'shulker_id', referencedColumnName: 'id' })
+  shulker: Shulker
 }

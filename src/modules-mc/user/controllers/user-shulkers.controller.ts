@@ -31,6 +31,7 @@ export class UserShulkersController {
     @Body()
     body: AddShulkerToUserBodyDto,
   ): Promise<void> {
+    throw new NotFoundException('1')
     await this.userShulkersService.addShulkerToUser(body)
   }
 
@@ -39,7 +40,6 @@ export class UserShulkersController {
   async addShulkerToUserConfirm(
     @Body() { cacheId, username }: AddShulkerToUserConfirmBodyDto,
   ): Promise<void> {
-    throw new NotFoundException('1')
     await this.userShulkersService.addShulkerToUserConfirm(username, cacheId)
   }
 
@@ -48,6 +48,7 @@ export class UserShulkersController {
   async pullShulker(
     @Body() { shulkerId, username }: PullShulkerBodyDto,
   ): Promise<PullShulkerResponseDto> {
+    throw new NotFoundException('1')
     return this.userShulkersService.pullShulker(username, shulkerId)
   }
 
@@ -56,7 +57,6 @@ export class UserShulkersController {
   async deleteShulker(
     @Param() { shulkerId, username }: DeleteShulkerParamDto,
   ): Promise<void> {
-    throw new NotFoundException('1')
     await this.userShulkersService.deleteShulker(username, shulkerId)
   }
 }

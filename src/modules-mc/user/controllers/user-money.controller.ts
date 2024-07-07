@@ -43,6 +43,7 @@ export class UserMoneyController {
   async addMoneyToUser(
     @Body() { username, money, cacheId }: AddMoneyToUserBodyDto,
   ): Promise<AddMoneyToUserResponseDto> {
+    throw new NotFoundException('1')
     return this.userMoneyService.addMoneyToUser(money, username, cacheId)
   }
 
@@ -51,7 +52,6 @@ export class UserMoneyController {
   async addMoneyToUserConfirm(
     @Body() { cacheId }: AddMoneyToUserConfirmBodyDto,
   ): Promise<void> {
-    throw new NotFoundException('1')
     await this.userMoneyService.addMoneyToUserConfirm(cacheId)
   }
 
@@ -60,6 +60,7 @@ export class UserMoneyController {
   async removeMoneyFromUser(
     @Body() { username, money, cacheId }: PullMoneyFromUserBodyDto,
   ): Promise<GetMoneyToUserResponseDto> {
+    throw new NotFoundException('1')
     return this.userMoneyService.removeMoneyFromUser(money, username, cacheId)
   }
 
@@ -68,7 +69,6 @@ export class UserMoneyController {
   async removeMoneyFromUserConfirm(
     @Body() { cacheId }: PullMoneyFromUserConfirmBodyDto,
   ): Promise<void> {
-    throw new NotFoundException('1')
     await this.userMoneyService.removeMoneyFromUserConfirm(cacheId)
   }
 }

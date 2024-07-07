@@ -14,6 +14,7 @@ import { Item } from 'src/entities/item.entity'
 import { Lot } from 'src/entities/lot.entity'
 
 import { User } from 'src/entities/user.entity'
+import { itemMeta } from 'src/shared/constants'
 import type { ByeLotServiceT, CreateLotServiceT } from '../types'
 import type {
   CreateLotResponseDto,
@@ -202,16 +203,7 @@ export class LotService {
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {
     const itemFromLot = await this.itemRepository.findOne({
       where: { lot: { id } },
-      select: [
-        'id',
-        'amount',
-        'type',
-        'display_name',
-        'description',
-        'enchants',
-        'categories',
-        'durability',
-      ],
+      select: itemMeta,
     })
 
     const deletedLot = await this.lotRepository.delete(id)

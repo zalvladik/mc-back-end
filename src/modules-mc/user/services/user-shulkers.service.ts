@@ -12,7 +12,7 @@ import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { SocketTypes } from 'src/shared/constants'
+import { itemMeta, SocketTypes } from 'src/shared/constants'
 import { ShulkerItem } from 'src/entities/shulker-item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
@@ -126,16 +126,7 @@ export class UserShulkersService {
 
     const savedItemsResult = await this.shulkerItemsRepository.find({
       where: { shulker: { id: savedUserShulker.id } },
-      select: [
-        'id',
-        'amount',
-        'categories',
-        'description',
-        'display_name',
-        'durability',
-        'enchants',
-        'type',
-      ],
+      select: itemMeta,
     })
 
     this.socketService.updateDataAndNotifyClients({

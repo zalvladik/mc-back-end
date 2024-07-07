@@ -12,6 +12,7 @@ import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { User } from 'src/entities/user.entity'
 
+import { itemMeta } from 'src/shared/constants'
 import type {
   CreateItemTicketResponseDto,
   GetItemsFromTicketResponseDto,
@@ -48,16 +49,7 @@ export class ItemTicketService {
 
     return this.itemRepository.find({
       where: { itemTicket: { id: itemTicketId } },
-      select: [
-        'id',
-        'amount',
-        'type',
-        'display_name',
-        'description',
-        'enchants',
-        'categories',
-        'durability',
-      ],
+      select: itemMeta,
     })
   }
 
@@ -130,16 +122,7 @@ export class ItemTicketService {
 
     return this.itemRepository.find({
       where: { id: In(itemIds), user: { id: userId } },
-      select: [
-        'id',
-        'amount',
-        'type',
-        'display_name',
-        'description',
-        'enchants',
-        'categories',
-        'durability',
-      ],
+      select: itemMeta,
     })
   }
 

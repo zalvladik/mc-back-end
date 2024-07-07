@@ -8,3 +8,14 @@ export enum SocketTypes {
   ADD_SHULKER,
   REMOVE_SHULKER,
 }
+
+export const itemMeta = {
+  id: true,
+  amount: true,
+  categories: true,
+  description: true,
+  display_name: true,
+  durability: true,
+  enchants: true,
+  type: true,
+}

@@ -124,7 +124,7 @@ export class UserShulkersService {
 
     this.cacheService.delete(cacheId)
 
-    const savedItemsResult = this.shulkerItemsRepository.find({
+    const savedItemsResult = await this.shulkerItemsRepository.find({
       where: { shulker: { id: savedUserShulker.id } },
       select: [
         'id',

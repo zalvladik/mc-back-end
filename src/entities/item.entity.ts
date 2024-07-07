@@ -12,6 +12,7 @@ import { CategoryEnum } from 'src/shared/enums'
 import { ItemTicket } from './item-ticket.entity'
 import { Lot } from './lot.entity'
 import { User } from './user.entity'
+import { Shulker } from './shulker.entity'
 
 @Entity({ name: 'items' })
 @Index(['user'])
@@ -57,7 +58,7 @@ export class Item {
   @Column({ type: 'text', nullable: false })
   serialized: string
 
-  @ManyToOne(() => User, user => user.items)
+  @ManyToOne(() => User, user => user.items, { nullable: true })
   @JoinColumn({ name: 'user_id' })
   user: User
 
@@ -70,4 +71,8 @@ export class Item {
   @OneToOne(() => Lot, lot => lot.item, { onDelete: 'SET NULL' })
   @JoinColumn({ name: 'lot_id' })
   lot: Lot
+
+  @ManyToOne(() => Shulker, shulker => shulker.items, { nullable: true })
+  @JoinColumn({ name: 'shulker_id' })
+  shulker: Shulker
 }

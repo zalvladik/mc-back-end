@@ -16,7 +16,12 @@ export class UserItemsService {
 
   async getItemsFromUser(id: number): Promise<GetItemsFromUserResponseDto[]> {
     return this.itemRepository.find({
-      where: { user: { id }, itemTicket: IsNull(), lot: IsNull() },
+      where: {
+        user: { id },
+        itemTicket: IsNull(),
+        lot: IsNull(),
+        shulker: IsNull(),
+      },
       select: itemMeta,
     })
   }

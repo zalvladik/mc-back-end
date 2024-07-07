@@ -11,7 +11,6 @@ import { TokenService } from 'src/shared/services/token/token.service'
 import { Item } from 'src/entities/item.entity'
 
 import { Shulker } from 'src/entities/shulker.entity'
-import { ShulkerItem } from 'src/entities/shulker-item.entity'
 import {
   UserAdvancementsController,
   UserController,
@@ -39,7 +38,6 @@ import { AuthModule } from '../auth/auth.module'
       Item,
       SrPlayerSkin,
       Shulker,
-      ShulkerItem,
     ]),
     AuthModule,
   ],

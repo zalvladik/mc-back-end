@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { ShulkerItem } from 'src/entities/shulker-item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { User } from 'src/entities/user.entity'
 import { Repository } from 'typeorm'
@@ -11,8 +10,6 @@ export class UserShulkersService {
   constructor(
     @InjectRepository(User)
     private readonly userReposetory: Repository<User>,
-    @InjectRepository(ShulkerItem)
-    private readonly shulkerItemReposetory: Repository<ShulkerItem>,
     @InjectRepository(Shulker)
     private readonly shulkerReposetory: Repository<Shulker>,
   ) {}
@@ -38,8 +35,8 @@ export class UserShulkersService {
       throw new NotFoundException('Такого шалкера не існує')
     }
 
-    const { shulkerItems } = shulker
+    const { items } = shulker
 
-    return shulkerItems.map(({ serialized, ...rest }) => rest)
+    return items.map(({ serialized, ...rest }) => rest)
   }
 }

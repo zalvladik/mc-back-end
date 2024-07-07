@@ -11,7 +11,6 @@ import { TokenService } from 'src/shared/services/token/token.service'
 import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { Shulker } from 'src/entities/shulker.entity'
-import { ShulkerItem } from 'src/entities/shulker-item.entity'
 import { CacheService } from 'src/shared/services/cache'
 import {
   UserAdvancementsController,
@@ -37,7 +36,6 @@ import {
       Item,
       ItemTicket,
       Shulker,
-      ShulkerItem,
     ]),
   ],
   controllers: [

@@ -13,7 +13,7 @@ import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
 import { itemMeta, SocketTypes } from 'src/shared/constants'
-import { ShulkerItem } from 'src/entities/shulker-item.entity'
+import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
 import { giveShulkerLocal } from 'src/shared/helpers/giveShulkerLocal'
@@ -23,8 +23,8 @@ import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 @Injectable()
 export class UserShulkersService {
   constructor(
-    @InjectRepository(ShulkerItem)
-    private readonly shulkerItemsRepository: Repository<ShulkerItem>,
+    @InjectRepository(Item)
+    private readonly itemsRepository: Repository<Item>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     @InjectRepository(Shulker)
@@ -120,11 +120,11 @@ export class UserShulkersService {
       return { ...item, shulker: savedUserShulker }
     })
 
-    await this.shulkerItemsRepository.save(updatedShulkerItems)
+    await this.itemsRepository.save(updatedShulkerItems)
 
     this.cacheService.delete(cacheId)
 
-    const savedItemsResult = await this.shulkerItemsRepository.find({
+    const savedItemsResult = await this.itemsRepository.find({
       where: { shulker: { id: savedUserShulker.id } },
       select: itemMeta,
     })
@@ -142,14 +142,14 @@ export class UserShulkersService {
   ): Promise<PullShulkerResponseDto> {
     const userShulker = await this.shulkerRepository.findOne({
       where: { username, id: shulkerId },
-      relations: ['shulkerItems'],
+      relations: ['items'],
     })
 
     if (!userShulker) {
       throw new NotFoundException('Шалкер з таким id не знайдено')
     }
 
-    const shulkerItems = userShulker.shulkerItems.map(item => item.serialized)
+    const shulkerItems = userShulker.items.map(item => item.serialized)
 
     return {
       shulkerName: userShulker.display_name,
@@ -164,7 +164,7 @@ export class UserShulkersService {
       relations: ['shulkerItems'],
     })
 
-    await this.shulkerItemsRepository.remove(userShulker.shulkerItems)
+    await this.itemsRepository.remove(userShulker.items)
     await this.shulkerRepository.remove(userShulker)
 
     this.socketService.updateDataAndNotifyClients({

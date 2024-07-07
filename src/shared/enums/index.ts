@@ -16,4 +16,5 @@ export enum CategoryEnum {
   REDSTONE_BLOCKS = 'redstone_blocks',
   TOOLS = 'tools',
   WEAPONS = 'weapons',
+  SHULKERS = 'shulkers',
 }

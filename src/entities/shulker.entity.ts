@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
+import { CategoryEnum } from 'src/shared/enums'
 import { User } from './user.entity'
 import { Item } from './item.entity'
 import { Lot } from './lot.entity'
@@ -27,6 +28,14 @@ export class Shulker {
 
   @Column({ length: 255, nullable: false })
   display_name: string
+
+  @Column({
+    type: 'set',
+    enum: [CategoryEnum.SHULKERS],
+    default: [CategoryEnum.SHULKERS],
+    nullable: false,
+  })
+  categories: CategoryEnum[]
 
   @OneToMany(() => Item, Item => Item.shulker)
   items: Item[]

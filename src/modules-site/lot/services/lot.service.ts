@@ -48,7 +48,7 @@ export class LotService {
 
     if (display_nameOrType) {
       queryBuilder.andWhere(
-        '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)',
+        '(shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)',
         {
           display_nameOrType: `%${display_nameOrType}%`,
         },

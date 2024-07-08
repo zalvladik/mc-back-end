@@ -128,7 +128,9 @@ export class LotItemService {
     await this.itemRepository.save(updatedItem)
     await this.deleteLot(lotId)
 
-    return lotMetaData.item
+    const { user, ...rest } = lotMetaData.item
+
+    return rest
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {

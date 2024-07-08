@@ -48,6 +48,6 @@ export class Shulker {
     onDelete: 'SET NULL',
     nullable: true,
   })
-  @JoinColumn({ name: 'shulker_id' })
+  @JoinColumn({ name: 'lot_id' })
   lot: Lot
 }

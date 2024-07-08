@@ -28,6 +28,7 @@ export class LotService {
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
+      .leftJoinAndSelect('shulker.items', 'shulkerItem')
       .skip((page - 1) * limit)
       .take(limit)
       .select([
@@ -45,12 +46,21 @@ export class LotService {
         'shulker.categories',
         'shulker.type',
         'shulker.display_name',
+        'shulkerItem.id',
+        'shulkerItem.amount',
+        'shulkerItem.type',
+        'shulkerItem.display_name',
+        'shulkerItem.description',
+        'shulkerItem.enchants',
+        'shulkerItem.categories',
+        'shulkerItem.durability',
       ])
 
     if (category) {
-      queryBuilder.andWhere('FIND_IN_SET(:category, item.categories)', {
-        category,
-      })
+      queryBuilder.andWhere(
+        '(FIND_IN_SET(:category, item.categories) OR FIND_IN_SET(:category, shulkerItem.categories))',
+        { category },
+      )
     }
 
     if (display_nameOrType) {

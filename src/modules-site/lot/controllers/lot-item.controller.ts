@@ -15,10 +15,12 @@ import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
 import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
-import type { Item } from 'src/entities/item.entity'
 import { BuyLotItemBodyDto, CreateLotItemBodyDto } from '../dtos-request'
 import { LotItemService } from '../services'
-import type { CreateLotResponseDto } from '../dtos-response'
+import type {
+  ByeLotItemResponseDto,
+  CreateLotResponseDto,
+} from '../dtos-response'
 
 @Controller('lot/item')
 @ApiTags('lot/item')
@@ -43,11 +45,11 @@ export class LotItemController {
 
   @Put()
   @HttpCode(201)
-  async buyLot(
+  async buyLotItem(
     @Body() { lotId }: BuyLotItemBodyDto,
     @UserDecorator() { id, itemCount }: GetUserDto,
-  ): Promise<Item> {
-    return this.lotItemService.buyLot({
+  ): Promise<ByeLotItemResponseDto> {
+    return this.lotItemService.buyLotItem({
       lotId,
       buyerUserId: id,
       itemCount,

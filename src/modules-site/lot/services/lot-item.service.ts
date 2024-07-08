@@ -16,6 +16,7 @@ import { Lot } from 'src/entities/lot.entity'
 import { User } from 'src/entities/user.entity'
 import type { ByeLotItemServiceT, CreateLotItemServiceT } from '../types'
 import type {
+  ByeLotItemResponseDto,
   CreateLotResponseDto,
   DeleteUserLotResponseDto,
 } from '../dtos-response'
@@ -80,11 +81,11 @@ export class LotItemService {
     return { id: newLot.id, price, item: { ...rest }, username }
   }
 
-  async buyLot({
+  async buyLotItem({
     lotId,
     itemCount,
     buyerUserId,
-  }: ByeLotItemServiceT): Promise<Item> {
+  }: ByeLotItemServiceT): Promise<ByeLotItemResponseDto> {
     const lotMetaData = await this.lotRepository.findOne({
       where: { id: lotId },
       relations: ['item', 'item.user'],
@@ -127,7 +128,9 @@ export class LotItemService {
     await this.itemRepository.save(updatedItem)
     await this.deleteLot(lotId)
 
-    return updatedItem
+    const { user, ...rest } = updatedItem
+
+    return rest
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {

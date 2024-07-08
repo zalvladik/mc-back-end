@@ -16,6 +16,7 @@ import { User } from 'src/entities/user.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import type { ByeLotShulkerServiceT, CreateLotShulkerServiceT } from '../types'
 import type {
+  BuyLotShulkerResponseDto,
   CreateLotResponseDto,
   DeleteUserLotResponseDto,
 } from '../dtos-response'
@@ -84,7 +85,7 @@ export class LotShulkerService {
     lotId,
     shulkerCount,
     buyerUserId,
-  }: ByeLotShulkerServiceT): Promise<Shulker> {
+  }: ByeLotShulkerServiceT): Promise<BuyLotShulkerResponseDto> {
     const lotMetaData = await this.lotRepository.findOne({
       where: { id: lotId },
       relations: ['shulker', 'shulker.user'],
@@ -123,7 +124,9 @@ export class LotShulkerService {
     await this.shulkerRepository.save(updatedShulker)
     await this.deleteLot(lotId)
 
-    return updatedShulker
+    const { user, ...rest } = updatedShulker
+
+    return rest
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {

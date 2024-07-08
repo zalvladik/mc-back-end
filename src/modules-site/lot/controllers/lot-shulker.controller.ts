@@ -15,10 +15,12 @@ import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
 import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
-import type { Shulker } from 'src/entities/shulker.entity'
 import { BuyLotShulkerBodyDto, CreateLotShulkerBodyDto } from '../dtos-request'
 import { LotShulkerService } from '../services'
-import type { CreateLotResponseDto } from '../dtos-response'
+import type {
+  BuyLotShulkerResponseDto,
+  CreateLotResponseDto,
+} from '../dtos-response'
 
 @Controller('lot/shulker')
 @ApiTags('lot/shulker')
@@ -43,10 +45,10 @@ export class LotShulkerController {
 
   @Put()
   @HttpCode(201)
-  async buyLot(
+  async buyLotShulker(
     @Body() { lotId }: BuyLotShulkerBodyDto,
     @UserDecorator() { id, shulkerCount }: GetUserDto,
-  ): Promise<Shulker> {
+  ): Promise<BuyLotShulkerResponseDto> {
     return this.lotShulkerService.buyLotShulker({
       lotId,
       buyerUserId: id,

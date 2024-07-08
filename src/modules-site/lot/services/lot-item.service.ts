@@ -37,7 +37,7 @@ export class LotItemService {
     itemId,
     price,
     username,
-    countLot,
+    lotCount,
   }: CreateLotItemServiceT): Promise<CreateLotResponseDto> {
     if (price > 64 * 27 * 9)
       throw new BadRequestException(
@@ -59,9 +59,9 @@ export class LotItemService {
       where: { username },
     })
 
-    if (currentLotCount + 1 > countLot) {
+    if (currentLotCount + 1 > lotCount) {
       throw new BadRequestException(
-        `У вас перевищена кількість лотів, максимально ${countLot} шт.`,
+        `У вас перевищена кількість лотів, максимально ${lotCount} шт.`,
       )
     }
 

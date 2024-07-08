@@ -33,13 +33,13 @@ export class LotItemController {
   @HttpCode(201)
   async createLot(
     @Body() body: CreateLotItemBodyDto,
-    @UserDecorator() { id, username, countLot }: GetUserDto,
+    @UserDecorator() { id, username, lotCount }: GetUserDto,
   ): Promise<CreateLotResponseDto> {
     return this.lotItemService.createLot({
       ...body,
       username,
       userId: id,
-      countLot,
+      lotCount,
     })
   }
 

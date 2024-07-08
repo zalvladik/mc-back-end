@@ -52,7 +52,7 @@ export class GetUserDto {
 
   @IsNotEmpty()
   @IsNumber()
-  countLot: number
+  lotCount: number
 
   @IsNotEmpty()
   @IsNumber()

@@ -3,7 +3,7 @@ export type CreateLotItemServiceT = {
   itemId: number
   price: number
   username: string
-  countLot: number
+  lotCount: number
 }
 
 export type CreateLotShulkerServiceT = {
@@ -11,7 +11,7 @@ export type CreateLotShulkerServiceT = {
   shulkerId: number
   price: number
   username: string
-  countLot: number
+  lotCount: number
 }
 
 export type ByeLotItemServiceT = {

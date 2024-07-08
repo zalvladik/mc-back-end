@@ -33,13 +33,13 @@ export class LotShulkerController {
   @HttpCode(201)
   async createLot(
     @Body() body: CreateLotShulkerBodyDto,
-    @UserDecorator() { id, username, countLot }: GetUserDto,
+    @UserDecorator() { id, username, lotCount }: GetUserDto,
   ): Promise<CreateLotResponseDto> {
     return this.lotShulkerService.createLotShulker({
       ...body,
       username,
       userId: id,
-      countLot,
+      lotCount,
     })
   }
 

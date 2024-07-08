@@ -9,7 +9,7 @@ import type {
   DeleteUserLotResponseDto,
   GetLotsResponseDto,
 } from '../dtos-response'
-import type { GetLotsQuaryDto } from '../dtos-request'
+import type { GetLotsQuaryDto, GetShulkerLotsQuaryDto } from '../dtos-request'
 
 @Injectable()
 export class LotService {
@@ -17,6 +17,53 @@ export class LotService {
     @InjectRepository(Lot)
     private readonly lotRepository: Repository<Lot>,
   ) {}
+
+  async getShulkerLots({
+    page = 1,
+    limit = 8,
+    display_nameOrType,
+  }: GetShulkerLotsQuaryDto): Promise<GetLotsResponseDto> {
+    const queryBuilder = this.lotRepository
+      .createQueryBuilder('lot')
+      .leftJoinAndSelect('lot.shulker', 'shulker')
+      .leftJoinAndSelect('shulker.items', 'shulkerItem')
+      .skip((page - 1) * limit)
+      .take(limit)
+      .select([
+        'lot',
+        'shulker.id',
+        'shulker.username',
+        'shulker.categories',
+        'shulker.type',
+        'shulker.display_name',
+        'shulkerItem.id',
+        'shulkerItem.amount',
+        'shulkerItem.type',
+        'shulkerItem.display_name',
+        'shulkerItem.description',
+        'shulkerItem.enchants',
+        'shulkerItem.categories',
+        'shulkerItem.durability',
+      ])
+
+    if (display_nameOrType) {
+      queryBuilder.andWhere(
+        '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)',
+        {
+          display_nameOrType: `%${display_nameOrType}%`,
+        },
+      )
+    }
+
+    const [lots, totalItems] = await queryBuilder.getManyAndCount()
+
+    const totalPages = Math.ceil(totalItems / limit)
+
+    return {
+      totalPages,
+      lots,
+    }
+  }
 
   async getLots({
     page = 1,

@@ -71,3 +71,25 @@ export class GetLotsQuaryDto {
   @IsString()
   display_nameOrType?: string
 }
+
+export class GetShulkerLotsQuaryDto {
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page?: number
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  limit?: number
+
+  @IsOptional()
+  @IsString()
+  category?: string
+
+  @IsOptional()
+  @IsString()
+  display_nameOrType?: string
+}

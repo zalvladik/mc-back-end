@@ -11,7 +11,7 @@ import { ApiTags } from '@nestjs/swagger'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 
 import { RolesGuard } from 'src/shared/guards/roles.guard'
-import { RoleEnum } from 'src/shared/enums'
+import { CategoryEnum, RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
 import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
@@ -34,9 +34,13 @@ export class LotController {
   @Get()
   @HttpCode(200)
   async getLots(
-    @Query() payload: GetLotsQuaryDto,
+    @Query() { category, ...rest }: GetLotsQuaryDto,
   ): Promise<GetLotsResponseDto> {
-    return this.lotService.getLots({ ...payload })
+    if (category === CategoryEnum.SHULKERS) {
+      return this.lotService.getShulkerLots({ ...rest })
+    }
+
+    return this.lotService.getLots({ category, ...rest })
   }
 
   @Get('user')

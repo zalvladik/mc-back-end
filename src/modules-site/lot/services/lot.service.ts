@@ -25,8 +25,8 @@ export class LotService {
   }: GetShulkerLotsQuaryDto): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
-      .leftJoinAndSelect('lot.shulker', 'shulker')
-      .leftJoinAndSelect('shulker.items', 'shulkerItem')
+      .innerJoinAndSelect('lot.shulker', 'shulker')
+      .innerJoinAndSelect('shulker.items', 'shulkerItem')
       .skip((page - 1) * limit)
       .take(limit)
       .select([

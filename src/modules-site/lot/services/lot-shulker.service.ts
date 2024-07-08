@@ -124,9 +124,7 @@ export class LotShulkerService {
     await this.shulkerRepository.save(updatedShulker)
     await this.deleteLot(lotId)
 
-    const { user, ...rest } = updatedShulker
-
-    return rest
+    return lotMetaData.shulker
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {

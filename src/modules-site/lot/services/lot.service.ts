@@ -23,6 +23,7 @@ export class LotService {
     limit = 8,
     display_nameOrType,
   }: GetShulkerLotsQuaryDto): Promise<GetLotsResponseDto> {
+    console.log('getShulkerLots')
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.shulker', 'shulker')
@@ -63,6 +64,8 @@ export class LotService {
     category,
     display_nameOrType,
   }: GetLotsQuaryDto): Promise<GetLotsResponseDto> {
+    console.log('getLots')
+
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')

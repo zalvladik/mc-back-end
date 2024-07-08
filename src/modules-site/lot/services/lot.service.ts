@@ -36,14 +36,6 @@ export class LotService {
         'shulker.categories',
         'shulker.type',
         'shulker.display_name',
-        'shulkerItem.id',
-        'shulkerItem.amount',
-        'shulkerItem.type',
-        'shulkerItem.display_name',
-        'shulkerItem.description',
-        'shulkerItem.enchants',
-        'shulkerItem.categories',
-        'shulkerItem.durability',
       ])
 
     if (display_nameOrType) {
@@ -93,14 +85,6 @@ export class LotService {
         'shulker.categories',
         'shulker.type',
         'shulker.display_name',
-        'shulkerItem.id',
-        'shulkerItem.amount',
-        'shulkerItem.type',
-        'shulkerItem.display_name',
-        'shulkerItem.description',
-        'shulkerItem.enchants',
-        'shulkerItem.categories',
-        'shulkerItem.durability',
       ])
 
     if (category) {

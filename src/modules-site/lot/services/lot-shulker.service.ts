@@ -110,7 +110,7 @@ export class LotShulkerService {
       )
     }
 
-    const sellerUser = lotMetaData.item.user
+    const sellerUser = lotMetaData.shulker.user
 
     buyerUser.money -= lotMetaData.price
     sellerUser.money += lotMetaData.price

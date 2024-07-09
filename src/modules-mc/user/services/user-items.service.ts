@@ -36,6 +36,8 @@ export class UserItemsService {
     username: string,
     itemsStorageId: string,
   ): Promise<void> {
+    console.log(itemsData[0].enchants)
+
     const user = await this.userRepository.findOne({
       where: { username },
     })

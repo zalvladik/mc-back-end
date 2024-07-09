@@ -4317,7 +4317,7 @@
     },
     "enchanted_book": {
       "display_name": "Зачарована книга",
-      "categories": ["ingredients"]
+      "categories": ["enchanted_book"]
     },
     "enchanting_table": {
       "display_name": "Стіл зачарування",

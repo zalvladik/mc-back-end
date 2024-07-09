@@ -50,6 +50,7 @@ export class Item {
       CategoryEnum.REDSTONE_BLOCKS,
       CategoryEnum.TOOLS,
       CategoryEnum.WEAPONS,
+      CategoryEnum.ENCHANTED_BOOK,
     ],
     nullable: false,
   })

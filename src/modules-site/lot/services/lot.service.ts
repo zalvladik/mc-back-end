@@ -94,13 +94,6 @@ export class LotService {
       )
     }
 
-    if (enchants) {
-      queryBuilder.andWhere(
-        '(FIND_IN_SET(:category, item.enchants) OR FIND_IN_SET(:category, shulkerItem.enchants))',
-        { enchants },
-      )
-    }
-
     if (display_nameOrType) {
       queryBuilder.andWhere(
         '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)',

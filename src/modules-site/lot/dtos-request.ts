@@ -1,6 +1,8 @@
 import type { TransformFnParams } from 'class-transformer'
 import { Transform, Type } from 'class-transformer'
 import {
+  ArrayNotEmpty,
+  IsArray,
   IsInt,
   IsNotEmpty,
   IsNumber,
@@ -66,6 +68,11 @@ export class GetLotsQuaryDto {
   @IsOptional()
   @IsString()
   category?: string
+
+  @IsOptional()
+  @IsArray()
+  @ArrayNotEmpty()
+  enchants?: string[]
 
   @IsOptional()
   @IsString()

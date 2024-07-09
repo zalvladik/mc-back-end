@@ -18,3 +18,17 @@ export enum CategoryEnum {
   WEAPONS = 'weapons',
   SHULKERS = 'shulkers',
 }
+
+export enum EnchantsWithoutLvl {
+  AQUA_AFFINITY = 'aqua_affinity',
+  BINDING_CURSE = 'binding_curse',
+  CHANNELING = 'channeling',
+  VANISHING_CURSE = 'vanishing_curse',
+  SILK_TOUCH = 'silk_touch',
+  MENDING = 'mending',
+  MULTISHOT = 'multishot',
+  INFINITY = 'infinity',
+  FLAME = 'flame',
+}
+
+export enum EnchantsWithLvl {}

@@ -258,6 +258,10 @@
       "display_name": "Арбалет",
       "categories": ["weapons"]
     },
+    "mace": {
+      "display_name": "Булава",
+      "categories": ["weapons"]
+    },
     "cod_bucket": {
       "display_name": "Відро з тріскою",
       "categories": ["tools"]

@@ -1,9 +1,6 @@
 import type { TransformFnParams } from 'class-transformer'
 import { Transform, Type } from 'class-transformer'
 import {
-  ArrayMaxSize,
-  ArrayNotEmpty,
-  IsArray,
   IsInt,
   IsNotEmpty,
   IsNumber,
@@ -11,7 +8,6 @@ import {
   IsString,
   Min,
 } from 'class-validator'
-import type { EnchantsEnum } from 'src/shared/enums'
 import { EnchantsTypesEnum } from 'src/shared/enums'
 
 export class DeleteLotQuaryDto {
@@ -91,11 +87,8 @@ export class GetItemWithEnchantsQuaryDto {
   limit?: number
 
   @IsNotEmpty()
-  @IsArray()
-  @ArrayNotEmpty()
-  @IsString({ each: true })
-  @ArrayMaxSize(64)
-  enchants: EnchantsEnum[]
+  @IsString()
+  enchants: string
 
   @IsNotEmpty()
   @IsString()

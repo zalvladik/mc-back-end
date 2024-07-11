@@ -68,11 +68,9 @@ export class LotService {
         'shulker.display_name',
       ])
 
-    const enchantsString = enchants.join(',')
-
     queryBuilder.andWhere(
-      `(FIND_IN_SET(itemEnchantMeta.${enchantMetaType}, :enchantsString)) > 0`,
-      { enchantsString },
+      `(FIND_IN_SET(itemEnchantMeta.${enchantMetaType}, :enchants)) > 0`,
+      { enchants },
     )
 
     queryBuilder.andWhere(

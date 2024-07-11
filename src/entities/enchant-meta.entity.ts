@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  Index,
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -126,6 +127,11 @@ export class EnchantMeta {
   })
   fishing_rod: string[]
 
-  @Column({ length: 255, nullable: false })
+  @Column({
+    type: 'enum',
+    enum: EnchantsTypesEnum,
+    nullable: true,
+  })
+  @Index()
   enchantType: EnchantsTypesEnum
 }

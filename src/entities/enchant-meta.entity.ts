@@ -20,7 +20,7 @@ export class EnchantMeta {
   @OneToOne(() => Item, item => item.enchantMeta, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'item_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'item_id' })
   item: Item
 
   @Column({

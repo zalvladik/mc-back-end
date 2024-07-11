@@ -17,6 +17,9 @@ import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
 import { giveShulkerLocal } from 'src/shared/helpers/giveShulkerLocal'
+import { getEnchantTypeFromItemType } from 'src/shared/helpers/getEnchantTypeFromItem'
+import { getEnchantMetaType } from 'src/shared/helpers/getEnchantMetaType'
+import { EnchantMeta } from 'src/entities/enchant-meta.entity'
 import type { PullShulkerResponseDto } from '../dtos-responses'
 import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 
@@ -25,6 +28,8 @@ export class UserShulkersService {
   constructor(
     @InjectRepository(Item)
     private readonly itemsRepository: Repository<Item>,
+    @InjectRepository(EnchantMeta)
+    private readonly enchantMetaRepository: Repository<EnchantMeta>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     @InjectRepository(Shulker)
@@ -85,9 +90,29 @@ export class UserShulkersService {
           shulkerData.display_name || giveShulkerLocal(shulkerData.type),
       }
 
+      const itemsEnchantMeta = items
+        .map(item => {
+          if (item.enchants?.length) {
+            const enchantType = getEnchantTypeFromItemType(item.type)
+            const enchantMetaType = getEnchantMetaType(enchantType)
+
+            if (enchantType) {
+              return {
+                item,
+                [enchantMetaType]: item.enchants,
+                [enchantType]: enchantType,
+              }
+            }
+          }
+
+          return undefined
+        })
+        .filter(item => item)
+
       this.cacheService.set(cacheId, {
         shulkerItems: items,
         shulkerData: updatedShulkerData,
+        itemsEnchantMeta,
       })
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')
@@ -100,7 +125,7 @@ export class UserShulkersService {
   ): Promise<void> {
     const user = await this.userRepository.findOne({ where: { username } })
 
-    const { shulkerItems, shulkerData } =
+    const { shulkerItems, shulkerData, itemsEnchantMeta } =
       this.cacheService.get<ShulkerPostStorageT>(cacheId)
 
     const newUserShulker = this.shulkerRepository.create({
@@ -120,6 +145,7 @@ export class UserShulkersService {
     })
 
     await this.itemsRepository.save(updatedShulkerItems)
+    await this.enchantMetaRepository.save(itemsEnchantMeta)
 
     this.cacheService.delete(cacheId)
 

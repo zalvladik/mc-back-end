@@ -93,6 +93,8 @@ export class UserItemsService {
         })
         .filter(item => item)
 
+      console.log({ items, itemsEnchantMeta })
+
       this.cacheService.set(itemsStorageId, { items, itemsEnchantMeta })
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')

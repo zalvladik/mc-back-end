@@ -8,7 +8,7 @@ export class CacheService {
     this.cache.clear()
   }
 
-  set(key: string | number, value: unknown): void {
+  set(key: string | number, value: any): void {
     this.cache.set(String(key), value)
   }
 

@@ -78,7 +78,7 @@ export class Item {
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'enchant_item_id' })
-  enchant_meta: EnchantMeta
+  enchantMeta: EnchantMeta
 
   @ManyToOne(() => Shulker, shulker => shulker.items, { nullable: true })
   @JoinColumn({ name: 'shulker_id' })

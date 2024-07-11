@@ -1,15 +1,24 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
 
 import { Lot } from 'src/entities/lot.entity'
 
+import { getEnchantMetaType } from 'src/shared/helpers/getEnchantMetaType'
 import type {
   DeleteUserLotResponseDto,
   GetLotsResponseDto,
 } from '../dtos-response'
-import type { GetLotsQuaryDto, GetShulkerLotsQuaryDto } from '../dtos-request'
+import type {
+  GetItemWithEnchantsQuaryDto,
+  GetLotsQuaryDto,
+  GetShulkerLotsQuaryDto,
+} from '../dtos-request'
 
 @Injectable()
 export class LotService {
@@ -17,6 +26,78 @@ export class LotService {
     @InjectRepository(Lot)
     private readonly lotRepository: Repository<Lot>,
   ) {}
+
+  async getItemWithEnchants({
+    page = 1,
+    limit = 8,
+    enchants,
+    type,
+    enchantType,
+  }: GetItemWithEnchantsQuaryDto): Promise<GetLotsResponseDto> {
+    const enchantMetaType = getEnchantMetaType(enchantType)
+
+    if (!enchantMetaType) {
+      throw new BadRequestException(
+        'Хибний тип для пошуку зачарованих предметів',
+      )
+    }
+
+    const queryBuilder = this.lotRepository
+      .createQueryBuilder('lot')
+      .leftJoinAndSelect('lot.item', 'item')
+      .leftJoinAndSelect('lot.item.enchantMeta', 'itemEnchantMeta')
+      .leftJoinAndSelect('lot.shulker', 'shulker')
+      .leftJoinAndSelect('shulker.items', 'shulkerItem')
+      .leftJoinAndSelect('shulker.items.enchantMeta', 'shulkerItemEnchantMeta')
+      .skip((page - 1) * limit)
+      .take(limit)
+      .select([
+        'lot',
+        'item.id',
+        'item.amount',
+        'item.type',
+        'item.display_name',
+        'item.description',
+        'item.enchants',
+        'item.categories',
+        'item.durability',
+        'shulker.id',
+        'shulker.username',
+        'shulker.categories',
+        'shulker.type',
+        'shulker.display_name',
+      ])
+
+    const enchantsString = enchants.join(',')
+
+    queryBuilder.andWhere(
+      `(FIND_IN_SET(itemEnchantMeta.${enchantMetaType}, :enchantsString)) > 0`,
+      { enchantsString },
+    )
+
+    queryBuilder.andWhere(
+      '(itemEnchantMeta.enchantType LIKE :enchantType OR itemEnchantMeta.enchantType LIKE :enchantType)',
+      {
+        enchantType: `%${enchantType}%`,
+      },
+    )
+
+    queryBuilder.andWhere(
+      '(item.type LIKE :type OR shulkerItem.type LIKE :type)',
+      {
+        type: `%${type}%`,
+      },
+    )
+
+    const [lots, totalItems] = await queryBuilder.getManyAndCount()
+
+    const totalPages = Math.ceil(totalItems / limit)
+
+    return {
+      totalPages,
+      lots,
+    }
+  }
 
   async getShulkerLots({
     page = 1,

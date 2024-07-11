@@ -1,6 +1,7 @@
 import type { TransformFnParams } from 'class-transformer'
 import { Transform, Type } from 'class-transformer'
 import {
+  ArrayMaxSize,
   ArrayNotEmpty,
   IsArray,
   IsInt,
@@ -10,6 +11,8 @@ import {
   IsString,
   Min,
 } from 'class-validator'
+import type { EnchantsEnum } from 'src/shared/enums'
+import { EnchantsTypesEnum } from 'src/shared/enums'
 
 export class DeleteLotQuaryDto {
   @IsNotEmpty()
@@ -70,13 +73,37 @@ export class GetLotsQuaryDto {
   category?: string
 
   @IsOptional()
-  @IsArray()
-  @ArrayNotEmpty()
-  enchants?: string[]
-
-  @IsOptional()
   @IsString()
   display_nameOrType?: string
+}
+
+export class GetItemWithEnchantsQuaryDto {
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page?: number
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  limit?: number
+
+  @IsNotEmpty()
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsString({ each: true })
+  @ArrayMaxSize(64)
+  enchants: EnchantsEnum[]
+
+  @IsNotEmpty()
+  @IsString()
+  enchantType: EnchantsTypesEnum
+
+  @IsNotEmpty()
+  @IsString()
+  type: string
 }
 
 export class GetShulkerLotsQuaryDto {

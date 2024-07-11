@@ -17,7 +17,11 @@ import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
 import type { Lot } from 'src/entities/lot.entity'
 
-import { DeleteLotQuaryDto, GetLotsQuaryDto } from '../dtos-request'
+import {
+  DeleteLotQuaryDto,
+  GetItemWithEnchantsQuaryDto,
+  GetLotsQuaryDto,
+} from '../dtos-request'
 import { LotService } from '../services'
 import type {
   DeleteUserLotResponseDto,
@@ -27,7 +31,7 @@ import type {
 @Controller('lot')
 @ApiTags('lot')
 @UseGuards(AuthGuard, RolesGuard)
-@Roles(RoleEnum.USER)
+// @Roles(RoleEnum.USER)
 export class LotController {
   constructor(private readonly lotService: LotService) {}
 
@@ -47,6 +51,14 @@ export class LotController {
   @HttpCode(200)
   async getUserLots(@UserDecorator() { username }: GetUserDto): Promise<Lot[]> {
     return this.lotService.getUserLots(username)
+  }
+
+  @Get('enchants')
+  @HttpCode(200)
+  async getItemWithEnchants(
+    @Query() body: GetItemWithEnchantsQuaryDto,
+  ): Promise<GetLotsResponseDto> {
+    return this.lotService.getItemWithEnchants(body)
   }
 
   @Delete()

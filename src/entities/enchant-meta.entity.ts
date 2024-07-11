@@ -17,7 +17,7 @@ export class EnchantMeta {
   @PrimaryGeneratedColumn()
   id: number
 
-  @OneToOne(() => Item, item => item.enchantMeta, {
+  @OneToOne(() => Item, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'item_id' })

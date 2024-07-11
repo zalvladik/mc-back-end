@@ -45,10 +45,10 @@ export class LotService {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')
-      .leftJoinAndSelect('lot.item.enchantMeta', 'itemEnchantMeta')
+      .leftJoinAndSelect('item.enchantMeta', 'itemEnchantMeta')
       .leftJoinAndSelect('lot.shulker', 'shulker')
       .leftJoinAndSelect('shulker.items', 'shulkerItem')
-      .leftJoinAndSelect('shulker.items.enchantMeta', 'shulkerItemEnchantMeta')
+      .leftJoinAndSelect('shulkerItem.enchantMeta', 'shulkerItemEnchantMeta')
       .skip((page - 1) * limit)
       .take(limit)
       .select([

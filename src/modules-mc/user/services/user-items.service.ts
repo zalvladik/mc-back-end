@@ -108,15 +108,7 @@ export class UserItemsService {
       itemsEnchantMeta: EnchantMeta[]
     }>(itemsStorageId)
 
-    items.forEach(async (item, i) => {
-      const newItem = this.itemRepository.create({
-        ...item,
-        enchantMeta: itemsEnchantMeta[i],
-      })
-
-      await this.itemRepository.save(newItem)
-    })
-
+    await this.itemRepository.save(items)
     await this.enchantMetaRepository.save(itemsEnchantMeta)
 
     this.cacheService.delete(itemsStorageId)

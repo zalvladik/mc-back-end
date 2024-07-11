@@ -13,7 +13,6 @@ import { ItemTicket } from './item-ticket.entity'
 import { Lot } from './lot.entity'
 import { User } from './user.entity'
 import { Shulker } from './shulker.entity'
-import { EnchantMeta } from './enchant-meta.entity'
 
 @Entity({ name: 'items' })
 @Index(['user'])
@@ -73,12 +72,6 @@ export class Item {
   @OneToOne(() => Lot, lot => lot.item, { onDelete: 'SET NULL' })
   @JoinColumn({ name: 'lot_id' })
   lot: Lot
-
-  @OneToOne(() => EnchantMeta, enchamtMeta => enchamtMeta.item, {
-    onDelete: 'SET NULL',
-  })
-  @JoinColumn({ name: 'enchant_item_id' })
-  enchantMeta: EnchantMeta
 
   @ManyToOne(() => Shulker, shulker => shulker.items, { nullable: true })
   @JoinColumn({ name: 'shulker_id' })

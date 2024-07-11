@@ -79,7 +79,7 @@ export class UserItemsService {
               const enchantMetaType = getEnchantMetaType(enchantType)
 
               const body = {
-                [enchantMetaType]: item.enchants,
+                [enchantMetaType]: item.enchants.join(','),
                 enchantType,
               }
 

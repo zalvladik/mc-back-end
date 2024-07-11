@@ -63,37 +63,35 @@ export class UserItemsService {
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 
-          let result = {
+          const createdNewItem = this.itemRepository.create({
             ...item,
             user,
             display_name: item.display_name || display_name,
             categories,
+          })
+
+          if (description) createdNewItem.description = description
+
+          if (item.enchants?.length) {
+            const enchantType = getEnchantTypeFromItemType(item.type)
+            const enchantMetaType = getEnchantMetaType(enchantType)
+
+            if (enchantType) {
+              const newEnchantMeta = this.enchantMetaRepository.create({
+                item: createdNewItem,
+                [enchantMetaType]: item.enchants,
+                [enchantType]: enchantType,
+              })
+
+              createdNewItem.enchantMeta = newEnchantMeta
+            }
           }
 
-          if (description) result = { ...result, description }
-
-          return result
+          return createdNewItem
         },
       )
 
-      const itemsEnchantMeta = items.map(item => {
-        if (item.enchants?.length) {
-          const enchantType = getEnchantTypeFromItemType(item.type)
-          const enchantMetaType = getEnchantMetaType(enchantType)
-
-          if (enchantType) {
-            return {
-              item,
-              [enchantMetaType]: item.enchants,
-              [enchantType]: enchantType,
-            }
-          }
-        }
-
-        return undefined
-      })
-
-      this.cacheService.set(itemsStorageId, { items, itemsEnchantMeta })
+      this.cacheService.set(itemsStorageId, { items })
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')
     }
@@ -103,13 +101,11 @@ export class UserItemsService {
     username: string,
     itemsStorageId: string,
   ): Promise<void> {
-    const { items, itemsEnchantMeta } = this.cacheService.get<{
+    const { items } = this.cacheService.get<{
       items: Item[]
-      itemsEnchantMeta: EnchantMeta[]
     }>(itemsStorageId)
 
     await this.itemRepository.save(items)
-    await this.enchantMetaRepository.save(itemsEnchantMeta)
 
     this.cacheService.delete(itemsStorageId)
 

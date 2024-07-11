@@ -1,27 +1,13 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm'
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
 
 import { EnchantsTypesEnum } from 'src/shared/enums'
 import { getSetsForEnchantMeta } from 'src/shared/helpers/getSetsForEnchantMeta'
 import { EnchantMetaTypeEnum } from 'src/shared/constants'
-import { Item } from './item.entity'
 
 @Entity({ name: 'enchant_meta' })
 export class EnchantMeta {
   @PrimaryGeneratedColumn()
   id: number
-
-  @OneToOne(() => Item, item => item.enchantMeta, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'item_id' })
-  item: Item
 
   @Column({
     type: 'enum',

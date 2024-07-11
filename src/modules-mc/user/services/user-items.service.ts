@@ -14,7 +14,11 @@ import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { enchantVariables, SocketTypes } from 'src/shared/constants'
+import {
+  enchantsWithMaxLvl,
+  enchantVariables,
+  SocketTypes,
+} from 'src/shared/constants'
 import { CacheService } from 'src/shared/services/cache'
 import {
   giveNegativeEnchantsTypes,
@@ -79,13 +83,17 @@ export class UserItemsService {
             result = { ...result, enchants }
           }
 
-          const enchantType = getEnchantTypeFromItemType(item.type)
+          const enchants = Object.entries(enchantsWithMaxLvl)
+            .map(([key, value]) => {
+              if (value === 1) return key
 
-          console.log([
-            ...(enchantVariables[enchantType] ?? []),
-            ...giveOtherEnchantsTypes(enchantType),
-            ...giveNegativeEnchantsTypes(enchantType),
-          ])
+              return Array.from({ length: value }).map(
+                lvl => `${key}$${lvl}${1}`,
+              )
+            })
+            .flat()
+
+          console.log({ length: enchants.length, enchants })
 
           return result
         },

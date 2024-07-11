@@ -49,3 +49,11 @@ export const giveNegativeEnchantsTypes = (
 
   return [vanishingCurse]
 }
+
+export const getSetsForEnchantTypes = (
+  enchantType: EnchantsTypesEnum,
+): EnchantsEnum[] => [
+  ...(enchantVariables[enchantType] ?? []),
+  ...giveOtherEnchantsTypes(enchantType),
+  ...giveNegativeEnchantsTypes(enchantType),
+]

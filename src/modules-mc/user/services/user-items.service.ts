@@ -78,12 +78,14 @@ export class UserItemsService {
             if (enchantType) {
               const enchantMetaType = getEnchantMetaType(enchantType)
 
-              console.log(enchantMetaType)
-
-              const newEnchantMeta = this.enchantMetaRepository.create({
+              const body = {
                 [enchantMetaType]: item.enchants,
                 enchantType,
-              })
+              }
+
+              console.log(body)
+
+              const newEnchantMeta = this.enchantMetaRepository.create(body)
 
               createdNewItem.enchantMeta = newEnchantMeta
             }

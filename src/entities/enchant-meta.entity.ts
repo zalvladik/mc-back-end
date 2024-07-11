@@ -9,6 +9,7 @@ import {
 
 import { EnchantsTypesEnum } from 'src/shared/enums'
 import { getSetsForEnchantMeta } from 'src/shared/helpers/getSetsForEnchantMeta'
+import { EnchantMetaTypeEnum } from 'src/shared/constants'
 import { Item } from './item.entity'
 
 @Entity({ name: 'enchant_meta' })
@@ -32,106 +33,22 @@ export class EnchantMeta {
 
   @Column({
     type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.HELMET),
+    enum: getSetsForEnchantMeta(EnchantMetaTypeEnum.ARMOR),
     nullable: true,
   })
-  helmet: string[]
+  armor: string[]
 
   @Column({
     type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.CHESTPLATE),
+    enum: getSetsForEnchantMeta(EnchantMetaTypeEnum.TOOLS_AND_MELEE),
     nullable: true,
   })
-  chestplate: string[]
+  toolsAndMelle: string[]
 
   @Column({
     type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.LEGGINGS),
+    enum: getSetsForEnchantMeta(EnchantMetaTypeEnum.RANGE_WEAPON),
     nullable: true,
   })
-  leggings: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.BOOTS),
-    nullable: true,
-  })
-  boots: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.ELYTRA),
-    nullable: true,
-  })
-  elytra: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.SWORD),
-    nullable: true,
-  })
-  sword: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.AXE),
-    nullable: true,
-  })
-  axe: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.TRIDENT),
-    nullable: true,
-  })
-  trident: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.MACE),
-    nullable: true,
-  })
-  mace: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.PICKAXE),
-    nullable: true,
-  })
-  pickaxe: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.SHOVEL),
-    nullable: true,
-  })
-  shovel: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.HOE),
-    nullable: true,
-  })
-  hoe: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.BOW),
-    nullable: true,
-  })
-  bow: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.CROSSBOW),
-    nullable: true,
-  })
-  crossbow: string[]
-
-  @Column({
-    type: 'set',
-    enum: getSetsForEnchantMeta(EnchantsTypesEnum.FISHING_ROD),
-    nullable: true,
-  })
-  fishing_rod: string[]
+  rangeWeapon: string[]
 }

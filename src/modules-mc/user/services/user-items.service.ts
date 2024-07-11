@@ -18,6 +18,7 @@ import { CacheService } from 'src/shared/services/cache'
 
 import { EnchantMeta } from 'src/entities/enchant-meta.entity'
 import { getEnchantTypeFromItemType } from 'src/shared/helpers/getEnchantTypeFromItem'
+import { getEnchantMetaType } from 'src/shared/helpers/getEnchantMetaType'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
@@ -79,11 +80,12 @@ export class UserItemsService {
         .map(item => {
           if (item.enchants?.length) {
             const enchantType = getEnchantTypeFromItemType(item.type)
+            const enchantMetaType = getEnchantMetaType(enchantType)
 
             if (enchantType) {
               return {
                 item,
-                enchantType,
+                [enchantMetaType]: enchantMetaType,
                 [enchantType]: item.enchants,
               }
             }
@@ -92,8 +94,6 @@ export class UserItemsService {
           return undefined
         })
         .filter(item => item)
-
-      console.log(itemsEnchantMeta[0].boots)
 
       this.cacheService.set(itemsStorageId, { items, itemsEnchantMeta })
     } catch (error) {

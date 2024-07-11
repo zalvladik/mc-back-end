@@ -1,59 +1,17 @@
-import { enchantVariables } from 'src/shared/constants'
-import { EnchantsEnum, EnchantsTypesEnum } from 'src/shared/enums'
+import { EnchantMetaTypeEnum, enchantVariables } from 'src/shared/constants'
 
-const isArmorType = (enchantType: EnchantsTypesEnum): boolean => {
-  return (
-    enchantType === EnchantsTypesEnum.HELMET ||
-    enchantType === EnchantsTypesEnum.CHESTPLATE ||
-    enchantType === EnchantsTypesEnum.LEGGINGS ||
-    enchantType === EnchantsTypesEnum.BOOTS
-  )
-}
-
-const isToolType = (enchantType: EnchantsTypesEnum): boolean => {
-  return (
-    enchantType === EnchantsTypesEnum.AXE ||
-    enchantType === EnchantsTypesEnum.PICKAXE ||
-    enchantType === EnchantsTypesEnum.SHOVEL ||
-    enchantType === EnchantsTypesEnum.HOE
-  )
-}
-
-export const giveOtherEnchantsTypes = (
-  enchantType: EnchantsTypesEnum,
-): EnchantsEnum[] => {
-  if (isArmorType(enchantType)) {
-    return [...enchantVariables.all, ...enchantVariables.armor]
-  }
-
-  if (isToolType(enchantType)) {
-    return [...enchantVariables.all, ...enchantVariables.tools]
-  }
-
-  if (enchantType === EnchantsTypesEnum.BOW) {
-    return [EnchantsEnum.UNBREAKING]
-  }
-
-  return [...enchantVariables.all]
-}
-
-export const giveNegativeEnchantsTypes = (
-  enchantType: EnchantsTypesEnum,
-): EnchantsEnum[] => {
-  const vanishingCurse = EnchantsEnum.VANISHING_CURSE
-  const bindingCurse = EnchantsEnum.BINDING_CURSE
-
-  if (isArmorType(enchantType)) {
-    return [bindingCurse, vanishingCurse]
-  }
-
-  return [vanishingCurse]
-}
+import type { EnchantsEnum } from 'src/shared/enums'
 
 export const getSetsForEnchantTypes = (
-  enchantType: EnchantsTypesEnum,
-): EnchantsEnum[] => [
-  ...(enchantVariables[enchantType] ?? []),
-  ...giveOtherEnchantsTypes(enchantType),
-  ...giveNegativeEnchantsTypes(enchantType),
-]
+  enchantMetaType: EnchantMetaTypeEnum,
+): EnchantsEnum[] => {
+  if (enchantMetaType === EnchantMetaTypeEnum.ARMOR) {
+    return enchantVariables.armor
+  }
+
+  if (enchantMetaType === EnchantMetaTypeEnum.TOOLS_AND_MELEE) {
+    return enchantVariables.toolsAndMelee
+  }
+
+  return enchantVariables.rangeWeapon
+}

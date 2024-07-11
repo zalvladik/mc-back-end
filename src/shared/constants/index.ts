@@ -1,4 +1,5 @@
-import { EnchantsEnum, EnchantsTypesEnum } from '../enums'
+import type { EnchantsTypesEnum } from '../enums'
+import { EnchantsEnum } from '../enums'
 
 export const THIRTY_DAYS = 30 * 24 * 60 * 1000
 
@@ -67,67 +68,64 @@ export const enchantsWithMaxLvl: { [key: string]: number } = {
   [EnchantsEnum.FLAME]: 1,
 }
 
+export enum EnchantMetaTypeEnum {
+  ARMOR = 'armor',
+  TOOLS_AND_MELEE = 'toolsAndMelee',
+  RANGE_WEAPON = 'rangeWeapon',
+}
+
 export const enchantVariables: {
-  [key in EnchantsTypesEnum | string]: EnchantsEnum[]
+  [key in EnchantMetaTypeEnum]: EnchantsEnum[]
 } = {
-  [EnchantsTypesEnum.HELMET]: [
+  armor: [
     EnchantsEnum.AQUA_AFFINITY,
     EnchantsEnum.RESPIRATION,
-  ],
-  [EnchantsTypesEnum.LEGGINGS]: [EnchantsEnum.SWIFT_SNEAK],
-  [EnchantsTypesEnum.BOOTS]: [
+    EnchantsEnum.SWIFT_SNEAK,
+    EnchantsEnum.BLAST_PROTECTION,
+    EnchantsEnum.FIRE_PROTECTION,
+    EnchantsEnum.PROJECTILE_PROTECTION,
+    EnchantsEnum.PROTECTION,
+    EnchantsEnum.THORNS,
     EnchantsEnum.DEPTH_STRIDER,
     EnchantsEnum.FROST_WALKER,
     EnchantsEnum.FEATHER_FALLING,
     EnchantsEnum.SOUL_SPEED,
+    EnchantsEnum.BINDING_CURSE,
+    EnchantsEnum.MENDING,
+    EnchantsEnum.UNBREAKING,
+    EnchantsEnum.VANISHING_CURSE,
   ],
-  [EnchantsTypesEnum.ELYTRA]: [EnchantsEnum.BINDING_CURSE],
-  [EnchantsTypesEnum.SWORD]: [
+  toolsAndMelee: [
+    EnchantsEnum.FORTUNE,
+    EnchantsEnum.SILK_TOUCH,
+    EnchantsEnum.EFFICIENCY,
+    EnchantsEnum.SHARPNESS,
     EnchantsEnum.BANE_OF_ARTHROPODS,
     EnchantsEnum.SMITE,
     EnchantsEnum.SWEEPING,
     EnchantsEnum.FIRE_ASPECT,
     EnchantsEnum.KNOCKBACK,
     EnchantsEnum.LOOTING,
+    EnchantsEnum.LUCK_OF_THE_SEA,
+    EnchantsEnum.LURE,
+    EnchantsEnum.MENDING,
+    EnchantsEnum.UNBREAKING,
+    EnchantsEnum.VANISHING_CURSE,
   ],
-  [EnchantsTypesEnum.AXE]: [
-    EnchantsEnum.SHARPNESS,
-    EnchantsEnum.BANE_OF_ARTHROPODS,
-    EnchantsEnum.SMITE,
-  ],
-  [EnchantsTypesEnum.TRIDENT]: [
+  rangeWeapon: [
     EnchantsEnum.CHANNELING,
     EnchantsEnum.LOYALTY,
     EnchantsEnum.RIPTIDE,
     EnchantsEnum.IMPALING,
-  ],
-  [EnchantsTypesEnum.BOW]: [
     EnchantsEnum.INFINITY,
     EnchantsEnum.MENDING,
+    EnchantsEnum.UNBREAKING,
+    EnchantsEnum.VANISHING_CURSE,
     EnchantsEnum.FLAME,
     EnchantsEnum.POWER,
     EnchantsEnum.PUNCH,
-  ],
-  [EnchantsTypesEnum.CROSSBOW]: [
     EnchantsEnum.MULTISHOT,
     EnchantsEnum.PIERCING,
     EnchantsEnum.QUICK_CHARGE,
-  ],
-  [EnchantsTypesEnum.FISHING_ROD]: [
-    EnchantsEnum.LUCK_OF_THE_SEA,
-    EnchantsEnum.LURE,
-  ],
-  all: [EnchantsEnum.MENDING, EnchantsEnum.UNBREAKING],
-  armor: [
-    EnchantsEnum.BLAST_PROTECTION,
-    EnchantsEnum.FIRE_PROTECTION,
-    EnchantsEnum.PROJECTILE_PROTECTION,
-    EnchantsEnum.PROTECTION,
-    EnchantsEnum.THORNS,
-  ],
-  tools: [
-    EnchantsEnum.FORTUNE,
-    EnchantsEnum.SILK_TOUCH,
-    EnchantsEnum.EFFICIENCY,
   ],
 }

@@ -81,11 +81,11 @@ export class UserItemsService {
             const enchantType = getEnchantTypeFromItemType(item.type)
 
             if (enchantType) {
-              return this.enchantMetaRepository.create({
+              return {
                 item,
                 enchantType,
                 [enchantType]: item.enchants,
-              })
+              }
             }
           }
 

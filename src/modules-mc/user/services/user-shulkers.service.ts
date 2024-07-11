@@ -9,7 +9,6 @@ import { Repository } from 'typeorm'
 
 import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
-import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
 import { itemMeta, SocketTypes } from 'src/shared/constants'
@@ -66,21 +65,30 @@ export class UserShulkersService {
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 
-          let result = {
+          const createdNewItem = this.itemsRepository.create({
             ...item,
             display_name: item.display_name || display_name,
             categories,
-          }
+          })
 
-          if (description) result = { ...result, description }
+          if (description) createdNewItem.description = description
 
           if (item.enchants?.length) {
-            const enchants = enchantmentDescription(item.enchants)
+            const enchantType = getEnchantTypeFromItemType(item.type)
 
-            result = { ...result, enchants }
+            if (enchantType) {
+              const enchantMetaType = getEnchantMetaType(enchantType)
+
+              const newEnchantMeta = this.enchantMetaRepository.create({
+                [enchantMetaType]: item.enchants.join(','),
+                enchantType,
+              })
+
+              createdNewItem.enchantMeta = newEnchantMeta
+            }
           }
 
-          return result
+          return createdNewItem
         },
       )
 

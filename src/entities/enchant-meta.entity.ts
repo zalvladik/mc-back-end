@@ -1,27 +1,13 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm'
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
 
 import { EnchantsTypesEnum } from 'src/shared/enums'
 import { getSetsForEnchantMeta } from 'src/shared/helpers/getSetsForEnchantMeta'
 import { EnchantMetaTypeEnum } from 'src/shared/constants'
-import { Item } from './item.entity'
 
 @Entity({ name: 'enchant_meta' })
 export class EnchantMeta {
   @PrimaryGeneratedColumn()
   id: number
-
-  @OneToOne(() => Item, item => item.enchantMeta, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'item_id' })
-  item: Item
 
   @Column({
     type: 'enum',
@@ -29,26 +15,26 @@ export class EnchantMeta {
     nullable: true,
   })
   @Index()
-  enchantType: EnchantsTypesEnum
+  enchantType: EnchantsTypesEnum;
 
   @Column({
     type: 'set',
     enum: getSetsForEnchantMeta(EnchantMetaTypeEnum.ARMOR),
     nullable: true,
   })
-  armor: string[]
+  [EnchantMetaTypeEnum.ARMOR]: string[];
 
   @Column({
     type: 'set',
     enum: getSetsForEnchantMeta(EnchantMetaTypeEnum.TOOLS_AND_MELEE),
     nullable: true,
   })
-  toolsAndMelle: string[]
+  [EnchantMetaTypeEnum.TOOLS_AND_MELEE]: string[];
 
   @Column({
     type: 'set',
     enum: getSetsForEnchantMeta(EnchantMetaTypeEnum.RANGE_WEAPON),
     nullable: true,
   })
-  rangeWeapon: string[]
+  [EnchantMetaTypeEnum.RANGE_WEAPON]: string[]
 }

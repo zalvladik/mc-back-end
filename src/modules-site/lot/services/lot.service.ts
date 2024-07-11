@@ -69,12 +69,12 @@ export class LotService {
       ])
 
     queryBuilder.andWhere(
-      `(FIND_IN_SET(itemEnchantMeta.${enchantMetaType}, :enchants)) > 0`,
+      `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:enchants, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`,
       { enchants },
     )
 
     queryBuilder.andWhere(
-      '(itemEnchantMeta.enchantType LIKE :enchantType OR itemEnchantMeta.enchantType LIKE :enchantType)',
+      '(itemEnchantMeta.enchantType LIKE :enchantType OR shulkerItemEnchantMeta.enchantType LIKE :enchantType)',
       {
         enchantType: `%${enchantType}%`,
       },

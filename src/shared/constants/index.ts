@@ -1,4 +1,3 @@
-import type { EnchantsTypesEnum } from '../enums'
 import { EnchantsEnum } from '../enums'
 
 export const THIRTY_DAYS = 30 * 24 * 60 * 1000
@@ -111,6 +110,8 @@ export const enchantVariables: {
     EnchantsEnum.MENDING,
     EnchantsEnum.UNBREAKING,
     EnchantsEnum.VANISHING_CURSE,
+    EnchantsEnum.WIND_BURST,
+    EnchantsEnum.DENSITY,
   ],
   rangeWeapon: [
     EnchantsEnum.CHANNELING,

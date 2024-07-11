@@ -1,12 +1,20 @@
 import { enchantsWithMaxLvl } from 'src/shared/constants'
+import type { EnchantsTypesEnum } from 'src/shared/enums'
+import { getSetsForEnchantTypes } from '../getSetsForEnchantTypes/getSetsForEnchantTypes'
 
-export const getSetsForEnchantMeta = (): string[] => {
-  return Object.entries(enchantsWithMaxLvl)
-    .map(([key, value]) => {
-      if (value === 1) return key
+export const getSetsForEnchantMeta = (
+  enchantType: EnchantsTypesEnum,
+): string[] => {
+  const enchants = getSetsForEnchantTypes(enchantType)
 
-      return Array.from({ length: value }).map(
-        (enchant, i) => `${enchant}$${i + 1}`,
+  return enchants
+    .map(enchant => {
+      const maxLvL = enchantsWithMaxLvl[enchant]
+
+      if (maxLvL === 1) return enchant
+
+      return Array.from({ length: maxLvL }, () => 'empty').map(
+        (_, lvl) => `${enchant}$${lvl + 1}`,
       )
     })
     .flat()

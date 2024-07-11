@@ -93,7 +93,7 @@ export class UserItemsService {
         })
         .filter(item => item)
 
-      console.log({ items, itemsEnchantMeta })
+      console.log(itemsEnchantMeta[0].boots)
 
       this.cacheService.set(itemsStorageId, { items, itemsEnchantMeta })
     } catch (error) {

@@ -11,12 +11,13 @@ import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
-import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
 import { SocketTypes } from 'src/shared/constants'
 import { CacheService } from 'src/shared/services/cache'
 
+import { EnchantMeta } from 'src/entities/enchant-meta.entity'
+import { getEnchantTypeFromItemType } from 'src/shared/helpers/getEnchantTypeFromItem'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
@@ -24,6 +25,8 @@ export class UserItemsService {
   constructor(
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
+    @InjectRepository(EnchantMeta)
+    private readonly enchantMetaRepository: Repository<EnchantMeta>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     @InjectRepository(ItemTicket)
@@ -68,17 +71,29 @@ export class UserItemsService {
 
           if (description) result = { ...result, description }
 
-          if (item.enchants?.length) {
-            const enchants = enchantmentDescription(item.enchants)
-
-            result = { ...result, enchants }
-          }
-
           return result
         },
       )
 
-      this.cacheService.set(itemsStorageId, items)
+      const itemsEnchantMeta = items
+        .map(item => {
+          if (item.enchants?.length) {
+            const enchantType = getEnchantTypeFromItemType(item.type)
+
+            if (enchantType) {
+              return this.enchantMetaRepository.create({
+                item,
+                enchantType,
+                [enchantType]: item.enchants,
+              })
+            }
+          }
+
+          return undefined
+        })
+        .filter(item => item)
+
+      this.cacheService.set(itemsStorageId, { items, itemsEnchantMeta })
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')
     }
@@ -88,9 +103,13 @@ export class UserItemsService {
     username: string,
     itemsStorageId: string,
   ): Promise<void> {
-    const items = this.cacheService.get<Item[]>(itemsStorageId)
+    const { items, itemsEnchantMeta } = this.cacheService.get<{
+      items: Item[]
+      itemsEnchantMeta: EnchantMeta[]
+    }>(itemsStorageId)
 
     await this.itemRepository.save(items)
+    await this.enchantMetaRepository.save(itemsEnchantMeta)
 
     this.cacheService.delete(itemsStorageId)
 

@@ -14,8 +14,14 @@ import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { SocketTypes } from 'src/shared/constants'
+import { enchantVariables, SocketTypes } from 'src/shared/constants'
 import { CacheService } from 'src/shared/services/cache'
+import {
+  giveNegativeEnchantsTypes,
+  giveOtherEnchantsTypes,
+} from 'src/shared/helpers/getSetsForEnchantTypes/getSetsForEnchantTypes'
+
+import { getEnchantTypeFromItemType } from 'src/shared/helpers/getEnchantTypeFromItem'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
@@ -36,8 +42,6 @@ export class UserItemsService {
     username: string,
     itemsStorageId: string,
   ): Promise<void> {
-    console.log(itemsData[0].enchants)
-
     const user = await this.userRepository.findOne({
       where: { username },
     })
@@ -74,6 +78,14 @@ export class UserItemsService {
 
             result = { ...result, enchants }
           }
+
+          const enchantType = getEnchantTypeFromItemType(item.type)
+
+          console.log([
+            ...enchantVariables[enchantType],
+            ...giveOtherEnchantsTypes(enchantType),
+            ...giveNegativeEnchantsTypes(enchantType),
+          ])
 
           return result
         },

@@ -82,7 +82,7 @@ export class UserItemsService {
           const enchantType = getEnchantTypeFromItemType(item.type)
 
           console.log([
-            ...enchantVariables[enchantType],
+            ...(enchantVariables[enchantType] ?? []),
             ...giveOtherEnchantsTypes(enchantType),
             ...giveNegativeEnchantsTypes(enchantType),
           ])

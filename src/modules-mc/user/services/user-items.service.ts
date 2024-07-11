@@ -88,7 +88,7 @@ export class UserItemsService {
               if (value === 1) return key
 
               return Array.from({ length: value }).map(
-                lvl => `${key}$${lvl}${1}`,
+                (_, lvl) => `${key}$${lvl}${1}`,
               )
             })
             .flat()

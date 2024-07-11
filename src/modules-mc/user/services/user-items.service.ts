@@ -14,18 +14,9 @@ import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { enchantmentDescription } from 'src/shared/helpers/enchantments'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import {
-  enchantsWithMaxLvl,
-  enchantVariables,
-  SocketTypes,
-} from 'src/shared/constants'
+import { SocketTypes } from 'src/shared/constants'
 import { CacheService } from 'src/shared/services/cache'
-import {
-  giveNegativeEnchantsTypes,
-  giveOtherEnchantsTypes,
-} from 'src/shared/helpers/getSetsForEnchantTypes/getSetsForEnchantTypes'
 
-import { getEnchantTypeFromItemType } from 'src/shared/helpers/getEnchantTypeFromItem'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
@@ -82,18 +73,6 @@ export class UserItemsService {
 
             result = { ...result, enchants }
           }
-
-          const enchants = Object.entries(enchantsWithMaxLvl)
-            .map(([key, value]) => {
-              if (value === 1) return key
-
-              return Array.from({ length: value }, () => 'empty').map(
-                (_, lvl) => `${key}$${lvl + 1}`,
-              )
-            })
-            .flat()
-
-          console.log({ length: enchants.length, enchants })
 
           return result
         },

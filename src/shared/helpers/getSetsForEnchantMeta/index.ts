@@ -19,7 +19,5 @@ export const getSetsForEnchantMeta = (
     })
     .flat()
 
-  console.log(response.length)
-
   return response
 }

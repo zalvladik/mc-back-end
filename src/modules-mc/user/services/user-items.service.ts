@@ -85,8 +85,8 @@ export class UserItemsService {
             if (enchantType) {
               return {
                 item,
-                [enchantMetaType]: enchantMetaType,
-                [enchantType]: item.enchants,
+                [enchantMetaType]: item.enchants,
+                [enchantType]: enchantType,
               }
             }
           }
@@ -94,6 +94,8 @@ export class UserItemsService {
           return undefined
         })
         .filter(item => item)
+
+      console.log(itemsEnchantMeta)
 
       this.cacheService.set(itemsStorageId, { items, itemsEnchantMeta })
     } catch (error) {

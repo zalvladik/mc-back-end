@@ -76,24 +76,22 @@ export class UserItemsService {
         },
       )
 
-      const itemsEnchantMeta = items
-        .map(item => {
-          if (item.enchants?.length) {
-            const enchantType = getEnchantTypeFromItemType(item.type)
-            const enchantMetaType = getEnchantMetaType(enchantType)
+      const itemsEnchantMeta = items.map(item => {
+        if (item.enchants?.length) {
+          const enchantType = getEnchantTypeFromItemType(item.type)
+          const enchantMetaType = getEnchantMetaType(enchantType)
 
-            if (enchantType) {
-              return {
-                item,
-                [enchantMetaType]: item.enchants,
-                [enchantType]: enchantType,
-              }
+          if (enchantType) {
+            return {
+              item,
+              [enchantMetaType]: item.enchants,
+              [enchantType]: enchantType,
             }
           }
+        }
 
-          return undefined
-        })
-        .filter(item => item)
+        return undefined
+      })
 
       this.cacheService.set(itemsStorageId, { items, itemsEnchantMeta })
     } catch (error) {
@@ -110,7 +108,15 @@ export class UserItemsService {
       itemsEnchantMeta: EnchantMeta[]
     }>(itemsStorageId)
 
-    await this.itemRepository.save(items)
+    items.forEach(async (item, i) => {
+      const newItem = this.itemRepository.create({
+        ...item,
+        enchantMeta: itemsEnchantMeta[i],
+      })
+
+      await this.itemRepository.save(newItem)
+    })
+
     await this.enchantMetaRepository.save(itemsEnchantMeta)
 
     this.cacheService.delete(itemsStorageId)

@@ -62,8 +62,6 @@ export class UserShulkersService {
     try {
       const items = itemsData.map(
         (item: ItemDto & { description: string[] | null }) => {
-          console.log(item)
-
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 
@@ -99,30 +97,9 @@ export class UserShulkersService {
         display_name:
           shulkerData.display_name || giveShulkerLocal(shulkerData.type),
       }
-
-      const itemsEnchantMeta = items
-        .map(item => {
-          if (item.enchants?.length) {
-            const enchantType = getEnchantTypeFromItemType(item.type)
-            const enchantMetaType = getEnchantMetaType(enchantType)
-
-            if (enchantType) {
-              return {
-                item,
-                [enchantMetaType]: item.enchants,
-                [enchantType]: enchantType,
-              }
-            }
-          }
-
-          return undefined
-        })
-        .filter(item => item)
-
       this.cacheService.set(cacheId, {
         shulkerItems: items,
         shulkerData: updatedShulkerData,
-        itemsEnchantMeta,
       })
     } catch (error) {
       throw new BadRequestException('Предмет не знайдено')
@@ -135,7 +112,7 @@ export class UserShulkersService {
   ): Promise<void> {
     const user = await this.userRepository.findOne({ where: { username } })
 
-    const { shulkerItems, shulkerData, itemsEnchantMeta } =
+    const { shulkerItems, shulkerData } =
       this.cacheService.get<ShulkerPostStorageT>(cacheId)
 
     const newUserShulker = this.shulkerRepository.create({
@@ -155,7 +132,6 @@ export class UserShulkersService {
     })
 
     await this.itemsRepository.save(updatedShulkerItems)
-    await this.enchantMetaRepository.save(itemsEnchantMeta)
 
     this.cacheService.delete(cacheId)
 

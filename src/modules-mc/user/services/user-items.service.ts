@@ -60,7 +60,6 @@ export class UserItemsService {
     try {
       const items = itemsData.map(
         (item: ItemDto & { description: string[] | null }) => {
-          console.log(item)
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 

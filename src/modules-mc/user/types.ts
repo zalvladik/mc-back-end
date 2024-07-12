@@ -1,4 +1,3 @@
-import type { EnchantMeta } from 'src/entities/enchant-meta.entity'
 import type { ItemDto, ShulkerDto } from './dtos-request'
 
 export type MoneyStorageDataT = {
@@ -9,7 +8,6 @@ export type MoneyStorageDataT = {
 export type ShulkerPostStorageT = {
   shulkerItems: ItemDto[]
   shulkerData: ShulkerDto
-  itemsEnchantMeta: EnchantMeta[]
 }
 
 export type AddShulkerToUserProps = {

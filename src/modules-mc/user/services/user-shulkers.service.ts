@@ -81,11 +81,13 @@ export class UserShulkersService {
             if (enchantType) {
               const enchantMetaType = getEnchantMetaType(enchantType)
 
-              const newEnchantMeta = this.enchantMetaRepository.create({
+              const body = {
                 item: { ...createdNewItem },
-                [enchantMetaType]: item.enchants.join(','),
+                [enchantMetaType]: item.enchants,
                 enchantType,
-              })
+              }
+
+              const newEnchantMeta = this.enchantMetaRepository.create(body)
 
               createdNewItem.enchantMeta = { ...newEnchantMeta }
             }

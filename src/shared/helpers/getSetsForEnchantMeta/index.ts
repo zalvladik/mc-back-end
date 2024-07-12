@@ -11,7 +11,7 @@ export const getSetsForEnchantMeta = (
     .map(enchant => {
       const maxLvL = enchantsWithMaxLvl[enchant]
 
-      if (maxLvL === 1) return enchant
+      if (maxLvL === 1) return `${enchant}$1`
 
       return Array.from({ length: maxLvL }, () => 'empty').map(
         (_, lvl) => `${enchant}$${lvl + 1}`,

@@ -26,13 +26,13 @@ export class Lot {
     onDelete: 'CASCADE',
     nullable: true,
   })
-  @JoinColumn({ name: 'item_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'item_id' })
   item: Item
 
   @OneToOne(() => Shulker, shulker => shulker.lot, {
     onDelete: 'CASCADE',
     nullable: true,
   })
-  @JoinColumn({ name: 'shulker_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'shulker_id' })
   shulker: Shulker
 }

@@ -1,8 +1,16 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
 
 import { EnchantsTypesEnum } from 'src/shared/enums'
 import { getSetsForEnchantMeta } from 'src/shared/helpers/getSetsForEnchantMeta'
 import { EnchantMetaTypeEnum } from 'src/shared/constants'
+import { Item } from './item.entity'
 
 @Entity({ name: 'enchant_meta' })
 export class EnchantMeta {
@@ -15,7 +23,14 @@ export class EnchantMeta {
     nullable: true,
   })
   @Index()
-  enchantType: EnchantsTypesEnum;
+  enchantType: EnchantsTypesEnum
+
+  @OneToOne(() => Item, {
+    cascade: true,
+    nullable: false,
+  })
+  @JoinColumn({ name: 'item_id' })
+  enchantMeta: Item;
 
   @Column({
     type: 'set',

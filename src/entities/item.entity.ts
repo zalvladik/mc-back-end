@@ -76,7 +76,7 @@ export class Item {
 
   @OneToOne(() => EnchantMeta, {
     cascade: true,
-    onDelete: 'CASCADE',
+    nullable: true,
   })
   @JoinColumn({ name: 'enchant_meta_id' })
   enchantMeta: EnchantMeta

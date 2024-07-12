@@ -25,13 +25,13 @@ export class EnchantMeta {
   @Index()
   enchantType: EnchantsTypesEnum
 
-  @OneToOne(() => Item, {
+  @OneToOne(() => Item, item => item.enchantMeta, {
     cascade: true,
     onDelete: 'CASCADE',
     nullable: false,
   })
   @JoinColumn({ name: 'item_id' })
-  enchantMeta: Item;
+  item: Item;
 
   @Column({
     type: 'set',

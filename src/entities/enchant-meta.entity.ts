@@ -26,7 +26,6 @@ export class EnchantMeta {
   enchantType: EnchantsTypesEnum
 
   @OneToOne(() => Item, item => item.enchantMeta, {
-    cascade: true,
     onDelete: 'CASCADE',
     nullable: false,
   })

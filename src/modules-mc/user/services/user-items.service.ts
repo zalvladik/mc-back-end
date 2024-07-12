@@ -67,7 +67,7 @@ export class UserItemsService {
             ...item,
             user,
             display_name: item.display_name || display_name,
-            categories,
+            categories: categories.join(','),
           })
 
           if (description) createdNewItem.description = description

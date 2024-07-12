@@ -68,7 +68,7 @@ export class UserShulkersService {
           const createdNewItem = this.itemsRepository.create({
             ...item,
             display_name: item.display_name || display_name,
-            categories,
+            categories: categories.join(','),
           })
 
           if (description) createdNewItem.description = description

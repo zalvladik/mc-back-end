@@ -75,7 +75,6 @@ export class Item {
   lot: Lot
 
   @OneToOne(() => EnchantMeta, {
-    cascade: true,
     nullable: true,
   })
   @JoinColumn({ name: 'enchant_meta_id' })

@@ -11,11 +11,7 @@ import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import {
-  EnchantMetaTypeEnum,
-  itemMeta,
-  SocketTypes,
-} from 'src/shared/constants'
+import { itemMeta, SocketTypes } from 'src/shared/constants'
 import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
@@ -83,19 +79,14 @@ export class UserShulkersService {
             if (enchantType) {
               const enchantMetaType = getEnchantMetaType(enchantType)
 
+              console.log(item.enchants)
+
               const newEnchantMeta = this.enchantMetaRepository.create({
-                item: { ...createdNewItem },
                 enchantType,
-                ...{
-                  armor: enchantMetaType === 'armor' ? item.enchants : null,
-                  toolsAndMelee:
-                    enchantMetaType === 'toolsAndMelee' ? item.enchants : null,
-                  rangeWeapon:
-                    enchantMetaType === 'rangeWeapon' ? item.enchants : null,
-                },
+                [enchantMetaType]: item.enchants.join(','),
               })
 
-              createdNewItem.enchantMeta = { ...newEnchantMeta }
+              createdNewItem.enchantMeta = newEnchantMeta
             }
           }
 
@@ -108,6 +99,7 @@ export class UserShulkersService {
         display_name:
           shulkerData.display_name || giveShulkerLocal(shulkerData.type),
       }
+
       this.cacheService.set(cacheId, {
         shulkerItems: items,
         shulkerData: updatedShulkerData,

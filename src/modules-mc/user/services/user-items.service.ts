@@ -13,7 +13,7 @@ import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { EnchantMetaTypeEnum, SocketTypes } from 'src/shared/constants'
+import { SocketTypes } from 'src/shared/constants'
 import { CacheService } from 'src/shared/services/cache'
 
 import { EnchantMeta } from 'src/entities/enchant-meta.entity'
@@ -79,18 +79,11 @@ export class UserItemsService {
               const enchantMetaType = getEnchantMetaType(enchantType)
 
               const newEnchantMeta = this.enchantMetaRepository.create({
-                item: { ...createdNewItem },
                 enchantType,
-                ...{
-                  armor: enchantMetaType === 'armor' ? item.enchants : null,
-                  toolsAndMelee:
-                    enchantMetaType === 'toolsAndMelee' ? item.enchants : null,
-                  rangeWeapon:
-                    enchantMetaType === 'rangeWeapon' ? item.enchants : null,
-                },
+                [enchantMetaType]: item.enchants.join(','),
               })
 
-              createdNewItem.enchantMeta = { ...newEnchantMeta }
+              createdNewItem.enchantMeta = newEnchantMeta
             }
           }
 

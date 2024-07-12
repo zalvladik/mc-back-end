@@ -63,12 +63,14 @@ export class UserItemsService {
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 
-          const createdNewItem = this.itemRepository.create({
+          const body = {
             ...item,
             user,
             display_name: item.display_name || display_name,
-            categories: categories.join(','),
-          })
+            categories,
+          }
+
+          const createdNewItem = this.itemRepository.create(body)
 
           if (description) createdNewItem.description = description
 

@@ -65,11 +65,13 @@ export class UserShulkersService {
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 
-          const createdNewItem = this.itemsRepository.create({
+          const body = {
             ...item,
             display_name: item.display_name || display_name,
-            categories: categories.join(','),
-          })
+            categories,
+          }
+
+          const createdNewItem = this.itemsRepository.create(body)
 
           if (description) createdNewItem.description = description
 

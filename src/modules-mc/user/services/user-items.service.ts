@@ -63,14 +63,12 @@ export class UserItemsService {
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 
-          const body = {
+          const createdNewItem = this.itemRepository.create({
             ...item,
             user,
             display_name: item.display_name || display_name,
             categories,
-          }
-
-          const createdNewItem = this.itemRepository.create(body)
+          })
 
           if (description) createdNewItem.description = description
 
@@ -80,26 +78,17 @@ export class UserItemsService {
             if (enchantType) {
               const enchantMetaType = getEnchantMetaType(enchantType)
 
-              const body = {
+              const newEnchantMeta = this.enchantMetaRepository.create({
                 item: { ...createdNewItem },
                 enchantType,
                 ...{
-                  [EnchantMetaTypeEnum.ARMOR]:
-                    enchantMetaType === EnchantMetaTypeEnum.ARMOR
-                      ? item.enchants
-                      : null,
-                  [EnchantMetaTypeEnum.TOOLS_AND_MELEE]:
-                    enchantMetaType === EnchantMetaTypeEnum.TOOLS_AND_MELEE
-                      ? item.enchants
-                      : null,
-                  [EnchantMetaTypeEnum.RANGE_WEAPON]:
-                    enchantMetaType === EnchantMetaTypeEnum.RANGE_WEAPON
-                      ? item.enchants
-                      : null,
+                  armor: enchantMetaType === 'armor' ? item.enchants : null,
+                  toolsAndMelee:
+                    enchantMetaType === 'toolsAndMelee' ? item.enchants : null,
+                  rangeWeapon:
+                    enchantMetaType === 'rangeWeapon' ? item.enchants : null,
                 },
-              }
-
-              const newEnchantMeta = this.enchantMetaRepository.create(body)
+              })
 
               createdNewItem.enchantMeta = { ...newEnchantMeta }
             }

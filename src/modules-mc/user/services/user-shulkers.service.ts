@@ -11,7 +11,11 @@ import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { itemMeta, SocketTypes } from 'src/shared/constants'
+import {
+  EnchantMetaTypeEnum,
+  itemMeta,
+  SocketTypes,
+} from 'src/shared/constants'
 import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
@@ -65,13 +69,11 @@ export class UserShulkersService {
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 
-          const body = {
+          const createdNewItem = this.itemsRepository.create({
             ...item,
             display_name: item.display_name || display_name,
             categories,
-          }
-
-          const createdNewItem = this.itemsRepository.create(body)
+          })
 
           if (description) createdNewItem.description = description
 
@@ -83,8 +85,14 @@ export class UserShulkersService {
 
               const body = {
                 item: { ...createdNewItem },
-                [enchantMetaType]: item.enchants,
                 enchantType,
+                ...{
+                  armor: enchantMetaType === 'armor' ? item.enchants : null,
+                  toolsAndMelee:
+                    enchantMetaType === 'toolsAndMelee' ? item.enchants : null,
+                  rangeWeapon:
+                    enchantMetaType === 'rangeWeapon' ? item.enchants : null,
+                },
               }
 
               const newEnchantMeta = this.enchantMetaRepository.create(body)

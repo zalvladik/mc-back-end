@@ -55,7 +55,7 @@ export class Item {
     ],
     nullable: false,
   })
-  categories: string[]
+  categories: CategoryEnum[]
 
   @Column({ type: 'text', nullable: false })
   serialized: string

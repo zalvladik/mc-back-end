@@ -84,7 +84,7 @@ export class UserShulkersService {
                 enchantType,
               })
 
-              createdNewItem.enchantMeta = newEnchantMeta
+              createdNewItem.enchantMeta = { ...newEnchantMeta }
             }
           }
 

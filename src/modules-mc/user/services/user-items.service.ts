@@ -83,7 +83,7 @@ export class UserItemsService {
                 enchantType,
               })
 
-              createdNewItem.enchantMeta = newEnchantMeta
+              createdNewItem.enchantMeta = { ...newEnchantMeta }
             }
           }
 

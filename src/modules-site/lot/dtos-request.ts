@@ -71,52 +71,12 @@ export class GetLotsQuaryDto {
   @IsOptional()
   @IsString()
   display_nameOrType?: string
-}
-
-export class GetItemWithEnchantsQuaryDto {
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  page?: number
-
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  limit?: number
-
-  @IsNotEmpty()
-  @IsString()
-  enchants: string
-
-  @IsNotEmpty()
-  @IsString()
-  enchantType: EnchantsTypesEnum
-
-  @IsNotEmpty()
-  @IsString()
-  type: string
-}
-
-export class GetShulkerLotsQuaryDto {
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  page?: number
-
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  limit?: number
 
   @IsOptional()
   @IsString()
-  category?: string
+  enchants?: string
 
   @IsOptional()
   @IsString()
-  display_nameOrType?: string
+  enchantType?: EnchantsTypesEnum
 }

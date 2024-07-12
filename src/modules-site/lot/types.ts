@@ -1,3 +1,5 @@
+import type { GetLotsQuaryDto } from './dtos-request'
+
 export type CreateLotItemServiceT = {
   userId: number
   itemId: number
@@ -25,3 +27,20 @@ export type ByeLotShulkerServiceT = {
   buyerUserId: number
   shulkerCount: number
 }
+
+export type GetItemWithEnchantsService = {
+  username: string
+  didNeedUserLots?: boolean
+  didNeedShulkers?: boolean
+} & GetLotsQuaryDto
+
+export type GetShulkerLotsService = {
+  username: string
+  didNeedUserLots?: boolean
+} & GetLotsQuaryDto
+
+export type GetLotsSerivce = {
+  username: string
+  didNeedUserLots?: boolean
+  didNeedShulkers?: boolean
+} & GetLotsQuaryDto

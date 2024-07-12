@@ -15,10 +15,10 @@ import type {
   GetLotsResponseDto,
 } from '../dtos-response'
 import type {
-  GetItemWithEnchantsQuaryDto,
-  GetLotsQuaryDto,
-  GetShulkerLotsQuaryDto,
-} from '../dtos-request'
+  GetItemWithEnchantsService,
+  GetLotsSerivce,
+  GetShulkerLotsService,
+} from '../types'
 
 @Injectable()
 export class LotService {
@@ -31,9 +31,12 @@ export class LotService {
     page = 1,
     limit = 8,
     enchants,
-    type,
+    display_nameOrType: type,
+    username,
     enchantType,
-  }: GetItemWithEnchantsQuaryDto): Promise<GetLotsResponseDto> {
+    didNeedUserLots = true,
+    didNeedShulkers = true,
+  }: GetItemWithEnchantsService): Promise<GetLotsResponseDto> {
     const enchantMetaType = getEnchantMetaType(enchantType)
 
     if (!enchantMetaType) {
@@ -68,10 +71,15 @@ export class LotService {
         'shulker.display_name',
       ])
 
-    queryBuilder.andWhere(
-      `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:enchants, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`,
-      { enchants },
-    )
+    if (didNeedUserLots === false) {
+      queryBuilder.andWhere('lot.username != :username', { username })
+    }
+
+    const sqlEnchants = didNeedShulkers
+      ? `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:enchants, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`
+      : `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0)`
+
+    queryBuilder.andWhere(sqlEnchants, { enchants })
 
     queryBuilder.andWhere(
       '(itemEnchantMeta.enchantType LIKE :enchantType OR shulkerItemEnchantMeta.enchantType LIKE :enchantType)',
@@ -80,12 +88,13 @@ export class LotService {
       },
     )
 
-    queryBuilder.andWhere(
-      '(item.type LIKE :type OR shulkerItem.type LIKE :type)',
-      {
-        type: `%${type}%`,
-      },
-    )
+    const sqlType = didNeedShulkers
+      ? '(item.type LIKE :type OR shulkerItem.type LIKE :type)'
+      : '(item.type LIKE :type)'
+
+    queryBuilder.andWhere(sqlType, {
+      type: `%${type}%`,
+    })
 
     const [lots, totalItems] = await queryBuilder.getManyAndCount()
 
@@ -101,7 +110,9 @@ export class LotService {
     page = 1,
     limit = 8,
     display_nameOrType,
-  }: GetShulkerLotsQuaryDto): Promise<GetLotsResponseDto> {
+    username,
+    didNeedUserLots = true,
+  }: GetShulkerLotsService): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.shulker', 'shulker')
@@ -116,6 +127,10 @@ export class LotService {
         'shulker.type',
         'shulker.display_name',
       ])
+
+    if (didNeedUserLots === false) {
+      queryBuilder.andWhere('lot.username != :username', { username })
+    }
 
     if (display_nameOrType) {
       queryBuilder.andWhere(
@@ -141,7 +156,10 @@ export class LotService {
     limit = 8,
     category,
     display_nameOrType,
-  }: GetLotsQuaryDto): Promise<GetLotsResponseDto> {
+    username,
+    didNeedUserLots = true,
+    didNeedShulkers = true,
+  }: GetLotsSerivce): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')
@@ -166,20 +184,26 @@ export class LotService {
         'shulker.display_name',
       ])
 
-    if (category) {
-      queryBuilder.andWhere(
-        '(FIND_IN_SET(:category, item.categories) OR FIND_IN_SET(:category, shulkerItem.categories))',
-        { category },
-      )
+    if (didNeedUserLots === false) {
+      queryBuilder.andWhere('lot.username != :username', { username })
     }
 
+    const sqlCategory = didNeedShulkers
+      ? '(FIND_IN_SET(:category, item.categories) OR FIND_IN_SET(:category, shulkerItem.categories))'
+      : '(FIND_IN_SET(:category, item.categories)'
+
+    if (category) {
+      queryBuilder.andWhere(sqlCategory, { category })
+    }
+
+    const sqlDisplay_nameOrType = didNeedShulkers
+      ? '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)'
+      : '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType)'
+
     if (display_nameOrType) {
-      queryBuilder.andWhere(
-        '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)',
-        {
-          display_nameOrType: `%${display_nameOrType}%`,
-        },
-      )
+      queryBuilder.andWhere(sqlDisplay_nameOrType, {
+        display_nameOrType: `%${display_nameOrType}%`,
+      })
     }
 
     const [lots, totalItems] = await queryBuilder.getManyAndCount()

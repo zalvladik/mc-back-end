@@ -48,6 +48,8 @@ export class LotController {
       return this.lotService.getShulkerLots({ username, ...rest })
     }
 
+    console.log({ enchants, enchantType, display_nameOrType })
+
     if (enchants && enchantType && display_nameOrType) {
       return this.lotService.getItemWithEnchants({
         username,
@@ -56,6 +58,8 @@ export class LotController {
         display_nameOrType,
       })
     }
+
+    console.log({ username, category, ...rest })
 
     return this.lotService.getLots({ username, category, ...rest })
   }

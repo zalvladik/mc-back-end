@@ -79,4 +79,20 @@ export class GetLotsQuaryDto {
   @IsOptional()
   @IsString()
   enchantType?: EnchantsTypesEnum
+
+  @IsOptional()
+  @IsString()
+  didNeedShulkers?: boolean
+
+  @IsOptional()
+  @IsString()
+  didNeedUserLots?: boolean
+
+  @IsOptional()
+  @IsString()
+  didMoneyToUp?: boolean
+
+  @IsOptional()
+  @IsString()
+  didNeedIdentical?: boolean
 }

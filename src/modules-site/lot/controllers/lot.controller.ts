@@ -36,6 +36,8 @@ export class LotController {
   async getLots(
     @Query()
     {
+      page,
+      limit,
       category,
       enchants,
       enchantType,
@@ -48,6 +50,8 @@ export class LotController {
     @UserDecorator() { username }: GetUserDto,
   ): Promise<GetLotsResponseDto> {
     const searchFilterParams = {
+      page,
+      limit,
       didNeedShulkers,
       didNeedUserLots,
       didPriceToUp,

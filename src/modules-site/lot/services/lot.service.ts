@@ -169,32 +169,44 @@ export class LotService {
     didNeedUserLots,
     didNeedShulkers,
   }: GetLotsSerivce): Promise<GetLotsResponseDto> {
-    const queryBuilder = this.lotRepository
-      .createQueryBuilder('lot')
-      .leftJoinAndSelect('lot.item', 'item')
-      .leftJoinAndSelect('lot.shulker', 'shulker')
-      .leftJoinAndSelect('shulker.items', 'shulkerItem')
-      .skip((page - 1) * limit)
-      .take(limit)
-      .select([
-        'lot',
-        'item.id',
-        'item.amount',
-        'item.type',
-        'item.display_name',
-        'item.description',
-        'item.enchants',
-        'item.categories',
-        'item.durability',
+    let select = [
+      'lot',
+      'item.id',
+      'item.amount',
+      'item.type',
+      'item.display_name',
+      'item.description',
+      'item.enchants',
+      'item.categories',
+      'item.durability',
+    ]
+
+    if (didNeedShulkers) {
+      select = [
+        ...select,
         'shulker.id',
         'shulker.username',
         'shulker.categories',
         'shulker.type',
         'shulker.display_name',
-      ])
+      ]
+    }
+
+    const queryBuilder = this.lotRepository
+      .createQueryBuilder('lot')
+      .leftJoinAndSelect('lot.item', 'item')
+      .skip((page - 1) * limit)
+      .take(limit)
+      .select(select)
 
     if (didNeedUserLots === false) {
       queryBuilder.andWhere('lot.username != :username', { username })
+    }
+
+    if (didNeedShulkers) {
+      queryBuilder
+        .leftJoinAndSelect('lot.shulker', 'shulker')
+        .leftJoinAndSelect('shulker.items', 'shulkerItem')
     }
 
     const sqlCategory = didNeedShulkers

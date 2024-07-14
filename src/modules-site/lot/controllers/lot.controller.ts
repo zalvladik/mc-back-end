@@ -42,7 +42,7 @@ export class LotController {
       display_nameOrType,
       didNeedShulkers = true,
       didNeedUserLots = true,
-      didMoneyToUp = true,
+      didPriceToUp = true,
       didNeedIdentical = false,
     }: GetLotsQuaryDto,
     @UserDecorator() { username }: GetUserDto,
@@ -50,7 +50,7 @@ export class LotController {
     const restPayload = {
       didNeedShulkers,
       didNeedUserLots,
-      didMoneyToUp,
+      didPriceToUp,
       didNeedIdentical,
     }
 
@@ -76,7 +76,7 @@ export class LotController {
       category,
       didNeedShulkers,
       didNeedUserLots,
-      didMoneyToUp,
+      didPriceToUp,
       didNeedIdentical,
     })
   }

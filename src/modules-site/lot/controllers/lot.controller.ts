@@ -47,7 +47,7 @@ export class LotController {
     }: GetLotsQuaryDto,
     @UserDecorator() { username }: GetUserDto,
   ): Promise<GetLotsResponseDto> {
-    const restPayload = {
+    const searchFilterParams = {
       didNeedShulkers,
       didNeedUserLots,
       didPriceToUp,
@@ -57,7 +57,8 @@ export class LotController {
     if (category === CategoryEnum.SHULKERS) {
       return this.lotService.getShulkerLots({
         username,
-        ...restPayload,
+        display_nameOrType,
+        ...searchFilterParams,
       })
     }
 
@@ -67,13 +68,14 @@ export class LotController {
         enchants,
         enchantType,
         display_nameOrType,
-        ...restPayload,
+        ...searchFilterParams,
       })
     }
 
     return this.lotService.getLots({
       username,
       category,
+      display_nameOrType,
       didNeedShulkers,
       didNeedUserLots,
       didPriceToUp,

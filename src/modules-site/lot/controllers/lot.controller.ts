@@ -40,15 +40,26 @@ export class LotController {
       enchants,
       enchantType,
       display_nameOrType,
-      ...rest
+      didNeedShulkers = true,
+      didNeedUserLots = true,
+      didMoneyToUp = true,
+      didNeedIdentical = false,
     }: GetLotsQuaryDto,
     @UserDecorator() { username }: GetUserDto,
   ): Promise<GetLotsResponseDto> {
-    if (category === CategoryEnum.SHULKERS) {
-      return this.lotService.getShulkerLots({ username, ...rest })
+    const restPayload = {
+      didNeedShulkers,
+      didNeedUserLots,
+      didMoneyToUp,
+      didNeedIdentical,
     }
 
-    console.log({ enchants, enchantType, display_nameOrType })
+    if (category === CategoryEnum.SHULKERS) {
+      return this.lotService.getShulkerLots({
+        username,
+        ...restPayload,
+      })
+    }
 
     if (enchants && enchantType && display_nameOrType) {
       return this.lotService.getItemWithEnchants({
@@ -56,12 +67,18 @@ export class LotController {
         enchants,
         enchantType,
         display_nameOrType,
+        ...restPayload,
       })
     }
 
-    console.log({ username, category, ...rest })
-
-    return this.lotService.getLots({ username, category, ...rest })
+    return this.lotService.getLots({
+      username,
+      category,
+      didNeedShulkers,
+      didNeedUserLots,
+      didMoneyToUp,
+      didNeedIdentical,
+    })
   }
 
   @Get('user')

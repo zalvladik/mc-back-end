@@ -34,8 +34,8 @@ export class LotService {
     display_nameOrType: type,
     username,
     enchantType,
-    didNeedUserLots = true,
-    didNeedShulkers = true,
+    didNeedUserLots,
+    didNeedShulkers,
   }: GetItemWithEnchantsService): Promise<GetLotsResponseDto> {
     const enchantMetaType = getEnchantMetaType(enchantType)
 
@@ -111,7 +111,7 @@ export class LotService {
     limit = 8,
     display_nameOrType,
     username,
-    didNeedUserLots = true,
+    didNeedUserLots,
   }: GetShulkerLotsService): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
@@ -157,8 +157,8 @@ export class LotService {
     category,
     display_nameOrType,
     username,
-    didNeedUserLots = true,
-    didNeedShulkers = true,
+    didNeedUserLots,
+    didNeedShulkers,
   }: GetLotsSerivce): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')

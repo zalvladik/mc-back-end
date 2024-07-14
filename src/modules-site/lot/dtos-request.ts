@@ -1,6 +1,7 @@
 import type { TransformFnParams } from 'class-transformer'
 import { Transform, Type } from 'class-transformer'
 import {
+  IsBoolean,
   IsInt,
   IsNotEmpty,
   IsNumber,
@@ -81,18 +82,22 @@ export class GetLotsQuaryDto {
   enchantType?: EnchantsTypesEnum
 
   @IsOptional()
-  @IsString()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
   didNeedShulkers?: boolean
 
   @IsOptional()
-  @IsString()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
   didNeedUserLots?: boolean
 
   @IsOptional()
-  @IsString()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
   didMoneyToUp?: boolean
 
   @IsOptional()
-  @IsString()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
   didNeedIdentical?: boolean
 }

@@ -80,10 +80,7 @@ export class LotController {
       username,
       category,
       display_nameOrType,
-      didNeedShulkers,
-      didNeedUserLots,
-      didPriceToUp,
-      didNeedIdentical,
+      ...searchFilterParams,
     })
   }
 

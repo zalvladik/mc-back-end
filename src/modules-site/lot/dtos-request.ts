@@ -94,7 +94,7 @@ export class GetLotsQuaryDto {
   @IsOptional()
   @Transform(({ value }) => value === 'true')
   @IsBoolean()
-  didMoneyToUp?: boolean
+  didPriceToUp?: boolean
 
   @IsOptional()
   @Transform(({ value }) => value === 'true')

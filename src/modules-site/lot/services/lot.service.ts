@@ -36,6 +36,7 @@ export class LotService {
     enchantType,
     didNeedUserLots,
     didNeedShulkers,
+    didPriceToUp,
   }: GetItemWithEnchantsService): Promise<GetLotsResponseDto> {
     const enchantMetaType = getEnchantMetaType(enchantType)
 
@@ -96,6 +97,9 @@ export class LotService {
       type: `%${type}%`,
     })
 
+    const orderDirection = didPriceToUp ? 'ASC' : 'DESC'
+    queryBuilder.orderBy('lot.price', orderDirection)
+
     const [lots, totalItems] = await queryBuilder.getManyAndCount()
 
     const totalPages = Math.ceil(totalItems / limit)
@@ -112,6 +116,7 @@ export class LotService {
     display_nameOrType,
     username,
     didNeedUserLots,
+    didPriceToUp,
   }: GetShulkerLotsService): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
@@ -141,6 +146,9 @@ export class LotService {
       )
     }
 
+    const orderDirection = didPriceToUp ? 'ASC' : 'DESC'
+    queryBuilder.orderBy('lot.price', orderDirection)
+
     const [lots, totalItems] = await queryBuilder.getManyAndCount()
 
     const totalPages = Math.ceil(totalItems / limit)
@@ -157,6 +165,7 @@ export class LotService {
     category,
     display_nameOrType,
     username,
+    didPriceToUp,
     didNeedUserLots,
     didNeedShulkers,
   }: GetLotsSerivce): Promise<GetLotsResponseDto> {
@@ -205,6 +214,9 @@ export class LotService {
         display_nameOrType: `%${display_nameOrType}%`,
       })
     }
+
+    const orderDirection = didPriceToUp ? 'ASC' : 'DESC'
+    queryBuilder.orderBy('lot.price', orderDirection)
 
     const [lots, totalItems] = await queryBuilder.getManyAndCount()
 

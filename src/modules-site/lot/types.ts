@@ -41,6 +41,4 @@ export type GetShulkerLotsService = {
 
 export type GetLotsSerivce = {
   username: string
-  didNeedUserLots: boolean
-  didNeedShulkers: boolean
 } & GetLotsQuaryDto

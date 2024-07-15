@@ -179,9 +179,9 @@ export class LotService {
 
     if (display_nameOrType) {
       queryBuilder.andWhere(
-        `(shulkerItem.display_name ${isLike} :display_nameOrType OR shulkerItem.type ${isLike} :display_nameOrType)`,
+        `(LOWER(shulkerItem.display_name) ${isLike} :display_nameOrType OR LOWER(shulkerItem.type) ${isLike} :display_nameOrType)`,
         {
-          display_nameOrType: `%${display_nameOrType}%`,
+          display_nameOrType: display_nameOrType.toLowerCase(),
         },
       )
     }
@@ -248,11 +248,11 @@ export class LotService {
 
     if (display_nameOrType) {
       const sqlDisplay_nameOrType = didNeedShulkers
-        ? `(item.display_name ${isLike} :display_nameOrType OR item.type ${isLike} :display_nameOrType OR shulkerItem.display_name ${isLike} :display_nameOrType OR shulkerItem.type ${isLike} :display_nameOrType)`
-        : `(item.display_name ${isLike} :display_nameOrType OR item.type ${isLike} :display_nameOrType)`
+        ? `(LOWER(item.display_name) ${isLike} :display_nameOrType OR LOWER(item.type) ${isLike} :display_nameOrType OR LOWER(shulkerItem.display_name) ${isLike} :display_nameOrType OR LOWER(shulkerItem.type) ${isLike} :display_nameOrType)`
+        : `(LOWER(item.display_name) ${isLike} :display_nameOrType OR LOWER(item.type) ${isLike} :display_nameOrType)`
 
       queryBuilder.andWhere(sqlDisplay_nameOrType, {
-        display_nameOrType: `%${display_nameOrType}%`,
+        display_nameOrType: display_nameOrType.toLowerCase(),
       })
     }
 

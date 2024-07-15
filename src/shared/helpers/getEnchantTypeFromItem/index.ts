@@ -23,12 +23,12 @@ export const getEnchantTypeFromItemType = (
     return EnchantsTypesEnum.SWORD
   }
 
-  if (itemType.includes(EnchantsTypesEnum.AXE)) {
-    return EnchantsTypesEnum.AXE
-  }
-
   if (itemType.includes(EnchantsTypesEnum.PICKAXE)) {
     return EnchantsTypesEnum.PICKAXE
+  }
+
+  if (itemType.includes(EnchantsTypesEnum.AXE)) {
+    return EnchantsTypesEnum.AXE
   }
 
   if (itemType.includes(EnchantsTypesEnum.SHOVEL)) {

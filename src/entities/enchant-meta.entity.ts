@@ -12,7 +12,7 @@ export class EnchantMeta {
   @Column({
     type: 'enum',
     enum: EnchantsTypesEnum,
-    nullable: true,
+    nullable: false,
   })
   @Index()
   enchantType: EnchantsTypesEnum;

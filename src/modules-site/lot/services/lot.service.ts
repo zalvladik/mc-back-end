@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -22,21 +23,43 @@ import type {
 
 @Injectable()
 export class LotService {
+  private selectLote = [
+    'lot',
+    'item.id',
+    'item.amount',
+    'item.type',
+    'item.display_name',
+    'item.description',
+    'item.enchants',
+    'item.categories',
+    'item.durability',
+  ]
+
+  private selectShulker = [
+    'shulker.id',
+    'shulker.username',
+    'shulker.categories',
+    'shulker.type',
+    'shulker.display_name',
+  ]
+
+  private logger = new Logger('LotService')
+
   constructor(
     @InjectRepository(Lot)
     private readonly lotRepository: Repository<Lot>,
   ) {}
 
-  async getItemWithEnchants({
+  async getEnchantItems({
     page = 1,
     limit = 8,
     enchants,
-    display_nameOrType: type,
+    itemType,
     username,
     enchantType,
-    didNeedUserLots,
-    didNeedShulkers,
-    didPriceToUp,
+    didNeedUserLots = false,
+    didNeedShulkers = false,
+    didPriceToUp = true,
   }: GetItemWithEnchantsService): Promise<GetLotsResponseDto> {
     const enchantMetaType = getEnchantMetaType(enchantType)
 
@@ -46,31 +69,31 @@ export class LotService {
       )
     }
 
-    const queryBuilder = this.lotRepository
-      .createQueryBuilder('lot')
-      .leftJoinAndSelect('lot.item', 'item')
-      .leftJoinAndSelect('item.enchantMeta', 'itemEnchantMeta')
-      .leftJoinAndSelect('lot.shulker', 'shulker')
-      .leftJoinAndSelect('shulker.items', 'shulkerItem')
-      .leftJoinAndSelect('shulkerItem.enchantMeta', 'shulkerItemEnchantMeta')
+    let select = this.selectLote
+
+    if (didNeedShulkers) {
+      select = [...select, ...this.selectShulker]
+    }
+
+    const queryBuilder = this.lotRepository.createQueryBuilder('lot')
+
+    if (didNeedShulkers) {
+      queryBuilder
+        .leftJoinAndSelect('lot.item', 'item')
+        .leftJoinAndSelect('item.enchantMeta', 'itemEnchantMeta')
+        .leftJoinAndSelect('lot.shulker', 'shulker')
+        .leftJoinAndSelect('shulker.items', 'shulkerItem')
+        .leftJoinAndSelect('shulkerItem.enchantMeta', 'shulkerItemEnchantMeta')
+    } else {
+      queryBuilder
+        .innerJoinAndSelect('lot.item', 'item')
+        .leftJoinAndSelect('item.enchantMeta', 'itemEnchantMeta')
+    }
+
+    queryBuilder
       .skip((page - 1) * limit)
       .take(limit)
-      .select([
-        'lot',
-        'item.id',
-        'item.amount',
-        'item.type',
-        'item.display_name',
-        'item.description',
-        'item.enchants',
-        'item.categories',
-        'item.durability',
-        'shulker.id',
-        'shulker.username',
-        'shulker.categories',
-        'shulker.type',
-        'shulker.display_name',
-      ])
+      .select(select)
 
     if (didNeedUserLots === false) {
       queryBuilder.andWhere('lot.username != :username', { username })
@@ -80,22 +103,23 @@ export class LotService {
       ? `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:enchants, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`
       : `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0)`
 
-    queryBuilder.andWhere(sqlEnchants, { enchants })
-
-    queryBuilder.andWhere(
-      '(itemEnchantMeta.enchantType LIKE :enchantType OR shulkerItemEnchantMeta.enchantType LIKE :enchantType)',
-      {
-        enchantType: `%${enchantType}%`,
-      },
-    )
+    const sqlEnchantType = didNeedShulkers
+      ? `(itemEnchantMeta.enchantType = :enchantType OR shulkerItemEnchantMeta.enchantType = :enchantType)`
+      : `(itemEnchantMeta.enchantType = :enchantType)`
 
     const sqlType = didNeedShulkers
-      ? '(item.type LIKE :type OR shulkerItem.type LIKE :type)'
-      : '(item.type LIKE :type)'
+      ? '(item.type LIKE :itemType OR shulkerItem.type LIKE :itemType)'
+      : '(item.type LIKE :itemType)'
+
+    queryBuilder.andWhere(sqlEnchantType, {
+      enchantType,
+    })
 
     queryBuilder.andWhere(sqlType, {
-      type: `%${type}%`,
+      itemType,
     })
+
+    queryBuilder.andWhere(sqlEnchants, { enchants })
 
     const orderDirection = didPriceToUp ? 'ASC' : 'DESC'
     queryBuilder.orderBy('lot.price', orderDirection)
@@ -169,47 +193,45 @@ export class LotService {
     didNeedUserLots,
     didNeedShulkers,
   }: GetLotsSerivce): Promise<GetLotsResponseDto> {
-    const queryBuilder = this.lotRepository
-      .createQueryBuilder('lot')
-      .leftJoinAndSelect('lot.item', 'item')
-      .leftJoinAndSelect('lot.shulker', 'shulker')
-      .leftJoinAndSelect('shulker.items', 'shulkerItem')
+    let select = this.selectLote
+
+    if (didNeedShulkers) {
+      select = [...select, ...this.selectShulker]
+    }
+
+    const queryBuilder = this.lotRepository.createQueryBuilder('lot')
+
+    if (didNeedShulkers) {
+      queryBuilder
+        .leftJoinAndSelect('lot.item', 'item')
+        .leftJoinAndSelect('lot.shulker', 'shulker')
+        .leftJoinAndSelect('shulker.items', 'shulkerItem')
+    } else {
+      queryBuilder.innerJoinAndSelect('lot.item', 'item')
+    }
+
+    queryBuilder
       .skip((page - 1) * limit)
       .take(limit)
-      .select([
-        'lot',
-        'item.id',
-        'item.amount',
-        'item.type',
-        'item.display_name',
-        'item.description',
-        'item.enchants',
-        'item.categories',
-        'item.durability',
-        'shulker.id',
-        'shulker.username',
-        'shulker.categories',
-        'shulker.type',
-        'shulker.display_name',
-      ])
+      .select(select)
 
     if (didNeedUserLots === false) {
       queryBuilder.andWhere('lot.username != :username', { username })
     }
 
-    const sqlCategory = didNeedShulkers
-      ? '(FIND_IN_SET(:category, item.categories) OR FIND_IN_SET(:category, shulkerItem.categories))'
-      : '(FIND_IN_SET(:category, item.categories)'
-
     if (category) {
+      const sqlCategory = didNeedShulkers
+        ? '(FIND_IN_SET(:category, item.categories) OR FIND_IN_SET(:category, shulkerItem.categories))'
+        : '(FIND_IN_SET(:category, item.categories)'
+
       queryBuilder.andWhere(sqlCategory, { category })
     }
 
-    const sqlDisplay_nameOrType = didNeedShulkers
-      ? '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)'
-      : '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType)'
-
     if (display_nameOrType) {
+      const sqlDisplay_nameOrType = didNeedShulkers
+        ? '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)'
+        : '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType)'
+
       queryBuilder.andWhere(sqlDisplay_nameOrType, {
         display_nameOrType: `%${display_nameOrType}%`,
       })

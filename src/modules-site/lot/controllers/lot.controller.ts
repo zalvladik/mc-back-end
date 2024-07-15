@@ -17,7 +17,11 @@ import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
 import type { Lot } from 'src/entities/lot.entity'
 
-import { DeleteLotQuaryDto, GetLotsQuaryDto } from '../dtos-request'
+import {
+  DeleteLotQuaryDto,
+  GetEnchantitemsLotsQuaryDto,
+  GetLotsQuaryDto,
+} from '../dtos-request'
 import { LotService } from '../services'
 import type {
   DeleteUserLotResponseDto,
@@ -39,8 +43,6 @@ export class LotController {
       page,
       limit,
       category,
-      enchants,
-      enchantType,
       display_nameOrType,
       didNeedShulkers = true,
       didNeedUserLots = true,
@@ -66,22 +68,22 @@ export class LotController {
       })
     }
 
-    if (enchants && enchantType && display_nameOrType) {
-      return this.lotService.getItemWithEnchants({
-        username,
-        enchants,
-        enchantType,
-        display_nameOrType,
-        ...searchFilterParams,
-      })
-    }
-
     return this.lotService.getLots({
       username,
       category,
       display_nameOrType,
       ...searchFilterParams,
     })
+  }
+
+  @Get('enchant_items')
+  @HttpCode(200)
+  async getEnchantItems(
+    @Query()
+    body: GetEnchantitemsLotsQuaryDto,
+    @UserDecorator() { username }: GetUserDto,
+  ): Promise<GetLotsResponseDto> {
+    return this.lotService.getEnchantItems({ username, ...body })
   }
 
   @Get('user')

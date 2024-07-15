@@ -18,6 +18,42 @@ export class DeleteLotQuaryDto {
   id: number
 }
 
+export class PaginationParams {
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page?: number
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  limit?: number
+}
+
+export class LotFilterParams extends PaginationParams {
+  @IsOptional()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
+  didNeedShulkers?: boolean
+
+  @IsOptional()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
+  didNeedUserLots?: boolean
+
+  @IsOptional()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
+  didPriceToUp?: boolean
+
+  @IsOptional()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
+  didNeedIdentical?: boolean
+}
+
 export class CreateLotItemBodyDto {
   @IsNotEmpty()
   @IsNumber()
@@ -52,19 +88,7 @@ export class BuyLotShulkerBodyDto {
   lotId: number
 }
 
-export class GetLotsQuaryDto {
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  page?: number
-
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  limit?: number
-
+export class GetLotsQuaryDto extends LotFilterParams {
   @IsOptional()
   @IsString()
   category?: string
@@ -72,32 +96,18 @@ export class GetLotsQuaryDto {
   @IsOptional()
   @IsString()
   display_nameOrType?: string
+}
 
-  @IsOptional()
+export class GetEnchantitemsLotsQuaryDto extends LotFilterParams {
+  @IsNotEmpty()
   @IsString()
-  enchants?: string
+  itemType: string
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  enchantType?: EnchantsTypesEnum
+  enchants: string
 
-  @IsOptional()
-  @Transform(({ value }) => value === 'true')
-  @IsBoolean()
-  didNeedShulkers?: boolean
-
-  @IsOptional()
-  @Transform(({ value }) => value === 'true')
-  @IsBoolean()
-  didNeedUserLots?: boolean
-
-  @IsOptional()
-  @Transform(({ value }) => value === 'true')
-  @IsBoolean()
-  didPriceToUp?: boolean
-
-  @IsOptional()
-  @Transform(({ value }) => value === 'true')
-  @IsBoolean()
-  didNeedIdentical?: boolean
+  @IsNotEmpty()
+  @IsString()
+  enchantType: EnchantsTypesEnum
 }

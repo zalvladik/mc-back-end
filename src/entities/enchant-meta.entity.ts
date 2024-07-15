@@ -15,7 +15,14 @@ export class EnchantMeta {
     nullable: false,
   })
   @Index()
-  enchantType: EnchantsTypesEnum;
+  enchantType: EnchantsTypesEnum
+
+  @Column({
+    type: 'tinyint',
+    unsigned: true,
+    nullable: false,
+  })
+  enchantLength: number;
 
   @Column({
     type: 'set',

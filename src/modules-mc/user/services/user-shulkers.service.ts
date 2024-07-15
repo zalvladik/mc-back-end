@@ -80,6 +80,7 @@ export class UserShulkersService {
               const enchantMetaType = getEnchantMetaType(enchantType)
 
               const newEnchantMeta = this.enchantMetaRepository.create({
+                enchantLength: item.enchants.length,
                 enchantType,
                 [enchantMetaType]: item.enchants.join(','),
               })

@@ -60,6 +60,7 @@ export class LotService {
     didNeedUserLots = false,
     didNeedShulkers = false,
     didPriceToUp = true,
+    didNeedIdentical = false,
   }: GetItemWithEnchantsService): Promise<GetLotsResponseDto> {
     const enchantMetaType = getEnchantMetaType(enchantType)
 
@@ -99,6 +100,12 @@ export class LotService {
       queryBuilder.andWhere('lot.username != :username', { username })
     }
 
+    const enchantsArray = enchants.split(',')
+
+    const sqlLengthEnchants = didNeedShulkers
+      ? `(LENGTH(itemEnchantMeta.${enchantMetaType}) = ${enchantsArray.length} OR LENGTH(shulkerItemEnchantMeta.${enchantMetaType}) = ${enchantsArray.length})`
+      : `LENGTH(itemEnchantMeta.${enchantMetaType}) = ${enchantsArray.length}`
+
     const sqlEnchants = didNeedShulkers
       ? `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:enchants, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`
       : `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0)`
@@ -119,7 +126,13 @@ export class LotService {
       itemType,
     })
 
-    queryBuilder.andWhere(sqlEnchants, { enchants })
+    if (didNeedIdentical) {
+      queryBuilder.andWhere(sqlLengthEnchants)
+    }
+
+    for (let i = 0; i < enchantsArray.length; i++) {
+      queryBuilder.andWhere(sqlEnchants, { enchants: enchantsArray[i] })
+    }
 
     const orderDirection = didPriceToUp ? 'ASC' : 'DESC'
     queryBuilder.orderBy('lot.price', orderDirection)
@@ -256,22 +269,7 @@ export class LotService {
       .leftJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
       .where('lot.username = :username', { username })
-      .select([
-        'lot',
-        'item.id',
-        'item.amount',
-        'item.type',
-        'item.display_name',
-        'item.description',
-        'item.enchants',
-        'item.categories',
-        'item.durability',
-        'shulker.id',
-        'shulker.username',
-        'shulker.categories',
-        'shulker.type',
-        'shulker.display_name',
-      ])
+      .select([...this.selectLote, ...this.selectShulker])
       .getMany()
   }
 

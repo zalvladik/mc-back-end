@@ -103,8 +103,8 @@ export class LotService {
     const enchantsArray = enchants.split(',')
 
     const sqlLengthEnchants = didNeedShulkers
-      ? `(LENGTH(itemEnchantMeta.${enchantMetaType}) = ${enchantsArray.length} OR LENGTH(shulkerItemEnchantMeta.${enchantMetaType}) = ${enchantsArray.length})`
-      : `LENGTH(itemEnchantMeta.${enchantMetaType}) = ${enchantsArray.length}`
+      ? `(itemEnchantMeta.enchantLength = ${enchantsArray.length} OR shulkerItemEnchantMeta.enchantLength = ${enchantsArray.length})`
+      : `itemEnchantMeta.enchantLength = ${enchantsArray.length}`
 
     const sqlEnchants = didNeedShulkers
       ? `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:enchants, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`
@@ -115,8 +115,8 @@ export class LotService {
       : `(itemEnchantMeta.enchantType = :enchantType)`
 
     const sqlType = didNeedShulkers
-      ? '(item.type LIKE :itemType OR shulkerItem.type LIKE :itemType)'
-      : '(item.type LIKE :itemType)'
+      ? '(item.type = :itemType OR shulkerItem.type = :itemType)'
+      : '(item.type = :itemType)'
 
     queryBuilder.andWhere(sqlEnchantType, {
       enchantType,
@@ -154,6 +154,7 @@ export class LotService {
     username,
     didNeedUserLots,
     didPriceToUp,
+    didNeedIdentical,
   }: GetShulkerLotsService): Promise<GetLotsResponseDto> {
     const queryBuilder = this.lotRepository
       .createQueryBuilder('lot')
@@ -174,9 +175,11 @@ export class LotService {
       queryBuilder.andWhere('lot.username != :username', { username })
     }
 
+    const isLike = didNeedIdentical ? '=' : 'LIKE'
+
     if (display_nameOrType) {
       queryBuilder.andWhere(
-        '(shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)',
+        `(shulkerItem.display_name ${isLike} :display_nameOrType OR shulkerItem.type ${isLike} :display_nameOrType)`,
         {
           display_nameOrType: `%${display_nameOrType}%`,
         },
@@ -205,6 +208,7 @@ export class LotService {
     didPriceToUp,
     didNeedUserLots,
     didNeedShulkers,
+    didNeedIdentical,
   }: GetLotsSerivce): Promise<GetLotsResponseDto> {
     let select = this.selectLote
 
@@ -240,10 +244,12 @@ export class LotService {
       queryBuilder.andWhere(sqlCategory, { category })
     }
 
+    const isLike = didNeedIdentical ? '=' : 'LIKE'
+
     if (display_nameOrType) {
       const sqlDisplay_nameOrType = didNeedShulkers
-        ? '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType OR shulkerItem.display_name LIKE :display_nameOrType OR shulkerItem.type LIKE :display_nameOrType)'
-        : '(item.display_name LIKE :display_nameOrType OR item.type LIKE :display_nameOrType)'
+        ? `(item.display_name ${isLike} :display_nameOrType OR item.type ${isLike} :display_nameOrType OR shulkerItem.display_name ${isLike} :display_nameOrType OR shulkerItem.type ${isLike} :display_nameOrType)`
+        : `(item.display_name ${isLike} :display_nameOrType OR item.type ${isLike} :display_nameOrType)`
 
       queryBuilder.andWhere(sqlDisplay_nameOrType, {
         display_nameOrType: `%${display_nameOrType}%`,

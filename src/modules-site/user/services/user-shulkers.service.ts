@@ -20,7 +20,7 @@ export class UserShulkersService {
       relations: ['shulkers'],
     })
 
-    return user.shulkers
+    return user?.shulkers ?? []
   }
 
   async getShulkerItems(
@@ -35,8 +35,6 @@ export class UserShulkersService {
       throw new NotFoundException('Такого шалкера не існує')
     }
 
-    const { items } = shulker
-
-    return items.map(({ serialized, ...rest }) => rest)
+    return shulker?.items.map(({ serialized, ...rest }) => rest) ?? []
   }
 }

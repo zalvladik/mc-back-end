@@ -239,7 +239,7 @@ export class LotService {
     if (category) {
       const sqlCategory = didNeedShulkers
         ? '(FIND_IN_SET(:category, item.categories) OR FIND_IN_SET(:category, shulkerItem.categories))'
-        : '(FIND_IN_SET(:category, item.categories)'
+        : 'FIND_IN_SET(:category, item.categories)'
 
       queryBuilder.andWhere(sqlCategory, { category })
     }

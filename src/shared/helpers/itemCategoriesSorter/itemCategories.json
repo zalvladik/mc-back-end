@@ -230,6 +230,18 @@
       "display_name": "Різьблена книжкова полиця",
       "categories": ["redstone_blocks", "functional_blocks"]
     },
+    "chiseled_copper": {
+      "display_name": "Різьблена мідь",
+      "categories": ["build_blocks"]
+    },
+    "chiseled_tuff": {
+      "display_name": "Різьблений туф",
+      "categories": ["build_blocks"]
+    },
+    "chiseled_tuff_bricks": {
+      "display_name": "Різьблена туфова цегла",
+      "categories": ["build_blocks"]
+    },
     "composter": {
       "display_name": "Компостер",
       "categories": ["redstone_blocks", "functional_blocks"]
@@ -317,6 +329,22 @@
     "copper_ore": {
       "display_name": "Мідна руда",
       "categories": ["nature_blocks"]
+    },
+    "copper_bulb": {
+      "display_name": "Мідна жарівка",
+      "categories": ["build_blocks", "redstone_blocks"]
+    },
+    "copper_door": {
+      "display_name": "Мідні двері",
+      "categories": ["build_blocks"]
+    },
+    "copper_grate": {
+      "display_name": "Мідна решітка",
+      "categories": ["build_blocks"]
+    },
+    "copper_trapdoor": {
+      "display_name": "Мідний люк",
+      "categories": ["build_blocks"]
     },
     "cherry_log": {
       "display_name": "Вишнева колода",
@@ -711,6 +739,10 @@
       "display_name": "Верстак",
       "categories": ["functional_blocks"]
     },
+    "crafter": {
+      "display_name": "Майструвач",
+      "categories": ["redstone_blocks"]
+    },
     "cartography_table": {
       "display_name": "Картографічний стіл",
       "categories": ["functional_blocks"]
@@ -765,6 +797,10 @@
       "display_name": "Тризубець",
       "categories": ["weapons"]
     },
+    "trial_key": {
+      "display_name": "Ключ випробування",
+      "categories": ["ingredients"]
+    },
     "turtle_helmet": {
       "display_name": "Панцир черепахи",
       "categories": ["weapons", "ingredients"]
@@ -792,6 +828,34 @@
     "tuff": {
       "display_name": "Туф",
       "categories": ["nature_blocks", "build_blocks"]
+    },
+    "tuff_slab": {
+      "display_name": "Туфова плита",
+      "categories": ["build_blocks"]
+    },
+    "tuff_stairs": {
+      "display_name": "Туфові сходи",
+      "categories": ["build_blocks"]
+    },
+    "tuff_wall": {
+      "display_name": "Туфова стіна",
+      "categories": ["build_blocks"]
+    },
+    "tuff_bricks": {
+      "display_name": "Туфова цегла",
+      "categories": ["build_blocks"]
+    },
+    "tuff_brick_stairs": {
+      "display_name": "Сходи з туфової цегли",
+      "categories": ["build_blocks"]
+    },
+    "tuff_brick_slab": {
+      "display_name": "Плита з туфової цегли",
+      "categories": ["build_blocks"]
+    },
+    "tuff_brick_wall": {
+      "display_name": "Стіна з туфової цегли",
+      "categories": ["build_blocks"]
     },
     "torchflower": {
       "display_name": "Смолоскипник",
@@ -1101,6 +1165,14 @@
     }
   },
   "o": {
+    "ominous_trial_key": {
+      "display_name": "Зловісний ключ випробувань",
+      "categories": ["ingredients"]
+    },
+    "ominous_bottle": {
+      "display_name": "Зловісна пляшка",
+      "categories": ["foods_and_potions"]
+    },
     "oak_button": {
       "display_name": "Дубова кнопка",
       "categories": ["redstone_blocks", "build_blocks"]
@@ -1156,6 +1228,26 @@
     "oxeye_daisy": {
       "display_name": "Ромашка",
       "categories": ["nature_blocks"]
+    },
+    "oxidized_chiseled_copper": {
+      "display_name": "Окиснена різьблена мідь",
+      "categories": ["build_blocks"]
+    },
+    "oxidized_copper_bulb": {
+      "display_name": "Окиснена мідна жарівка",
+      "categories": ["build_blocks", "redstone_blocks"]
+    },
+    "oxidized_copper_door": {
+      "display_name": "Окиснені мідні двері",
+      "categories": ["build_blocks"]
+    },
+    "oxidized_copper_grate": {
+      "display_name": "Окиснена мідна решітка",
+      "categories": ["build_blocks"]
+    },
+    "oxidized_copper_trapdoor": {
+      "display_name": "Окиснений мідний люк",
+      "categories": ["build_blocks"]
     },
     "ochre_froglight": {
       "display_name": "Вохристе жаб'яче світло",
@@ -1818,6 +1910,10 @@
       "display_name": "Важка вагова плита",
       "categories": ["redstone_blocks", "build_blocks"]
     },
+    "heavy_core": {
+      "display_name": "Важке ядро",
+      "categories": ["ingredients"]
+    },
     "honey_block": {
       "display_name": "Медовий блок",
       "categories": ["redstone_blocks", "nature_blocks"]
@@ -2294,6 +2390,115 @@
       "display_name": "Вощена окиснена тесана мідна плита",
       "categories": ["build_blocks"]
     },
+    "waxed_exposed_chiseled_copper": {
+      "display_name": "Вощена наражена різьблена мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_exposed_copper_bulb": {
+      "display_name": "Вощена наражена мідна жарівка",
+      "categories": ["build_blocks", "redstone_blocks"]
+    },
+    "waxed_exposed_copper_door": {
+      "display_name": "Вощені наражені мідні двері",
+      "categories": ["build_blocks"]
+    },
+    "waxed_exposed_copper_grate": {
+      "display_name": "Вощена наражена мідна решітка",
+      "categories": ["build_blocks"]
+    },
+    "waxed_exposed_copper_trapdoor": {
+      "display_name": "",
+      "categories": ["build_blocks"]
+    },
+
+    "waxed_oxidized_chiseled_copper": {
+      "display_name": "Вощена окиснена різьблена мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_oxidized_copper_bulb": {
+      "display_name": "Вощена окиснена мідна жарівка",
+      "categories": ["build_blocks", "redstone_blocks"]
+    },
+    "waxed_oxidized_copper_door": {
+      "display_name": "Вощені окиснені мідні двері",
+      "categories": ["build_blocks"]
+    },
+    "waxed_oxidized_copper_grate": {
+      "display_name": "Вощена окиснена мідна решітка",
+      "categories": ["build_blocks"]
+    },
+    "waxed_oxidized_copper_trapdoor": {
+      "display_name": "Вощений окиснений мідний люк",
+      "categories": ["build_blocks"]
+    },
+
+    "waxed_weathered_chiseled_copper": {
+      "display_name": "Вощена вивітрена різьблена мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_weathered_copper_bulb": {
+      "display_name": "Вощена вивітрена мідна жарівка",
+      "categories": ["build_blocks", "redstone_blocks"]
+    },
+    "waxed_weathered_copper_door": {
+      "display_name": "Вощені вивітрені мідні двері",
+      "categories": ["build_blocks"]
+    },
+    "waxed_weathered_copper_grate": {
+      "display_name": "Вощена вивітрена мідна решітка",
+      "categories": ["build_blocks"]
+    },
+    "waxed_weathered_copper_trapdoor": {
+      "display_name": "Вощений вивітрений мідний люк",
+      "categories": ["build_blocks"]
+    },
+
+    "weathered_chiseled_copper": {
+      "display_name": "Вивітрена різьблена мідь",
+      "categories": ["build_blocks"]
+    },
+    "weathered_copper_bulb": {
+      "display_name": "Вивітрена мідна жарівка",
+      "categories": ["build_blocks", "redstone_blocks"]
+    },
+    "weathered_copper_door": {
+      "display_name": "Вивітрені мідні двері",
+      "categories": ["build_blocks"]
+    },
+    "weathered_copper_grate": {
+      "display_name": "Вивітрена мідна решітка",
+      "categories": ["build_blocks"]
+    },
+    "weathered_copper_trapdoor": {
+      "display_name": "Вивітрений мідний люк",
+      "categories": ["build_blocks"]
+    },
+
+    "waxed_chiseled_copper": {
+      "display_name": "Вощена різьблена мідь",
+      "categories": ["build_blocks"]
+    },
+    "waxed_copper_bulb": {
+      "display_name": "Вощена мідна жарівка",
+      "categories": ["build_blocks", "redstone_blocks"]
+    },
+    "waxed_copper_door": {
+      "display_name": "Вощені мідні двері",
+      "categories": ["build_blocks"]
+    },
+    "waxed_copper_grate": {
+      "display_name": "Вощена мідна решітка",
+      "categories": ["build_blocks"]
+    },
+    "waxed_copper_trapdoor": {
+      "display_name": "Вощений мідний люк",
+      "categories": ["build_blocks"]
+    },
+
+    "wind_charge": {
+      "display_name": "Заряд вітру",
+      "categories": ["tools", "weapons"]
+    },
     "white_carpet": {
       "display_name": "Білий килим",
       "categories": ["color_blocks"]
@@ -2722,6 +2927,22 @@
       "display_name": "Відро із сипким снігом",
       "categories": ["tools"]
     },
+    "polished_tuff": {
+      "display_name": "Полірований туф",
+      "categories": ["build_blocks"]
+    },
+    "polished_tuff_slab": {
+      "display_name": "Плита з полірованого туфу",
+      "categories": ["build_blocks"]
+    },
+    "polished_tuff_stairs": {
+      "display_name": "Сходи з полірованого туфу",
+      "categories": ["build_blocks"]
+    },
+    "polished_tuff_wall": {
+      "display_name": "Стіна з полірованого туфу",
+      "categories": ["build_blocks"]
+    },
     "powered_rail": {
       "display_name": "Електризовані рейки",
       "categories": ["tools", "redstone_blocks"]
@@ -3101,9 +3322,25 @@
       "display_name": "Кісткове борошно",
       "categories": ["tools", "ingredients"]
     },
+    "bolt_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Блискавка>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
+    },
     "brush": {
       "display_name": "Щітка",
       "categories": ["tools"]
+    },
+    "breeze_rod": {
+      "display_name": "Стрижень вітреня",
+      "categories": ["ingredients"]
     },
     "birch_boat": {
       "display_name": "Березовий човен",
@@ -3598,6 +3835,18 @@
     "flowering_azalea": {
       "display_name": "Квітуча азалія",
       "categories": ["nature_blocks"]
+    },
+    "flow_armor_trim_smithing_template": {
+      "display_name": "Ковальський шаблон",
+      "categories": ["ingredients"],
+      "description": [
+        "Орнамент обладунку <<Плин>>",
+        "null",
+        "Застосовується до:",
+        "{\"text\": \"Обладунки\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}",
+        "Складники:",
+        "{\"text\": \"Злитки та кристали\"_ \"backdown\": 10_ \"color\": \"#5454fc\"}"
+      ]
     },
     "fern": {
       "display_name": "Папороть",
@@ -4315,6 +4564,26 @@
       "display_name": "Наражена тесана мідна плита",
       "categories": ["build_blocks"]
     },
+    "exposed_chiseled_copper": {
+      "display_name": "Наражена різьблена мідь",
+      "categories": ["build_blocks"]
+    },
+    "exposed_copper_bulb": {
+      "display_name": "Наражена мідна жарівка",
+      "categories": ["build_blocks", "redstone_blocks"]
+    },
+    "exposed_copper_door": {
+      "display_name": "Наражені мідні двері",
+      "categories": ["build_blocks"]
+    },
+    "exposed_copper_grate": {
+      "display_name": "Наражена мідна решітка",
+      "categories": ["build_blocks"]
+    },
+    "exposed_copper_trapdoor": {
+      "display_name": "Наражений мідний люк",
+      "categories": ["build_blocks"]
+    },
     "end_rod": {
       "display_name": "Стрижень Енду",
       "categories": ["functional_blocks"]
@@ -4434,6 +4703,21 @@
     },
     "music_disc_pigstep": {
       "display_name": "Платівка",
+      "categories": ["tools"],
+      "description": ["Лейна Рейд - Precipice"]
+    },
+    "music_disc_creator_music_box": {
+      "display_name": "Платівка",
+      "categories": ["tools"],
+      "description": ["Лейна Рейд - Creator (музична скринька)"]
+    },
+    "music_disc_creator": {
+      "display_name": "Платівка",
+      "categories": ["tools"],
+      "description": ["Лейна Рейд - Creator"]
+    },
+    "music_disc_precipice": {
+      "display_name": "",
       "categories": ["tools"],
       "description": ["Лейна Рейд - Pigstep"]
     },
@@ -4668,6 +4952,7 @@
     }
   },
   "v": {
+    "vault": { "display_name": "Сховище", "categories": ["functional_blocks"] },
     "vine": {
       "display_name": "Лози",
       "categories": ["nature_blocks"]

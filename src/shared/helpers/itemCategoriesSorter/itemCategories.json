@@ -4610,6 +4610,7 @@
       "display_name": "Відро молока",
       "categories": ["tools", "foods_and_potions"]
     },
+    "mace": { "display_name": "Булава", "categories": ["weapons"] },
     "map": {
       "display_name": "Порожня мапа",
       "categories": ["tools"]

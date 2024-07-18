@@ -33,7 +33,7 @@ export class LotItemService {
     private readonly itemRepository: Repository<Item>,
   ) {}
 
-  async createLot({
+  async createLotItem({
     userId,
     itemId,
     price,

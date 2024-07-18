@@ -17,7 +17,7 @@ export type CreateLotShulkerServiceT = {
   shulkerId: number
   price: number
   username: string
-  lotCount: number
+  vip: VipEnum
 }
 
 export type ByeLotItemServiceT = {
@@ -29,7 +29,7 @@ export type ByeLotItemServiceT = {
 export type ByeLotShulkerServiceT = {
   lotId: number
   buyerUserId: number
-  shulkerCount: number
+  vip: VipEnum
 }
 
 export type GetItemWithEnchantsService = {

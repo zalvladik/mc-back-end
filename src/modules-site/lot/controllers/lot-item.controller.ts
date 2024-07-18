@@ -35,7 +35,7 @@ export class LotItemController {
     @Body() body: CreateLotItemBodyDto,
     @UserDecorator() { id, username, vip }: GetUserDto,
   ): Promise<CreateLotResponseDto> {
-    return this.lotItemService.createLot({
+    return this.lotItemService.createLotItem({
       ...body,
       username,
       userId: id,

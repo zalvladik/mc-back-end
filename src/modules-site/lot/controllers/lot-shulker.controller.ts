@@ -33,13 +33,13 @@ export class LotShulkerController {
   @HttpCode(201)
   async createLot(
     @Body() body: CreateLotShulkerBodyDto,
-    @UserDecorator() { id, username, lotCount }: GetUserDto,
+    @UserDecorator() { id, username, vip }: GetUserDto,
   ): Promise<CreateLotResponseDto> {
     return this.lotShulkerService.createLotShulker({
       ...body,
       username,
       userId: id,
-      lotCount,
+      vip,
     })
   }
 
@@ -47,12 +47,12 @@ export class LotShulkerController {
   @HttpCode(201)
   async buyLotShulker(
     @Body() { lotId }: BuyLotShulkerBodyDto,
-    @UserDecorator() { id, shulkerCount }: GetUserDto,
+    @UserDecorator() { id, vip }: GetUserDto,
   ): Promise<BuyLotShulkerResponseDto> {
     return this.lotShulkerService.buyLotShulker({
       lotId,
       buyerUserId: id,
-      shulkerCount,
+      vip,
     })
   }
 }

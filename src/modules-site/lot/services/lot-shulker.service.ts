@@ -14,6 +14,7 @@ import { Lot } from 'src/entities/lot.entity'
 
 import { User } from 'src/entities/user.entity'
 import { Shulker } from 'src/entities/shulker.entity'
+import { getVipParams } from 'src/shared/helpers/getVipParams'
 import type { ByeLotShulkerServiceT, CreateLotShulkerServiceT } from '../types'
 import type {
   BuyLotShulkerResponseDto,
@@ -37,7 +38,7 @@ export class LotShulkerService {
     shulkerId,
     price,
     username,
-    lotCount,
+    vip,
   }: CreateLotShulkerServiceT): Promise<CreateLotResponseDto> {
     if (price > 64 * 27 * 9)
       throw new BadRequestException(
@@ -55,13 +56,15 @@ export class LotShulkerService {
       throw new ConflictException('Для цього шалкера уже виставлений лот')
     }
 
+    const { vipLotCount } = getVipParams(vip)
+
     const currentLotCount = await this.lotRepository.count({
       where: { username },
     })
 
-    if (currentLotCount + 1 > lotCount) {
+    if (currentLotCount + 1 > vipLotCount) {
       throw new BadRequestException(
-        `У вас перевищена кількість лотів, максимально ${lotCount} шт.`,
+        `У вас перевищена кількість лотів, максимально ${vipLotCount} шт.`,
       )
     }
 
@@ -83,7 +86,7 @@ export class LotShulkerService {
 
   async buyLotShulker({
     lotId,
-    shulkerCount,
+    vip,
     buyerUserId,
   }: ByeLotShulkerServiceT): Promise<BuyLotShulkerResponseDto> {
     const lotMetaData = await this.lotRepository.findOne({
@@ -105,9 +108,11 @@ export class LotShulkerService {
       where: { user: { id: buyerUserId } },
     })
 
-    if (currentShulkersCount + 1 > shulkerCount) {
+    const { vipShulkerCount } = getVipParams(vip)
+
+    if (currentShulkersCount + 1 > vipShulkerCount) {
       throw new BadRequestException(
-        `У вас максимальна кількість шалкерів, максимально ${shulkerCount} шлк.`,
+        `У вас максимальна кількість шалкерів, максимально ${vipShulkerCount} шлк.`,
       )
     }
 

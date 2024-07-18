@@ -6,6 +6,13 @@ export enum RoleEnum {
   USER = 'user',
 }
 
+export enum VipEnum {
+  IRON = 'iron',
+  GOLDEN = 'golden',
+  DIAMOND = 'diamond',
+  NETHERITE = 'netherite',
+}
+
 export enum CategoryEnum {
   BUILD_BLOCKS = 'build_blocks',
   COLOR_BLOCKS = 'color_blocks',

@@ -19,6 +19,7 @@ import { CacheService } from 'src/shared/services/cache'
 import { EnchantMeta } from 'src/entities/enchant-meta.entity'
 import { getEnchantTypeFromItemType } from 'src/shared/helpers/getEnchantTypeFromItem'
 import { getEnchantMetaType } from 'src/shared/helpers/getEnchantMetaType'
+import { getVipParams } from 'src/shared/helpers/getVipParams'
 import type { PullItemsFromUserResponseDto } from '../dtos-responses'
 
 @Injectable()
@@ -51,9 +52,11 @@ export class UserItemsService {
       where: { user },
     })
 
-    if (itemCount + itemsData.length > user.itemCount) {
+    const { vipItemCount } = getVipParams(user.vip)
+
+    if (itemCount + itemsData.length > vipItemCount) {
       throw new BadRequestException(
-        `У вас замало місця на аккаунті, максимально ${user.itemCount} шт.`,
+        `У вас замало місця на аккаунті, максимально ${vipItemCount} шт.`,
       )
     }
 

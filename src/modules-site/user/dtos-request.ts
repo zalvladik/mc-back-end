@@ -3,6 +3,7 @@ import type { TransformFnParams } from 'class-transformer'
 import { Transform } from 'class-transformer'
 
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { VipEnum } from 'src/shared/enums'
 
 export class PostUserUuidBodyDto {
   @IsNotEmpty()
@@ -43,16 +44,8 @@ export class GetUserDto {
   money: number
 
   @IsNotEmpty()
-  @IsNumber()
-  shulkerCount: number
-
-  @IsNotEmpty()
-  @IsNumber()
-  itemCount: number
-
-  @IsNotEmpty()
-  @IsNumber()
-  lotCount: number
+  @IsString()
+  vip: VipEnum
 
   @IsNotEmpty()
   @IsNumber()

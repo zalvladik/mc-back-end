@@ -14,6 +14,7 @@ import { Item } from 'src/entities/item.entity'
 import { Lot } from 'src/entities/lot.entity'
 
 import { User } from 'src/entities/user.entity'
+import { getVipParams } from 'src/shared/helpers/getVipParams'
 import type { ByeLotItemServiceT, CreateLotItemServiceT } from '../types'
 import type {
   ByeLotItemResponseDto,
@@ -37,7 +38,7 @@ export class LotItemService {
     itemId,
     price,
     username,
-    lotCount,
+    vip,
   }: CreateLotItemServiceT): Promise<CreateLotResponseDto> {
     if (price > 64 * 27 * 9)
       throw new BadRequestException(
@@ -59,9 +60,11 @@ export class LotItemService {
       where: { username },
     })
 
-    if (currentLotCount + 1 > lotCount) {
+    const { vipLotCount } = getVipParams(vip)
+
+    if (currentLotCount + 1 > vipLotCount) {
       throw new BadRequestException(
-        `У вас перевищена кількість лотів, максимально ${lotCount} шт.`,
+        `У вас перевищена кількість лотів, максимально ${vipLotCount} шт.`,
       )
     }
 
@@ -83,7 +86,7 @@ export class LotItemService {
 
   async buyLotItem({
     lotId,
-    itemCount,
+    vip,
     buyerUserId,
   }: ByeLotItemServiceT): Promise<ByeLotItemResponseDto> {
     const lotMetaData = await this.lotRepository.findOne({
@@ -109,9 +112,11 @@ export class LotItemService {
       where: { user: { id: buyerUserId } },
     })
 
-    if (currentItemsCount + 1 > itemCount) {
+    const { vipItemCount } = getVipParams(vip)
+
+    if (currentItemsCount + 1 > vipItemCount) {
       throw new BadRequestException(
-        `У вас мало місця в інвентарі, максимально ${itemCount} предметів.`,
+        `У вас мало місця в інвентарі, максимально ${vipItemCount} предметів.`,
       )
     }
 

@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
-import { RoleEnum } from 'src/shared/enums'
+import { RoleEnum, VipEnum } from 'src/shared/enums'
 import { Advancements } from './advancements.entity'
 import { ItemTicket } from './item-ticket.entity'
 import { Item } from './item.entity'
@@ -59,6 +59,14 @@ export class User {
   })
   role: RoleEnum[]
 
+  @Column({
+    type: 'enum',
+    enum: VipEnum,
+    nullable: true,
+    default: null,
+  })
+  vip: VipEnum
+
   @Column({ type: 'smallint', nullable: false, default: 0 })
   money: number
 
@@ -70,15 +78,6 @@ export class User {
 
   @OneToMany(() => Shulker, shulker => shulker.user)
   shulkers: Shulker[]
-
-  @Column({ type: 'smallint', nullable: false, default: 5 })
-  shulkerCount: number
-
-  @Column({ type: 'smallint', nullable: false, default: 54 })
-  itemCount: number
-
-  @Column({ type: 'smallint', nullable: false, default: 20 })
-  lotCount: number
 
   @Column({ length: 2000, nullable: true })
   refreshToken?: string

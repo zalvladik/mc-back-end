@@ -1,3 +1,4 @@
+import type { VipEnum } from 'src/shared/enums'
 import type {
   GetEnchantitemsLotsQuaryDto,
   GetLotsQuaryDto,
@@ -8,7 +9,7 @@ export type CreateLotItemServiceT = {
   itemId: number
   price: number
   username: string
-  lotCount: number
+  vip: VipEnum
 }
 
 export type CreateLotShulkerServiceT = {
@@ -22,7 +23,7 @@ export type CreateLotShulkerServiceT = {
 export type ByeLotItemServiceT = {
   lotId: number
   buyerUserId: number
-  itemCount: number
+  vip: VipEnum
 }
 
 export type ByeLotShulkerServiceT = {

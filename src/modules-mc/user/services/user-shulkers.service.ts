@@ -19,6 +19,7 @@ import { giveShulkerLocal } from 'src/shared/helpers/giveShulkerLocal'
 import { getEnchantTypeFromItemType } from 'src/shared/helpers/getEnchantTypeFromItem'
 import { getEnchantMetaType } from 'src/shared/helpers/getEnchantMetaType'
 import { EnchantMeta } from 'src/entities/enchant-meta.entity'
+import { getVipParams } from 'src/shared/helpers/getVipParams'
 import type { PullShulkerResponseDto } from '../dtos-responses'
 import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 
@@ -53,9 +54,11 @@ export class UserShulkersService {
       where: { user },
     })
 
-    if (shulkerCount + 1 > user.shulkerCount) {
+    const { vipShulkerCount } = getVipParams(user.vip)
+
+    if (shulkerCount + 1 > vipShulkerCount) {
       throw new BadRequestException(
-        `У вас максимальна кількість шалкерів, ${user.shulkerCount} шлк.`,
+        `У вас максимальна кількість шалкерів, ${vipShulkerCount} шлк.`,
       )
     }
 

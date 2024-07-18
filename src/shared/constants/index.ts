@@ -130,3 +130,9 @@ export const enchantVariables: {
     EnchantsEnum.QUICK_CHARGE,
   ],
 }
+
+export const ITEMS_COUNT = 27
+
+export const LOTS_COUNT = 8
+
+export const SHULKERS_COUNT = 2

@@ -16,15 +16,7 @@ export class UserService {
   async getByID(id: number): Promise<GetProfileResponseDto> {
     return this.userRepository.findOne({
       where: { id },
-      select: [
-        'id',
-        'username',
-        'role',
-        'money',
-        'shulkerCount',
-        'lotCount',
-        'itemCount',
-      ],
+      select: ['id', 'username', 'role', 'money', 'vip'],
     })
   }
 }

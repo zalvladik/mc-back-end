@@ -1,14 +1,14 @@
 import type { CanActivate, ExecutionContext } from '@nestjs/common'
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 
-import type { Response } from 'express'
+// import type { Response } from 'express'
 
 import { AuthService } from 'src/modules-site/auth/services'
 
 import type { GetUserDto } from 'src/modules-site/user/dtos-request'
 import { TokenService } from '../services/token/token.service'
 import { getKievTime } from '../helpers/getKievTime'
-import { THIRTY_DAYS } from '../constants'
+// import { THIRTY_DAYS } from '../constants'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest()
-    const res = context.switchToHttp().getResponse<Response>()
+    // const res = context.switchToHttp().getResponse<Response>()
 
     const authorizationHeader = req.headers.authorization
 
@@ -45,20 +45,20 @@ export class AuthGuard implements CanActivate {
         req.user.vip = null
         req.user.vipExpirationDate = null
 
-        const { refreshToken } = req.cookies
+        // const { refreshToken } = req.cookies
 
-        const updateUserData = await this.authService.refresh(refreshToken)
+        // const updateUserData = await this.authService.refresh(refreshToken)
 
-        res.cookie('refreshToken', updateUserData.refreshToken, {
-          maxAge: THIRTY_DAYS,
-          httpOnly: true,
-          sameSite: 'none',
-          secure: true,
-        })
+        // res.cookie('refreshToken', updateUserData.refreshToken, {
+        //   maxAge: THIRTY_DAYS,
+        //   httpOnly: true,
+        //   sameSite: 'none',
+        //   secure: true,
+        // })
 
-        res.setHeader('access-token', updateUserData.accessToken)
+        // res.setHeader('access-token', updateUserData.accessToken)
 
-        context.switchToHttp().getRequest().response = res
+        // context.switchToHttp().getRequest().response = res
       }
     } catch (error) {
       throw new UnauthorizedException('invalid AccessToken')

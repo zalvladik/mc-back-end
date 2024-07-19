@@ -17,6 +17,7 @@ import {
   UserSkinController,
   UserItemsController,
   UserShulkersController,
+  UserVipController,
 } from './controllers'
 
 import {
@@ -25,6 +26,7 @@ import {
   UserItemsService,
   UserService,
   UserShulkersService,
+  UserVipService,
 } from './services'
 
 import { AuthModule } from '../auth/auth.module'
@@ -47,6 +49,7 @@ import { AuthModule } from '../auth/auth.module'
     UserAdvancementsController,
     UserSkinController,
     UserShulkersController,
+    UserVipController,
   ],
   providers: [
     UserService,
@@ -56,6 +59,8 @@ import { AuthModule } from '../auth/auth.module'
     TokenService,
     UserSkinService,
     UserShulkersService,
+    UserVipService,
   ],
+  exports: [UserVipService],
 })
 export class UserModule {}

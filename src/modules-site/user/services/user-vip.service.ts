@@ -12,19 +12,28 @@ export class UserVipService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async byeVip({ vip, money, id }: ByeVipProps): Promise<any> {
-    if (money < vipPrice[vip]) {
+  async byeVip({ vip, id }: ByeVipProps): Promise<any> {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      select: ['money', 'vip'],
+    })
+
+    if (user.vip) {
+      throw new BadRequestException('У вас уже куплено VIP')
+    }
+
+    if (user.money < vipPrice[vip]) {
       throw new BadRequestException('У вас недостатньо коштів')
     }
 
     const currentDate = new Date()
     const expirationDate = new Date()
-    expirationDate.setDate(currentDate.getDate() + 6)
-    expirationDate.setHours(23, 50, 0, 0)
+    expirationDate.setDate(currentDate.getDate() + 7)
+    expirationDate.setHours(0, 0, 0, 0)
 
     await this.userRepository.update(id, {
       vip,
-      money: money - vipPrice[vip],
+      money: user.money - vipPrice[vip],
       vipExpirationDate: expirationDate,
     })
   }

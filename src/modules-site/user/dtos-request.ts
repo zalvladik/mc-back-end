@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import type { TransformFnParams } from 'class-transformer'
 import { Transform } from 'class-transformer'
 
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator'
 import { VipEnum } from 'src/shared/enums'
 
 export class PostUserUuidBodyDto {
@@ -28,6 +28,13 @@ export class GetShulkerItemsParamDto {
   @IsNumber()
   @ApiProperty({ example: 1 })
   shulkerId: number
+}
+
+export class ByeVipBodyDto {
+  @IsNotEmpty()
+  @IsString()
+  @IsEnum(VipEnum)
+  vip: VipEnum
 }
 
 export class GetUserDto {

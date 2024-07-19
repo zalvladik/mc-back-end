@@ -67,6 +67,9 @@ export class User {
   })
   vip: VipEnum
 
+  @Column({ type: 'datetime', nullable: true })
+  vipExpirationDate: Date | null
+
   @Column({ type: 'smallint', nullable: false, default: 0 })
   money: number
 

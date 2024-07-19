@@ -1,4 +1,4 @@
-import { EnchantsEnum } from '../enums'
+import { EnchantsEnum, VipEnum } from '../enums'
 
 export const THIRTY_DAYS = 30 * 24 * 60 * 1000
 
@@ -136,3 +136,17 @@ export const ITEMS_COUNT = 27
 export const LOTS_COUNT = 8
 
 export const SHULKERS_COUNT = 2
+
+export const vipMultipliers: Record<VipEnum, number> = {
+  [VipEnum.IRON]: 2,
+  [VipEnum.GOLDEN]: 4,
+  [VipEnum.DIAMOND]: 6,
+  [VipEnum.NETHERITE]: 8,
+}
+
+export const vipPrice: Record<VipEnum, number> = {
+  [VipEnum.IRON]: 16,
+  [VipEnum.GOLDEN]: 32,
+  [VipEnum.DIAMOND]: 48,
+  [VipEnum.NETHERITE]: 64,
+}

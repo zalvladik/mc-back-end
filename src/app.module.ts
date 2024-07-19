@@ -11,6 +11,7 @@ import { McUserModule } from './modules-mc/user/user.module'
 import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
 import { McAuthModule } from './modules-mc/auth/auth.module'
+import { TaskService } from './shared/services/tasks'
 
 const siteModule = [
   AuthModule,
@@ -22,6 +23,8 @@ const siteModule = [
 ]
 
 const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]
+
+const services = [TaskService]
 
 @Module({
   imports: [
@@ -40,5 +43,7 @@ const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]
     ...siteModule,
     ...mcModule,
   ],
+  providers: [...services],
+  exports: [...services],
 })
 export class AppModule {}

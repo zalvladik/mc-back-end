@@ -3,7 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { User } from 'src/entities/user.entity'
 import { Repository } from 'typeorm'
 import { vipPrice } from 'src/shared/constants'
-import type { ByeVipProps } from '../types'
+import { getKievTime } from 'src/shared/helpers/getKievTime'
+import type { ByeVipProps, UpgradeVipProps } from '../types'
 
 @Injectable()
 export class UserVipService {
@@ -12,13 +13,13 @@ export class UserVipService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async byeVip({ vip, id }: ByeVipProps): Promise<any> {
+  async byeVip({ vip, id, userVip }: ByeVipProps): Promise<any> {
     const user = await this.userRepository.findOne({
       where: { id },
-      select: ['money', 'vip'],
+      select: ['money'],
     })
 
-    if (user.vip) {
+    if (userVip) {
       throw new BadRequestException('У вас уже куплено VIP')
     }
 
@@ -26,10 +27,10 @@ export class UserVipService {
       throw new BadRequestException('У вас недостатньо коштів')
     }
 
-    const currentDate = new Date()
-    const expirationDate = new Date()
-    expirationDate.setDate(currentDate.getDate() + 7)
-    expirationDate.setHours(0, 0, 0, 0)
+    const expirationDate = getKievTime()
+    // expirationDate.setDate(expirationDate.getDate() + 7)
+
+    expirationDate.setSeconds(59, 0)
 
     await this.userRepository.update(id, {
       vip,
@@ -38,9 +39,43 @@ export class UserVipService {
     })
   }
 
+  async upgradeVip({ vip, id }: UpgradeVipProps): Promise<any> {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      select: ['money', 'vip', 'vipExpirationDate'],
+    })
+
+    if (!user.vip) {
+      throw new BadRequestException('У вас не куплено VIP')
+    }
+
+    if (vipPrice[vip] <= vipPrice[user.vip]) {
+      throw new BadRequestException(
+        'Ви можете придбати тільки той VIP, який краще вашого',
+      )
+    }
+
+    // const currentDate = new Date()
+    // const timeDifference =
+    //   user.vipExpirationDate.getTime() - currentDate.getTime()
+
+    // const hoursRemaining = Math.floor(timeDifference / (1000 * 60 * 60))
+
+    // console.log(`Осталось ${hoursRemaining} часов до истечения срока.`)
+
+    if (user.money < vipPrice[vip]) {
+      throw new BadRequestException('У вас недостатньо коштів')
+    }
+
+    await this.userRepository.update(id, {
+      vip,
+      money: user.money - vipPrice[vip],
+    })
+  }
+
   async checkUserVipExpression(): Promise<void> {
     const currentDate = new Date()
-    currentDate.setHours(0, 0, 0, 0)
+    currentDate.setHours(0, 1, 0, 0)
 
     await this.userRepository
       .createQueryBuilder()

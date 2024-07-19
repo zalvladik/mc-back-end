@@ -30,6 +30,7 @@ import {
 } from './services'
 
 import { AuthModule } from '../auth/auth.module'
+import { AuthService } from '../auth/services'
 
 @Module({
   imports: [
@@ -60,7 +61,8 @@ import { AuthModule } from '../auth/auth.module'
     UserSkinService,
     UserShulkersService,
     UserVipService,
+    AuthService,
   ],
-  exports: [UserVipService],
+  exports: [UserVipService, JwtService],
 })
 export class UserModule {}

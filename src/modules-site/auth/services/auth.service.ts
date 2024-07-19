@@ -101,4 +101,11 @@ export class AuthService {
       select: ['refreshToken'],
     })
   }
+
+  async resetVip(id: number): Promise<void> {
+    await this.userRepository.update(id, {
+      vip: null,
+      vipExpirationDate: null,
+    })
+  }
 }

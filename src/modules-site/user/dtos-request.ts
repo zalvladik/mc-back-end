@@ -2,7 +2,14 @@ import { ApiProperty } from '@nestjs/swagger'
 import type { TransformFnParams } from 'class-transformer'
 import { Transform } from 'class-transformer'
 
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import {
+  IsDate,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator'
 import { VipEnum } from 'src/shared/enums'
 
 export class PostUserUuidBodyDto {
@@ -37,6 +44,13 @@ export class ByeVipBodyDto {
   vip: VipEnum
 }
 
+export class UpgradeVipBodyDto {
+  @IsNotEmpty()
+  @IsString()
+  @IsEnum(VipEnum)
+  vip: VipEnum
+}
+
 export class GetUserDto {
   @IsNotEmpty()
   @IsNumber()
@@ -54,9 +68,13 @@ export class GetUserDto {
   @IsString()
   vip: VipEnum
 
+  @IsOptional()
+  @IsDate()
+  vipExpirationDate: Date | null
+
   @IsNotEmpty()
   @IsNumber()
-  advancements: string
+  advancements: number
 }
 
 export class GetAdvancementsParamDto {

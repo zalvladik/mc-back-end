@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
+import { VipEnum } from 'src/shared/enums'
 
 export class LogoutBodyDto {
   @ApiProperty({ example: 31321 })
@@ -14,6 +15,15 @@ export class AuthUser {
 
   @ApiProperty({ example: 100 })
   money: number
+
+  @ApiProperty({ example: 'iron' })
+  vip: VipEnum
+
+  @ApiProperty({ example: '2024-07-26 18:19:20' })
+  vipExpirationDate: Date | null
+
+  @ApiProperty({ example: 5 })
+  advancements: number
 }
 
 export class AuthUserResponseDto {

@@ -7,6 +7,7 @@ import { Repository } from 'typeorm'
 
 import { User } from 'src/entities/user.entity'
 import type { GenerateTokensT } from 'src/modules-site/auth/types'
+import type { GetUserDto } from 'src/modules-site/user/dtos-request'
 
 @Injectable()
 export class TokenService {
@@ -45,7 +46,7 @@ export class TokenService {
     this.userRepository.update(id, { refreshToken: null })
   }
 
-  validateAccessToken(token: string): Promise<any> {
+  validateAccessToken(token: string): Promise<GetUserDto> {
     return this.jwtService.verify(token, {
       secret: this.config.get('JWT_ACCESS_SECRET'),
     })

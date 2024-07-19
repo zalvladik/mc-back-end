@@ -7,12 +7,10 @@ import { AuthModule } from 'src/modules-site/auth/auth.module'
 import { ItemTicketModule } from 'src/modules-site/item-ticket/item-ticket.module'
 import { UserModule } from 'src/modules-site/user/user.module'
 import { TokenModule } from 'src/shared/services/token/token.module'
-import { ScheduleModule } from '@nestjs/schedule'
 import { McUserModule } from './modules-mc/user/user.module'
 import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
 import { McAuthModule } from './modules-mc/auth/auth.module'
-import { TaskService } from './shared/services/tasks'
 
 const siteModule = [
   AuthModule,
@@ -23,8 +21,6 @@ const siteModule = [
 ]
 
 const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]
-
-const services = [TaskService]
 
 @Module({
   imports: [
@@ -40,11 +36,8 @@ const services = [TaskService]
       }),
       inject: [ConfigService],
     }),
-    ScheduleModule.forRoot(),
     ...siteModule,
     ...mcModule,
   ],
-  providers: [...services],
-  exports: [...services],
 })
 export class AppModule {}

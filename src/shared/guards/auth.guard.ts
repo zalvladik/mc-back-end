@@ -56,7 +56,7 @@ export class AuthGuard implements CanActivate {
           secure: true,
         })
 
-        res.setHeader('accessToken', updateUserData.accessToken)
+        res.setHeader('access-token', updateUserData.accessToken)
 
         context.switchToHttp().getRequest().response = res
       }

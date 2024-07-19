@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 
 import type { Item } from 'src/entities/item.entity'
+import type { User } from 'src/entities/user.entity'
 
 export class GetMoneyToUserResponseDto {
   @ApiProperty({ example: 50 })

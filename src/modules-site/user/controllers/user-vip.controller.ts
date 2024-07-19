@@ -17,6 +17,7 @@ import { Roles } from 'src/shared/decorators/roles.decorator'
 import { AuthService } from 'src/modules-site/auth/services'
 import { THIRTY_DAYS } from 'src/shared/constants'
 import { Request, Response } from 'express'
+import type { AuthUser } from 'src/modules-site/auth/dtos-response'
 import { UserVipService } from '../services'
 import { ByeVipBodyDto, GetUserDto, UpgradeVipBodyDto } from '../dtos-request'
 
@@ -36,7 +37,7 @@ export class UserVipController {
     @Res({ passthrough: true }) res: Response,
     @Body() { vip }: ByeVipBodyDto,
     @UserDecorator() { id, vip: userVip }: GetUserDto,
-  ): Promise<any> {
+  ): Promise<AuthUser> {
     await this.userVipService.byeVip({ vip, id, userVip })
 
     const { refreshToken } = req.cookies
@@ -51,6 +52,8 @@ export class UserVipController {
     })
 
     res.setHeader('accessToken', updateUserData.accessToken)
+
+    return updateUserData.user
   }
 
   @Put()
@@ -59,7 +62,7 @@ export class UserVipController {
     @Res({ passthrough: true }) res: Response,
     @Body() { vip }: UpgradeVipBodyDto,
     @UserDecorator() { id }: GetUserDto,
-  ): Promise<any> {
+  ): Promise<AuthUser> {
     await this.userVipService.upgradeVip({ vip, id })
 
     const { refreshToken } = req.cookies
@@ -74,5 +77,7 @@ export class UserVipController {
     })
 
     res.setHeader('accessToken', updateUserData.accessToken)
+
+    return updateUserData.user
   }
 }

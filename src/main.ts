@@ -14,6 +14,7 @@ async function bootstrap(): Promise<void> {
   app.enableCors({
     origin: true,
     credentials: true,
+    exposedHeaders: ['access-token'],
   })
 
   app.useStaticAssets(join(__dirname, '..', 'public'), { prefix: '/public/' })

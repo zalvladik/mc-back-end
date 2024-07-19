@@ -51,7 +51,7 @@ export class UserVipController {
       secure: true,
     })
 
-    res.setHeader('accessToken', updateUserData.accessToken)
+    res.setHeader('access-token', updateUserData.accessToken)
 
     return updateUserData.user
   }
@@ -76,7 +76,7 @@ export class UserVipController {
       secure: true,
     })
 
-    res.setHeader('accessToken', updateUserData.accessToken)
+    res.setHeader('access-token', updateUserData.accessToken)
 
     return updateUserData.user
   }

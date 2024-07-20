@@ -37,17 +37,10 @@ export class AuthGuard implements CanActivate {
 
       const userData: GetUserDto = req.user
 
-      console.log(userData.vipExpirationDate)
-      console.log(getKievTime())
-      console.log(new Date(userData.vipExpirationDate))
-
       if (
         userData.vipExpirationDate &&
         getKievTime() > new Date(userData.vipExpirationDate)
       ) {
-        console.log(typeof userData.vipExpirationDate)
-        console.log(userData.vipExpirationDate)
-
         await this.authService.resetVip(req.user.id)
         req.user.vip = null
         req.user.vipExpirationDate = null
@@ -66,6 +59,8 @@ export class AuthGuard implements CanActivate {
         res.setHeader('access-token', updateUserData.accessToken)
 
         context.switchToHttp().getRequest().response = res
+      } else {
+        res.removeHeader('access-token')
       }
     } catch (error) {
       throw new UnauthorizedException('invalid AccessToken')

@@ -53,9 +53,9 @@ export class AuthGuard implements CanActivate {
         //   secure: true,
         // })
         // res.setHeader('access-token', updateUserData.accessToken)
+      } else {
+        res.removeHeader('access-token')
       }
-
-      res.removeHeader('access-token')
     } catch (error) {
       throw new UnauthorizedException('invalid AccessToken')
     }

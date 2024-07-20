@@ -37,6 +37,10 @@ export class AuthGuard implements CanActivate {
 
       const userData: GetUserDto = req.user
 
+      console.log(userData.vipExpirationDate)
+      console.log(getKievTime())
+      console.log(new Date(userData.vipExpirationDate))
+
       if (
         userData.vipExpirationDate &&
         getKievTime() > new Date(userData.vipExpirationDate)

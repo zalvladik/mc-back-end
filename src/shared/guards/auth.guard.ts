@@ -44,8 +44,10 @@ export class AuthGuard implements CanActivate {
         await this.authService.resetVip(req.user.id)
         req.user.vip = null
         req.user.vipExpirationDate = null
+
         const { refreshToken } = req.cookies
         const updateUserData = await this.authService.refresh(refreshToken)
+
         res.cookie('refreshToken', updateUserData.refreshToken, {
           maxAge: THIRTY_DAYS,
           httpOnly: true,
@@ -57,7 +59,7 @@ export class AuthGuard implements CanActivate {
         res.setHeader('x-refresh-vip', 'true')
       } else {
         res.removeHeader('access-token')
-        res.removeHeader('x-refresh-vip')
+        res.setHeader('x-refresh-vip', 'false')
       }
     } catch (error) {
       throw new UnauthorizedException('invalid AccessToken')

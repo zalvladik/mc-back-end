@@ -57,7 +57,6 @@ export class AuthGuard implements CanActivate {
         })
 
         res.setHeader('access-token', updateUserData.accessToken)
-        res.setHeader('x-vip-expired', 'true')
 
         context.switchToHttp().getRequest().response = res
       }

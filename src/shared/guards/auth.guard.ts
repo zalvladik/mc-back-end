@@ -45,6 +45,9 @@ export class AuthGuard implements CanActivate {
         userData.vipExpirationDate &&
         getKievTime() > new Date(userData.vipExpirationDate)
       ) {
+        console.log(typeof userData.vipExpirationDate)
+        console.log(userData.vipExpirationDate)
+
         await this.authService.resetVip(req.user.id)
         req.user.vip = null
         req.user.vipExpirationDate = null

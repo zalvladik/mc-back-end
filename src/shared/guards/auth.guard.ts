@@ -57,6 +57,7 @@ export class AuthGuard implements CanActivate {
         res.setHeader('x-refresh-vip', 'true')
       } else {
         res.removeHeader('access-token')
+        res.removeHeader('x-refresh-vip')
       }
     } catch (error) {
       throw new UnauthorizedException('invalid AccessToken')

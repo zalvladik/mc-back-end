@@ -23,9 +23,9 @@ export class UserVipController {
   @Post()
   async byeVip(
     @Body() { vip }: ByeVipBodyDto,
-    @UserDecorator() { id, vip: userVip }: GetUserDto,
+    @UserDecorator() { id }: GetUserDto,
   ): Promise<void> {
-    await this.userVipService.byeVip({ vip, id, userVip })
+    await this.userVipService.byeVip({ vip, id })
   }
 
   @Put()

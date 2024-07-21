@@ -15,7 +15,6 @@ export class WhitelistController {
 
   @Post()
   async addUser(@Body() body: any): Promise<void> {
-    console.log(body)
     await this.whitelistService.addUser(body)
   }
 }

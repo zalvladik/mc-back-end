@@ -24,11 +24,9 @@ export class WhitelistService {
   }
 
   async addUser({ data }: CreateOrderBodyDto): Promise<void> {
-    const payComment = data.statementItem?.comment
-    const payAmount = data.statementItem.amount
-    const { description } = data.statementItem
+    const { description = null, comment = null, amount } = data.statementItem
 
-    if (!payComment && description) {
+    if (!comment && description) {
       const newUserInWhitelist = this.whitelistRepository.create({
         description,
       })
@@ -36,8 +34,8 @@ export class WhitelistService {
       await this.whitelistRepository.save(newUserInWhitelist)
     }
 
-    if (payComment && payComment.includes('uk-land$') && payAmount >= 200) {
-      const username = payComment
+    if (comment && comment.includes('uk-land$') && amount >= 200) {
+      const username = comment
         .trim()
         .replace(/^uk-land\$/, '')
         .replace(/\s+/g, '')

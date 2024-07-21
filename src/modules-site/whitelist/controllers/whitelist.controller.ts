@@ -12,7 +12,7 @@ export class WhitelistController {
     return this.whitelistService.getUserWhiteList()
   }
 
-  @Post()
+  @Post('super_security_key_lmao_buga_buga')
   async addUser(@Body() body: any): Promise<void> {
     this.logget.verbose(body)
     await this.whitelistService.addUser(body)

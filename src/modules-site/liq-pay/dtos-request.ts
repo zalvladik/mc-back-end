@@ -5,3 +5,19 @@ export class CreateOrderBodyDto {
   @IsString()
   username: string
 }
+
+export class CheckIsExistUserQueryDto {
+  @IsNotEmpty()
+  @IsString()
+  username: string
+}
+
+export class AddUserToWhiteListBodyDto {
+  @IsNotEmpty()
+  @IsString()
+  username: string
+
+  @IsNotEmpty()
+  @IsString()
+  transactionId: string
+}

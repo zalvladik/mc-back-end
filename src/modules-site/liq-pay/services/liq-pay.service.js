@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const LiqPay = require('../../shared/libs/liqpay')
+const LiqPay = require('../../../shared/libs/liqpay')
 
 @Injectable()
 export class LiqPayService {
@@ -12,7 +12,7 @@ export class LiqPayService {
 
     const liqpay = new LiqPay(publicKey, privateKey)
 
-    const html = liqpay.cnb_object({
+    const body = liqpay.cnb_object({
       action: 'pay',
       amount: 100,
       currency: 'UAH',
@@ -22,6 +22,20 @@ export class LiqPayService {
       paytypes: 'card',
     })
 
-    return html
+    return body
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  async checkStatus(transactionId) {
+    const response = await this.http
+      .post('https://www.liqpay.ua/api/request', {
+        action: 'status',
+        version: '3',
+        public_key: 'ваш_публичный_ключ',
+        transaction_id: transactionId,
+      })
+      .toPromise()
+
+    return response.data.status
   }
 }

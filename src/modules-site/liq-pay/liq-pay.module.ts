@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Whitelist } from 'src/entities/whitelist'
+import { Whitelist } from 'src/entities/whitelist.entity'
 import { LiqPayService, LiqPayUserService } from './services'
 import { LiqPayController, LiqPayUserController } from './controllers'
 

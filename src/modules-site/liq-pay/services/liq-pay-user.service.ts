@@ -1,6 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Whitelist } from 'src/entities/whitelist'
+import { Whitelist } from 'src/entities/whitelist.entity'
 import { Repository } from 'typeorm'
 
 @Injectable()

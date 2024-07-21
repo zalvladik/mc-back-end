@@ -23,12 +23,6 @@ export class CreateOrderBodyDto {
   }
 }
 
-export class CheckIsExistUserQueryDto {
-  @IsNotEmpty()
-  @IsString()
-  username: string
-}
-
 export class AddUserToWhiteListBodyDto {
   @IsNotEmpty()
   @IsString()

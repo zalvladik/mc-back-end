@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { Repository } from 'typeorm'
@@ -12,16 +12,10 @@ export class WhitelistService {
     private readonly whitelistRepository: Repository<Whitelist>,
   ) {}
 
-  async checkIsExistUser(username: string): Promise<any> {
-    const user = await this.whitelistRepository.findOne({
-      where: { user: username },
-    })
-
-    if (user) {
-      throw new ConflictException(
-        `Гравець з таким ніком уже існує: '${username}'`,
-      )
-    }
+  async getUserWhiteList(): Promise<string[]> {
+    return (await this.whitelistRepository.find({ select: ['user'] })).map(
+      item => item.user,
+    )
   }
 
   async addUser({ data }: CreateOrderBodyDto): Promise<void> {

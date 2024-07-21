@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { Repository } from 'typeorm'
+import { getKievTime } from 'src/shared/helpers/getKievTime'
 import type { CreateOrderBodyDto } from '../dtos-request'
 
 @Injectable()
@@ -24,11 +25,11 @@ export class WhitelistService {
   }
 
   async addUser({ data }: CreateOrderBodyDto): Promise<void> {
-    const { description = null, comment = null, amount } = data.statementItem
+    const { comment = null, amount } = data.statementItem
 
-    if (!comment && description) {
+    if (!comment) {
       const newUserInWhitelist = this.whitelistRepository.create({
-        description,
+        time: getKievTime(),
       })
 
       await this.whitelistRepository.save(newUserInWhitelist)
@@ -44,7 +45,7 @@ export class WhitelistService {
 
       const newUserInWhitelist = this.whitelistRepository.create({
         user: username,
-        description,
+        time: getKievTime(),
       })
 
       await this.whitelistRepository.save(newUserInWhitelist)

@@ -9,8 +9,8 @@ export class Whitelist {
   @Column({ type: 'varchar', length: 100, nullable: true })
   user: string
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  description: string
+  @Column({ type: 'datetime', nullable: false })
+  time: Date
 
   @Column({ type: 'varchar', length: 100, nullable: true })
   UUID: string

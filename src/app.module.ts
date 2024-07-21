@@ -11,7 +11,7 @@ import { McUserModule } from './modules-mc/user/user.module'
 import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
 import { McAuthModule } from './modules-mc/auth/auth.module'
-import { LiqPayModule } from './modules-site/liq-pay/liq-pay.module'
+import { WhitelistModule } from './modules-site/whitelist/whitelist.module'
 
 const siteModule = [
   AuthModule,
@@ -19,7 +19,7 @@ const siteModule = [
   UserModule,
   LotModule,
   ItemTicketModule,
-  LiqPayModule,
+  WhitelistModule,
 ]
 
 const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]

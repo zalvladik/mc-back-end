@@ -4,7 +4,7 @@ import { Whitelist } from 'src/entities/whitelist.entity'
 import { Repository } from 'typeorm'
 
 @Injectable()
-export class LiqPayUserService {
+export class WhitelistUserService {
   constructor(
     @InjectRepository(Whitelist)
     private readonly whitelistRepository: Repository<Whitelist>,

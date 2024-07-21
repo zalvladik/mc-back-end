@@ -6,37 +6,37 @@ import {
   Post,
   Query,
 } from '@nestjs/common'
-import { LiqPayUserService, LiqPayService } from '../services'
+import { WhitelistUserService, WhitelistService } from '../services'
 import {
   AddUserToWhiteListBodyDto,
   CheckIsExistUserQueryDto,
 } from '../dtos-request'
 
-@Controller('liqpay/user')
-export class LiqPayUserController {
+@Controller('whitelist/user')
+export class WhitelistUserController {
   constructor(
-    private readonly liqPayUserService: LiqPayUserService,
-    private readonly liqPayService: LiqPayService,
+    private readonly whitelistUserService: WhitelistUserService,
+    private readonly whitelistService: WhitelistService,
   ) {}
 
   @Get()
   async checkIsExistUser(
     @Query() { username }: CheckIsExistUserQueryDto,
   ): Promise<void> {
-    await this.liqPayUserService.checkIsExistUser(username)
+    await this.whitelistUserService.checkIsExistUser(username)
   }
 
   @Post()
   async addUser(
-    @Body() { username, transactionId }: AddUserToWhiteListBodyDto,
+    @Body() { username }: AddUserToWhiteListBodyDto,
   ): Promise<void> {
     const isSeccessfulTransaction =
-      await this.liqPayService.checkStatus(transactionId)
+      await this.whitelistService.checkStatus(username)
 
     if (!isSeccessfulTransaction) {
       throw new NotFoundException('Такої покупки не існує')
     }
 
-    await this.liqPayUserService.addUser(username)
+    await this.whitelistUserService.addUser(username)
   }
 }

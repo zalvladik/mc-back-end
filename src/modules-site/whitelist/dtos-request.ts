@@ -16,8 +16,4 @@ export class AddUserToWhiteListBodyDto {
   @IsNotEmpty()
   @IsString()
   username: string
-
-  @IsNotEmpty()
-  @IsString()
-  transactionId: string
 }

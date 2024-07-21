@@ -27,11 +27,15 @@ export class WhitelistService {
     const payComment = data.statementItem.comment
     const payAmount = data.statementItem.amount
 
+    console.log(data)
+
     if (payComment.includes('uk-land$') && payAmount >= 200) {
       const username = payComment
         .trim()
         .replace(/^uk-land\$/, '')
         .replace(/\s+/g, '')
+
+      console.log(username)
 
       const newUserInWhitelist = this.whitelistRepository.create({
         user: username,

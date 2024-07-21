@@ -24,12 +24,12 @@ export class WhitelistService {
   }
 
   async addUser({ data }: CreateOrderBodyDto): Promise<void> {
-    const payComment = data.statementItem.comment
+    const payComment = data.statementItem?.comment
     const payAmount = data.statementItem.amount
 
     console.log(data)
 
-    if (payComment.includes('uk-land$') && payAmount >= 200) {
+    if (payComment && payComment.includes('uk-land$') && payAmount >= 200) {
       const username = payComment
         .trim()
         .replace(/^uk-land\$/, '')

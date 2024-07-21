@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common'
 import { WhitelistService } from '../services'
-import { CheckIsExistUserQueryDto, CreateOrderBodyDto } from '../dtos-request'
+import { CheckIsExistUserQueryDto } from '../dtos-request'
 
 @Controller('whitelist')
 export class WhitelistController {
@@ -14,7 +14,8 @@ export class WhitelistController {
   }
 
   @Post()
-  async addUser(@Body() body: CreateOrderBodyDto): Promise<void> {
+  async addUser(@Body() body: any): Promise<void> {
+    console.log(body)
     await this.whitelistService.addUser(body)
   }
 }

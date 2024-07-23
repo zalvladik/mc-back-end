@@ -30,12 +30,28 @@ export class WhitelistService {
     }
 
     if (comment && comment.includes('uk-land$') && amount >= 10000) {
-      const username = comment
+      const uniCodeUsername = comment
         .trim()
         .replace(/^uk-land\$/, '')
         .replace(/\s+/g, '')
 
-      if (!username) return
+      if (!uniCodeUsername) {
+        const newUserInWhitelist = this.whitelistRepository.create({
+          time: getKievTime(),
+        })
+
+        await this.whitelistRepository.save(newUserInWhitelist)
+
+        return
+      }
+
+      const unicodeToString = (unicodeStr: string): string => {
+        return unicodeStr.replace(/\\u([0-9a-fA-F]{4})/g, (match, p1) =>
+          String.fromCharCode(parseInt(p1, 16)),
+        )
+      }
+
+      const username = unicodeToString(uniCodeUsername)
 
       const newUserInWhitelist = this.whitelistRepository.create({
         user: username,

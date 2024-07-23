@@ -9,7 +9,7 @@ export class Whitelist {
   @Column({ type: 'varchar', length: 100, nullable: true })
   user: string
 
-  @Column({ type: 'datetime', nullable: false })
+  @Column({ type: 'datetime', nullable: true })
   time: Date
 
   @Column({ type: 'varchar', length: 100, nullable: true })

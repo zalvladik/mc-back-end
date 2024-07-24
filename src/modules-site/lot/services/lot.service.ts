@@ -126,15 +126,17 @@ export class LotService {
       queryBuilder.andWhere(sqlLengthEnchants)
     }
 
-    for (let i = 0; i < enchantsArray.length; i++) {
-      const paramName = `enchants${i}`
-      const paramValue = enchantsArray[i]
-      const sqlEnchants = didNeedShulkers
-        ? `(FIND_IN_SET(:${paramName}, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:${paramName}, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`
-        : `(FIND_IN_SET(:${paramName}, itemEnchantMeta.${enchantMetaType}) > 0)`
+    if (didNeedIdentical) {
+      for (let i = 0; i < enchantsArray.length; i++) {
+        const paramName = `enchants${i}`
+        const paramValue = enchantsArray[i]
 
-      // Добавляем параметры и условия в запрос
-      queryBuilder.andWhere(sqlEnchants, { [paramName]: paramValue })
+        const sqlEnchants = didNeedShulkers
+          ? `(FIND_IN_SET(:${paramName}, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:${paramName}, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`
+          : `(FIND_IN_SET(:${paramName}, itemEnchantMeta.${enchantMetaType}) > 0)`
+
+        queryBuilder.andWhere(sqlEnchants, { [paramName]: paramValue })
+      }
     }
 
     const orderDirection = didPriceToUp ? 'ASC' : 'DESC'

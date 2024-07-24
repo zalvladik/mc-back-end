@@ -106,10 +106,6 @@ export class LotService {
       ? `(itemEnchantMeta.enchantLength = ${enchantsArray.length} OR shulkerItemEnchantMeta.enchantLength = ${enchantsArray.length})`
       : `itemEnchantMeta.enchantLength = ${enchantsArray.length}`
 
-    const sqlEnchants = didNeedShulkers
-      ? `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:enchants, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`
-      : `(FIND_IN_SET(:enchants, itemEnchantMeta.${enchantMetaType}) > 0)`
-
     const sqlEnchantType = didNeedShulkers
       ? `(itemEnchantMeta.enchantType = :enchantType OR shulkerItemEnchantMeta.enchantType = :enchantType)`
       : `(itemEnchantMeta.enchantType = :enchantType)`
@@ -131,7 +127,14 @@ export class LotService {
     }
 
     for (let i = 0; i < enchantsArray.length; i++) {
-      queryBuilder.andWhere(sqlEnchants, { enchants: enchantsArray[i] })
+      const paramName = `enchants${i}`
+      const paramValue = enchantsArray[i]
+      const sqlEnchants = didNeedShulkers
+        ? `(FIND_IN_SET(:${paramName}, itemEnchantMeta.${enchantMetaType}) > 0 OR FIND_IN_SET(:${paramName}, shulkerItemEnchantMeta.${enchantMetaType}) > 0)`
+        : `(FIND_IN_SET(:${paramName}, itemEnchantMeta.${enchantMetaType}) > 0)`
+
+      // Добавляем параметры и условия в запрос
+      queryBuilder.andWhere(sqlEnchants, { [paramName]: paramValue })
     }
 
     const orderDirection = didPriceToUp ? 'ASC' : 'DESC'

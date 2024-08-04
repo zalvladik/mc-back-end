@@ -74,7 +74,7 @@ export enum EnchantsEnum {
   SHARPNESS = 'sharpness',
   SMITE = 'smite',
   SOUL_SPEED = 'soul_speed',
-  SWEEPING = 'sweeping',
+  SWEEPING_EDGE = 'sweeping_edge',
   SWIFT_SNEAK = 'swift_sneak',
   THORNS = 'thorns',
   UNBREAKING = 'unbreaking',

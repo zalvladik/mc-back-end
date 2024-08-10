@@ -29,7 +29,7 @@ export class WhitelistService {
       await this.whitelistRepository.save(newUserInWhitelist)
     }
 
-    if (comment && comment.includes('uk-land$') && amount >= 15000) {
+    if (comment && comment.includes('uk-land$') && amount >= 9500) {
       const uniCodeUsername = comment
         .trim()
         .replace(/^uk-land\$/, '')

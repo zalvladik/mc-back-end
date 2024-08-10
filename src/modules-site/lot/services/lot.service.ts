@@ -181,10 +181,14 @@ export class LotService {
     const isLike = didNeedIdentical ? '=' : 'LIKE'
 
     if (display_nameOrType) {
+      const searchTerm = didNeedIdentical
+        ? display_nameOrType.toLowerCase()
+        : `%${display_nameOrType.toLowerCase()}%`
+
       queryBuilder.andWhere(
         `(LOWER(shulkerItem.display_name) ${isLike} :display_nameOrType OR LOWER(shulkerItem.type) ${isLike} :display_nameOrType)`,
         {
-          display_nameOrType: display_nameOrType.toLowerCase(),
+          display_nameOrType: searchTerm,
         },
       )
     }
@@ -250,12 +254,16 @@ export class LotService {
     const isLike = didNeedIdentical ? '=' : 'LIKE'
 
     if (display_nameOrType) {
+      const searchTerm = didNeedIdentical
+        ? display_nameOrType.toLowerCase()
+        : `%${display_nameOrType.toLowerCase()}%`
+
       const sqlDisplay_nameOrType = didNeedShulkers
         ? `(LOWER(item.display_name) ${isLike} :display_nameOrType OR LOWER(item.type) ${isLike} :display_nameOrType OR LOWER(shulkerItem.display_name) ${isLike} :display_nameOrType OR LOWER(shulkerItem.type) ${isLike} :display_nameOrType)`
         : `(LOWER(item.display_name) ${isLike} :display_nameOrType OR LOWER(item.type) ${isLike} :display_nameOrType)`
 
       queryBuilder.andWhere(sqlDisplay_nameOrType, {
-        display_nameOrType: display_nameOrType.toLowerCase(),
+        display_nameOrType: searchTerm,
       })
     }
 

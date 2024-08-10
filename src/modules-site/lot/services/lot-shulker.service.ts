@@ -121,7 +121,11 @@ export class LotShulkerService {
     buyerUser.money -= lotMetaData.price
     sellerUser.money += lotMetaData.price
 
-    const updatedShulker = { ...lotMetaData.shulker, user: buyerUser }
+    const updatedShulker = {
+      ...lotMetaData.shulker,
+      user: buyerUser,
+      username: buyerUser.username,
+    }
 
     await this.userRepository.save(buyerUser)
     await this.userRepository.save(sellerUser)

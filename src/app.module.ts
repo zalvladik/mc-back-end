@@ -12,6 +12,7 @@ import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
 import { McAuthModule } from './modules-mc/auth/auth.module'
 import { WhitelistModule } from './modules-site/whitelist/whitelist.module'
+import { PpModule } from './modules-site/pp/pp.module'
 
 const siteModule = [
   AuthModule,
@@ -20,6 +21,7 @@ const siteModule = [
   LotModule,
   ItemTicketModule,
   WhitelistModule,
+  PpModule,
 ]
 
 const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]

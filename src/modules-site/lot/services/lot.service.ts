@@ -1,7 +1,6 @@
 import {
   BadRequestException,
   Injectable,
-  Logger,
   NotFoundException,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -42,8 +41,6 @@ export class LotService {
     'shulker.type',
     'shulker.display_name',
   ]
-
-  private logger = new Logger('LotService')
 
   constructor(
     @InjectRepository(Lot)

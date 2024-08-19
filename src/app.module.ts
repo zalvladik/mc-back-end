@@ -11,8 +11,8 @@ import { McUserModule } from './modules-mc/user/user.module'
 import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
 import { McAuthModule } from './modules-mc/auth/auth.module'
-import { WhitelistModule } from './modules-site/whitelist/whitelist.module'
 import { PpModule } from './modules-site/pp/pp.module'
+import { DiscordBotModule } from './shared/services/discordBot/socket.module'
 
 const siteModule = [
   AuthModule,
@@ -20,7 +20,7 @@ const siteModule = [
   UserModule,
   LotModule,
   ItemTicketModule,
-  WhitelistModule,
+  DiscordBotModule,
   PpModule,
 ]
 

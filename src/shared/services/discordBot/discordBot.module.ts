@@ -6,6 +6,6 @@ import { DiscordBotService } from './discordBot.service'
 @Global()
 @Module({
   imports: [TypeOrmModule.forFeature([Whitelist])],
-  exports: [DiscordBotService],
+  providers: [DiscordBotService],
 })
 export class DiscordBotModule {}

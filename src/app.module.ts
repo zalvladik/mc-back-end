@@ -12,7 +12,7 @@ import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
 import { McAuthModule } from './modules-mc/auth/auth.module'
 import { PpModule } from './modules-site/pp/pp.module'
-import { DiscordBotModule } from './shared/services/discordBot/socket.module'
+import { DiscordBotModule } from './shared/services/discordBot/discordBot.module'
 
 const siteModule = [
   AuthModule,

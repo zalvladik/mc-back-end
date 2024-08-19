@@ -9,6 +9,9 @@ export class Whitelist {
   @Column({ type: 'varchar', length: 100, nullable: true })
   user: string
 
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  discordUserId: string
+
   @Column({ type: 'datetime', nullable: true })
   time: Date
 

@@ -45,7 +45,7 @@ export class DiscordBotService implements OnModuleInit {
 
     if (userByDiscordUserId) {
       throw new ConflictException(
-        `Вас уже добавленно в whitelist, ваш нікнейм: ${userByDiscordUserId.user}`,
+        `> Вас уже добавленно в whitelist, ваш нікнейм: **${userByDiscordUserId.user}**`,
       )
     }
 
@@ -55,7 +55,7 @@ export class DiscordBotService implements OnModuleInit {
 
     if (userByNickName) {
       throw new ConflictException(
-        `Нік ${nickname} зайнятий, придумайте інший нікнейм.`,
+        `> Нік **${nickname}** зайнятий, придумайте інший нікнейм.`,
       )
     }
 

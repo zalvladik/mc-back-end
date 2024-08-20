@@ -123,6 +123,8 @@ export class DiscordBotService implements OnModuleInit {
 
             if (guild) {
               const member = await guild.members.fetch(message.author.id)
+
+              await member.setNickname(message.content)
               await member.roles.add(this.ROLE_ID)
             }
 

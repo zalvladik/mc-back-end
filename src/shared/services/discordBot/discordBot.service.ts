@@ -1,5 +1,5 @@
 import type { OnModuleInit } from '@nestjs/common'
-import { Injectable, ConflictException } from '@nestjs/common'
+import { Injectable, ConflictException, Logger } from '@nestjs/common'
 import { Client, GatewayIntentBits } from 'discord.js'
 import { addMonths, isBefore } from 'date-fns'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -9,6 +9,8 @@ import { getKievTime } from 'src/shared/helpers/getKievTime'
 
 @Injectable()
 export class DiscordBotService implements OnModuleInit {
+  private logger = new Logger('DiscordBotService')
+
   private client: Client
 
   private TARGET_CHANNEL_ID = process.env.TARGET_CHANNEL_ID
@@ -133,6 +135,8 @@ export class DiscordBotService implements OnModuleInit {
               `> Вітаю, вас добавлено в **whitelist**! :tada: :partying_face: :tada:`,
             )
           } catch (error) {
+            this.logger.error(error)
+
             if (error instanceof ConflictException) {
               await message.delete()
               await message.author.send(error.message)
@@ -150,7 +154,7 @@ export class DiscordBotService implements OnModuleInit {
           )
         }
       } catch (error) {
-        // console.log('error')
+        this.logger.error(error)
       }
     })
 

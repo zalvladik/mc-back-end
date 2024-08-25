@@ -1,4 +1,4 @@
-import { Controller, Post, UseGuards } from '@nestjs/common'
+import { Controller, Get, Post, UseGuards } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
@@ -7,6 +7,7 @@ import { RolesGuard } from 'src/shared/guards/roles.guard'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
+import type { WlEnd } from 'src/entities/wl-end.entity'
 import { WlEndService } from './wl-end.service'
 
 @Controller('wl-end')
@@ -16,11 +17,21 @@ import { WlEndService } from './wl-end.service'
 export class WlEndController {
   constructor(private readonly wlEndService: WlEndService) {}
 
-  @Post()
+  @Get()
   @ApiResponse({
     status: 200,
   })
-  async byeTicket(@UserDecorator() { id }: GetUserDto): Promise<void> {
-    await this.wlEndService.byeWlEndTicket(id)
+  async wlEndList(): Promise<WlEnd[]> {
+    return this.wlEndService.wlEndList()
+  }
+
+  @Post()
+  @ApiResponse({
+    status: 201,
+  })
+  async byeTicket(
+    @UserDecorator() { id, username }: GetUserDto,
+  ): Promise<void> {
+    await this.wlEndService.byeWlEndTicket(id, username)
   }
 }

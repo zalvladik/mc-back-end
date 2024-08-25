@@ -31,7 +31,7 @@ export class WlEndController {
   })
   async byeTicket(
     @UserDecorator() { id, username }: GetUserDto,
-  ): Promise<void> {
-    await this.wlEndService.byeWlEndTicket(id, username)
+  ): Promise<WlEnd> {
+    return this.wlEndService.byeWlEndTicket(id, username)
   }
 }

@@ -25,7 +25,7 @@ export class WlEndService {
     return this.wlEndRepository.find()
   }
 
-  async byeWlEndTicket(id: number, username: string): Promise<void> {
+  async byeWlEndTicket(id: number, username: string): Promise<WlEnd> {
     const isExistPlayerInWlEnd = await this.wlEndRepository.findOne({
       where: { username },
     })
@@ -49,5 +49,7 @@ export class WlEndService {
 
     await this.userRepository.save(user)
     await this.wlEndRepository.save(newPlayerInWlEnd)
+
+    return newPlayerInWlEnd
   }
 }

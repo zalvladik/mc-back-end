@@ -10,8 +10,8 @@ import { Roles } from 'src/shared/decorators/roles.decorator'
 import type { WlEnd } from 'src/entities/wl-end.entity'
 import { WlEndService } from './wl-end.service'
 
-@Controller('wl-end')
-@ApiTags('wl-end')
+@Controller('wl_end')
+@ApiTags('wl_end')
 @UseGuards(AuthGuard, RolesGuard)
 @Roles(RoleEnum.USER)
 export class WlEndController {

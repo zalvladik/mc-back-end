@@ -13,6 +13,7 @@ import { AppConfig, DatabaseConfig } from './config'
 import { McAuthModule } from './modules-mc/auth/auth.module'
 import { PpModule } from './modules-site/pp/pp.module'
 import { DiscordBotModule } from './shared/services/discordBot/discordBot.module'
+import { WlEndModule } from './modules-site/wl-end/wl-end.module'
 
 const siteModule = [
   AuthModule,
@@ -20,6 +21,7 @@ const siteModule = [
   UserModule,
   LotModule,
   ItemTicketModule,
+  WlEndModule,
   DiscordBotModule,
   PpModule,
 ]

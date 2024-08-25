@@ -2,6 +2,8 @@ import { EnchantsEnum, VipEnum } from '../enums'
 
 export const THIRTY_DAYS = 30 * 24 * 60 * 1000
 
+export const WL_END_COST = 64 * 2
+
 export enum SocketTypes {
   INCREMENT_MONEY,
   DECREMENT_MONEY,

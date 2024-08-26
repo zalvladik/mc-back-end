@@ -137,7 +137,7 @@ export class LotShulkerService {
 
     this.mcUserNotificationService.byeShulkerLotNotification({
       username: sellerUser.username,
-      serialized: lotMetaData.shulker.items.map(item => item.serialized),
+      serializedArray: lotMetaData.shulker.items.map(item => item.serialized),
       message: `§b+${lotMetaData.price}⟡ §f| §7Купили лот: §aшалкер`,
     })
 

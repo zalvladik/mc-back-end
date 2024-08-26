@@ -22,12 +22,12 @@ export class McUserNotificationService {
   async byeShulkerLotNotification({
     username,
     message,
-    serialized,
+    serializedArray,
   }: ByeShulkerLotNotificationT): Promise<void> {
     await axios.post('http://51.75.74.159:25579/byeShulkerLotNotification', {
       username,
       message,
-      serialized,
+      serializedArray,
     })
   }
 }

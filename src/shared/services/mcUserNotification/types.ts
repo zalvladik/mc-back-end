@@ -7,5 +7,5 @@ export type ByeItemLotNotificationT = {
 export type ByeShulkerLotNotificationT = {
   username: string
   message: string
-  serialized: string[]
+  serializedArray: string[]
 }

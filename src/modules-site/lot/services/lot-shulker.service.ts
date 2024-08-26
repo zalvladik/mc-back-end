@@ -93,7 +93,7 @@ export class LotShulkerService {
   }: ByeLotShulkerServiceT): Promise<BuyLotShulkerResponseDto> {
     const lotMetaData = await this.lotRepository.findOne({
       where: { id: lotId },
-      relations: ['shulker', 'shulker.user'],
+      relations: ['shulker', 'shulker.user', 'shulker.items'],
     })
 
     if (!lotMetaData) throw new NotFoundException('Лот не знайдено')

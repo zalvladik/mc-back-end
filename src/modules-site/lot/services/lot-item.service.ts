@@ -138,7 +138,7 @@ export class LotItemService {
     this.mcUserNotificationService.byeItemLotNotification({
       username: sellerUser.username,
       serialized: lotMetaData.item.serialized,
-      message: `§b+${lotMetaData.price}⟡ §f| §7Купили лот: §a${lotMetaData.item.display_name}`,
+      message: ` §b+${lotMetaData.price}⟡ §f| §7Купили лот: §a${lotMetaData.item.display_name}`,
     })
 
     const { user, serialized, ...rest } = lotMetaData.item

@@ -141,7 +141,7 @@ export class LotShulkerService {
       message: `§b+${lotMetaData.price}⟡ §f| §7Купили лот: §aшалкер`,
     })
 
-    const { user, ...rest } = lotMetaData.shulker
+    const { user, items, ...rest } = lotMetaData.shulker
 
     return rest
   }

@@ -15,6 +15,7 @@ import { Lot } from 'src/entities/lot.entity'
 
 import { User } from 'src/entities/user.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
+import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
 import type { ByeLotItemServiceT, CreateLotItemServiceT } from '../types'
 import type {
   ByeLotItemResponseDto,
@@ -31,6 +32,7 @@ export class LotItemService {
     private readonly lotRepository: Repository<Lot>,
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
+    private readonly mcUserNotificationService: McUserNotificationService,
   ) {}
 
   async createLotItem({
@@ -133,7 +135,13 @@ export class LotItemService {
     await this.itemRepository.save(updatedItem)
     await this.deleteLot(lotId)
 
-    const { user, ...rest } = lotMetaData.item
+    this.mcUserNotificationService.byeItemLotNotification({
+      username: sellerUser.username,
+      serialized: lotMetaData.item.serialized,
+      message: `§b+${lotMetaData.price}⟡ §f| §7Купили лот: §a${lotMetaData.item.display_name}`,
+    })
+
+    const { user, serialized, ...rest } = lotMetaData.item
 
     return rest
   }

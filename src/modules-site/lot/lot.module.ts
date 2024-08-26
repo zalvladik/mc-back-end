@@ -10,6 +10,7 @@ import { UserController } from 'src/modules-site/user/controllers'
 import { UserService } from 'src/modules-site/user/services'
 
 import { Shulker } from 'src/entities/shulker.entity'
+import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
 import {
   LotItemController,
   LotController,
@@ -29,6 +30,12 @@ import { LotItemService, LotShulkerService, LotService } from './services'
     LotController,
     LotShulkerController,
   ],
-  providers: [UserService, LotItemService, LotShulkerService, LotService],
+  providers: [
+    UserService,
+    LotItemService,
+    LotShulkerService,
+    LotService,
+    McUserNotificationService,
+  ],
 })
 export class LotModule {}

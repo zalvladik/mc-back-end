@@ -15,6 +15,7 @@ import { Lot } from 'src/entities/lot.entity'
 import { User } from 'src/entities/user.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
+import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
 import type { ByeLotShulkerServiceT, CreateLotShulkerServiceT } from '../types'
 import type {
   BuyLotShulkerResponseDto,
@@ -31,6 +32,7 @@ export class LotShulkerService {
     private readonly lotRepository: Repository<Lot>,
     @InjectRepository(Shulker)
     private readonly shulkerRepository: Repository<Shulker>,
+    private readonly mcUserNotificationService: McUserNotificationService,
   ) {}
 
   async createLotShulker({
@@ -132,6 +134,12 @@ export class LotShulkerService {
 
     await this.shulkerRepository.save(updatedShulker)
     await this.deleteLot(lotId)
+
+    this.mcUserNotificationService.byeShulkerLotNotification({
+      username: sellerUser.username,
+      serialized: lotMetaData.shulker.items.map(item => item.serialized),
+      message: `§b+${lotMetaData.price}⟡ §f| §7Купили лот: §aшалкер`,
+    })
 
     const { user, ...rest } = lotMetaData.shulker
 

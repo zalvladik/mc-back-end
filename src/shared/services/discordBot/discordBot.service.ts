@@ -15,7 +15,9 @@ export class DiscordBotService implements OnModuleInit {
 
   private TARGET_CHANNEL_ID = process.env.TARGET_CHANNEL_ID
 
-  private ROLE_ID = process.env.ROLE_ID
+  private ROLE_NOOB_ID = process.env.ROLE_NOOB_ID
+
+  private ROLE_PLAYER_ID = process.env.ROLE_PLAYER_ID
 
   private DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN
 
@@ -127,7 +129,8 @@ export class DiscordBotService implements OnModuleInit {
               const member = await guild.members.fetch(message.author.id)
 
               await member.setNickname(message.content)
-              await member.roles.add(this.ROLE_ID)
+              await member.roles.add(this.ROLE_NOOB_ID)
+              await member.roles.add(this.ROLE_PLAYER_ID)
             }
 
             await message.react('✅')

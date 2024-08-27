@@ -27,7 +27,7 @@ import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 export class UserShulkersService {
   constructor(
     @InjectRepository(Item)
-    private readonly itemsRepository: Repository<Item>,
+    private readonly itemRepository: Repository<Item>,
     @InjectRepository(EnchantMeta)
     private readonly enchantMetaRepository: Repository<EnchantMeta>,
     @InjectRepository(User)
@@ -68,7 +68,7 @@ export class UserShulkersService {
           const { display_name, categories, description } =
             itemCategoriesSorter(item.type)
 
-          const createdNewItem = this.itemsRepository.create({
+          const createdNewItem = this.itemRepository.create({
             ...item,
             display_name: item.display_name || display_name,
             categories,
@@ -136,11 +136,11 @@ export class UserShulkersService {
       return { ...item, shulker: savedUserShulker }
     })
 
-    await this.itemsRepository.save(updatedShulkerItems)
+    await this.itemRepository.save(updatedShulkerItems)
 
     this.cacheService.delete(cacheId)
 
-    const savedItemsResult = await this.itemsRepository.find({
+    const savedItemsResult = await this.itemRepository.find({
       where: { shulker: { id: savedUserShulker.id } },
       select: itemMeta,
     })
@@ -175,13 +175,12 @@ export class UserShulkersService {
   }
 
   async deleteShulker(username: string, shulkerId: number): Promise<void> {
-    const userShulker = await this.shulkerRepository.findOne({
-      where: { id: shulkerId },
-      relations: ['items'],
-    })
+    await this.itemRepository.update(
+      { shulker: { id: shulkerId } },
+      { isTaken: true },
+    )
 
-    await this.itemsRepository.remove(userShulker.items)
-    await this.shulkerRepository.remove(userShulker)
+    await this.shulkerRepository.update({ id: shulkerId }, { isTaken: true })
 
     this.socketService.updateDataAndNotifyClients({
       username,

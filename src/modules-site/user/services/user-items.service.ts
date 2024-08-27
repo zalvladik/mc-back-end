@@ -19,6 +19,7 @@ export class UserItemsService {
       where: {
         user: { id },
         itemTicket: IsNull(),
+        isTaken: false,
         lot: IsNull(),
         shulker: IsNull(),
       },

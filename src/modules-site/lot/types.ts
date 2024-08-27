@@ -46,3 +46,11 @@ export type GetShulkerLotsService = {
 export type GetLotsSerivce = {
   username: string
 } & GetLotsQuaryDto
+
+export type GetTradeHistoryService = {
+  userId: number
+  username: string
+  isSeller?: boolean
+  page?: number
+  limit?: number
+}

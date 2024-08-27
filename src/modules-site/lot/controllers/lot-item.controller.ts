@@ -25,7 +25,7 @@ import type {
 @Controller('lot/item')
 @ApiTags('lot/item')
 @UseGuards(AuthGuard, RolesGuard)
-@Roles(RoleEnum.USER)
+@Roles(RoleEnum.ADMIN)
 export class LotItemController {
   constructor(private readonly lotItemService: LotItemService) {}
 

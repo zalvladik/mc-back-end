@@ -1,6 +1,5 @@
 import {
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -11,7 +10,6 @@ import { Item } from './item.entity'
 import { User } from './user.entity'
 
 @Entity({ name: 'item_ticket' })
-@Index(['user'])
 export class ItemTicket {
   @PrimaryGeneratedColumn()
   id: number
@@ -20,9 +18,7 @@ export class ItemTicket {
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @OneToMany(() => Item, item => item.itemTicket, {
-    onDelete: 'NO ACTION',
-  })
+  @OneToMany(() => Item, item => item.itemTicket)
   @JoinColumn({ name: 'item_ticket_id' })
   items: Item[]
 }

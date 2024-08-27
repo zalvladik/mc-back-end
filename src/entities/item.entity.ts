@@ -16,7 +16,7 @@ import { Shulker } from './shulker.entity'
 import { EnchantMeta } from './enchant-meta.entity'
 
 @Entity({ name: 'items' })
-@Index(['user'])
+@Index(['isTaken'])
 export class Item {
   @PrimaryGeneratedColumn()
   id: number
@@ -64,19 +64,19 @@ export class Item {
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @ManyToOne(() => ItemTicket, itemTicket => itemTicket.items, {
-    onDelete: 'SET NULL',
-  })
+  @Column({ type: 'boolean', default: false, nullable: false })
+  isTaken: boolean
+
+  @ManyToOne(() => ItemTicket, itemTicket => itemTicket.items, {})
   @JoinColumn({ name: 'item_ticket_id' })
   itemTicket: ItemTicket
 
-  @OneToOne(() => Lot, lot => lot.item, { onDelete: 'SET NULL' })
+  @OneToOne(() => Lot, lot => lot.item)
   @JoinColumn({ name: 'lot_id' })
   lot: Lot
 
   @OneToOne(() => EnchantMeta, {
     cascade: true,
-    onDelete: 'CASCADE',
     nullable: true,
   })
   @JoinColumn({ name: 'enchant_meta_id' })

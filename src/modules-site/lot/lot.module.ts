@@ -19,6 +19,8 @@ import {
 } from './controllers'
 
 import { LotItemService, LotShulkerService, LotService } from './services'
+import { LotTradeHistoryController } from './controllers/lot-trade-history.controller'
+import { LotTradeHistoryService } from './services/lot-trade-history.service'
 
 @Module({
   imports: [
@@ -37,12 +39,14 @@ import { LotItemService, LotShulkerService, LotService } from './services'
     LotItemController,
     LotController,
     LotShulkerController,
+    LotTradeHistoryController,
   ],
   providers: [
     UserService,
     LotItemService,
     LotShulkerService,
     LotService,
+    LotTradeHistoryService,
     McUserNotificationService,
   ],
 })

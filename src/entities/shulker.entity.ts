@@ -16,6 +16,7 @@ import { Lot } from './lot.entity'
 
 @Entity({ name: 'shulkers' })
 @Index(['username'])
+@Index(['isTaken'])
 export class Shulker {
   @PrimaryGeneratedColumn()
   id: number
@@ -44,10 +45,10 @@ export class Shulker {
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @OneToOne(() => Lot, lot => lot.shulker, {
-    onDelete: 'SET NULL',
-    nullable: true,
-  })
+  @OneToOne(() => Lot, lot => lot.shulker, { nullable: true })
   @JoinColumn({ name: 'lot_id' })
   lot: Lot
+
+  @Column({ type: 'boolean', default: false, nullable: false })
+  isTaken: boolean
 }

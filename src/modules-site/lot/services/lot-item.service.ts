@@ -16,6 +16,8 @@ import { Lot } from 'src/entities/lot.entity'
 import { User } from 'src/entities/user.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
 import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
+import { TradeHistory } from 'src/entities/trade-history.entity'
+import { getKievTime } from 'src/shared/helpers/getKievTime'
 import type { ByeLotItemServiceT, CreateLotItemServiceT } from '../types'
 import type {
   ByeLotItemResponseDto,
@@ -31,6 +33,8 @@ export class LotItemService {
     private readonly lotRepository: Repository<Lot>,
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
+    @InjectRepository(TradeHistory)
+    private readonly tradeHistoryRepository: Repository<TradeHistory>,
     private readonly mcUserNotificationService: McUserNotificationService,
   ) {}
 
@@ -134,6 +138,15 @@ export class LotItemService {
     await this.itemRepository.save(updatedItem)
 
     await this.lotRepository.update({ id: lotId }, { isSold: true })
+
+    const newTradeHistory = await this.tradeHistoryRepository.create({
+      seller: sellerUser,
+      buyer: buyerUser,
+      lot: lotMetaData,
+      tradeTime: getKievTime(),
+    })
+
+    await this.tradeHistoryRepository.save(newTradeHistory)
 
     this.mcUserNotificationService.byeItemLotNotification({
       username: sellerUser.username,

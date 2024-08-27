@@ -16,6 +16,8 @@ import { User } from 'src/entities/user.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
 import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
+import { TradeHistory } from 'src/entities/trade-history.entity'
+import { getKievTime } from 'src/shared/helpers/getKievTime'
 import type { ByeLotShulkerServiceT, CreateLotShulkerServiceT } from '../types'
 import type {
   BuyLotShulkerResponseDto,
@@ -31,6 +33,8 @@ export class LotShulkerService {
     private readonly lotRepository: Repository<Lot>,
     @InjectRepository(Shulker)
     private readonly shulkerRepository: Repository<Shulker>,
+    @InjectRepository(TradeHistory)
+    private readonly tradeHistoryRepository: Repository<TradeHistory>,
     private readonly mcUserNotificationService: McUserNotificationService,
   ) {}
 
@@ -134,6 +138,15 @@ export class LotShulkerService {
     await this.shulkerRepository.save(updatedShulker)
 
     await this.lotRepository.update({ id: lotId }, { isSold: true })
+
+    const newTradeHistory = await this.tradeHistoryRepository.create({
+      seller: sellerUser,
+      buyer: buyerUser,
+      lot: lotMetaData,
+      tradeTime: getKievTime(),
+    })
+
+    await this.tradeHistoryRepository.save(newTradeHistory)
 
     this.mcUserNotificationService.byeShulkerLotNotification({
       username: sellerUser.username,

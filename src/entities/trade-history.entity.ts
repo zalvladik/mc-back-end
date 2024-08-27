@@ -32,6 +32,6 @@ export class TradeHistory {
   @JoinColumn({ name: 'lot_id' })
   lot: Lot
 
-  @Column({ type: 'bigint', nullable: false })
-  trade_time: number
+  @Column({ type: 'datetime', nullable: true })
+  tradeTime: Date | null
 }

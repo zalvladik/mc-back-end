@@ -9,9 +9,11 @@ import {
 
 import { Item } from './item.entity'
 import { Shulker } from './shulker.entity'
+import { TradeHistory } from './trade-history.entity'
 
 @Entity({ name: 'lots' })
 @Index(['username'])
+@Index(['isSold'])
 export class Lot {
   @PrimaryGeneratedColumn()
   id: number
@@ -23,16 +25,23 @@ export class Lot {
   username: string
 
   @OneToOne(() => Item, item => item.lot, {
-    onDelete: 'CASCADE',
     nullable: true,
   })
   @JoinColumn({ name: 'item_id' })
   item: Item
 
   @OneToOne(() => Shulker, shulker => shulker.lot, {
-    onDelete: 'CASCADE',
     nullable: true,
   })
   @JoinColumn({ name: 'shulker_id' })
   shulker: Shulker
+
+  @OneToOne(() => TradeHistory, tradeHistory => tradeHistory.lot, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'trade_history_id' })
+  tradeHistory: TradeHistory
+
+  @Column({ type: 'boolean', default: false, nullable: false })
+  isSold: boolean
 }

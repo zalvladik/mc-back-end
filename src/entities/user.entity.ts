@@ -12,6 +12,7 @@ import { Advancements } from './advancements.entity'
 import { ItemTicket } from './item-ticket.entity'
 import { Item } from './item.entity'
 import { Shulker } from './shulker.entity'
+import { TradeHistory } from './trade-history.entity'
 
 @Entity({ name: 'users' })
 export class User {
@@ -84,6 +85,12 @@ export class User {
 
   @Column({ length: 2000, nullable: true })
   refreshToken?: string
+
+  @OneToMany(() => TradeHistory, tradeHistory => tradeHistory.seller)
+  tradeHistoriesAsSeller: TradeHistory[]
+
+  @OneToMany(() => TradeHistory, tradeHistory => tradeHistory.buyer)
+  tradeHistoriesAsBuyer: TradeHistory[]
 
   @OneToOne(() => Advancements)
   @JoinColumn({ name: 'advancements_id' })

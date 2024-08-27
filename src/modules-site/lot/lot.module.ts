@@ -11,6 +11,7 @@ import { UserService } from 'src/modules-site/user/services'
 
 import { Shulker } from 'src/entities/shulker.entity'
 import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
+import { TradeHistory } from 'src/entities/trade-history.entity'
 import {
   LotItemController,
   LotController,
@@ -21,7 +22,14 @@ import { LotItemService, LotShulkerService, LotService } from './services'
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Item, Lot, ItemTicket, Shulker]),
+    TypeOrmModule.forFeature([
+      User,
+      Item,
+      Lot,
+      ItemTicket,
+      Shulker,
+      TradeHistory,
+    ]),
     AuthModule,
   ],
   controllers: [

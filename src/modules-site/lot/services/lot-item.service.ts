@@ -20,7 +20,6 @@ import type { ByeLotItemServiceT, CreateLotItemServiceT } from '../types'
 import type {
   ByeLotItemResponseDto,
   CreateLotResponseDto,
-  DeleteUserLotResponseDto,
 } from '../dtos-response'
 
 @Injectable()
@@ -92,7 +91,7 @@ export class LotItemService {
     buyerUserId,
   }: ByeLotItemServiceT): Promise<ByeLotItemResponseDto> {
     const lotMetaData = await this.lotRepository.findOne({
-      where: { id: lotId },
+      where: { id: lotId, isSold: false },
       relations: ['item', 'item.user'],
     })
 
@@ -133,7 +132,8 @@ export class LotItemService {
     await this.userRepository.save(sellerUser)
 
     await this.itemRepository.save(updatedItem)
-    await this.deleteLot(lotId)
+
+    await this.lotRepository.update({ id: lotId }, { isSold: true })
 
     this.mcUserNotificationService.byeItemLotNotification({
       username: sellerUser.username,
@@ -144,13 +144,5 @@ export class LotItemService {
     const { user, serialized, ...rest } = lotMetaData.item
 
     return rest
-  }
-
-  async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {
-    const deletedLot = await this.lotRepository.delete(id)
-
-    if (!deletedLot.affected) throw new NotFoundException('Lot not found')
-
-    return { id }
   }
 }

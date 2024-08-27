@@ -20,7 +20,6 @@ import type { ByeLotShulkerServiceT, CreateLotShulkerServiceT } from '../types'
 import type {
   BuyLotShulkerResponseDto,
   CreateLotResponseDto,
-  DeleteUserLotResponseDto,
 } from '../dtos-response'
 
 @Injectable()
@@ -133,7 +132,8 @@ export class LotShulkerService {
     await this.userRepository.save(sellerUser)
 
     await this.shulkerRepository.save(updatedShulker)
-    await this.deleteLot(lotId)
+
+    await this.lotRepository.update({ id: lotId }, { isSold: true })
 
     this.mcUserNotificationService.byeShulkerLotNotification({
       username: sellerUser.username,
@@ -144,13 +144,5 @@ export class LotShulkerService {
     const { user, items, ...rest } = lotMetaData.shulker
 
     return rest
-  }
-
-  async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {
-    const deletedLot = await this.lotRepository.delete(id)
-
-    if (!deletedLot.affected) throw new NotFoundException('Lot not found')
-
-    return { id }
   }
 }

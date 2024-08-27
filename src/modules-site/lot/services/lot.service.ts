@@ -89,6 +89,7 @@ export class LotService {
     }
 
     queryBuilder
+      .andWhere('lot.isSold = :isSold', { isSold: false })
       .skip((page - 1) * limit)
       .take(limit)
       .select(select)
@@ -160,6 +161,7 @@ export class LotService {
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.shulker', 'shulker')
       .innerJoinAndSelect('shulker.items', 'shulkerItem')
+      .andWhere('lot.isSold = :isSold', { isSold: false })
       .skip((page - 1) * limit)
       .take(limit)
       .select([
@@ -232,6 +234,7 @@ export class LotService {
     }
 
     queryBuilder
+      .andWhere('lot.isSold = :isSold', { isSold: false })
       .skip((page - 1) * limit)
       .take(limit)
       .select(select)
@@ -282,15 +285,17 @@ export class LotService {
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
-      .where('lot.username = :username', { username })
+      .andWhere('lot.isSold = :isSold', { isSold: false })
+      .andWhere('lot.username = :username', { username })
       .select([...this.selectLote, ...this.selectShulker])
       .getMany()
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {
-    const deletedLot = await this.lotRepository.delete(id)
+    const deletedLot = await this.lotRepository.delete({ id, isSold: false })
 
-    if (!deletedLot.affected) throw new NotFoundException('Lot not found')
+    if (!deletedLot.affected)
+      throw new NotFoundException('Lot not found or already sold')
 
     return { id }
   }

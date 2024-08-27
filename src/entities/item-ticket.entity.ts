@@ -19,6 +19,5 @@ export class ItemTicket {
   user: User
 
   @OneToMany(() => Item, item => item.itemTicket)
-  @JoinColumn({ name: 'item_ticket_id' })
   items: Item[]
 }

@@ -67,7 +67,9 @@ export class Item {
   @Column({ type: 'boolean', default: false, nullable: false })
   isTaken: boolean
 
-  @ManyToOne(() => ItemTicket, itemTicket => itemTicket.items, {})
+  @ManyToOne(() => ItemTicket, itemTicket => itemTicket.items, {
+    onDelete: 'SET NULL',
+  })
   @JoinColumn({ name: 'item_ticket_id' })
   itemTicket: ItemTicket
 

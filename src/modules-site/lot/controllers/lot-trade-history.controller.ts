@@ -14,7 +14,7 @@ import { LotTradeHistoryService } from '../services/lot-trade-history.service'
 @Controller('lot/trade_history')
 @ApiTags('lot/trade_history')
 @UseGuards(AuthGuard, RolesGuard)
-@Roles(RoleEnum.ADMIN)
+@Roles(RoleEnum.USER)
 export class LotTradeHistoryController {
   constructor(
     private readonly lotTradeHistoryService: LotTradeHistoryService,

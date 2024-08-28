@@ -15,12 +15,23 @@ export class UserShulkersService {
   ) {}
 
   async getUserShulkers(id: number): Promise<Shulker[]> {
-    const user = await this.userReposetory.findOne({
-      where: { id, shulkers: { lot: IsNull() } },
-      relations: ['shulkers'],
-    })
+    const userShulkersWithoutLot =
+      (
+        await this.userReposetory.findOne({
+          where: { id, shulkers: { lot: IsNull() } },
+          relations: ['shulkers'],
+        })
+      )?.shulkers ?? []
 
-    return user?.shulkers ?? []
+    const userShulkersWithByetLot =
+      (
+        await this.userReposetory.findOne({
+          where: { id, shulkers: { lot: { isSold: true } } },
+          relations: ['shulkers'],
+        })
+      )?.shulkers ?? []
+
+    return [...userShulkersWithoutLot, ...userShulkersWithByetLot]
   }
 
   async getShulkerItems(

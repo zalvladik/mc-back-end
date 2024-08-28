@@ -23,7 +23,7 @@ export class LotTradeHistoryController {
   @Get()
   @HttpCode(200)
   async getTradeHistory(
-    @Query() { page, limit }: GetTradeHistoryQueryDto,
+    @Query() { page, limit, isSeller }: GetTradeHistoryQueryDto,
     @UserDecorator() { id: userId, username }: GetUserDto,
   ): Promise<any> {
     return this.lotTradeHistoryService.getTradeHistory({
@@ -31,6 +31,7 @@ export class LotTradeHistoryController {
       username,
       page,
       limit,
+      isSeller,
     })
   }
 }

@@ -32,7 +32,12 @@ export class PaginationParams {
   limit?: number
 }
 
-export class GetTradeHistoryQueryDto extends PaginationParams {}
+export class GetTradeHistoryQueryDto extends PaginationParams {
+  @IsOptional()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
+  isSeller?: boolean
+}
 
 export class LotFilterParams extends PaginationParams {
   @IsOptional()

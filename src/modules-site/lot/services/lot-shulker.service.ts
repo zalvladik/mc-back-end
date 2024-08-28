@@ -64,7 +64,7 @@ export class LotShulkerService {
     const { vipLotCount } = getVipParams(vip)
 
     const currentLotCount = await this.lotRepository.count({
-      where: { username },
+      where: { username, isSold: false },
     })
 
     if (currentLotCount + 1 > vipLotCount) {

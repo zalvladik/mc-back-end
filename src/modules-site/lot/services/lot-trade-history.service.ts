@@ -3,13 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
 
-import { Lot } from 'src/entities/lot.entity'
-
-import { User } from 'src/entities/user.entity'
+import { TradeHistory } from 'src/entities/trade-history.entity'
 import type { GetTradeHistoryService } from '../types'
 
 @Injectable()
 export class LotTradeHistoryService {
+  private tradeHistory = ['tradeHistory.id', 'tradeHistory.tradeTime']
+
   private selectLote = [
     'lot',
     'item.id',
@@ -31,10 +31,8 @@ export class LotTradeHistoryService {
   ]
 
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-    @InjectRepository(Lot)
-    private readonly lotRepository: Repository<Lot>,
+    @InjectRepository(TradeHistory)
+    private readonly tradeHistoryRepository: Repository<TradeHistory>,
   ) {}
 
   async getTradeHistory({
@@ -42,28 +40,26 @@ export class LotTradeHistoryService {
     page = 1,
     limit = 10,
     isSeller = false,
-    username,
   }: GetTradeHistoryService): Promise<any> {
-    const select = [...this.selectLote, ...this.selectShulker]
+    const select = [
+      ...this.tradeHistory,
+      ...this.selectLote,
+      ...this.selectShulker,
+    ]
 
-    const queryBuilder = this.lotRepository.createQueryBuilder('lot')
-
-    queryBuilder
+    const queryBuilder = this.tradeHistoryRepository
+      .createQueryBuilder('tradeHistory')
+      .leftJoinAndSelect('tradeHistory.lot', 'lot')
       .leftJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
-      .leftJoinAndSelect('lot.tradeHistory', 'tradeHistory')
-      .leftJoinAndSelect('shulker.items', 'shulkerItem')
-      .andWhere('lot.isSold = :isSold', { isSold: true })
       .skip((page - 1) * limit)
       .take(limit)
       .select(select)
 
     if (isSeller) {
-      queryBuilder.andWhere('lot.username = :username', { username })
+      queryBuilder.andWhere('tradeHistory.seller.id = :userId', { userId })
     } else {
-      queryBuilder
-        .leftJoinAndSelect('tradeHistory.buyer', 'buyer')
-        .andWhere('buyer.id = :userId', { userId })
+      queryBuilder.andWhere('tradeHistory.buyer.id = :userId', { userId })
     }
 
     const [lots, totalItems] = await queryBuilder.getManyAndCount()

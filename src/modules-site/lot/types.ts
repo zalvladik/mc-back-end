@@ -49,7 +49,6 @@ export type GetLotsSerivce = {
 
 export type GetTradeHistoryService = {
   userId: number
-  username: string
   isSeller?: boolean
   page?: number
   limit?: number

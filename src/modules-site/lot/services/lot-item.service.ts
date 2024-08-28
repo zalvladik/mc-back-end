@@ -114,7 +114,7 @@ export class LotItemService {
     }
 
     const currentItemsCount = await this.itemRepository.count({
-      where: { user: { id: buyerUserId } },
+      where: { user: { id: buyerUserId }, isTaken: false },
     })
 
     const { vipItemCount } = getVipParams(vip)

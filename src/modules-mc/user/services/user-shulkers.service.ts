@@ -51,7 +51,7 @@ export class UserShulkersService {
     if (!user) throw new NotFoundException('Гравця не знайдено')
 
     const shulkerCount = await this.shulkerRepository.count({
-      where: { user },
+      where: { user, isTaken: false },
     })
 
     const { vipShulkerCount } = getVipParams(user.vip)

@@ -110,7 +110,7 @@ export class LotShulkerService {
     }
 
     const currentShulkersCount = await this.shulkerRepository.count({
-      where: { user: { id: buyerUserId } },
+      where: { user: { id: buyerUserId }, isTaken: false },
     })
 
     const { vipShulkerCount } = getVipParams(vip)

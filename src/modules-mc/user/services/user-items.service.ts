@@ -49,7 +49,7 @@ export class UserItemsService {
     if (!user) throw new NotFoundException('Гравця не знайдено')
 
     const itemCount = await this.itemRepository.count({
-      where: { user },
+      where: { user, isTaken: false },
     })
 
     const { vipItemCount } = getVipParams(user.vip)

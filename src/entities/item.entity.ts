@@ -73,7 +73,10 @@ export class Item {
   @JoinColumn({ name: 'item_ticket_id' })
   itemTicket: ItemTicket
 
-  @OneToOne(() => Lot, lot => lot.item, { onDelete: 'SET NULL' })
+  @OneToOne(() => Lot, lot => lot.item, {
+    onDelete: 'SET NULL',
+    nullable: true,
+  })
   @JoinColumn({ name: 'lot_id' })
   lot: Lot
 

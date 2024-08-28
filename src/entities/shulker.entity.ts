@@ -45,7 +45,10 @@ export class Shulker {
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @OneToOne(() => Lot, lot => lot.shulker, { nullable: true })
+  @OneToOne(() => Lot, lot => lot.shulker, {
+    onDelete: 'SET NULL',
+    nullable: true,
+  })
   @JoinColumn({ name: 'lot_id' })
   lot: Lot
 

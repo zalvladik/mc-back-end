@@ -33,5 +33,5 @@ export class TradeHistory {
   lot: Lot
 
   @Column({ type: 'datetime', nullable: true })
-  tradeTime: Date | null
+  tradeTime: Date
 }

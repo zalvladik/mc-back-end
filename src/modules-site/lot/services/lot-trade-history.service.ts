@@ -55,6 +55,7 @@ export class LotTradeHistoryService {
       .skip((page - 1) * limit)
       .take(limit)
       .select(select)
+      .orderBy('tradeHistory.tradeTime', 'DESC')
 
     if (isSeller) {
       queryBuilder.andWhere('tradeHistory.seller.id = :userId', { userId })

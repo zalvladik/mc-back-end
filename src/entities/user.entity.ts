@@ -68,7 +68,7 @@ export class User {
   })
   vip: VipEnum
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'timestamp', default: null })
   vipExpirationDate: Date | null
 
   @Column({ type: 'smallint', nullable: false, default: 0 })

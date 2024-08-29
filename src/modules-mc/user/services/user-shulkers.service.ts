@@ -157,7 +157,7 @@ export class UserShulkersService {
     shulkerId: number,
   ): Promise<PullShulkerResponseDto> {
     const userShulker = await this.shulkerRepository.findOne({
-      where: { username, id: shulkerId },
+      where: { username, id: shulkerId, isTaken: false },
       relations: ['items'],
     })
 

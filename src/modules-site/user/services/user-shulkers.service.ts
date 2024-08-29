@@ -18,7 +18,7 @@ export class UserShulkersService {
     const userShulkersWithoutLot =
       (
         await this.userReposetory.findOne({
-          where: { id, shulkers: { lot: IsNull() } },
+          where: { id, shulkers: { lot: IsNull(), isTaken: false } },
           relations: ['shulkers'],
         })
       )?.shulkers ?? []
@@ -26,7 +26,7 @@ export class UserShulkersService {
     const userShulkersWithByetLot =
       (
         await this.userReposetory.findOne({
-          where: { id, shulkers: { lot: { isSold: true } } },
+          where: { id, shulkers: { lot: { isSold: true }, isTaken: false } },
           relations: ['shulkers'],
         })
       )?.shulkers ?? []

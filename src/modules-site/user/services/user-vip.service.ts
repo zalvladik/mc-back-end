@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { User } from 'src/entities/user.entity'
 import { Repository } from 'typeorm'
 import { vipPrice } from 'src/shared/constants'
-import { getKievTime } from 'src/shared/helpers/getKievTime'
 import type { ByeVipProps, UpgradeVipProps } from '../types'
 
 @Injectable()
@@ -27,7 +26,8 @@ export class UserVipService {
       throw new BadRequestException('У вас недостатньо коштів')
     }
 
-    const expirationDate = getKievTime()
+    const expirationDate = new Date()
+
     expirationDate.setDate(expirationDate.getDate() + 7)
 
     await this.userRepository.update(id, {
@@ -57,7 +57,7 @@ export class UserVipService {
       throw new BadRequestException('У вас недостатньо коштів')
     }
 
-    const expirationDate = getKievTime()
+    const expirationDate = new Date()
     expirationDate.setDate(expirationDate.getDate() + 7)
 
     await this.userRepository.update(id, {

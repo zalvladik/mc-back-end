@@ -7,7 +7,6 @@ import { AuthService } from 'src/modules-site/auth/services'
 
 import type { GetUserDto } from 'src/modules-site/user/dtos-request'
 import { TokenService } from '../services/token/token.service'
-import { getKievTime } from '../helpers/getKievTime'
 import { THIRTY_DAYS } from '../constants'
 
 @Injectable()
@@ -39,7 +38,7 @@ export class AuthGuard implements CanActivate {
 
       if (
         userData.vipExpirationDate &&
-        getKievTime() > new Date(userData.vipExpirationDate)
+        new Date() > new Date(userData.vipExpirationDate)
       ) {
         await this.authService.resetVip(req.user.id)
         req.user.vip = null

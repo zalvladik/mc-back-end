@@ -8,7 +8,7 @@ import type { GetTradeHistoryService } from '../types'
 
 @Injectable()
 export class LotTradeHistoryService {
-  private tradeHistory = ['tradeHistory.id', 'tradeHistory.tradeTime']
+  private tradeHistory = ['tradeHistory.id', 'tradeHistory.createdAt']
 
   private selectLote = [
     'lot',
@@ -55,7 +55,7 @@ export class LotTradeHistoryService {
       .skip((page - 1) * limit)
       .take(limit)
       .select(select)
-      .orderBy('tradeHistory.tradeTime', 'DESC')
+      .orderBy('tradeHistory.createdAt', 'DESC')
 
     if (isSeller) {
       queryBuilder.andWhere('tradeHistory.seller.id = :userId', { userId })

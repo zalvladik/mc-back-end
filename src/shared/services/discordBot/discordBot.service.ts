@@ -5,7 +5,6 @@ import { addMonths, isBefore } from 'date-fns'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { Repository } from 'typeorm'
-import { getKievTime } from 'src/shared/helpers/getKievTime'
 
 @Injectable()
 export class DiscordBotService implements OnModuleInit {
@@ -66,7 +65,7 @@ export class DiscordBotService implements OnModuleInit {
     const newUserInWhitelist = this.whitelistRepository.create({
       user: nickname,
       discordUserId,
-      time: getKievTime(),
+      createdAt: new Date(),
     })
 
     await this.whitelistRepository.save(newUserInWhitelist)

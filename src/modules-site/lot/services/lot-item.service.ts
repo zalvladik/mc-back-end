@@ -17,7 +17,6 @@ import { User } from 'src/entities/user.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
 import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
 import { TradeHistory } from 'src/entities/trade-history.entity'
-import { getKievTime } from 'src/shared/helpers/getKievTime'
 import type { ByeLotItemServiceT, CreateLotItemServiceT } from '../types'
 import type {
   ByeLotItemResponseDto,
@@ -141,7 +140,7 @@ export class LotItemService {
       seller: sellerUser,
       buyer: buyerUser,
       lot: lotMetaData,
-      tradeTime: getKievTime(),
+      createdAt: new Date(),
     })
 
     await this.tradeHistoryRepository.save(newTradeHistory)

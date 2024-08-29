@@ -17,7 +17,6 @@ import { Shulker } from 'src/entities/shulker.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
 import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
 import { TradeHistory } from 'src/entities/trade-history.entity'
-import { getKievTime } from 'src/shared/helpers/getKievTime'
 import type { ByeLotShulkerServiceT, CreateLotShulkerServiceT } from '../types'
 import type {
   BuyLotShulkerResponseDto,
@@ -141,7 +140,7 @@ export class LotShulkerService {
       seller: sellerUser,
       buyer: buyerUser,
       lot: lotMetaData,
-      tradeTime: getKievTime(),
+      createdAt: new Date(),
     })
 
     await this.tradeHistoryRepository.save(newTradeHistory)

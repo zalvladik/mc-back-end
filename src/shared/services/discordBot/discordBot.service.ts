@@ -65,7 +65,6 @@ export class DiscordBotService implements OnModuleInit {
     const newUserInWhitelist = this.whitelistRepository.create({
       user: nickname,
       discordUserId,
-      createdAt: new Date(),
     })
 
     await this.whitelistRepository.save(newUserInWhitelist)

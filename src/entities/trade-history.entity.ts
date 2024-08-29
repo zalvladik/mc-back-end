@@ -32,10 +32,6 @@ export class TradeHistory {
   @JoinColumn({ name: 'lot_id' })
   lot: Lot
 
-  @Column({
-    type: 'timestamp',
-    nullable: false,
-    default: () => 'CURRENT_TIMESTAMP',
-  })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date
 }

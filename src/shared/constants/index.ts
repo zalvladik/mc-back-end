@@ -147,10 +147,10 @@ export const vipMultipliers: Record<VipEnum, number> = {
 }
 
 export const vipPrice: Record<VipEnum, number> = {
-  [VipEnum.IRON]: 16,
-  [VipEnum.GOLD]: 32,
-  [VipEnum.DIAMOND]: 48,
-  [VipEnum.NETHERITE]: 64,
+  [VipEnum.IRON]: 8,
+  [VipEnum.GOLD]: 16,
+  [VipEnum.DIAMOND]: 24,
+  [VipEnum.NETHERITE]: 32,
 }
 
 export const ppStyles = ['feet', 'move', 'normal', 'thick', 'trail', 'swords']

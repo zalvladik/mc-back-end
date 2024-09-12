@@ -11,7 +11,6 @@ import type { AddPpEffectsProps, DeletePpEffectsProps } from '../types'
 import type {
   DeletePpParticleResponseDto,
   GetPpParticleResponseDto,
-  PostPpParticleResponseDto,
 } from '../dtos-response'
 
 @Injectable()
@@ -49,7 +48,7 @@ export class PpService {
     style,
     effect,
     username,
-  }: AddPpEffectsProps): Promise<PostPpParticleResponseDto> {
+  }: AddPpEffectsProps): Promise<void> {
     const userUUID = (
       await this.userRepository.findOne({
         where: { id },
@@ -69,32 +68,7 @@ export class PpService {
       throw new BadRequestException('У вас може бути тільки 3 еффекти.')
     }
 
-    const allPssCount = await this.ppParticle.count()
-
-    const newPlayerEffect = this.ppParticle.create({
-      group_uuid: playerGroupUUID.uuid,
-      style,
-      effect,
-      id: allPssCount + 1,
-      item_material: 'IRON_SHOVEL',
-      block_material: 'STONE',
-      note: 0,
-      r: 0,
-      g: 0,
-      b: 0,
-      r_end: 255,
-      g_end: 255,
-      b_end: 255,
-      duration: 20,
-    })
-
-    await this.ppParticle.save(newPlayerEffect)
-
-    const { group_uuid, uuid } = newPlayerEffect
-
     await this.mcFetchingService.handleAddPP({ effect, style, username })
-
-    return { style, effect, group_uuid, uuid }
   }
 
   async deletePpParticle({
@@ -120,8 +94,6 @@ export class PpService {
     if (!ppsPlayer) {
       throw new BadRequestException('Неправильно вказаний id еффекту')
     }
-
-    await this.ppParticle.delete(ppUUID)
 
     await this.mcFetchingService.handleDeletePP({ id: ppsPlayer.id, username })
 

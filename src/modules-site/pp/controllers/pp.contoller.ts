@@ -23,7 +23,6 @@ import { AddPpEffectsQueryDto, DeletePpEffectsQueryDto } from '../dtos-request'
 import type {
   DeletePpParticleResponseDto,
   GetPpParticleResponseDto,
-  PostPpParticleResponseDto,
 } from '../dtos-response'
 
 @Controller('pp')
@@ -46,8 +45,8 @@ export class PpController {
   async addPpEffects(
     @Body() { effect, style }: AddPpEffectsQueryDto,
     @UserDecorator() { id, username }: GetUserDto,
-  ): Promise<PostPpParticleResponseDto> {
-    return this.ppService.addPpParticle({
+  ): Promise<void> {
+    await this.ppService.addPpParticle({
       id,
       effect,
       style,

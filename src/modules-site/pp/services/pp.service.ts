@@ -6,6 +6,7 @@ import { Repository } from 'typeorm'
 import { User } from 'src/entities/user.entity'
 import { PpParticle } from 'src/entities/pp/playerparticles_particle.entity'
 import { PpGroup } from 'src/entities/pp/playerparticles_group.entity'
+import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import type { AddPpEffectsProps } from '../types'
 import type {
   DeletePpParticleResponseDto,
@@ -22,6 +23,7 @@ export class PpService {
     private readonly ppParticle: Repository<PpParticle>,
     @InjectRepository(PpGroup)
     private readonly ppGroup: Repository<PpGroup>,
+    private readonly mcFetchingService: McFetchingService,
   ) {}
 
   async getPpParticle(id: number): Promise<GetPpParticleResponseDto[]> {
@@ -89,6 +91,8 @@ export class PpService {
 
     const { group_uuid, uuid } = newPlayerEffect
 
+    this.mcFetchingService.reloadPpOnServer()
+
     return { style, effect, group_uuid, uuid }
   }
 
@@ -116,6 +120,8 @@ export class PpService {
     }
 
     await this.ppParticle.delete(ppUUID)
+
+    this.mcFetchingService.reloadPpOnServer()
 
     return { uuid: ppUUID }
   }

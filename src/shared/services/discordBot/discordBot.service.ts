@@ -80,9 +80,9 @@ export class DiscordBotService implements OnModuleInit {
 
       try {
         const accountCreationDate = message.author.createdAt
-        const twoMonthsAgo = addMonths(new Date(), -2)
+        const threeMonthsAgo = addMonths(new Date(), -3)
 
-        if (isBefore(accountCreationDate, twoMonthsAgo)) {
+        if (isBefore(accountCreationDate, threeMonthsAgo)) {
           const newUsername = message.content
           const validPattern = /^[a-zA-Z0-9_.-]+$/
 
@@ -151,7 +151,7 @@ export class DiscordBotService implements OnModuleInit {
         } else {
           await message.delete()
           await message.author.send(
-            `Попасти в whitelist можна тільки, якщо ваш ДС аккаунт має більше 2 місяців.`,
+            `Попасти в whitelist можна тільки, якщо ваш ДС аккаунт має більше 3 місяців.`,
           )
         }
       } catch (error) {

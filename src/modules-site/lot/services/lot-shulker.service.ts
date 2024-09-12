@@ -15,7 +15,7 @@ import { Lot } from 'src/entities/lot.entity'
 import { User } from 'src/entities/user.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
-import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
+import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import { TradeHistory } from 'src/entities/trade-history.entity'
 import type { ByeLotShulkerServiceT, CreateLotShulkerServiceT } from '../types'
 import type {
@@ -34,7 +34,7 @@ export class LotShulkerService {
     private readonly shulkerRepository: Repository<Shulker>,
     @InjectRepository(TradeHistory)
     private readonly tradeHistoryRepository: Repository<TradeHistory>,
-    private readonly mcUserNotificationService: McUserNotificationService,
+    private readonly mcFetchingService: McFetchingService,
   ) {}
 
   async createLotShulker({
@@ -154,7 +154,7 @@ export class LotShulkerService {
       { isSold: true, tradeHistory: createdNewTradeHistory },
     )
 
-    this.mcUserNotificationService.byeShulkerLotNotification({
+    this.mcFetchingService.byeShulkerLotNotification({
       username: sellerUser.username,
       serializedArray: lotMetaData.shulker.items.map(item => item.serialized),
       message: ` §b+${lotMetaData.price}⟡ §f| §7Купили лот: §aшалкер`,

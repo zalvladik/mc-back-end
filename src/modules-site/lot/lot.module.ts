@@ -10,7 +10,7 @@ import { UserController } from 'src/modules-site/user/controllers'
 import { UserService } from 'src/modules-site/user/services'
 
 import { Shulker } from 'src/entities/shulker.entity'
-import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
+import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import { TradeHistory } from 'src/entities/trade-history.entity'
 import {
   LotItemController,
@@ -47,7 +47,7 @@ import { LotTradeHistoryService } from './services/lot-trade-history.service'
     LotShulkerService,
     LotService,
     LotTradeHistoryService,
-    McUserNotificationService,
+    McFetchingService,
   ],
 })
 export class LotModule {}

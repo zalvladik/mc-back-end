@@ -15,7 +15,7 @@ import { Lot } from 'src/entities/lot.entity'
 
 import { User } from 'src/entities/user.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
-import { McUserNotificationService } from 'src/shared/services/mcUserNotification/mcUserNotification.service'
+import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import { TradeHistory } from 'src/entities/trade-history.entity'
 import type { ByeLotItemServiceT, CreateLotItemServiceT } from '../types'
 import type {
@@ -34,7 +34,7 @@ export class LotItemService {
     private readonly itemRepository: Repository<Item>,
     @InjectRepository(TradeHistory)
     private readonly tradeHistoryRepository: Repository<TradeHistory>,
-    private readonly mcUserNotificationService: McUserNotificationService,
+    private readonly mcFetchingService: McFetchingService,
   ) {}
 
   async createLotItem({
@@ -154,7 +154,7 @@ export class LotItemService {
       { isSold: true, tradeHistory: createdNewTradeHistory },
     )
 
-    this.mcUserNotificationService.byeItemLotNotification({
+    this.mcFetchingService.byeItemLotNotification({
       username: sellerUser.username,
       serialized: lotMetaData.item.serialized,
       message: ` §b+${lotMetaData.price}⟡ §f| §7Купили лот: §a${lotMetaData.item.display_name}`,

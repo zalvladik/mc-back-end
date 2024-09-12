@@ -6,8 +6,8 @@ import type {
 } from './types'
 
 @Injectable()
-export class McUserNotificationService {
-  private logger = new Logger('McUserNotificationService')
+export class McFetchingService {
+  private logger = new Logger('McFetchingService')
 
   private minecraftServerURL = process.env.MINECRAFT_SERVER_URL
 
@@ -38,6 +38,14 @@ export class McUserNotificationService {
         message,
         serializedArray,
       })
+    } catch (error) {
+      this.logger.verbose(error)
+    }
+  }
+
+  async reloadPpOnServer(): Promise<void> {
+    try {
+      await axios.post(`${this.minecraftServerURL}/reloadPp`)
     } catch (error) {
       this.logger.verbose(error)
     }

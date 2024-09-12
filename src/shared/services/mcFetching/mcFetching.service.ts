@@ -46,25 +46,17 @@ export class McFetchingService {
   }
 
   async handleAddPP({ effect, style, username }: HandleAddPPT): Promise<void> {
-    try {
-      await axios.post(`${this.minecraftServerURL}/handleAddPP`, {
-        effect,
-        style,
-        username,
-      })
-    } catch (error) {
-      this.logger.verbose(error)
-    }
+    await axios.post(`${this.minecraftServerURL}/handleAddPP`, {
+      effect,
+      style,
+      username,
+    })
   }
 
   async handleDeletePP({ id, username }: HandleDeletePPT): Promise<void> {
-    try {
-      await axios.post(`${this.minecraftServerURL}/handleDeletePP`, {
-        id,
-        username,
-      })
-    } catch (error) {
-      this.logger.verbose(error)
-    }
+    await axios.post(`${this.minecraftServerURL}/handleDeletePP`, {
+      id,
+      username,
+    })
   }
 }

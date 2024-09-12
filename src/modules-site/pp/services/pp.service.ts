@@ -7,7 +7,7 @@ import { User } from 'src/entities/user.entity'
 import { PpParticle } from 'src/entities/pp/playerparticles_particle.entity'
 import { PpGroup } from 'src/entities/pp/playerparticles_group.entity'
 import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
-import type { AddPpEffectsProps } from '../types'
+import type { AddPpEffectsProps, DeletePpEffectsProps } from '../types'
 import type {
   DeletePpParticleResponseDto,
   GetPpParticleResponseDto,
@@ -48,6 +48,7 @@ export class PpService {
     id,
     style,
     effect,
+    username,
   }: AddPpEffectsProps): Promise<PostPpParticleResponseDto> {
     const userUUID = (
       await this.userRepository.findOne({
@@ -91,15 +92,16 @@ export class PpService {
 
     const { group_uuid, uuid } = newPlayerEffect
 
-    await this.mcFetchingService.handleAddPP({ effect, style })
+    await this.mcFetchingService.handleAddPP({ effect, style, username })
 
     return { style, effect, group_uuid, uuid }
   }
 
-  async deletePpParticle(
-    userId: number,
-    ppUUID: string,
-  ): Promise<DeletePpParticleResponseDto> {
+  async deletePpParticle({
+    userId,
+    ppUUID,
+    username,
+  }: DeletePpEffectsProps): Promise<DeletePpParticleResponseDto> {
     const userUUID = (
       await this.userRepository.findOne({
         where: { id: userId },
@@ -121,7 +123,7 @@ export class PpService {
 
     await this.ppParticle.delete(ppUUID)
 
-    await this.mcFetchingService.handleDeletePP(ppsPlayer.id)
+    await this.mcFetchingService.handleDeletePP({ id: ppsPlayer.id, username })
 
     return { uuid: ppUUID }
   }

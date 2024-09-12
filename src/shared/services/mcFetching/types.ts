@@ -10,4 +10,6 @@ export type ByeShulkerLotNotificationT = {
   serializedArray: string[]
 }
 
-export type HandleAddPPT = { effect: string; style: string }
+export type HandleAddPPT = { effect: string; style: string; username: string }
+
+export type HandleDeletePPT = { id: number; username: string }

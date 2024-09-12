@@ -45,12 +45,13 @@ export class PpController {
   @HttpCode(200)
   async addPpEffects(
     @Body() { effect, style }: AddPpEffectsQueryDto,
-    @UserDecorator() { id }: GetUserDto,
+    @UserDecorator() { id, username }: GetUserDto,
   ): Promise<PostPpParticleResponseDto> {
     return this.ppService.addPpParticle({
       id,
       effect,
       style,
+      username,
     })
   }
 
@@ -58,8 +59,8 @@ export class PpController {
   @HttpCode(200)
   async deletePpEffects(
     @Query() { uuid: ppUUID }: DeletePpEffectsQueryDto,
-    @UserDecorator() { id }: GetUserDto,
+    @UserDecorator() { id, username }: GetUserDto,
   ): Promise<DeletePpParticleResponseDto> {
-    return this.ppService.deletePpParticle(id, ppUUID)
+    return this.ppService.deletePpParticle({ userId: id, ppUUID, username })
   }
 }

@@ -3,6 +3,7 @@ import axios from 'axios'
 import type {
   ByeItemLotNotificationT,
   ByeShulkerLotNotificationT,
+  HandleAddPPT,
 } from './types'
 
 @Injectable()
@@ -43,9 +44,20 @@ export class McFetchingService {
     }
   }
 
-  async reloadPpOnServer(): Promise<void> {
+  async handleAddPP({ effect, style }: HandleAddPPT): Promise<void> {
     try {
-      await axios.post(`${this.minecraftServerURL}/reloadPp`)
+      await axios.post(`${this.minecraftServerURL}/handleAddPP`, {
+        effect,
+        style,
+      })
+    } catch (error) {
+      this.logger.verbose(error)
+    }
+  }
+
+  async handleDeletePP(id: number): Promise<void> {
+    try {
+      await axios.post(`${this.minecraftServerURL}/handleDeletePP`, { id })
     } catch (error) {
       this.logger.verbose(error)
     }

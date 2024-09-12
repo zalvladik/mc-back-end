@@ -91,7 +91,7 @@ export class PpService {
 
     const { group_uuid, uuid } = newPlayerEffect
 
-    this.mcFetchingService.reloadPpOnServer()
+    await this.mcFetchingService.handleAddPP({ effect, style })
 
     return { style, effect, group_uuid, uuid }
   }
@@ -121,7 +121,7 @@ export class PpService {
 
     await this.ppParticle.delete(ppUUID)
 
-    this.mcFetchingService.reloadPpOnServer()
+    await this.mcFetchingService.handleDeletePP(ppsPlayer.id)
 
     return { uuid: ppUUID }
   }

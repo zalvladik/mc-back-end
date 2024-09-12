@@ -68,7 +68,30 @@ export class PpService {
       throw new BadRequestException('У вас може бути тільки 3 еффекти.')
     }
 
-    await this.mcFetchingService.handleAddPP({ effect, style, username })
+    try {
+      await this.mcFetchingService.handleAddPP({ effect, style, username })
+    } catch (error) {
+      const allPssCount = await this.ppParticle.count()
+
+      const newPlayerEffect = this.ppParticle.create({
+        group_uuid: playerGroupUUID.uuid,
+        style,
+        effect,
+        id: allPssCount + 1,
+        item_material: 'IRON_SHOVEL',
+        block_material: 'STONE',
+        note: 0,
+        r: 0,
+        g: 0,
+        b: 0,
+        r_end: 255,
+        g_end: 255,
+        b_end: 255,
+        duration: 20,
+      })
+
+      await this.ppParticle.save(newPlayerEffect)
+    }
   }
 
   async deletePpParticle({
@@ -95,7 +118,14 @@ export class PpService {
       throw new BadRequestException('Неправильно вказаний id еффекту')
     }
 
-    await this.mcFetchingService.handleDeletePP({ id: ppsPlayer.id, username })
+    try {
+      await this.mcFetchingService.handleDeletePP({
+        id: ppsPlayer.id,
+        username,
+      })
+    } catch (error) {
+      await this.ppParticle.delete(ppUUID)
+    }
 
     return { uuid: ppUUID }
   }

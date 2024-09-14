@@ -95,10 +95,14 @@ export class DiscordBotService implements OnModuleInit {
 
           await this.whitelistRepository.remove(user)
 
-          await member.send(
-            `> Вас **видалено** з **whitelist**! :x:
+          try {
+            await member.send(
+              `> Вас **видалено** з **whitelist**! :x:
             Щоб знову зайти на сервер, вам потрібно вернутись на діскрод сервер UK-land!`,
-          )
+            )
+          } catch (e) {
+            this.logger.verbose('Користувач не приймає повідомлення в ПП')
+          }
         }
       } catch (error) {
         this.logger.error(
@@ -133,11 +137,15 @@ export class DiscordBotService implements OnModuleInit {
 
           member.setNickname(userInLeave.user)
 
-          await member.send(
-            `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
-            Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
-            Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799`,
-          )
+          try {
+            await member.send(
+              `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
+              Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
+              Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799`,
+            )
+          } catch (e) {
+            this.logger.verbose('Користувач не приймає повідомлення в ПП')
+          }
         }
       } catch (error) {
         this.logger.error(
@@ -161,27 +169,42 @@ export class DiscordBotService implements OnModuleInit {
 
           if (!validPattern.test(newUsername)) {
             await message.delete()
-            await message.author.send(
-              '> :x: Хибний набір символів для нікнейму.',
-            )
+
+            try {
+              await message.author.send(
+                '> :x: Хибний набір символів для нікнейму.',
+              )
+            } catch (e) {
+              this.logger.verbose('Користувач не приймає повідомлення в ПП')
+            }
 
             return
           }
 
           if (message.content.length < 3) {
             await message.delete()
-            await message.author.send(
-              '> :x: Мінімальна кількість символів **3**',
-            )
+
+            try {
+              await message.author.send(
+                '> :x: Мінімальна кількість символів **3**',
+              )
+            } catch (e) {
+              this.logger.verbose('Користувач не приймає повідомлення в ПП')
+            }
 
             return
           }
 
           if (message.content.length > 16) {
             await message.delete()
-            await message.author.send(
-              '> :x: Максимальна кількість символів **16**',
-            )
+
+            try {
+              await message.author.send(
+                '> :x: Максимальна кількість символів **16**',
+              )
+            } catch (e) {
+              this.logger.verbose('Користувач не приймає повідомлення в ПП')
+            }
 
             return
           }
@@ -204,11 +227,15 @@ export class DiscordBotService implements OnModuleInit {
               await member.roles.add(this.ROLE_PLAYER_ID)
             }
 
-            await message.author.send(
-              `> Вітаю, вас добавлено в **whitelist**! :tada: :partying_face: :tada:
-              Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
-              Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799`,
-            )
+            try {
+              await message.author.send(
+                `> Вітаю, вас добавлено в **whitelist**! :tada: :partying_face: :tada:
+                Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
+                Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799`,
+              )
+            } catch (e) {
+              this.logger.verbose('Користувач не приймає повідомлення в ПП')
+            }
 
             try {
               await message.delete()
@@ -220,19 +247,20 @@ export class DiscordBotService implements OnModuleInit {
 
             if (error instanceof ConflictException) {
               await message.delete()
-              await message.author.send(error.message)
             } else {
               await message.delete()
-              await message.author.send(
-                'Сталась помилка при добавленні гравця в **whitelist**',
-              )
             }
           }
         } else {
           await message.delete()
-          await message.author.send(
-            `Попасти в whitelist можна тільки, якщо ваш ДС аккаунт має більше 3 місяців.`,
-          )
+
+          try {
+            await message.author.send(
+              `Попасти в whitelist можна тільки, якщо ваш ДС аккаунт має більше 3 місяців.`,
+            )
+          } catch (e) {
+            this.logger.verbose('Користувач не приймає повідомлення в ПП')
+          }
         }
       } catch (error) {
         this.logger.error(error)

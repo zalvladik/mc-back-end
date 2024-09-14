@@ -5,6 +5,7 @@ import { addMonths, isBefore } from 'date-fns'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { Repository } from 'typeorm'
+import { DsUserLeave } from 'src/entities/ds-user-leave.entity'
 
 @Injectable()
 export class DiscordBotService implements OnModuleInit {
@@ -23,6 +24,8 @@ export class DiscordBotService implements OnModuleInit {
   constructor(
     @InjectRepository(Whitelist)
     private readonly whitelistRepository: Repository<Whitelist>,
+    @InjectRepository(DsUserLeave)
+    private readonly dsUserLeaveRepository: Repository<DsUserLeave>,
   ) {
     this.client = new Client({
       intents: [
@@ -72,6 +75,74 @@ export class DiscordBotService implements OnModuleInit {
 
   async onModuleInit(): Promise<void> {
     this.client.once('ready', () => {})
+
+    this.client.on('guildMemberRemove', async member => {
+      try {
+        const user = await this.whitelistRepository.findOne({
+          where: { discordUserId: member.id },
+        })
+
+        if (user) {
+          const newLeaveUser = this.dsUserLeaveRepository.create({
+            user: user.user,
+            discordUserId: member.id,
+            UUID: user.UUID ?? null,
+          })
+
+          await this.dsUserLeaveRepository.save(newLeaveUser)
+
+          await this.whitelistRepository.remove(user)
+
+          await member.send(
+            `> Вас **видалено** з **whitelist**! :x:
+            Щоб знову зайти на сервер, вам потрібно вернутись на діскрод сервер UK-land!`,
+          )
+        }
+      } catch (error) {
+        this.logger.error(
+          `Помилка при видаленні гравця з whitelist: ${error.message}`,
+        )
+      }
+    })
+
+    this.client.on('guildMemberAdd', async member => {
+      try {
+        const userInLeave = await this.dsUserLeaveRepository.findOne({
+          where: { discordUserId: member.id },
+        })
+
+        if (userInLeave) {
+          const newUserInWhitelist = this.whitelistRepository.create({
+            user: userInLeave.user,
+            discordUserId: member.id,
+            UUID: userInLeave.UUID ?? null,
+          })
+
+          await this.whitelistRepository.save(newUserInWhitelist)
+
+          await this.dsUserLeaveRepository.remove(userInLeave)
+
+          const { guild } = member
+
+          if (guild) {
+            await member.roles.add(this.ROLE_NOOB_ID)
+            await member.roles.add(this.ROLE_PLAYER_ID)
+          }
+
+          member.setNickname(userInLeave.user)
+
+          await member.send(
+            `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
+            Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
+            Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799`,
+          )
+        }
+      } catch (error) {
+        this.logger.error(
+          `Ошибка при восстановлении пользователя в whitelist: ${error.message}`,
+        )
+      }
+    })
 
     this.client.on('messageCreate', async message => {
       if (message.author.bot) return
@@ -131,10 +202,17 @@ export class DiscordBotService implements OnModuleInit {
               await member.roles.add(this.ROLE_PLAYER_ID)
             }
 
-            await message.react('✅')
             await message.author.send(
-              `> Вітаю, вас добавлено в **whitelist**! :tada: :partying_face: :tada:`,
+              `> Вітаю, вас добавлено в **whitelist**! :tada: :partying_face: :tada:
+              Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
+              Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799`,
             )
+
+            try {
+              await message.delete()
+            } catch (error) {
+              this.logger.error(`Не вдалось видалити повідомлення: ${error}`)
+            }
           } catch (error) {
             this.logger.error(error)
 

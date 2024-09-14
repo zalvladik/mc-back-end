@@ -82,6 +82,8 @@ export class DiscordBotService implements OnModuleInit {
           where: { discordUserId: member.id },
         })
 
+        this.logger.log(user)
+
         if (user) {
           const newLeaveUser = this.dsUserLeaveRepository.create({
             user: user.user,

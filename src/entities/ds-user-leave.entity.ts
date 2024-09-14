@@ -14,4 +14,7 @@ export class DsUserLeave {
 
   @Column({ type: 'varchar', length: 100, nullable: true })
   UUID: string
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  discordUserRoles: string
 }

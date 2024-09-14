@@ -17,6 +17,8 @@ export class DiscordBotService implements OnModuleInit {
 
   private ROLE_NOOB_ID = process.env.ROLE_NOOB_ID
 
+  private ROLE_PRO_ID = process.env.ROLE_PRO_ID
+
   private ROLE_PLAYER_ID = process.env.ROLE_PLAYER_ID
 
   private DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN
@@ -85,10 +87,19 @@ export class DiscordBotService implements OnModuleInit {
         this.logger.log(user)
 
         if (user) {
+          const discordUserRoles = member.roles.cache
+            .filter(
+              role =>
+                role.id === this.ROLE_NOOB_ID || role.id === this.ROLE_PRO_ID,
+            )
+            .map(role => role.id)
+            .join(',')
+
           const newLeaveUser = this.dsUserLeaveRepository.create({
             user: user.user,
             discordUserId: member.id,
             UUID: user.UUID ?? null,
+            discordUserRoles,
           })
 
           await this.dsUserLeaveRepository.save(newLeaveUser)
@@ -131,8 +142,21 @@ export class DiscordBotService implements OnModuleInit {
           const { guild } = member
 
           if (guild) {
-            await member.roles.add(this.ROLE_NOOB_ID)
-            await member.roles.add(this.ROLE_PLAYER_ID)
+            const rolesToRestore = userInLeave.discordUserRoles?.split(',')
+
+            if (rolesToRestore) {
+              await Promise.all(
+                rolesToRestore.map(async roleId => {
+                  const role = guild.roles.cache.get(roleId)
+
+                  if (role) {
+                    await member.roles.add(role)
+                  }
+                }),
+              )
+
+              await member.roles.add(this.ROLE_PLAYER_ID)
+            }
           }
 
           member.setNickname(userInLeave.user)

@@ -53,7 +53,7 @@ export class DiscordBotService implements OnModuleInit {
 
     if (userByDiscordUserId) {
       throw new ConflictException(
-        `> Вас уже добавленно в whitelist, ваш нікнейм: **${userByDiscordUserId.user}**`,
+        `Вас уже добавленно в whitelist, ваш нікнейм: **${userByDiscordUserId.user}**`,
       )
     }
 
@@ -63,7 +63,7 @@ export class DiscordBotService implements OnModuleInit {
 
     if (userByNickName) {
       throw new ConflictException(
-        `> Нік **${nickname}** зайнятий, придумайте інший нікнейм.`,
+        `Нік **${nickname}** зайнятий, придумайте інший нікнейм.`,
       )
     }
 
@@ -107,10 +107,14 @@ export class DiscordBotService implements OnModuleInit {
           await this.whitelistRepository.remove(user)
 
           try {
-            await member.send(
-              `> Вас **видалено** з **whitelist**! :x:
-            Щоб знову зайти на сервер, вам потрібно вернутись на діскрод сервер UK-land!`,
-            )
+            const embed = new EmbedBuilder()
+              .setDescription(
+                `> Вас **видалено** з **whitelist**! :x:
+Щоб знову зайти на сервер, вам потрібно вернутись на діскрод сервер UK-land!`,
+              )
+              .setColor('#FF0000')
+
+            member.send({ embeds: [embed] })
           } catch (e) {
             this.logger.verbose('Користувач не приймає повідомлення в ПП')
           }
@@ -141,6 +145,21 @@ export class DiscordBotService implements OnModuleInit {
 :desktop: **Сайт**: https://uk-land-site.vercel.app/
 :map: **Карта**: https://map.uk-land.space/`,
             )
+
+            const embed = new EmbedBuilder()
+              .setDescription(
+                `> Вітаю, щоб попасти на сервер, просто напишіть в цей канал свій нікНейм: https://discord.com/channels/991308923581779988/1284457173723775063
+
+Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
+Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
+                
+>>> :globe_with_meridians: **Версія**: 1.21
+:link: **IP**: uk-land.space
+:desktop: **Сайт**: https://uk-land-site.vercel.app/
+:map: **Карта**: https://map.uk-land.space/`,
+              )
+              .setColor('#097FED')
+            await member.send({ embeds: [embed] })
           } catch (e) {
             this.logger.verbose('Користувач не приймає повідомлення в ПП')
           }
@@ -180,17 +199,20 @@ export class DiscordBotService implements OnModuleInit {
           member.setNickname(userInLeave.user)
 
           try {
-            await member.send(
-              `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
+            const embed = new EmbedBuilder()
+              .setDescription(
+                `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
 
 Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
 Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
-
+                  
 >>> :globe_with_meridians: **Версія**: 1.21
 :link: **IP**: uk-land.space
 :desktop: **Сайт**: https://uk-land-site.vercel.app/
 :map: **Карта**: https://map.uk-land.space/`,
-            )
+              )
+              .setColor('#00FF00')
+            await member.send({ embeds: [embed] })
           } catch (e) {
             this.logger.verbose('Користувач не приймає повідомлення в ПП')
           }
@@ -219,9 +241,11 @@ export class DiscordBotService implements OnModuleInit {
             await message.delete()
 
             try {
-              await message.author.send(
-                '> :x: Хибний набір символів для нікнейму.',
-              )
+              const embed = new EmbedBuilder()
+                .setDescription(`Хибний набір символів для нікнейму. :x:`)
+                .setColor('#FF0000')
+
+              message.author.send({ embeds: [embed] })
             } catch (e) {
               this.logger.verbose('Користувач не приймає повідомлення в ПП')
             }
@@ -233,9 +257,11 @@ export class DiscordBotService implements OnModuleInit {
             await message.delete()
 
             try {
-              await message.author.send(
-                '> :x: Мінімальна кількість символів **3**',
-              )
+              const embed = new EmbedBuilder()
+                .setDescription(`Мінімальна кількість символів **3** :x:`)
+                .setColor('#FF0000')
+
+              message.author.send({ embeds: [embed] })
             } catch (e) {
               this.logger.verbose('Користувач не приймає повідомлення в ПП')
             }
@@ -247,9 +273,11 @@ export class DiscordBotService implements OnModuleInit {
             await message.delete()
 
             try {
-              await message.author.send(
-                '> :x: Максимальна кількість символів **16**',
-              )
+              const embed = new EmbedBuilder()
+                .setDescription(`Максимальна кількість символів **16** :x:`)
+                .setColor('#FF0000')
+
+              message.author.send({ embeds: [embed] })
             } catch (e) {
               this.logger.verbose('Користувач не приймає повідомлення в ПП')
             }
@@ -278,7 +306,7 @@ export class DiscordBotService implements OnModuleInit {
             try {
               const embed = new EmbedBuilder()
                 .setDescription(
-                  '> Вітаю, вас добавлено в **whitelist**! 🎉 🥳 🎉',
+                  'Вітаю, вас добавлено в **whitelist**! 🎉 🥳 🎉',
                 )
                 .setColor('#00FF00')
               await message.author.send({ embeds: [embed] })
@@ -292,6 +320,12 @@ export class DiscordBotService implements OnModuleInit {
               this.logger.error(`Не вдалось видалити повідомлення: ${error}`)
             }
           } catch (error) {
+            const embed = new EmbedBuilder()
+              .setDescription(error.message)
+              .setColor('#FF0000')
+
+            message.author.send({ embeds: [embed] })
+
             this.logger.error(error)
 
             if (error instanceof ConflictException) {
@@ -304,9 +338,13 @@ export class DiscordBotService implements OnModuleInit {
           await message.delete()
 
           try {
-            await message.author.send(
-              `Попасти в whitelist можна тільки, якщо ваш ДС аккаунт має більше 3 місяців.`,
-            )
+            const embed = new EmbedBuilder()
+              .setDescription(
+                `Попасти в whitelist можна тільки, якщо ваш ДС аккаунт має більше 3 місяців.`,
+              )
+              .setColor('#FF0000')
+
+            message.author.send({ embeds: [embed] })
           } catch (e) {
             this.logger.verbose('Користувач не приймає повідомлення в ПП')
           }

@@ -320,11 +320,15 @@ export class DiscordBotService implements OnModuleInit {
               this.logger.error(`Не вдалось видалити повідомлення: ${error}`)
             }
           } catch (error) {
-            const embed = new EmbedBuilder()
-              .setDescription(error.message)
-              .setColor('#FF0000')
+            try {
+              const embed = new EmbedBuilder()
+                .setDescription(error.message)
+                .setColor('#FF0000')
 
-            message.author.send({ embeds: [embed] })
+              message.author.send({ embeds: [embed] })
+            } catch (error) {
+              this.logger.verbose('Користувач не приймає повідомлення в ПП')
+            }
 
             this.logger.error(error)
 

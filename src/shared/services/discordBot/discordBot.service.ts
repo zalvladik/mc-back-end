@@ -1,6 +1,6 @@
 import type { OnModuleInit } from '@nestjs/common'
 import { Injectable, ConflictException, Logger } from '@nestjs/common'
-import { Client, GatewayIntentBits } from 'discord.js'
+import { Client, GatewayIntentBits, EmbedBuilder } from 'discord.js'
 import { addMonths, isBefore } from 'date-fns'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
@@ -276,9 +276,12 @@ export class DiscordBotService implements OnModuleInit {
             }
 
             try {
-              await message.author.send(
-                `> Вітаю, вас добавлено в **whitelist**! :tada: :partying_face: :tada:`,
-              )
+              const embed = new EmbedBuilder()
+                .setDescription(
+                  '> Вітаю, вас добавлено в **whitelist**! 🎉 🥳 🎉',
+                )
+                .setColor('#00FF00')
+              await message.author.send({ embeds: [embed] })
             } catch (e) {
               this.logger.verbose('Користувач не приймає повідомлення в ПП')
             }

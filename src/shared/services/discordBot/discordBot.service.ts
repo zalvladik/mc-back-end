@@ -128,6 +128,25 @@ export class DiscordBotService implements OnModuleInit {
           where: { discordUserId: member.id },
         })
 
+        if (!userInLeave) {
+          try {
+            await member.send(
+              `> Вітаю, щоб попасти на сервер, 
+              просто напишіть в цей канал свій нікНейм: https://discord.com/channels/991308923581779988/1284457173723775063
+              
+              Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
+              Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
+              
+              >>> :globe_with_meridians: **Версія**: 1.21
+              :link: **IP**: uk-land.space
+              :desktop: **Сайт**: https://uk-land-site.vercel.app/
+              :map: **Карта**: https://map.uk-land.space/`,
+            )
+          } catch (e) {
+            this.logger.verbose('Користувач не приймає повідомлення в ПП')
+          }
+        }
+
         if (userInLeave) {
           const newUserInWhitelist = this.whitelistRepository.create({
             user: userInLeave.user,
@@ -164,6 +183,7 @@ export class DiscordBotService implements OnModuleInit {
           try {
             await member.send(
               `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
+
               Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
               Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
               
@@ -259,6 +279,7 @@ export class DiscordBotService implements OnModuleInit {
             try {
               await message.author.send(
                 `> Вітаю, вас добавлено в **whitelist**! :tada: :partying_face: :tada:
+                
                 Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
                 Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
 

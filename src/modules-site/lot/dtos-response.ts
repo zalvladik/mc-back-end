@@ -68,8 +68,7 @@ export class GetTradeHistoryWithTimeRangeResponse {
 
   createdAt: Date
 
-  lot: {
-    id: number
-    price: number
-  }
+  isSeller: boolean
+
+  price: number
 }

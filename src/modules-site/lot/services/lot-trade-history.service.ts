@@ -81,7 +81,6 @@ export class LotTradeHistoryService {
   async getTradeHistoryWithTimeRange({
     from,
     to,
-
     userId,
   }: getTradeHistoryWithTimeRange): Promise<
     GetTradeHistoryWithTimeRangeResponse[]
@@ -94,6 +93,8 @@ export class LotTradeHistoryService {
       .select([
         'tradeHistory.id',
         'tradeHistory.createdAt',
+        'seller.id',
+        'buyer.id',
         'lot.id',
         'lot.price',
       ])
@@ -108,6 +109,13 @@ export class LotTradeHistoryService {
       { userId },
     )
 
-    return queryBuilder.getMany()
+    const tradeHistories = await queryBuilder.getMany()
+
+    return tradeHistories.map(tradeHistory => ({
+      id: tradeHistory.id,
+      createdAt: tradeHistory.createdAt,
+      isSeller: tradeHistory.seller.id === userId,
+      price: tradeHistory.lot.price,
+    }))
   }
 }

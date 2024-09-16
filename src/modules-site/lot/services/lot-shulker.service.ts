@@ -145,14 +145,7 @@ export class LotShulkerService {
 
     await this.tradeHistoryRepository.save(newTradeHistory)
 
-    const createdNewTradeHistory = await this.tradeHistoryRepository.findOne({
-      where: { lot: { id: lotMetaData.id } },
-    })
-
-    await this.lotRepository.update(
-      { id: lotId },
-      { isSold: true, tradeHistory: createdNewTradeHistory },
-    )
+    await this.lotRepository.update({ id: lotId }, { isSold: true })
 
     this.mcFetchingService.byeShulkerLotNotification({
       username: sellerUser.username,

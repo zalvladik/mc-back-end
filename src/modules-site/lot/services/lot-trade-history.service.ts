@@ -98,10 +98,7 @@ export class LotTradeHistoryService {
         'lot.id',
         'lot.price',
       ])
-      .where('tradeHistory.createdAt BETWEEN :from AND :to', {
-        from,
-        to,
-      })
+      .where('tradeHistory.createdAt BETWEEN :from AND :to', { from, to })
       .orderBy('tradeHistory.createdAt', 'DESC')
 
     queryBuilder.andWhere(

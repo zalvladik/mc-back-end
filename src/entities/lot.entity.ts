@@ -9,7 +9,6 @@ import {
 
 import { Item } from './item.entity'
 import { Shulker } from './shulker.entity'
-import { TradeHistory } from './trade-history.entity'
 
 @Entity({ name: 'lots' })
 @Index(['username'])
@@ -35,12 +34,6 @@ export class Lot {
   })
   @JoinColumn({ name: 'shulker_id' })
   shulker: Shulker
-
-  @OneToOne(() => TradeHistory, tradeHistory => tradeHistory.lot, {
-    nullable: true,
-  })
-  @JoinColumn({ name: 'trade_history_id' })
-  tradeHistory: TradeHistory
 
   @Column({ type: 'boolean', default: false, nullable: false })
   isSold: boolean

@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
-  OneToOne,
 } from 'typeorm'
 import { User } from './user.entity'
 import { Lot } from './lot.entity'
@@ -26,8 +25,9 @@ export class TradeHistory {
   @JoinColumn({ name: 'buyer_user_id' })
   buyer: User
 
-  @OneToOne(() => Lot, lot => lot.tradeHistory, {
+  @ManyToOne(() => Lot, {
     nullable: false,
+    onDelete: 'NO ACTION',
   })
   @JoinColumn({ name: 'lot_id' })
   lot: Lot

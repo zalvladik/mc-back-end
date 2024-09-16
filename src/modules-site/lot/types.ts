@@ -2,6 +2,7 @@ import type { VipEnum } from 'src/shared/enums'
 import type {
   GetEnchantitemsLotsQuaryDto,
   GetLotsQuaryDto,
+  GetTradeHistoryWithTimeRangeQueryDto,
 } from './dtos-request'
 
 export type CreateLotItemServiceT = {
@@ -53,3 +54,7 @@ export type GetTradeHistoryService = {
   page?: number
   limit?: number
 }
+
+export type getTradeHistoryWithTimeRange = {
+  userId: number
+} & GetTradeHistoryWithTimeRangeQueryDto

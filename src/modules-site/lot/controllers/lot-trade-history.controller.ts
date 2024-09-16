@@ -8,8 +8,12 @@ import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
 import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
-import { GetTradeHistoryQueryDto } from '../dtos-request'
+import {
+  GetTradeHistoryQueryDto,
+  GetTradeHistoryWithTimeRangeQueryDto,
+} from '../dtos-request'
 import { LotTradeHistoryService } from '../services/lot-trade-history.service'
+import type { GetTradeHistoryWithTimeRangeResponse } from '../dtos-response'
 
 @Controller('lot/trade_history')
 @ApiTags('lot/trade_history')
@@ -30,6 +34,21 @@ export class LotTradeHistoryController {
       userId,
       page,
       limit,
+      isSeller,
+    })
+  }
+
+  @Get('price')
+  @HttpCode(200)
+  async getTradeHistoryWithTimeRange(
+    @Query()
+    { from, to, isSeller }: GetTradeHistoryWithTimeRangeQueryDto,
+    @UserDecorator() { id: userId }: GetUserDto,
+  ): Promise<GetTradeHistoryWithTimeRangeResponse[]> {
+    return this.lotTradeHistoryService.getTradeHistoryWithTimeRange({
+      userId,
+      from,
+      to,
       isSeller,
     })
   }

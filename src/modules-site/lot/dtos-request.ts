@@ -39,6 +39,21 @@ export class GetTradeHistoryQueryDto extends PaginationParams {
   isSeller?: boolean
 }
 
+export class GetTradeHistoryWithTimeRangeQueryDto {
+  @IsNotEmpty()
+  @IsString()
+  from: string
+
+  @IsNotEmpty()
+  @IsString()
+  to: string
+
+  @IsOptional()
+  @Transform(({ value }) => value === 'true')
+  @IsBoolean()
+  isSeller: boolean
+}
+
 export class LotFilterParams extends PaginationParams {
   @IsOptional()
   @Transform(({ value }) => value === 'true')

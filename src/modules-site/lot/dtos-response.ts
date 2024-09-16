@@ -62,3 +62,14 @@ export class ByeLotItemResponseDto {
 export class DeleteUserLotResponseDto {
   id: number
 }
+
+export class GetTradeHistoryWithTimeRangeResponse {
+  id: number
+
+  createdAt: Date
+
+  lot: {
+    id: number
+    price: number
+  }
+}

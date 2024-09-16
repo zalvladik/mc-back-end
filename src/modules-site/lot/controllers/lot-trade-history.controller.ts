@@ -42,14 +42,13 @@ export class LotTradeHistoryController {
   @HttpCode(200)
   async getTradeHistoryWithTimeRange(
     @Query()
-    { from, to, isSeller }: GetTradeHistoryWithTimeRangeQueryDto,
+    { from, to }: GetTradeHistoryWithTimeRangeQueryDto,
     @UserDecorator() { id: userId }: GetUserDto,
   ): Promise<GetTradeHistoryWithTimeRangeResponse[]> {
     return this.lotTradeHistoryService.getTradeHistoryWithTimeRange({
       userId,
       from,
       to,
-      isSeller,
     })
   }
 }

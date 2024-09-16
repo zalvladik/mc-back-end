@@ -81,7 +81,7 @@ export class LotTradeHistoryService {
   async getTradeHistoryWithTimeRange({
     from,
     to,
-    isSeller,
+
     userId,
   }: getTradeHistoryWithTimeRange): Promise<
     GetTradeHistoryWithTimeRangeResponse[]
@@ -103,11 +103,10 @@ export class LotTradeHistoryService {
       })
       .orderBy('tradeHistory.createdAt', 'DESC')
 
-    if (isSeller) {
-      queryBuilder.andWhere('tradeHistory.seller.id = :userId', { userId })
-    } else {
-      queryBuilder.andWhere('tradeHistory.buyer.id = :userId', { userId })
-    }
+    queryBuilder.andWhere(
+      'tradeHistory.seller.id = :userId OR tradeHistory.buyer.id = :userId',
+      { userId },
+    )
 
     return queryBuilder.getMany()
   }

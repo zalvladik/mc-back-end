@@ -47,11 +47,6 @@ export class GetTradeHistoryWithTimeRangeQueryDto {
   @IsNotEmpty()
   @IsString()
   to: string
-
-  @IsOptional()
-  @Transform(({ value }) => value === 'true')
-  @IsBoolean()
-  isSeller: boolean
 }
 
 export class LotFilterParams extends PaginationParams {

@@ -106,9 +106,9 @@ export class LotTradeHistoryService {
       { userId },
     )
 
-    const tradeHistories = await queryBuilder.getMany()
+    const tradeHistory = await queryBuilder.getMany()
 
-    return tradeHistories.map(tradeHistory => ({
+    return tradeHistory.map(tradeHistory => ({
       id: tradeHistory.id,
       createdAt: tradeHistory.createdAt,
       isSeller: tradeHistory.seller.id === userId,

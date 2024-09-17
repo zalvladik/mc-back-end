@@ -5,6 +5,7 @@ import { Repository } from 'typeorm'
 
 import { TradeHistory } from 'src/entities/trade-history.entity'
 
+import { formatDateToSQL } from 'src/shared/helpers/formatDateToSQL'
 import type {
   GetTradeHistoryService,
   getTradeHistoryWithTimeRange,
@@ -98,8 +99,11 @@ export class LotTradeHistoryService {
         'lot.id',
         'lot.price',
       ])
-      .where('tradeHistory.createdAt BETWEEN :from AND :to', { from, to })
-      .orderBy('tradeHistory.createdAt', 'DESC')
+      .where('tradeHistory.createdAt BETWEEN :from AND :to', {
+        from: formatDateToSQL(from),
+        to: formatDateToSQL(to),
+      })
+      .orderBy('tradeHistory.createdAt', 'ASC')
 
     queryBuilder.andWhere(
       'tradeHistory.seller.id = :userId OR tradeHistory.buyer.id = :userId',

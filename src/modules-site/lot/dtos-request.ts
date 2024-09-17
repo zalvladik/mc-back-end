@@ -42,11 +42,11 @@ export class GetTradeHistoryQueryDto extends PaginationParams {
 export class GetTradeHistoryWithTimeRangeQueryDto {
   @IsNotEmpty()
   @IsString()
-  from: string
+  from: Date
 
   @IsNotEmpty()
   @IsString()
-  to: string
+  to: Date
 }
 
 export class LotFilterParams extends PaginationParams {

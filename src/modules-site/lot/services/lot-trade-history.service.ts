@@ -99,9 +99,10 @@ export class LotTradeHistoryService {
         'lot.id',
         'lot.price',
       ])
-      .where(
-        `tradeHistory.createdAt BETWEEN '${formatDateToSQL(from)} 00:00:01' AND '${formatDateToSQL(to)} 23:59:59`,
-      )
+      .where('tradeHistory.createdAt BETWEEN :from AND :to', {
+        from: `${formatDateToSQL(from)} 00:00:01`,
+        to: `${formatDateToSQL(to)} 23:59:59`,
+      })
       .orderBy('tradeHistory.createdAt', 'ASC')
 
     queryBuilder.andWhere(

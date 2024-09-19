@@ -11,7 +11,7 @@ import { TokenService } from 'src/shared/services/token/token.service'
 import { Item } from 'src/entities/item.entity'
 
 import { Shulker } from 'src/entities/shulker.entity'
-import { McWhitelist } from 'src/entities/mc-whitelist.entity'
+import { Whitelist } from 'src/entities/whitelist.entity'
 import {
   UserAdvancementsController,
   UserController,
@@ -42,7 +42,7 @@ import { AuthService } from '../auth/services'
       Item,
       SrPlayerSkin,
       Shulker,
-      McWhitelist,
+      Whitelist,
     ]),
     AuthModule,
   ],

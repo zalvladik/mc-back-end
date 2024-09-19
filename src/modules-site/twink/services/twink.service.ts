@@ -9,7 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { User } from 'src/entities/user.entity'
 import { TWINKS_COUNT, TWINKS_PRICE } from 'src/shared/constants'
 import { Repository } from 'typeorm'
-import { McWhitelist } from 'src/entities/mc-whitelist.entity'
+import { Whitelist } from 'src/entities/whitelist.entity'
 import type { CreateTwinksService } from '../types'
 
 @Injectable()
@@ -17,8 +17,8 @@ export class TwinkService {
   constructor(
     @InjectRepository(User)
     private readonly userRepositry: Repository<User>,
-    @InjectRepository(McWhitelist)
-    private readonly mcWhiteListRepositry: Repository<McWhitelist>,
+    @InjectRepository(Whitelist)
+    private readonly whitelistRepository: Repository<Whitelist>,
   ) {}
 
   async getTwinks(mainUserName: string): Promise<any> {
@@ -31,7 +31,7 @@ export class TwinkService {
     twinkName,
   }: CreateTwinksService): Promise<void> {
     const [isUserNameTwinkInWl, isUserNameTwinkInUsers] = await Promise.all([
-      this.mcWhiteListRepositry.findOne({ where: { username: twinkName } }),
+      this.whitelistRepository.findOne({ where: { username: twinkName } }),
       this.userRepositry.findOne({ where: { username: twinkName } }),
     ])
 
@@ -39,7 +39,7 @@ export class TwinkService {
       throw new ConflictException('Цей нікНейм зайнятий')
     }
 
-    const countTwinks = await this.mcWhiteListRepositry.count({
+    const countTwinks = await this.whitelistRepository.count({
       where: { mainUserName, isTwink: true },
     })
 
@@ -53,7 +53,7 @@ export class TwinkService {
       where: { id: userId },
     })
 
-    const currentUserInWl = await this.mcWhiteListRepositry.findOne({
+    const currentUserInWl = await this.whitelistRepository.findOne({
       where: { username: mainUserName },
     })
 
@@ -90,13 +90,13 @@ export class TwinkService {
       regip: currentUser.regip,
     })
 
-    const newUserTwinkInWl = this.mcWhiteListRepositry.create({
+    const newUserTwinkInWl = this.whitelistRepository.create({
       ...twinkData,
       discordUserId: currentUserInWl.discordUserId,
       discordUserRoles: currentUserInWl.discordUserRoles,
     })
 
     await this.userRepositry.save([currentUser, newUserTwinkInUsers])
-    await this.mcWhiteListRepositry.save(newUserTwinkInWl)
+    await this.whitelistRepository.save(newUserTwinkInWl)
   }
 }

@@ -10,7 +10,7 @@ import { Repository } from 'typeorm'
 
 import { User } from 'src/entities/user.entity'
 import { TokenService } from 'src/shared/services/token/token.service'
-import { McWhitelist } from 'src/entities/mc-whitelist.entity'
+import { Whitelist } from 'src/entities/whitelist.entity'
 import type { AuthUserResponseDto } from '../dtos-response'
 
 @Injectable()
@@ -18,8 +18,8 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    @InjectRepository(McWhitelist)
-    private readonly mcWhitelistRepository: Repository<McWhitelist>,
+    @InjectRepository(Whitelist)
+    private readonly whitelistRepository: Repository<Whitelist>,
     private readonly tokenService: TokenService,
   ) {}
 
@@ -51,7 +51,7 @@ export class AuthService {
       throw new BadRequestException('Неправильний пароль')
     }
 
-    const isExistInDsServer = await this.mcWhitelistRepository.findOne({
+    const isExistInDsServer = await this.whitelistRepository.findOne({
       where: { username, isTwink: false, isExistInDsServer: false },
     })
 
@@ -81,7 +81,7 @@ export class AuthService {
     const userData = this.tokenService.validateRefreshToken(oldRefreshToken)
     const { id, username } = userData
 
-    const isExistInDsServer = await this.mcWhitelistRepository.findOne({
+    const isExistInDsServer = await this.whitelistRepository.findOne({
       where: { username, isTwink: false, isExistInDsServer: false },
     })
 

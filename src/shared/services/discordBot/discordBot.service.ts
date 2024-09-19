@@ -4,7 +4,7 @@ import { Client, GatewayIntentBits, EmbedBuilder } from 'discord.js'
 import { addMonths, isBefore } from 'date-fns'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { McWhitelist } from 'src/entities/mc-whitelist.entity'
+import { Whitelist } from 'src/entities/whitelist.entity'
 import { User } from 'src/entities/user.entity'
 
 @Injectable()
@@ -24,8 +24,8 @@ export class DiscordBotService implements OnModuleInit {
   private DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN
 
   constructor(
-    @InjectRepository(McWhitelist)
-    private readonly mcWhitelistRepository: Repository<McWhitelist>,
+    @InjectRepository(Whitelist)
+    private readonly whitelistRepository: Repository<Whitelist>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {
@@ -47,7 +47,7 @@ export class DiscordBotService implements OnModuleInit {
     nickname: string
     discordUserId: string
   }): Promise<void> {
-    const userByDiscordUserId = await this.mcWhitelistRepository.findOne({
+    const userByDiscordUserId = await this.whitelistRepository.findOne({
       where: { discordUserId, isTwink: false },
     })
 
@@ -57,7 +57,7 @@ export class DiscordBotService implements OnModuleInit {
       )
     }
 
-    const userByNickName = await this.mcWhitelistRepository.findOne({
+    const userByNickName = await this.whitelistRepository.findOne({
       where: { username: nickname },
     })
 
@@ -67,12 +67,12 @@ export class DiscordBotService implements OnModuleInit {
       )
     }
 
-    const newUserInWhitelist = this.mcWhitelistRepository.create({
+    const newUserInWhitelist = this.whitelistRepository.create({
       username: nickname,
       discordUserId,
     })
 
-    await this.mcWhitelistRepository.save(newUserInWhitelist)
+    await this.whitelistRepository.save(newUserInWhitelist)
   }
 
   async onModuleInit(): Promise<void> {
@@ -80,7 +80,7 @@ export class DiscordBotService implements OnModuleInit {
 
     this.client.on('guildMemberRemove', async member => {
       try {
-        const user = await this.mcWhitelistRepository.findOne({
+        const user = await this.whitelistRepository.findOne({
           where: { discordUserId: member.id },
         })
 
@@ -95,7 +95,7 @@ export class DiscordBotService implements OnModuleInit {
             .map(role => role.id)
             .join(',')
 
-          await this.mcWhitelistRepository.update(
+          await this.whitelistRepository.update(
             {
               discordUserId: user.discordUserId,
             },
@@ -129,7 +129,7 @@ export class DiscordBotService implements OnModuleInit {
 
     this.client.on('guildMemberAdd', async member => {
       try {
-        const isExistUserInWl = await this.mcWhitelistRepository.findOne({
+        const isExistUserInWl = await this.whitelistRepository.findOne({
           where: { discordUserId: member.id, isExistInDsServer: false },
         })
 
@@ -155,7 +155,7 @@ export class DiscordBotService implements OnModuleInit {
         }
 
         if (isExistUserInWl) {
-          await this.mcWhitelistRepository.update(
+          await this.whitelistRepository.update(
             {
               discordUserId: member.id,
             },

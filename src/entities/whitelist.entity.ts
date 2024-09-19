@@ -1,7 +1,6 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity({ name: 'whitelist' })
-@Index(['user'])
 export class Whitelist {
   @PrimaryGeneratedColumn()
   id: number

@@ -3,9 +3,9 @@ import { Injectable, ConflictException, Logger } from '@nestjs/common'
 import { Client, GatewayIntentBits, EmbedBuilder } from 'discord.js'
 import { addMonths, isBefore } from 'date-fns'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Whitelist } from 'src/entities/whitelist.entity'
 import { Repository } from 'typeorm'
-import { DsUserLeave } from 'src/entities/ds-user-leave.entity'
+import { McWhitelist } from 'src/entities/mc-whitelist.entity'
+import { User } from 'src/entities/user.entity'
 
 @Injectable()
 export class DiscordBotService implements OnModuleInit {
@@ -24,10 +24,10 @@ export class DiscordBotService implements OnModuleInit {
   private DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN
 
   constructor(
-    @InjectRepository(Whitelist)
-    private readonly whitelistRepository: Repository<Whitelist>,
-    @InjectRepository(DsUserLeave)
-    private readonly dsUserLeaveRepository: Repository<DsUserLeave>,
+    @InjectRepository(McWhitelist)
+    private readonly mcWhitelistRepository: Repository<McWhitelist>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {
     this.client = new Client({
       intents: [
@@ -47,18 +47,18 @@ export class DiscordBotService implements OnModuleInit {
     nickname: string
     discordUserId: string
   }): Promise<void> {
-    const userByDiscordUserId = await this.whitelistRepository.findOne({
-      where: { discordUserId },
+    const userByDiscordUserId = await this.mcWhitelistRepository.findOne({
+      where: { discordUserId, isTwink: false },
     })
 
     if (userByDiscordUserId) {
       throw new ConflictException(
-        `Вас уже добавленно в whitelist, ваш нікнейм: **${userByDiscordUserId.user}**`,
+        `Вас уже добавленно в whitelist, ваш нікнейм: **${userByDiscordUserId.username}**`,
       )
     }
 
-    const userByNickName = await this.whitelistRepository.findOne({
-      where: { user: nickname },
+    const userByNickName = await this.mcWhitelistRepository.findOne({
+      where: { username: nickname },
     })
 
     if (userByNickName) {
@@ -67,12 +67,12 @@ export class DiscordBotService implements OnModuleInit {
       )
     }
 
-    const newUserInWhitelist = this.whitelistRepository.create({
-      user: nickname,
+    const newUserInWhitelist = this.mcWhitelistRepository.create({
+      username: nickname,
       discordUserId,
     })
 
-    await this.whitelistRepository.save(newUserInWhitelist)
+    await this.mcWhitelistRepository.save(newUserInWhitelist)
   }
 
   async onModuleInit(): Promise<void> {
@@ -80,7 +80,7 @@ export class DiscordBotService implements OnModuleInit {
 
     this.client.on('guildMemberRemove', async member => {
       try {
-        const user = await this.whitelistRepository.findOne({
+        const user = await this.mcWhitelistRepository.findOne({
           where: { discordUserId: member.id },
         })
 
@@ -95,16 +95,17 @@ export class DiscordBotService implements OnModuleInit {
             .map(role => role.id)
             .join(',')
 
-          const newLeaveUser = this.dsUserLeaveRepository.create({
-            user: user.user,
-            discordUserId: member.id,
-            UUID: user.UUID ?? null,
-            discordUserRoles,
-          })
+          await this.mcWhitelistRepository.update(
+            {
+              discordUserId: user.discordUserId,
+            },
+            { discordUserRoles, isExistInDsServer: false },
+          )
 
-          await this.dsUserLeaveRepository.save(newLeaveUser)
-
-          await this.whitelistRepository.remove(user)
+          await this.userRepository.update(
+            { username: user.username },
+            { refreshToken: null },
+          )
 
           try {
             const embed = new EmbedBuilder()
@@ -128,24 +129,12 @@ export class DiscordBotService implements OnModuleInit {
 
     this.client.on('guildMemberAdd', async member => {
       try {
-        const userInLeave = await this.dsUserLeaveRepository.findOne({
-          where: { discordUserId: member.id },
+        const isExistUserInWl = await this.mcWhitelistRepository.findOne({
+          where: { discordUserId: member.id, isExistInDsServer: false },
         })
 
-        if (!userInLeave) {
+        if (!isExistUserInWl) {
           try {
-            await member.send(
-              `> Вітаю, щоб попасти на сервер, просто напишіть в цей канал свій нікНейм: https://discord.com/channels/991308923581779988/1284457173723775063
-
-Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
-Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
-
->>> :globe_with_meridians: **Версія**: 1.21
-:link: **IP**: uk-land.space
-:desktop: **Сайт**: https://uk-land-site.vercel.app/
-:map: **Карта**: https://map.uk-land.space/`,
-            )
-
             const embed = new EmbedBuilder()
               .setDescription(
                 `> Вітаю, щоб попасти на сервер, просто напишіть в цей канал свій нікНейм: https://discord.com/channels/991308923581779988/1284457173723775063
@@ -165,21 +154,18 @@ export class DiscordBotService implements OnModuleInit {
           }
         }
 
-        if (userInLeave) {
-          const newUserInWhitelist = this.whitelistRepository.create({
-            user: userInLeave.user,
-            discordUserId: member.id,
-            UUID: userInLeave.UUID ?? null,
-          })
-
-          await this.whitelistRepository.save(newUserInWhitelist)
-
-          await this.dsUserLeaveRepository.remove(userInLeave)
+        if (isExistUserInWl) {
+          await this.mcWhitelistRepository.update(
+            {
+              discordUserId: member.id,
+            },
+            { isExistInDsServer: false },
+          )
 
           const { guild } = member
 
           if (guild) {
-            const rolesToRestore = userInLeave.discordUserRoles?.split(',')
+            const rolesToRestore = isExistUserInWl.discordUserRoles?.split(',')
 
             if (rolesToRestore) {
               await Promise.all(
@@ -196,7 +182,7 @@ export class DiscordBotService implements OnModuleInit {
             }
           }
 
-          member.setNickname(userInLeave.user)
+          member.setNickname(isExistUserInWl.username)
 
           try {
             const embed = new EmbedBuilder()

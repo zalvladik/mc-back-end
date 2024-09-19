@@ -10,7 +10,6 @@ import { TokenModule } from 'src/shared/services/token/token.module'
 import { McUserModule } from './modules-mc/user/user.module'
 import { McItemTicketModule } from './modules-mc/item-ticket/item-ticket.module'
 import { AppConfig, DatabaseConfig } from './config'
-import { McAuthModule } from './modules-mc/auth/auth.module'
 import { PpModule } from './modules-site/pp/pp.module'
 import { DiscordBotModule } from './shared/services/discordBot/discordBot.module'
 import { WlEndModule } from './modules-site/wl-end/wl-end.module'
@@ -26,7 +25,7 @@ const siteModule = [
   PpModule,
 ]
 
-const mcModule = [McItemTicketModule, McUserModule, McUserModule, McAuthModule]
+const mcModule = [McItemTicketModule, McUserModule, McUserModule]
 
 @Module({
   imports: [

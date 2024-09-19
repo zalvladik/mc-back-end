@@ -177,4 +177,16 @@ export class User {
     collation: 'utf8_general_ci',
   })
   uuid: string | null
+
+  @Column({ type: 'boolean', default: false, nullable: false })
+  isTwink: boolean
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+    charset: 'utf8',
+    collation: 'utf8_general_ci',
+  })
+  mainUserName: string
 }

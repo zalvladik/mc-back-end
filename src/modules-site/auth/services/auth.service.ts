@@ -10,6 +10,7 @@ import { Repository } from 'typeorm'
 
 import { User } from 'src/entities/user.entity'
 import { TokenService } from 'src/shared/services/token/token.service'
+import { McWhitelist } from 'src/entities/mc-whitelist.entity'
 import type { AuthUserResponseDto } from '../dtos-response'
 
 @Injectable()
@@ -17,6 +18,8 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(McWhitelist)
+    private readonly mcWhitelistRepository: Repository<McWhitelist>,
     private readonly tokenService: TokenService,
   ) {}
 
@@ -25,7 +28,7 @@ export class AuthService {
     password: string,
   ): Promise<AuthUserResponseDto> {
     const userMeta = await this.userRepository.findOne({
-      where: { username },
+      where: { username, isTwink: false },
       relations: ['advancements'],
       select: [
         'id',
@@ -48,6 +51,16 @@ export class AuthService {
       throw new BadRequestException('Неправильний пароль')
     }
 
+    const isExistInDsServer = await this.mcWhitelistRepository.findOne({
+      where: { username, isTwink: false, isExistInDsServer: false },
+    })
+
+    if (!isExistInDsServer) {
+      throw new BadRequestException(
+        'Щоб авторизуватись, вам потрібно вернутись на діскорд сервер UK-land',
+      )
+    }
+
     const user = {
       ...rest,
       advancements: rest.advancements.id,
@@ -68,8 +81,18 @@ export class AuthService {
     const userData = this.tokenService.validateRefreshToken(oldRefreshToken)
     const { id, username } = userData
 
+    const isExistInDsServer = await this.mcWhitelistRepository.findOne({
+      where: { username, isTwink: false, isExistInDsServer: false },
+    })
+
+    if (!isExistInDsServer) {
+      throw new BadRequestException(
+        'Щоб авторизуватись, вам потрібно вернутись на діскорд сервер UK-land',
+      )
+    }
+
     const userMeta = await this.userRepository.findOne({
-      where: { username },
+      where: { username, isTwink: false },
       relations: ['advancements'],
       select: ['id', 'username', 'role', 'money', 'vip', 'vipExpirationDate'],
     })
@@ -90,14 +113,14 @@ export class AuthService {
 
   async getByRefreshToken(id: number, refreshToken: string): Promise<any> {
     return this.userRepository.findOne({
-      where: { id, refreshToken },
+      where: { id, refreshToken, isTwink: false },
       select: ['refreshToken'],
     })
   }
 
   async getRefreshTokenById(id: number): Promise<any> {
     return this.userRepository.findOne({
-      where: { id },
+      where: { id, isTwink: false },
       select: ['refreshToken'],
     })
   }

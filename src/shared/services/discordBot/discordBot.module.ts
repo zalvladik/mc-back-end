@@ -1,12 +1,12 @@
 import { Module, Global } from '@nestjs/common'
-import { Whitelist } from 'src/entities/whitelist.entity'
+import { McWhitelist } from 'src/entities/mc-whitelist.entity'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { DsUserLeave } from 'src/entities/ds-user-leave.entity'
+import { User } from 'src/entities/user.entity'
 import { DiscordBotService } from './discordBot.service'
 
 @Global()
 @Module({
-  imports: [TypeOrmModule.forFeature([Whitelist, DsUserLeave])],
+  imports: [TypeOrmModule.forFeature([McWhitelist, User])],
   providers: [DiscordBotService],
 })
 export class DiscordBotModule {}

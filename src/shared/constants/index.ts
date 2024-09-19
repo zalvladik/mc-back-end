@@ -139,6 +139,8 @@ export const LOTS_COUNT = 8
 
 export const SHULKERS_COUNT = 2
 
+export const TWINKS_COUNT = 3
+
 export const vipMultipliers: Record<VipEnum, number> = {
   [VipEnum.IRON]: 2,
   [VipEnum.GOLD]: 4,
@@ -151,6 +153,12 @@ export const vipPrice: Record<VipEnum, number> = {
   [VipEnum.GOLD]: 16,
   [VipEnum.DIAMOND]: 24,
   [VipEnum.NETHERITE]: 32,
+}
+
+export const TWINKS_PRICE = {
+  FIRST_TWINK: 64 * 2,
+  SECOND_TWINK: 64 * 3,
+  THIRD_TWINK: 64 * 4,
 }
 
 export const ppStyles = ['feet', 'move', 'normal', 'thick', 'trail', 'swords']

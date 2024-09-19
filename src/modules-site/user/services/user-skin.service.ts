@@ -27,7 +27,7 @@ export class UserSkinService {
     username: string,
   ): Promise<GetUserSkinRsponseDto> {
     const player = await this.userRepository.findOne({
-      where: { username },
+      where: { username, isTwink: false },
       select: ['uuid'],
     })
 

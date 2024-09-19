@@ -55,7 +55,7 @@ export class AuthService {
       where: { username, isTwink: false, isExistInDsServer: false },
     })
 
-    if (!isExistInDsServer) {
+    if (isExistInDsServer) {
       throw new BadRequestException(
         'Щоб авторизуватись, вам потрібно вернутись на діскорд сервер UK-land',
       )

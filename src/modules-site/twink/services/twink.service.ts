@@ -11,7 +11,10 @@ import { TWINKS_COUNT, TWINKS_PRICE } from 'src/shared/constants'
 import { Repository } from 'typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import type { CreateTwinksService } from '../types'
-import type { GetTwinksResponseDto } from '../dtos.response'
+import type {
+  CreateTwinkResponseDto,
+  GetTwinksResponseDto,
+} from '../dtos.response'
 
 @Injectable()
 export class TwinkService {
@@ -33,7 +36,7 @@ export class TwinkService {
     userId,
     mainUserName,
     twinkName,
-  }: CreateTwinksService): Promise<void> {
+  }: CreateTwinksService): Promise<CreateTwinkResponseDto> {
     const [isUserNameTwinkInWl, isUserNameTwinkInUsers] = await Promise.all([
       this.whitelistRepository.findOne({ where: { username: twinkName } }),
       this.userRepositry.findOne({ where: { username: twinkName } }),
@@ -102,5 +105,10 @@ export class TwinkService {
 
     await this.userRepositry.save([currentUser, newUserTwinkInUsers])
     await this.whitelistRepository.save(newUserTwinkInWl)
+
+    return {
+      id: newUserTwinkInUsers.id,
+      username: newUserTwinkInUsers.username,
+    }
   }
 }

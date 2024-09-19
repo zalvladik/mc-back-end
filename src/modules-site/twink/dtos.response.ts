@@ -1,5 +1,9 @@
 export class GetTwinksResponseDto {
-  username: string
-
   id: number
+  username: string
+}
+
+export class CreateTwinkResponseDto {
+  id: number
+  username: string
 }

@@ -10,7 +10,10 @@ import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
 import { TwinkService } from '../services'
 import { CreateTwinksBodyDto } from '../dtos.request'
-import type { GetTwinksResponseDto } from '../dtos.response'
+import type {
+  CreateTwinkResponseDto,
+  GetTwinksResponseDto,
+} from '../dtos.response'
 
 @Controller('twink')
 @ApiTags('twink')
@@ -30,8 +33,8 @@ export class TwinkController {
   async createTwinks(
     @Body() { twinkName }: CreateTwinksBodyDto,
     @UserDecorator() { username, id }: GetUserDto,
-  ): Promise<void> {
-    await this.twinkService.createTwinks({
+  ): Promise<CreateTwinkResponseDto> {
+    return this.twinkService.createTwinks({
       userId: id,
       mainUserName: username,
       twinkName,

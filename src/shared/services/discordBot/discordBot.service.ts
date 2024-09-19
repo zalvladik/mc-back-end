@@ -81,7 +81,7 @@ export class DiscordBotService implements OnModuleInit {
     this.client.on('guildMemberRemove', async member => {
       try {
         const user = await this.whitelistRepository.findOne({
-          where: { discordUserId: member.id },
+          where: { discordUserId: member.id, isTwink: false },
         })
 
         this.logger.log(user)
@@ -99,7 +99,15 @@ export class DiscordBotService implements OnModuleInit {
             {
               discordUserId: user.discordUserId,
             },
-            { discordUserRoles, isExistInDsServer: false },
+            { isExistInDsServer: false },
+          )
+
+          await this.whitelistRepository.update(
+            {
+              discordUserId: user.discordUserId,
+              isTwink: false,
+            },
+            { discordUserRoles },
           )
 
           await this.userRepository.update(
@@ -110,8 +118,8 @@ export class DiscordBotService implements OnModuleInit {
           try {
             const embed = new EmbedBuilder()
               .setDescription(
-                `> Вас **видалено** з **whitelist**! :x:
-Щоб знову зайти на сервер, вам потрібно вернутись на діскрод сервер UK-land!`,
+                `> Щоб знову зайти на майкнрафт сервер,
+вам потрібно вернутись на діскрод сервер UK-land!`,
               )
               .setColor('#FF0000')
 
@@ -159,7 +167,7 @@ export class DiscordBotService implements OnModuleInit {
             {
               discordUserId: member.id,
             },
-            { isExistInDsServer: false },
+            { isExistInDsServer: true },
           )
 
           const { guild } = member

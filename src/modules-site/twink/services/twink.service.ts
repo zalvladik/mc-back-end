@@ -11,6 +11,7 @@ import { TWINKS_COUNT, TWINKS_PRICE } from 'src/shared/constants'
 import { Repository } from 'typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import type { CreateTwinksService } from '../types'
+import type { GetTwinksResponseDto } from '../dtos.response'
 
 @Injectable()
 export class TwinkService {
@@ -21,8 +22,11 @@ export class TwinkService {
     private readonly whitelistRepository: Repository<Whitelist>,
   ) {}
 
-  async getTwinks(mainUserName: string): Promise<any> {
-    return this.userRepositry.find({ where: { mainUserName } })
+  async getTwinks(mainUserName: string): Promise<GetTwinksResponseDto[]> {
+    return this.userRepositry.find({
+      where: { mainUserName, isTwink: true },
+      select: ['username', 'id'],
+    })
   }
 
   async createTwinks({

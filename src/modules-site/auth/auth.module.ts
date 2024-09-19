@@ -6,12 +6,13 @@ import { User } from 'src/entities/user.entity'
 import { TokenService } from 'src/shared/services/token/token.service'
 
 import { SocketModule } from 'src/shared/services/socket/socket.module'
+import { McWhitelist } from 'src/entities/mc-whitelist.entity'
 import { AuthController } from './controllers'
 
 import { AuthService } from './services'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), SocketModule],
+  imports: [TypeOrmModule.forFeature([User, McWhitelist]), SocketModule],
   controllers: [AuthController],
   providers: [AuthService, JwtService, TokenService],
   exports: [AuthService, JwtService, TokenService],

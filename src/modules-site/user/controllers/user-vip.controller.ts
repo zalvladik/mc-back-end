@@ -6,7 +6,6 @@ import { AuthGuard } from 'src/shared/guards/auth.guard'
 import { ApiTags } from '@nestjs/swagger'
 import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
-import { AuthService } from 'src/modules-site/auth/services'
 import { UserVipService } from '../services'
 import { ByeVipBodyDto, GetUserDto, UpgradeVipBodyDto } from '../dtos-request'
 
@@ -15,10 +14,7 @@ import { ByeVipBodyDto, GetUserDto, UpgradeVipBodyDto } from '../dtos-request'
 @UseGuards(AuthGuard, RolesGuard)
 @Roles(RoleEnum.USER)
 export class UserVipController {
-  constructor(
-    private readonly userVipService: UserVipService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly userVipService: UserVipService) {}
 
   @Post()
   async byeVip(

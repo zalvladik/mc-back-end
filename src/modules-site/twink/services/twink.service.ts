@@ -87,6 +87,7 @@ export class TwinkService {
     const newUserTwinkInUsers = this.userRepositry.create({
       ...twinkData,
       realname: twinkName.toLowerCase(),
+      password: currentUser.password,
       ip: currentUser.ip,
       lastlogin: currentUser.lastlogin,
       x: currentUser.x,

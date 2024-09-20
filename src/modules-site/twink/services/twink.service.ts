@@ -26,7 +26,7 @@ export class TwinkService {
   ) {}
 
   async getTwinks(mainUserName: string): Promise<GetTwinksResponseDto[]> {
-    return this.userRepositry.find({
+    return this.whitelistRepository.find({
       where: { mainUserName, isTwink: true },
       select: ['username', 'id'],
     })
@@ -42,8 +42,47 @@ export class TwinkService {
       this.userRepositry.findOne({ where: { username: twinkName } }),
     ])
 
-    if (isUserNameTwinkInWl || isUserNameTwinkInUsers) {
+    if (isUserNameTwinkInWl) {
       throw new ConflictException('Цей нікНейм зайнятий')
+    }
+
+    if (isUserNameTwinkInUsers && !isUserNameTwinkInWl) {
+      const currentUserInWl = await this.whitelistRepository.findOne({
+        where: { username: mainUserName },
+      })
+
+      const newUserTwinkInWl = this.whitelistRepository.create({
+        username: twinkName,
+        isTwink: true,
+        mainUserName,
+        discordUserId: currentUserInWl.discordUserId,
+        discordUserRoles: currentUserInWl.discordUserRoles,
+      })
+
+      await this.userRepositry.update(
+        { username: twinkName },
+        {
+          password: isUserNameTwinkInUsers.password,
+          realname: twinkName.toLowerCase(),
+          ip: isUserNameTwinkInUsers.ip,
+          lastlogin: isUserNameTwinkInUsers.lastlogin,
+          x: isUserNameTwinkInUsers.x,
+          y: isUserNameTwinkInUsers.y,
+          z: isUserNameTwinkInUsers.z,
+          world: isUserNameTwinkInUsers.world,
+          regdate: new Date().getMilliseconds(),
+          regip: isUserNameTwinkInUsers.regip,
+          mainUserName,
+          isTwink: true,
+        },
+      )
+
+      await this.whitelistRepository.save(newUserTwinkInWl)
+
+      return {
+        id: newUserTwinkInWl.id,
+        username: newUserTwinkInWl.username,
+      }
     }
 
     const countTwinks = await this.whitelistRepository.count({
@@ -108,8 +147,8 @@ export class TwinkService {
     await this.whitelistRepository.save(newUserTwinkInWl)
 
     return {
-      id: newUserTwinkInUsers.id,
-      username: newUserTwinkInUsers.username,
+      id: newUserTwinkInWl.id,
+      username: newUserTwinkInWl.username,
     }
   }
 }

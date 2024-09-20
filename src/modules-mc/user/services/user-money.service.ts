@@ -29,6 +29,14 @@ export class UserMoneyService {
   ) {}
 
   async getMoneyByUserName(username: string): Promise<{ money: number }> {
+    const user = await this.userRepository.findOne({
+      where: { username, isTwink: true },
+    })
+
+    if (user) {
+      throw new BadRequestException('З твіна /trade неможливий')
+    }
+
     return this.userRepository.findOne({
       where: { username },
       select: ['money'],

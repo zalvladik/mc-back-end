@@ -48,6 +48,10 @@ export class UserItemsService {
 
     if (!user) throw new NotFoundException('Гравця не знайдено')
 
+    if (user.isTwink) {
+      throw new BadRequestException('З твіна /trade неможливий')
+    }
+
     const itemCount = await this.itemRepository.count({
       where: { user, isTaken: false },
     })

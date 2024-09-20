@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
@@ -35,10 +40,14 @@ export class UserMoneyService {
     username: string,
     moneyPostStorageId: string,
   ): Promise<AddMoneyToUserResponseDto> {
-    const { money: moneyBefore } = await this.userRepository.findOne({
+    const { money: moneyBefore, isTwink } = await this.userRepository.findOne({
       where: { username },
-      select: ['money'],
+      select: ['money', 'isTwink'],
     })
+
+    if (isTwink) {
+      throw new BadRequestException('З твіна /trade неможливий')
+    }
 
     this.cacheService.set(moneyPostStorageId, {
       username,
@@ -67,10 +76,14 @@ export class UserMoneyService {
     username: string,
     cacheId: string,
   ): Promise<GetMoneyToUserResponseDto> {
-    const { money: moneyBefore } = await this.userRepository.findOne({
+    const { money: moneyBefore, isTwink } = await this.userRepository.findOne({
       where: { username },
-      select: ['money'],
+      select: ['money', 'isTwink'],
     })
+
+    if (isTwink) {
+      throw new BadRequestException('З твіна /trade неможливий')
+    }
 
     if (moneyBefore < moneyToRemove) {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)

@@ -50,6 +50,10 @@ export class UserShulkersService {
 
     if (!user) throw new NotFoundException('Гравця не знайдено')
 
+    if (user.isTwink) {
+      throw new BadRequestException('З твіна /trade неможливий')
+    }
+
     const shulkerCount = await this.shulkerRepository.count({
       where: { user, isTaken: false },
     })
@@ -156,6 +160,14 @@ export class UserShulkersService {
     username: string,
     shulkerId: number,
   ): Promise<PullShulkerResponseDto> {
+    const user = await this.userRepository.findOne({
+      where: { username, isTwink: true },
+    })
+
+    if (user) {
+      throw new BadRequestException('З твіна /trade неможливий')
+    }
+
     const userShulker = await this.shulkerRepository.findOne({
       where: { username, id: shulkerId, isTaken: false },
       relations: ['items'],

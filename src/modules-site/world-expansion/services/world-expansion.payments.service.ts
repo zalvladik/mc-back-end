@@ -5,6 +5,7 @@ import { WorldExpansion } from 'src/entities/world-expansion.entity'
 import { Repository } from 'typeorm'
 import { WorldExpansionPayments } from 'src/entities/world-expansion-payments.entity'
 import { User } from 'src/entities/user.entity'
+import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import type { CreateWorldsExpansionPeymantsProps } from '../types'
 import type { GetTopWorldsExpansionPeymentsQueryDto } from '../dtos.request'
 
@@ -17,6 +18,7 @@ export class WorldExpansionPaymentsService {
     private readonly worldExpansionPaymentsRepository: Repository<WorldExpansionPayments>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly mcFetchingService: McFetchingService,
   ) {}
 
   async getTopWorldsExpansionPeyments({
@@ -79,6 +81,11 @@ export class WorldExpansionPaymentsService {
       user,
       createdAt: new Date(),
       worldExpansion: lastExpansion,
+    })
+
+    await this.mcFetchingService.worldExansion({
+      lvl: lastExpansion.lvl,
+      worldType: lastExpansion.worldType,
     })
 
     await this.userRepository.save(user)

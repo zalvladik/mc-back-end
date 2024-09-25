@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common'
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { WorldExpansion } from 'src/entities/world-expansion.entity'
 
@@ -83,10 +87,14 @@ export class WorldExpansionPaymentsService {
       worldExpansion: lastExpansion,
     })
 
-    await this.mcFetchingService.worldExansion({
-      lvl: lastExpansion.lvl,
-      worldType: lastExpansion.worldType,
-    })
+    try {
+      await this.mcFetchingService.worldExansion({
+        lvl: lastExpansion.lvl,
+        worldType: lastExpansion.worldType,
+      })
+    } catch {
+      throw new InternalServerErrorException('Проблеми з розширенням світу')
+    }
 
     await this.userRepository.save(user)
     await this.worldExpansionRepository.save(lastExpansion)

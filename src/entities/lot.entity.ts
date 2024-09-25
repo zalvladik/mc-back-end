@@ -3,7 +3,7 @@ import {
   Entity,
   Index,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
@@ -23,13 +23,13 @@ export class Lot {
   @Column({ type: 'varchar', length: 255 })
   username: string
 
-  @OneToOne(() => Item, item => item.lot, {
+  @ManyToOne(() => Item, item => item.lot, {
     nullable: true,
   })
   @JoinColumn({ name: 'item_id' })
   item: Item
 
-  @OneToOne(() => Shulker, shulker => shulker.lot, {
+  @ManyToOne(() => Shulker, shulker => shulker.lot, {
     nullable: true,
   })
   @JoinColumn({ name: 'shulker_id' })

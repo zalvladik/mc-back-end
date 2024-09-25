@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
@@ -44,7 +45,7 @@ export class Shulker {
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @ManyToOne(() => Lot, lot => lot.shulker, {
+  @OneToOne(() => Lot, lot => lot.shulker, {
     nullable: true,
   })
   @JoinColumn({ name: 'lot_id' })

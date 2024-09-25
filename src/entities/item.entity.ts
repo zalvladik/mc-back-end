@@ -73,7 +73,7 @@ export class Item {
   @JoinColumn({ name: 'item_ticket_id' })
   itemTicket: ItemTicket
 
-  @OneToOne(() => Lot, lot => lot.item, {
+  @ManyToOne(() => Lot, lot => lot.item, {
     nullable: true,
   })
   @JoinColumn({ name: 'lot_id' })

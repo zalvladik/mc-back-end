@@ -4,7 +4,6 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
@@ -74,7 +73,7 @@ export class Item {
   @JoinColumn({ name: 'item_ticket_id' })
   itemTicket: ItemTicket
 
-  @OneToMany(() => Lot, lot => lot.item, {
+  @OneToOne(() => Lot, lot => lot.item, {
     nullable: true,
   })
   @JoinColumn({ name: 'lot_id' })

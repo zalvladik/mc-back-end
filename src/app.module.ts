@@ -14,6 +14,7 @@ import { PpModule } from './modules-site/pp/pp.module'
 import { DiscordBotModule } from './shared/services/discordBot/discordBot.module'
 import { WlEndModule } from './modules-site/wl-end/wl-end.module'
 import { TwinkModule } from './modules-site/twink/twink.module'
+import { WorldExpansionModule } from './modules-site/world-expansion/world-expansion.module'
 
 const siteModule = [
   AuthModule,
@@ -25,6 +26,7 @@ const siteModule = [
   DiscordBotModule,
   PpModule,
   TwinkModule,
+  WorldExpansionModule,
 ]
 
 const mcModule = [McItemTicketModule, McUserModule, McUserModule]

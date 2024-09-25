@@ -2,6 +2,7 @@ import type { TransformFnParams } from 'class-transformer'
 import { Transform, Type } from 'class-transformer'
 import {
   IsBoolean,
+  IsEnum,
   IsInt,
   IsNotEmpty,
   IsNumber,
@@ -9,7 +10,7 @@ import {
   IsString,
   Min,
 } from 'class-validator'
-import { EnchantsTypesEnum } from 'src/shared/enums'
+import { CategoryEnum, EnchantsTypesEnum } from 'src/shared/enums'
 
 export class DeleteLotQuaryDto {
   @IsNotEmpty()
@@ -108,7 +109,10 @@ export class BuyLotShulkerBodyDto {
 export class GetLotsQuaryDto extends LotFilterParams {
   @IsOptional()
   @IsString()
-  category?: string
+  @IsEnum(CategoryEnum, {
+    message: 'category must be a valid CategoryEnum value',
+  })
+  category?: CategoryEnum
 
   @IsOptional()
   @IsString()
@@ -126,5 +130,8 @@ export class GetEnchantitemsLotsQuaryDto extends LotFilterParams {
 
   @IsNotEmpty()
   @IsString()
+  @IsEnum(EnchantsTypesEnum, {
+    message: 'enchantType must be a valid EnchantsTypesEnum value',
+  })
   enchantType: EnchantsTypesEnum
 }

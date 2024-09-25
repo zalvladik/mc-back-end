@@ -27,6 +27,12 @@ export enum CategoryEnum {
   ENCHANTED_BOOK = 'enchanted_book',
 }
 
+export enum WorldEnum {
+  WORLD = 'world',
+  WORLD_NETHER = 'world_nether',
+  WORLD_END = 'world_end',
+}
+
 export enum EnchantsTypesEnum {
   HELMET = 'helmet',
   CHESTPLATE = 'chestplate',

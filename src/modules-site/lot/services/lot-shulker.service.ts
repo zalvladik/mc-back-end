@@ -56,7 +56,7 @@ export class LotShulkerService {
 
     if (!shulkerForLot) throw new NotFoundException('Шалкер не знайдено')
 
-    if (shulkerForLot.lot) {
+    if (shulkerForLot.lot && shulkerForLot.lot.isSold) {
       throw new ConflictException('Для цього шалкера уже виставлений лот')
     }
 

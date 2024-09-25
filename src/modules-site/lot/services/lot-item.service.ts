@@ -56,7 +56,7 @@ export class LotItemService {
 
     if (!itemForLot) throw new NotFoundException('Предмет не знайдено')
 
-    if (itemForLot.lot) {
+    if (itemForLot.lot && itemForLot.lot.isSold) {
       throw new ConflictException('Для цього предмет уже виставлений лот')
     }
 

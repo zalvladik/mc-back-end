@@ -46,7 +46,6 @@ export class Shulker {
   user: User
 
   @OneToOne(() => Lot, lot => lot.shulker, {
-    onDelete: 'SET NULL',
     nullable: true,
   })
   @JoinColumn({ name: 'lot_id' })

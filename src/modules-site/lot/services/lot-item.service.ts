@@ -124,12 +124,16 @@ export class LotItemService {
       )
     }
 
-    const sellerUser = lotMetaData.item.user
+    const lotItem = lotMetaData.item
+
+    lotItem.lot = null
+
+    const sellerUser = lotItem.user
 
     buyerUser.money -= lotMetaData.price
     sellerUser.money += lotMetaData.price
 
-    const updatedItem = { ...lotMetaData.item, user: buyerUser }
+    const updatedItem = { ...lotItem, user: buyerUser }
 
     await this.userRepository.save(buyerUser)
     await this.userRepository.save(sellerUser)

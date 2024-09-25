@@ -10,6 +10,8 @@ import { Repository } from 'typeorm'
 import { Lot } from 'src/entities/lot.entity'
 
 import { getEnchantMetaType } from 'src/shared/helpers/getEnchantMetaType'
+import { Item } from 'src/entities/item.entity'
+import { Shulker } from 'src/entities/shulker.entity'
 import type {
   DeleteUserLotResponseDto,
   GetLotsResponseDto,
@@ -45,6 +47,10 @@ export class LotService {
   constructor(
     @InjectRepository(Lot)
     private readonly lotRepository: Repository<Lot>,
+    @InjectRepository(Item)
+    private readonly itemRepository: Repository<Item>,
+    @InjectRepository(Shulker)
+    private readonly shulkerRepository: Repository<Shulker>,
   ) {}
 
   async getEnchantItems({
@@ -292,10 +298,24 @@ export class LotService {
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {
-    const deletedLot = await this.lotRepository.delete({ id, isSold: false })
+    const lotItem = await this.lotRepository.findOne({
+      where: { id },
+      relations: ['shulker', 'item'],
+    })
 
-    if (!deletedLot.affected)
+    if (!lotItem) {
       throw new NotFoundException('Lot not found or already sold')
+    }
+
+    if (lotItem.shulker) {
+      await this.shulkerRepository.update(lotItem.shulker.id, { lot: null })
+    }
+
+    if (lotItem.item) {
+      await this.itemRepository.update(lotItem.item.id, { lot: null })
+    }
+
+    await this.lotRepository.delete({ id, isSold: false })
 
     return { id }
   }

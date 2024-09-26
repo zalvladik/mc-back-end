@@ -53,7 +53,7 @@ export class DiscordBotService implements OnModuleInit {
 
     if (userByDiscordUserId) {
       throw new ConflictException(
-        `Вас уже добавленно в whitelist, ваш нікнейм: **${userByDiscordUserId.username}**`,
+        `Вас уже добавлено в whitelist, ваш нікнейм: **${userByDiscordUserId.username}**`,
       )
     }
 
@@ -118,8 +118,8 @@ export class DiscordBotService implements OnModuleInit {
           try {
             const embed = new EmbedBuilder()
               .setDescription(
-                `> Щоб знову зайти на майкнрафт сервер,
-вам потрібно вернутись на діскрод сервер UK-land!`,
+                `> Щоб знову зайти на майнкрафт сервер,
+вам потрібно вернутись на діскорд сервер Vinland!`,
               )
               .setColor('#FF0000')
 
@@ -148,12 +148,12 @@ export class DiscordBotService implements OnModuleInit {
                 `> Вітаю, щоб попасти на сервер, просто напишіть в цей канал свій нікНейм: https://discord.com/channels/991308923581779988/1284457173723775063
 
 Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
-Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
+Функції функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
                 
 >>> :globe_with_meridians: **Версія**: 1.21
-:link: **IP**: uk-land.space
-:desktop: **Сайт**: https://uk-land-site.vercel.app/
-:map: **Карта**: https://map.uk-land.space/`,
+:link: **IP**: vinlad.space
+:desktop: **Сайт**: https://vinland-site.vercel.app/
+:map: **Карта**: https://map.vinlad.space/`,
               )
               .setColor('#097FED')
             await member.send({ embeds: [embed] })
@@ -198,12 +198,12 @@ export class DiscordBotService implements OnModuleInit {
                 `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
 
 Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
-Вам варто дізнатись про функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
+Функції функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
                   
 >>> :globe_with_meridians: **Версія**: 1.21
-:link: **IP**: uk-land.space
-:desktop: **Сайт**: https://uk-land-site.vercel.app/
-:map: **Карта**: https://map.uk-land.space/`,
+:link: **IP**: vinland.space
+:desktop: **Сайт**: https://vinland-site.vercel.app/
+:map: **Карта**: https://map.vinland.space/`,
               )
               .setColor('#00FF00')
             await member.send({ embeds: [embed] })
@@ -213,7 +213,7 @@ export class DiscordBotService implements OnModuleInit {
         }
       } catch (error) {
         this.logger.error(
-          `Ошибка при восстановлении пользователя в whitelist: ${error.message}`,
+          `Помилка при відновленні гравця в whitelist: ${error.message}`,
         )
       }
     })
@@ -338,7 +338,7 @@ export class DiscordBotService implements OnModuleInit {
           try {
             const embed = new EmbedBuilder()
               .setDescription(
-                `Попасти в whitelist можна тільки, якщо ваш ДС аккаунт має більше 3 місяців.`,
+                `Попасти в whitelist можна тільки якщо ваш ДС аккаунт був створений 3 місяців назад.`,
               )
               .setColor('#FF0000')
 

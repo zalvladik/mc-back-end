@@ -12,19 +12,9 @@ export class WorldExpansionService {
     private readonly worldExpansionRepository: Repository<WorldExpansion>,
   ) {}
 
-  async getWorldsExpansion(
-    worldType: WorldEnum,
-    lvl?: number,
-  ): Promise<WorldExpansion> {
-    if (!lvl) {
-      this.worldExpansionRepository.findOne({
-        where: { worldType },
-        order: { createdAt: 'DESC' },
-      })
-    }
-
-    return this.worldExpansionRepository.findOne({
-      where: { worldType, lvl },
+  async getWorldsExpansion(worldType: WorldEnum): Promise<WorldExpansion[]> {
+    return this.worldExpansionRepository.find({
+      where: { worldType },
     })
   }
 

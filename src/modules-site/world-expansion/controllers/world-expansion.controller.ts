@@ -24,13 +24,13 @@ export class WorldExpansionController {
     status: 200,
   })
   async getWorldsExpansion(
-    @Query() { worldType, lvl }: GetWorldsExpansionQueryDto,
-  ): Promise<WorldExpansion> {
-    return this.worldExpansionService.getWorldsExpansion(worldType, lvl)
+    @Query() { worldType }: GetWorldsExpansionQueryDto,
+  ): Promise<WorldExpansion[]> {
+    return this.worldExpansionService.getWorldsExpansion(worldType)
   }
 
   @Post()
-  // @Roles(RoleEnum.ADMIN)
+  @Roles(RoleEnum.ADMIN)
   @ApiResponse({
     status: 201,
   })

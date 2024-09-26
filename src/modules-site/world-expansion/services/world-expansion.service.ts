@@ -37,17 +37,19 @@ export class WorldExpansionService {
       order: { createdAt: 'DESC' },
     })
 
-    if (!lastExpansion.completedAt || !lastExpansion.isCompleted) {
-      throw new ConflictException(
-        'Потрібно завершити попереднє розширення світу',
-      )
+    if (lastExpansion) {
+      if (!lastExpansion?.completedAt || !lastExpansion?.isCompleted) {
+        throw new ConflictException(
+          'Потрібно завершити попереднє розширення світу',
+        )
+      }
     }
 
     const newWorldExpansion = this.worldExpansionRepository.create({
       worldType,
       cost,
       createdAt: new Date(),
-      lvl: lastExpansion.lvl + 1,
+      lvl: lastExpansion?.lvl ?? 0 + 1,
     })
 
     await this.worldExpansionRepository.save(newWorldExpansion)

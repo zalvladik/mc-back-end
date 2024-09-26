@@ -30,7 +30,7 @@ export class WorldExpansionController {
   }
 
   @Post()
-  @Roles(RoleEnum.ADMIN)
+  // @Roles(RoleEnum.ADMIN)
   @ApiResponse({
     status: 201,
   })

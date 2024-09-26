@@ -12,10 +12,12 @@ export class WorldExpansionService {
     private readonly worldExpansionRepository: Repository<WorldExpansion>,
   ) {}
 
-  async getWorldsExpansion(worldType: WorldEnum): Promise<WorldExpansion> {
+  async getWorldsExpansion(
+    worldType: WorldEnum,
+    lvl: number,
+  ): Promise<WorldExpansion> {
     return this.worldExpansionRepository.findOne({
-      where: { worldType },
-      order: { createdAt: 'DESC' },
+      where: { worldType, lvl },
     })
   }
 

@@ -30,7 +30,7 @@ export enum CategoryEnum {
 export enum WorldEnum {
   WORLD = 'world',
   WORLD_NETHER = 'world_nether',
-  WORLD_END = 'world_end',
+  WORLD_THE_END = 'world_the_end',
 }
 
 export enum EnchantsTypesEnum {

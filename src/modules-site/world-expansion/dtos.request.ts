@@ -31,6 +31,12 @@ export class GetWorldsExpansionQueryDto {
     message: 'worldType must be a valid WorldEnum value',
   })
   worldType: WorldEnum
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  lvl?: number
 }
 
 export class CreateWorkldExpansionBodyDto {

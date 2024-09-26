@@ -24,9 +24,9 @@ export class WorldExpansionController {
     status: 200,
   })
   async getWorldsExpansion(
-    @Query() { worldType }: GetWorldsExpansionQueryDto,
+    @Query() { worldType, lvl }: GetWorldsExpansionQueryDto,
   ): Promise<WorldExpansion> {
-    return this.worldExpansionService.getWorldsExpansion(worldType)
+    return this.worldExpansionService.getWorldsExpansion(worldType, lvl)
   }
 
   @Post()

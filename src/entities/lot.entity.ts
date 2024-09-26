@@ -23,13 +23,13 @@ export class Lot {
   @Column({ type: 'varchar', length: 255 })
   username: string
 
-  @ManyToOne(() => Item, item => item.lot, {
+  @ManyToOne(() => Item, {
     nullable: true,
   })
   @JoinColumn({ name: 'item_id' })
   item: Item
 
-  @ManyToOne(() => Shulker, shulker => shulker.lot, {
+  @ManyToOne(() => Shulker, {
     nullable: true,
   })
   @JoinColumn({ name: 'shulker_id' })

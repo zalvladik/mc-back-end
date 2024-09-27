@@ -152,7 +152,7 @@ export class DiscordBotService implements OnModuleInit {
                 
 >>> :globe_with_meridians: **Версія**: 1.21
 :link: **IP**: vinlad.space
-:desktop: **Сайт**: https://vinland-site.vercel.app/
+:desktop: **Сайт**: https://vinland-trade.vercel.app/
 :map: **Карта**: https://map.vinlad.space/`,
               )
               .setColor('#097FED')
@@ -202,7 +202,7 @@ export class DiscordBotService implements OnModuleInit {
                   
 >>> :globe_with_meridians: **Версія**: 1.21
 :link: **IP**: vinland.space
-:desktop: **Сайт**: https://vinland-site.vercel.app/
+:desktop: **Сайт**: https://vinland-trade.vercel.app/
 :map: **Карта**: https://map.vinland.space/`,
               )
               .setColor('#00FF00')

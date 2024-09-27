@@ -1,6 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-import { IsNotEmpty, IsObject, IsString, IsNumber } from 'class-validator'
+import {
+  IsNotEmpty,
+  IsString,
+  IsNumber,
+  ArrayNotEmpty,
+  IsArray,
+} from 'class-validator'
 
 import type { TransformFnParams } from 'class-transformer'
 import { Transform } from 'class-transformer'
@@ -203,9 +209,10 @@ export class PutAdvancementsBodyDto {
   @ApiProperty({ example: 'France' })
   username: string
 
-  @IsNotEmpty()
-  @IsObject()
-  data: object
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsString({ each: true })
+  data: string[]
 }
 
 export class PostUserUuidBodyDto {

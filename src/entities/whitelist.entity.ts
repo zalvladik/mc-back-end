@@ -23,6 +23,9 @@ export class Whitelist {
   @Column({ type: 'boolean', default: true, nullable: false })
   isExistInDsServer: boolean
 
+  @Column({ type: 'boolean', default: true, nullable: false })
+  isNewPlayer: boolean
+
   @Column({
     type: 'varchar',
     length: 255,

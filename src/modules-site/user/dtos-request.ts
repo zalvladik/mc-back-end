@@ -76,3 +76,10 @@ export class GetUserDto {
   @IsNumber()
   advancements: number
 }
+
+export class GetAdvancementsParamDto {
+  @IsNotEmpty()
+  @Transform(({ value }: TransformFnParams) => Number(value))
+  @IsNumber()
+  userId: number
+}

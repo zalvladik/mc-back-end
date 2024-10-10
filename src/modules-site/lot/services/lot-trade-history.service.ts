@@ -30,7 +30,6 @@ export class LotTradeHistoryService {
 
   private selectShulker = [
     'shulker.id',
-    'shulker.username',
     'shulker.categories',
     'shulker.type',
     'shulker.display_name',

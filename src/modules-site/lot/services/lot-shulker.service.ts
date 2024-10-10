@@ -106,7 +106,7 @@ export class LotShulkerService {
       where: { id: buyerUserId },
     })
 
-    if (lotMetaData.price > buyerUser.money) {
+    if (Number(lotMetaData.price) > Number(buyerUser.money)) {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
     }
 
@@ -128,8 +128,9 @@ export class LotShulkerService {
 
     const sellerUser = lotShulker.user
 
-    buyerUser.money -= lotMetaData.price
-    sellerUser.money += lotMetaData.price
+    buyerUser.money = +buyerUser.money - +lotMetaData.price
+
+    sellerUser.money = +sellerUser.money + +lotMetaData.price
 
     const updatedShulker = {
       ...lotShulker,

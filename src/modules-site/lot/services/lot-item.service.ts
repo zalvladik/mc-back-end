@@ -110,7 +110,7 @@ export class LotItemService {
       throw new NotFoundException('Покупця з таким ніком не існує')
     }
 
-    if (lotMetaData.price > buyerUser.money) {
+    if (Number(lotMetaData.price) > Number(buyerUser.money)) {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
     }
 
@@ -132,8 +132,9 @@ export class LotItemService {
 
     const sellerUser = lotItem.user
 
-    buyerUser.money -= lotMetaData.price
-    sellerUser.money += lotMetaData.price
+    buyerUser.money = +buyerUser.money - +lotMetaData.price
+
+    sellerUser.money = +sellerUser.money + +lotMetaData.price
 
     const updatedItem = { ...lotItem, user: buyerUser }
 

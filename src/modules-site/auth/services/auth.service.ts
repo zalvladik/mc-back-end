@@ -92,7 +92,7 @@ export class AuthService {
 
     if (!userMeta) throw new NotFoundException(`Гравця ${username} не знайдено`)
 
-    const tokens = this.tokenService.generateTokens(userMeta)
+    const tokens = this.tokenService.generateTokens({ ...userMeta })
 
     await this.tokenService.refresh(id, tokens.refreshToken)
 

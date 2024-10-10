@@ -14,7 +14,7 @@ export class ItemTicket {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne(() => User, user => user.itemTickets)
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User
 

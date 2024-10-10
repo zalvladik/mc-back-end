@@ -16,9 +16,6 @@ export class Advancements {
   @Column('simple-array', { nullable: true })
   advancements: string[]
 
-  @Column({ length: 255, nullable: false })
-  username: string
-
   @Column({ type: 'int', nullable: false, default: 0 })
   rating: number
 

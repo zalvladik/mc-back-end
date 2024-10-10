@@ -1,72 +1,48 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
 
 import { Advancements } from 'src/entities/advancements.entity'
+import { User } from 'src/entities/user.entity'
 
 @Injectable()
 export class UserAdvancementsService {
   constructor(
     @InjectRepository(Advancements)
     private readonly advancementsRepository: Repository<Advancements>,
+
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async getAdvancements(): Promise<Advancements[]> {
     return this.advancementsRepository.find({
-      select: ['username', 'rating', 'id'],
+      select: ['rating', 'id'],
     })
   }
 
-  async getUserAdvancementsByUserName(username: string): Promise<Advancements> {
-    const userAdvancements = await this.advancementsRepository.findOne({
-      where: { username },
-    })
-
-    if (!userAdvancements)
-      throw new NotFoundException(`Гравця ${username} не знайдено`)
-
-    return userAdvancements
-  }
-
-  async putAdvancements(username: string, data: object): Promise<void> {
-    const userAdvancements = Object.entries(data).reduce(
-      (result, [key, { done }]) => {
-        if (!done) return result
-
-        if (
-          key.includes('minecraft:story') ||
-          key.includes('minecraft:nether') ||
-          key.includes('minecraft:end') ||
-          key.includes('minecraft:adventure') ||
-          key.includes('minecraft:husbandry')
-        ) {
-          if (key.includes('root')) {
-            result.push(key.split(':')[1].replace('/', ''))
-
-            return result
-          }
-
-          result.push(key.split('/')[1].split('_').join(''))
-
-          return result
-        }
-
-        return result
-      },
-      [],
-    )
-
+  async getUserAdvancementsByUserId(id: number): Promise<Advancements> {
     const userAdvancement = await this.advancementsRepository.findOne({
-      where: { username },
+      where: { user: { id } },
     })
 
-    userAdvancement.advancements = userAdvancements
-    userAdvancement.rating = userAdvancements.length
+    if (!userAdvancement) {
+      const user = await this.userRepository.findOne({
+        where: { id },
+      })
 
-    await this.advancementsRepository.update(
-      userAdvancement.id,
-      userAdvancement,
-    )
+      const newUserAdvancement = this.advancementsRepository.create({
+        user,
+        advancements: [],
+        rating: 0,
+      })
+
+      await this.advancementsRepository.save(newUserAdvancement)
+
+      return newUserAdvancement
+    }
+
+    return userAdvancement
   }
 }

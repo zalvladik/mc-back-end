@@ -21,9 +21,6 @@ export class AuthUser {
 
   @ApiProperty({ example: '2024-07-26 18:19:20' })
   vipExpirationDate: Date | null
-
-  @ApiProperty({ example: 5 })
-  advancements: number
 }
 
 export class AuthUserResponseDto {

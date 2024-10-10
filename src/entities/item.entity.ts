@@ -60,7 +60,7 @@ export class Item {
   @Column({ type: 'text', nullable: false })
   serialized: string
 
-  @ManyToOne(() => User, user => user.items, { nullable: true })
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'user_id' })
   user: User
 

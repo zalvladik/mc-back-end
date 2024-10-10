@@ -76,9 +76,3 @@ export class GetUserDto {
   @IsNumber()
   advancements: number
 }
-
-export class GetAdvancementsParamDto {
-  @IsNotEmpty()
-  @IsString()
-  username: string
-}

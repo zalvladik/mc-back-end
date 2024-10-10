@@ -29,7 +29,6 @@ export class AuthService {
   ): Promise<AuthUserResponseDto> {
     const userMeta = await this.userRepository.findOne({
       where: { username, isTwink: false },
-      relations: ['advancements'],
       select: [
         'id',
         'username',
@@ -61,16 +60,11 @@ export class AuthService {
       )
     }
 
-    const user = {
-      ...rest,
-      advancements: rest.advancements.id,
-    }
+    const tokens = this.tokenService.generateTokens(rest)
 
-    const tokens = this.tokenService.generateTokens(user)
+    await this.tokenService.create(rest.id, tokens.refreshToken)
 
-    await this.tokenService.create(user.id, tokens.refreshToken)
-
-    return { ...tokens, user }
+    return { ...tokens, user: rest }
   }
 
   logout(userId: number): void {
@@ -93,22 +87,16 @@ export class AuthService {
 
     const userMeta = await this.userRepository.findOne({
       where: { username, isTwink: false },
-      relations: ['advancements'],
       select: ['id', 'username', 'role', 'money', 'vip', 'vipExpirationDate'],
     })
 
     if (!userMeta) throw new NotFoundException(`Гравця ${username} не знайдено`)
 
-    const user = {
-      ...userMeta,
-      advancements: userMeta.advancements.id,
-    }
-
-    const tokens = this.tokenService.generateTokens(user)
+    const tokens = this.tokenService.generateTokens(userMeta)
 
     await this.tokenService.refresh(id, tokens.refreshToken)
 
-    return { ...tokens, user }
+    return { ...tokens, user: userMeta }
   }
 
   async getByRefreshToken(id: number, refreshToken: string): Promise<any> {

@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, UseGuards } from '@nestjs/common'
+import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 
 import type { Advancements } from 'src/entities/advancements.entity'
@@ -7,9 +7,10 @@ import { AuthGuard } from 'src/shared/guards/auth.guard'
 import { RolesGuard } from 'src/shared/guards/roles.guard'
 import { RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
+import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { UserAdvancementsService } from '../services'
 
-import { GetAdvancementsParamDto } from '../dtos-request'
+import { GetUserDto } from '../dtos-request'
 
 @Controller('user/advancements')
 @ApiTags('user/advancements')
@@ -26,11 +27,11 @@ export class UserAdvancementsController {
     return this.userAdvancementsService.getAdvancements()
   }
 
-  @Get(':username')
+  @Get()
   @HttpCode(200)
   async getUserAdvancementsById(
-    @Param() { username }: GetAdvancementsParamDto,
+    @UserDecorator() { id }: GetUserDto,
   ): Promise<Advancements> {
-    return this.userAdvancementsService.getUserAdvancementsByUserName(username)
+    return this.userAdvancementsService.getUserAdvancementsByUserId(id)
   }
 }

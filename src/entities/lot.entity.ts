@@ -17,7 +17,7 @@ export class Lot {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'smallint', nullable: false })
+  @Column('decimal', { precision: 10, scale: 2 })
   price: number
 
   @Column({ type: 'varchar', length: 255 })

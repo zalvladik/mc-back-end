@@ -14,13 +14,13 @@ export class TradeHistory {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne(() => User, user => user.tradeHistoriesAsSeller, {
+  @ManyToOne(() => User, {
     nullable: false,
   })
   @JoinColumn({ name: 'seller_user_id' })
   seller: User
 
-  @ManyToOne(() => User, user => user.tradeHistoriesAsBuyer, {
+  @ManyToOne(() => User, {
     nullable: false,
   })
   @JoinColumn({ name: 'buyer_user_id' })

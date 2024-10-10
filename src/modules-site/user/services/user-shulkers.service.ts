@@ -1,35 +1,26 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Shulker } from 'src/entities/shulker.entity'
-import { User } from 'src/entities/user.entity'
 import { IsNull, Repository } from 'typeorm'
 import type { GetShulkerItemsFromUserResponseDto } from '../dtos-response'
 
 @Injectable()
 export class UserShulkersService {
   constructor(
-    @InjectRepository(User)
-    private readonly userReposetory: Repository<User>,
     @InjectRepository(Shulker)
     private readonly shulkerReposetory: Repository<Shulker>,
   ) {}
 
   async getUserShulkers(id: number): Promise<Shulker[]> {
     const userShulkersWithoutLot =
-      (
-        await this.userReposetory.findOne({
-          where: { id, shulkers: { lot: IsNull(), isTaken: false } },
-          relations: ['shulkers'],
-        })
-      )?.shulkers ?? []
+      (await this.shulkerReposetory.find({
+        where: { lot: IsNull(), isTaken: false, user: { id } },
+      })) ?? []
 
     const userShulkersWithByetLot =
-      (
-        await this.userReposetory.findOne({
-          where: { id, shulkers: { lot: { isSold: true }, isTaken: false } },
-          relations: ['shulkers'],
-        })
-      )?.shulkers ?? []
+      (await this.shulkerReposetory.find({
+        where: { lot: { isSold: true }, isTaken: false, user: { id } },
+      })) ?? []
 
     return [...userShulkersWithoutLot, ...userShulkersWithByetLot]
   }

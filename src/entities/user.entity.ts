@@ -1,18 +1,6 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 import { RoleEnum, VipEnum } from 'src/shared/enums'
-import { Advancements } from './advancements.entity'
-import { ItemTicket } from './item-ticket.entity'
-import { Item } from './item.entity'
-import { Shulker } from './shulker.entity'
-import { TradeHistory } from './trade-history.entity'
 
 @Entity({ name: 'users' })
 export class User {
@@ -71,30 +59,11 @@ export class User {
   @Column({ type: 'timestamp', default: null })
   vipExpirationDate: Date | null
 
-  @Column({ type: 'smallint', nullable: false, default: 0 })
+  @Column('decimal', { precision: 10, scale: 2 })
   money: number
-
-  @OneToMany(() => Item, item => item.user)
-  items: Item[]
-
-  @OneToMany(() => ItemTicket, itemTicket => itemTicket.user)
-  itemTickets: ItemTicket[]
-
-  @OneToMany(() => Shulker, shulker => shulker.user)
-  shulkers: Shulker[]
 
   @Column({ length: 2000, nullable: true })
   refreshToken?: string
-
-  @OneToMany(() => TradeHistory, tradeHistory => tradeHistory.seller)
-  tradeHistoriesAsSeller: TradeHistory[]
-
-  @OneToMany(() => TradeHistory, tradeHistory => tradeHistory.buyer)
-  tradeHistoriesAsBuyer: TradeHistory[]
-
-  @OneToOne(() => Advancements)
-  @JoinColumn({ name: 'advancements_id' })
-  advancements: Advancements
 
   @Column({
     type: 'varchar',

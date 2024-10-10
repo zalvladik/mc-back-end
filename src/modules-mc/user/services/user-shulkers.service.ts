@@ -74,6 +74,7 @@ export class UserShulkersService {
 
           const createdNewItem = this.itemRepository.create({
             ...item,
+            user,
             display_name: item.display_name || display_name,
             categories,
           })

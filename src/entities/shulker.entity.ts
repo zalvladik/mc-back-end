@@ -41,7 +41,7 @@ export class Shulker {
   @OneToMany(() => Item, Item => Item.shulker)
   items: Item[]
 
-  @ManyToOne(() => User, user => user.shulkers, { nullable: true })
+  @ManyToOne(() => User, { nullable: true })
   @JoinColumn({ name: 'user_id' })
   user: User
 

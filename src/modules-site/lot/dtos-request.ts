@@ -23,13 +23,13 @@ export class PaginationParams {
   @IsOptional()
   @Type(() => Number)
   @IsInt()
-  @Min(1)
+  @Min(0.1)
   page?: number
 
   @IsOptional()
   @Type(() => Number)
   @IsInt()
-  @Min(1)
+  @Min(0.1)
   limit?: number
 }
 
@@ -78,7 +78,7 @@ export class CreateLotItemBodyDto {
   itemId: number
 
   @IsNotEmpty()
-  @Min(1)
+  @Min(0.1)
   @IsNumber()
   price: number
 }
@@ -89,7 +89,7 @@ export class CreateLotShulkerBodyDto {
   shulkerId: number
 
   @IsNotEmpty()
-  @Min(1)
+  @Min(0.1)
   @IsNumber()
   price: number
 }

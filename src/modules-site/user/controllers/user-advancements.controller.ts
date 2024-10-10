@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Query, UseGuards } from '@nestjs/common'
+import { Controller, Get, HttpCode, Param, UseGuards } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 
 import type { Advancements } from 'src/entities/advancements.entity'
@@ -29,7 +29,7 @@ export class UserAdvancementsController {
   @Get(':userId')
   @HttpCode(200)
   async getUserAdvancementsById(
-    @Query() { userId }: GetAdvancementsParamDto,
+    @Param() { userId }: GetAdvancementsParamDto,
   ): Promise<Advancements> {
     return this.userAdvancementsService.getUserAdvancementsByUserId(userId)
   }

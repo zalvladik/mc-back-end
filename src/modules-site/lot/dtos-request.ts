@@ -23,13 +23,13 @@ export class PaginationParams {
   @IsOptional()
   @Type(() => Number)
   @IsInt()
-  @Min(0.1)
+  @Min(1)
   page?: number
 
   @IsOptional()
   @Type(() => Number)
   @IsInt()
-  @Min(0.1)
+  @Min(1)
   limit?: number
 }
 

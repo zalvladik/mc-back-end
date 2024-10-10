@@ -25,10 +25,10 @@ export class WorldExpansion {
   @Column({ type: 'smallint', nullable: false })
   lvl: number
 
-  @Column({ type: 'smallint', nullable: false, default: 0 })
+  @Column('decimal', { precision: 10, scale: 1, nullable: false, default: 0 })
   moneyStorage: number
 
-  @Column({ type: 'smallint', nullable: false })
+  @Column('decimal', { precision: 10, scale: 1, nullable: false, default: 0 })
   cost: number
 
   @Column({ type: 'boolean', default: false, nullable: false })

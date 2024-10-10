@@ -14,7 +14,7 @@ export class WorldExpansionPayments {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'smallint', nullable: false, default: 1 })
+  @Column('decimal', { precision: 10, scale: 1, nullable: false, default: 0 })
   money: number
 
   @Column({ type: 'timestamp', nullable: false })

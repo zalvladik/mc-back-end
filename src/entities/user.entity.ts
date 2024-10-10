@@ -59,7 +59,7 @@ export class User {
   @Column({ type: 'timestamp', default: null })
   vipExpirationDate: Date | null
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 1, nullable: false, default: 0 })
   money: number
 
   @Column({ length: 2000, nullable: true })

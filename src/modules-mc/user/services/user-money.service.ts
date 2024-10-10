@@ -37,10 +37,12 @@ export class UserMoneyService {
       throw new BadRequestException('З твіна /trade неможливий')
     }
 
-    return this.userRepository.findOne({
+    const money = await this.userRepository.findOne({
       where: { username },
       select: ['money'],
     })
+
+    return { money: Math.floor(money.money) }
   }
 
   async addMoneyToUser(
@@ -93,7 +95,7 @@ export class UserMoneyService {
       throw new BadRequestException('З твіна /trade неможливий')
     }
 
-    if (moneyBefore < moneyToRemove) {
+    if (Math.floor(moneyBefore) < moneyToRemove) {
       throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
     }
 
@@ -102,7 +104,10 @@ export class UserMoneyService {
       updatedMoney: moneyToRemove,
     })
 
-    return { moneyBefore, moneyAfter: moneyBefore - moneyToRemove }
+    return {
+      moneyBefore: Math.floor(moneyBefore),
+      moneyAfter: Number(Math.floor(moneyBefore)) - Number(moneyToRemove),
+    }
   }
 
   async removeMoneyFromUserConfirm(moneyStorageId: string): Promise<void> {

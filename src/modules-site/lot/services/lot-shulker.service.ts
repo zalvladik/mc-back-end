@@ -44,6 +44,8 @@ export class LotShulkerService {
     username,
     vip,
   }: CreateLotShulkerServiceT): Promise<CreateLotResponseDto> {
+    const user = await this.userRepository.findOne({ where: { id: userId } })
+
     if (price > 64 * 27 * 9)
       throw new BadRequestException(
         `Надто велика ціна, максимальна - ${64 * 27 * 9}`,
@@ -63,7 +65,7 @@ export class LotShulkerService {
     const { vipLotCount } = getVipParams(vip)
 
     const currentLotCount = await this.lotRepository.count({
-      where: { username, isSold: false },
+      where: { user, isSold: false },
     })
 
     if (currentLotCount + 1 > vipLotCount) {
@@ -73,7 +75,7 @@ export class LotShulkerService {
     }
 
     const newLot = this.lotRepository.create({
-      username,
+      user,
       price,
       shulker: shulkerForLot,
     })
@@ -159,6 +161,6 @@ export class LotShulkerService {
 
     const { user, items, ...rest } = lotMetaData.shulker
 
-    return rest
+    return { ...rest, username: user.username }
   }
 }

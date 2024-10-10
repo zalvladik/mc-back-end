@@ -150,7 +150,11 @@ export class LotService {
 
     return {
       totalPages,
-      lots,
+      lots: lots.map(item => {
+        const { user, ...rest } = item
+
+        return { ...rest, username: user.username }
+      }),
     }
   }
 
@@ -207,7 +211,11 @@ export class LotService {
 
     return {
       totalPages,
-      lots,
+      lots: lots.map(item => {
+        const { user, ...rest } = item
+
+        return { ...rest, username: user.username }
+      }),
     }
   }
 
@@ -282,7 +290,11 @@ export class LotService {
 
     return {
       totalPages,
-      lots,
+      lots: lots.map(item => {
+        const { user, ...rest } = item
+
+        return { ...rest, username: user.username }
+      }),
     }
   }
 

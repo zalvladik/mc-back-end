@@ -44,6 +44,8 @@ export class LotItemService {
     username,
     vip,
   }: CreateLotItemServiceT): Promise<CreateLotResponseDto> {
+    const user = await this.userRepository.findOne({ where: { id: userId } })
+
     if (price > 64 * 27 * 9)
       throw new BadRequestException(
         `Надто велика ціна, максимальна - ${64 * 27 * 9}`,
@@ -61,7 +63,7 @@ export class LotItemService {
     }
 
     const currentLotCount = await this.lotRepository.count({
-      where: { username, isSold: false },
+      where: { user, isSold: false },
     })
 
     const { vipLotCount } = getVipParams(vip)
@@ -73,7 +75,7 @@ export class LotItemService {
     }
 
     const newLot = this.lotRepository.create({
-      username,
+      user,
       price,
       item: itemForLot,
     })

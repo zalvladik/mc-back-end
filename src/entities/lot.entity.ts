@@ -9,9 +9,9 @@ import {
 
 import { Item } from './item.entity'
 import { Shulker } from './shulker.entity'
+import { User } from './user.entity'
 
 @Entity({ name: 'lots' })
-@Index(['username'])
 @Index(['isSold'])
 export class Lot {
   @PrimaryGeneratedColumn()
@@ -20,8 +20,9 @@ export class Lot {
   @Column('decimal', { precision: 10, scale: 2 })
   price: number
 
-  @Column({ type: 'varchar', length: 255 })
-  username: string
+  @ManyToOne(() => User, { nullable: false })
+  @JoinColumn({ name: 'user_id' })
+  user: User
 
   @ManyToOne(() => Item, {
     nullable: true,

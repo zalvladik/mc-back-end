@@ -15,14 +15,10 @@ import { Item } from './item.entity'
 import { Lot } from './lot.entity'
 
 @Entity({ name: 'shulkers' })
-@Index(['username'])
 @Index(['isTaken'])
 export class Shulker {
   @PrimaryGeneratedColumn()
   id: number
-
-  @Column({ type: 'varchar', length: 255 })
-  username: string
 
   @Column({ length: 255, nullable: false })
   type: string
@@ -38,10 +34,10 @@ export class Shulker {
   })
   categories: CategoryEnum[]
 
-  @OneToMany(() => Item, Item => Item.shulker)
+  @OneToMany(() => Item, Item => Item.shulker, { nullable: false })
   items: Item[]
 
-  @ManyToOne(() => User, { nullable: true })
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'user_id' })
   user: User
 

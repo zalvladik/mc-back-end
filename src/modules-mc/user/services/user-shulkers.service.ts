@@ -126,7 +126,6 @@ export class UserShulkersService {
 
     const newUserShulker = this.shulkerRepository.create({
       ...shulkerData,
-      username,
       user,
     })
 
@@ -169,7 +168,7 @@ export class UserShulkersService {
     }
 
     const userShulker = await this.shulkerRepository.findOne({
-      where: { username, id: shulkerId, isTaken: false },
+      where: { user: { username }, id: shulkerId, isTaken: false },
       relations: ['items'],
     })
 

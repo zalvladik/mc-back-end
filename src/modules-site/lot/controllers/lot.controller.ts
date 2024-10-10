@@ -49,7 +49,7 @@ export class LotController {
       didPriceToUp = true,
       didNeedIdentical = false,
     }: GetLotsQuaryDto,
-    @UserDecorator() { username }: GetUserDto,
+    @UserDecorator() { id: userId }: GetUserDto,
   ): Promise<GetLotsResponseDto> {
     const searchFilterParams = {
       page,
@@ -62,14 +62,14 @@ export class LotController {
 
     if (category === CategoryEnum.SHULKERS) {
       return this.lotService.getShulkerLots({
-        username,
+        userId,
         display_nameOrType,
         ...searchFilterParams,
       })
     }
 
     return this.lotService.getLots({
-      username,
+      userId,
       category,
       display_nameOrType,
       ...searchFilterParams,
@@ -81,15 +81,17 @@ export class LotController {
   async getEnchantItems(
     @Query()
     body: GetEnchantitemsLotsQuaryDto,
-    @UserDecorator() { username }: GetUserDto,
+    @UserDecorator() { id: userId }: GetUserDto,
   ): Promise<GetLotsResponseDto> {
-    return this.lotService.getEnchantItems({ username, ...body })
+    return this.lotService.getEnchantItems({ userId, ...body })
   }
 
   @Get('user')
   @HttpCode(200)
-  async getUserLots(@UserDecorator() { username }: GetUserDto): Promise<Lot[]> {
-    return this.lotService.getUserLots(username)
+  async getUserLots(
+    @UserDecorator() { id: userId }: GetUserDto,
+  ): Promise<Lot[]> {
+    return this.lotService.getUserLots(userId)
   }
 
   @Delete()

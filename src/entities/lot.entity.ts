@@ -17,7 +17,7 @@ export class Lot {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 1 })
   price: number
 
   @ManyToOne(() => User, { nullable: false })

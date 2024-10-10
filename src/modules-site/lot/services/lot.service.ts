@@ -13,9 +13,11 @@ import { getEnchantMetaType } from 'src/shared/helpers/getEnchantMetaType'
 import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import type {
+  CreateLotResponseDto,
   DeleteUserLotResponseDto,
   GetLotsResponseDto,
 } from '../dtos-response'
+
 import type {
   GetItemWithEnchantsService,
   GetLotsSerivce,
@@ -34,11 +36,11 @@ export class LotService {
     'item.enchants',
     'item.categories',
     'item.durability',
+    'user.username',
   ]
 
   private selectShulker = [
     'shulker.id',
-    'shulker.username',
     'shulker.categories',
     'shulker.type',
     'shulker.display_name',
@@ -58,7 +60,7 @@ export class LotService {
     limit = 8,
     enchants,
     itemType,
-    username,
+    userId,
     enchantType,
     didNeedUserLots = false,
     didNeedShulkers = false,
@@ -79,7 +81,9 @@ export class LotService {
       select = [...select, ...this.selectShulker]
     }
 
-    const queryBuilder = this.lotRepository.createQueryBuilder('lot')
+    const queryBuilder = this.lotRepository
+      .createQueryBuilder('lot')
+      .leftJoinAndSelect('lot.user', 'user')
 
     if (didNeedShulkers) {
       queryBuilder
@@ -101,7 +105,7 @@ export class LotService {
       .select(select)
 
     if (didNeedUserLots === false) {
-      queryBuilder.andWhere('lot.username != :username', { username })
+      queryBuilder.andWhere('user.id != :userId', { userId })
     }
 
     const enchantsArray = enchants.split(',')
@@ -150,11 +154,7 @@ export class LotService {
 
     return {
       totalPages,
-      lots: lots.map(item => {
-        const { user, ...rest } = item
-
-        return { ...rest, username: user.username }
-      }),
+      lots: lots as unknown as CreateLotResponseDto[],
     }
   }
 
@@ -162,7 +162,7 @@ export class LotService {
     page = 1,
     limit = 8,
     display_nameOrType,
-    username,
+    userId,
     didNeedUserLots,
     didPriceToUp,
     didNeedIdentical,
@@ -171,20 +171,21 @@ export class LotService {
       .createQueryBuilder('lot')
       .innerJoinAndSelect('lot.shulker', 'shulker')
       .innerJoinAndSelect('shulker.items', 'shulkerItem')
+      .leftJoinAndSelect('lot.user', 'user')
       .andWhere('lot.isSold = :isSold', { isSold: false })
       .skip((page - 1) * limit)
       .take(limit)
       .select([
         'lot',
         'shulker.id',
-        'shulker.username',
         'shulker.categories',
         'shulker.type',
         'shulker.display_name',
+        'user.username',
       ])
 
     if (didNeedUserLots === false) {
-      queryBuilder.andWhere('lot.username != :username', { username })
+      queryBuilder.andWhere('user.id != :userId', { userId })
     }
 
     const isLike = didNeedIdentical ? '=' : 'LIKE'
@@ -211,11 +212,7 @@ export class LotService {
 
     return {
       totalPages,
-      lots: lots.map(item => {
-        const { user, ...rest } = item
-
-        return { ...rest, username: user.username }
-      }),
+      lots: lots as unknown as CreateLotResponseDto[],
     }
   }
 
@@ -224,7 +221,7 @@ export class LotService {
     limit = 8,
     category,
     display_nameOrType,
-    username,
+    userId,
     didPriceToUp,
     didNeedUserLots,
     didNeedShulkers,
@@ -236,7 +233,9 @@ export class LotService {
       select = [...select, ...this.selectShulker]
     }
 
-    const queryBuilder = this.lotRepository.createQueryBuilder('lot')
+    const queryBuilder = this.lotRepository
+      .createQueryBuilder('lot')
+      .leftJoinAndSelect('lot.user', 'user')
 
     if (didNeedShulkers) {
       queryBuilder
@@ -254,7 +253,7 @@ export class LotService {
       .select(select)
 
     if (didNeedUserLots === false) {
-      queryBuilder.andWhere('lot.username != :username', { username })
+      queryBuilder.andWhere('user.id != :userId', { userId })
     }
 
     if (category) {
@@ -290,21 +289,18 @@ export class LotService {
 
     return {
       totalPages,
-      lots: lots.map(item => {
-        const { user, ...rest } = item
-
-        return { ...rest, username: user.username }
-      }),
+      lots: lots as unknown as CreateLotResponseDto[],
     }
   }
 
-  async getUserLots(username: string): Promise<Lot[]> {
+  async getUserLots(userId: number): Promise<Lot[]> {
     return this.lotRepository
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
+      .leftJoinAndSelect('lot.user', 'user')
       .andWhere('lot.isSold = :isSold', { isSold: false })
-      .andWhere('lot.username = :username', { username })
+      .andWhere('user.id = :userId', { userId })
       .select([...this.selectLote, ...this.selectShulker])
       .getMany()
   }

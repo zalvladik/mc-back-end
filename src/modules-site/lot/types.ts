@@ -34,18 +34,18 @@ export type ByeLotShulkerServiceT = {
 }
 
 export type GetItemWithEnchantsService = {
-  username: string
+  userId: number
   didNeedUserLots?: boolean
   didNeedShulkers?: boolean
 } & GetEnchantitemsLotsQuaryDto
 
 export type GetShulkerLotsService = {
-  username: string
+  userId: number
   didNeedUserLots?: boolean
 } & GetLotsQuaryDto
 
 export type GetLotsSerivce = {
-  username: string
+  userId: number
 } & GetLotsQuaryDto
 
 export type GetTradeHistoryService = {

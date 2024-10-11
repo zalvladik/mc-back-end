@@ -70,7 +70,7 @@ export class UserPlayerStatsService {
 
     user.afkTime = afkTime
     user.playTime = playTime
-    user.isNewPlayer = isMore48Hourse
+    user.isNewPlayer = !isMore48Hourse
 
     await this.whitelistRepository.save(user)
   }

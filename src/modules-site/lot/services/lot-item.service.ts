@@ -133,7 +133,6 @@ export class LotItemService {
     const sellerUser = lotItem.user
 
     buyerUser.money = +buyerUser.money - +lotMetaData.price
-
     sellerUser.money = +sellerUser.money + +lotMetaData.price
 
     const updatedItem = { ...lotItem, user: buyerUser }

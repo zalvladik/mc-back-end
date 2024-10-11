@@ -152,9 +152,14 @@ export class LotService {
 
     const totalPages = Math.ceil(totalItems / limit)
 
+    const formattedLots = lots.map(lot => ({
+      ...lot,
+      username: lot.user.username,
+    }))
+
     return {
       totalPages,
-      lots: lots as unknown as CreateLotResponseDto[],
+      lots: formattedLots,
     }
   }
 
@@ -210,9 +215,14 @@ export class LotService {
 
     const totalPages = Math.ceil(totalItems / limit)
 
+    const formattedLots = lots.map(lot => ({
+      ...lot,
+      username: lot.user.username,
+    }))
+
     return {
       totalPages,
-      lots: lots as unknown as CreateLotResponseDto[],
+      lots: formattedLots,
     }
   }
 
@@ -287,14 +297,19 @@ export class LotService {
 
     const totalPages = Math.ceil(totalItems / limit)
 
+    const formattedLots = lots.map(lot => ({
+      ...lot,
+      username: lot.user.username,
+    }))
+
     return {
       totalPages,
-      lots: lots as unknown as CreateLotResponseDto[],
+      lots: formattedLots,
     }
   }
 
-  async getUserLots(userId: number): Promise<Lot[]> {
-    return this.lotRepository
+  async getUserLots(userId: number): Promise<CreateLotResponseDto[]> {
+    const userLots = await this.lotRepository
       .createQueryBuilder('lot')
       .leftJoinAndSelect('lot.item', 'item')
       .leftJoinAndSelect('lot.shulker', 'shulker')
@@ -303,6 +318,15 @@ export class LotService {
       .andWhere('user.id = :userId', { userId })
       .select([...this.selectLote, ...this.selectShulker])
       .getMany()
+
+    return userLots.map(lot => ({
+      id: lot.id,
+      price: lot.price,
+      isSold: lot.isSold,
+      username: lot.user.username,
+      item: lot?.item ?? null,
+      shulker: lot?.shulker ?? null,
+    }))
   }
 
   async deleteLot(id: number): Promise<DeleteUserLotResponseDto> {

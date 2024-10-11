@@ -15,7 +15,6 @@ import { CategoryEnum, RoleEnum } from 'src/shared/enums'
 import { Roles } from 'src/shared/decorators/roles.decorator'
 import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { GetUserDto } from 'src/modules-site/user/dtos-request'
-import type { Lot } from 'src/entities/lot.entity'
 
 import {
   DeleteLotQuaryDto,
@@ -24,6 +23,7 @@ import {
 } from '../dtos-request'
 import { LotService } from '../services'
 import type {
+  CreateLotResponseDto,
   DeleteUserLotResponseDto,
   GetLotsResponseDto,
 } from '../dtos-response'
@@ -90,7 +90,7 @@ export class LotController {
   @HttpCode(200)
   async getUserLots(
     @UserDecorator() { id: userId }: GetUserDto,
-  ): Promise<Lot[]> {
+  ): Promise<CreateLotResponseDto[]> {
     return this.lotService.getUserLots(userId)
   }
 

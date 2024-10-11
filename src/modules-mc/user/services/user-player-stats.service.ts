@@ -66,11 +66,12 @@ export class UserPlayerStatsService {
 
     if (isMore48Hourse && !user.isNewPlayer) {
       await this.discordBotService.pingUserInChannel(user.discordUserId)
+
+      user.isNewPlayer = false
     }
 
     user.afkTime = afkTime
     user.playTime = playTime
-    user.isNewPlayer = !isMore48Hourse
 
     await this.whitelistRepository.save(user)
   }

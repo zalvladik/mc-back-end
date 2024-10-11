@@ -64,7 +64,7 @@ export class UserPlayerStatsService {
 
     const isMore48Hourse = playTime - afkTime > 172800
 
-    if (isMore48Hourse && !user.isNewPlayer) {
+    if (isMore48Hourse && user.isNewPlayer) {
       await this.discordBotService.pingUserInChannel(user.discordUserId)
 
       user.isNewPlayer = false

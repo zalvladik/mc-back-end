@@ -5,14 +5,20 @@ import { Repository } from 'typeorm'
 
 import { Advancements } from 'src/entities/advancements.entity'
 import { User } from 'src/entities/user.entity'
+import { Whitelist } from 'src/entities/whitelist.entity'
+import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
+import type { PutPlaytimeProps } from '../types'
 
 @Injectable()
-export class UserAdvancementsService {
+export class UserPlayerStatsService {
   constructor(
     @InjectRepository(Advancements)
     private readonly advancementsRepository: Repository<Advancements>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(Whitelist)
+    private readonly whitelistRepository: Repository<Whitelist>,
+    private readonly discordBotService: DiscordBotService,
   ) {}
 
   async putAdvancements(username: string, data: string[]): Promise<void> {
@@ -45,5 +51,27 @@ export class UserAdvancementsService {
       userAdvancement.id,
       userAdvancement,
     )
+  }
+
+  async putPlayTime({
+    username,
+    afkTime,
+    playTime,
+  }: PutPlaytimeProps): Promise<void> {
+    const user = await this.whitelistRepository.findOne({ where: { username } })
+
+    if (user.isTwink) return
+
+    const isMore48Hourse = playTime - afkTime > 172800
+
+    if (isMore48Hourse && !user.isNewPlayer) {
+      await this.discordBotService.pingUserInChannel(user.discordUserId)
+    }
+
+    user.afkTime = afkTime
+    user.playTime = playTime
+    user.isNewPlayer = isMore48Hourse
+
+    await this.whitelistRepository.save(user)
   }
 }

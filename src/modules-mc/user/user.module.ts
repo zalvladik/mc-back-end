@@ -13,15 +13,17 @@ import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
 import { EnchantMeta } from 'src/entities/enchant-meta.entity'
+import { Whitelist } from 'src/entities/whitelist.entity'
+import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
 import {
-  UserAdvancementsController,
+  UserPlayerStatsController,
   UserItemsController,
   UserMoneyController,
   UserShulkersController,
 } from './controllers'
 
 import {
-  UserAdvancementsService,
+  UserPlayerStatsService,
   UserItemsService,
   UserMoneyService,
   UserShulkersService,
@@ -38,22 +40,24 @@ import {
       ItemTicket,
       Shulker,
       EnchantMeta,
+      Whitelist,
     ]),
   ],
   controllers: [
-    UserAdvancementsController,
+    UserPlayerStatsController,
     UserMoneyController,
     UserItemsController,
     UserShulkersController,
   ],
   providers: [
-    UserAdvancementsService,
+    UserPlayerStatsService,
     JwtService,
     TokenService,
     UserMoneyService,
     UserItemsService,
     UserShulkersService,
     CacheService,
+    DiscordBotService,
   ],
 })
 export class McUserModule {}

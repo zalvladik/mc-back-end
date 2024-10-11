@@ -34,4 +34,10 @@ export class Whitelist {
     collation: 'utf8_general_ci',
   })
   mainUserName: string
+
+  @Column({ type: 'bigint', nullable: false, default: 0 })
+  afkTime: number
+
+  @Column({ type: 'bigint', nullable: false, default: 0 })
+  playTime: number
 }

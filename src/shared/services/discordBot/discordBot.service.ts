@@ -15,6 +15,8 @@ export class DiscordBotService implements OnModuleInit {
 
   private TARGET_CHANNEL_ID = process.env.TARGET_CHANNEL_ID
 
+  private COMMUNION_CHANNEL_ID = process.env.COMMUNION_CHANNEL_ID
+
   private ROLE_NOOB_ID = process.env.ROLE_NOOB_ID
 
   private ROLE_PRO_ID = process.env.ROLE_PRO_ID
@@ -22,6 +24,8 @@ export class DiscordBotService implements OnModuleInit {
   private ROLE_PLAYER_ID = process.env.ROLE_PLAYER_ID
 
   private DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN
+
+  private GUILD_ID = process.env.GUILD_ID
 
   constructor(
     @InjectRepository(Whitelist)
@@ -38,6 +42,41 @@ export class DiscordBotService implements OnModuleInit {
         GatewayIntentBits.GuildMembers,
       ],
     })
+  }
+
+  async pingUserInChannel(discordUserId: string): Promise<void> {
+    const channel = await this.client.channels.fetch(this.COMMUNION_CHANNEL_ID)
+
+    const guild = await this.client.guilds.fetch(this.GUILD_ID)
+    const member = await guild.members.fetch(discordUserId)
+
+    if (member) {
+      await member.roles.remove(this.ROLE_NOOB_ID)
+      await member.roles.add(this.ROLE_PRO_ID)
+    } else {
+      this.logger.error(`Користувача з ID ${discordUserId} не знайдено`)
+    }
+
+    if (channel?.isTextBased()) {
+      await channel.send(`<@${discordUserId}>`)
+
+      const embed = new EmbedBuilder()
+        .setDescription(
+          `Вітаю, ви награли більше **48 годин**!
+Вам добавлена роль в діскорді - <@&${this.ROLE_PRO_ID}>
+
+Тепер у вас є можливість:
+\`\`\`- Відправляти файли, gif, png і тд...
+- Відмітити територію на онлайн-карті
+- Доступ до серверу з креативом
+- Доступ до гілки з ідеями\`\`\`
+Дякую що проводиш час на сервері **Vinland** :heart:
+Хорошої гри і мирного неба !!!`,
+        )
+        .setColor('#ee7303')
+
+      await channel.send({ embeds: [embed] })
+    }
   }
 
   async addUser({

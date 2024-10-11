@@ -1,12 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-import {
-  IsNotEmpty,
-  IsString,
-  IsNumber,
-  ArrayNotEmpty,
-  IsArray,
-} from 'class-validator'
+import { IsNotEmpty, IsString, IsNumber, IsArray } from 'class-validator'
 
 import type { TransformFnParams } from 'class-transformer'
 import { Transform } from 'class-transformer'
@@ -203,16 +197,25 @@ export class AddShulkerToUserConfirmBodyDto {
   cacheId: string
 }
 
-export class PutAdvancementsBodyDto {
+export class PutPlayerStatsBodyDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({ example: 'France' })
   username: string
 
   @IsArray()
-  @ArrayNotEmpty()
   @IsString({ each: true })
   data: string[]
+
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({ example: 99991308 })
+  afkTime: number
+
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({ example: 20857284 })
+  playTime: number
 }
 
 export class PostUserUuidBodyDto {

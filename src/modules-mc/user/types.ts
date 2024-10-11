@@ -16,3 +16,9 @@ export type AddShulkerToUserProps = {
   cacheId: string
   shulkerData: ShulkerDto
 }
+
+export type PutPlaytimeProps = {
+  username: string
+  afkTime: number
+  playTime: number
+}

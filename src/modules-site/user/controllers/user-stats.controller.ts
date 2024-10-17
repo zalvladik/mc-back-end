@@ -11,6 +11,7 @@ import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { UserStatsService } from '../services'
 
 import { GetAdvancementsParamDto, GetUserDto } from '../dtos-request'
+import type { GetUserPlaytimeByIdResponseDto } from '../dtos-response'
 
 @Controller('user/stats')
 @ApiTags('user/stats')
@@ -37,7 +38,7 @@ export class UserStatsController {
   @HttpCode(200)
   async getUserPlaytimeById(
     @UserDecorator() { username }: GetUserDto,
-  ): Promise<Advancements> {
+  ): Promise<GetUserPlaytimeByIdResponseDto> {
     return this.userStatsService.getUserPlayTimeByUserName(username)
   }
 }

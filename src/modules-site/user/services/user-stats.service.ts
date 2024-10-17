@@ -6,6 +6,7 @@ import { Repository } from 'typeorm'
 import { Advancements } from 'src/entities/advancements.entity'
 import { User } from 'src/entities/user.entity'
 import { Whitelist } from 'src/entities/whitelist.entity'
+import type { GetUserPlaytimeByIdResponseDto } from '../dtos-response'
 
 @Injectable()
 export class UserStatsService {
@@ -50,7 +51,9 @@ export class UserStatsService {
     return userAdvancement
   }
 
-  async getUserPlayTimeByUserName(username: string): Promise<any> {
+  async getUserPlayTimeByUserName(
+    username: string,
+  ): Promise<GetUserPlaytimeByIdResponseDto> {
     return this.whitelistRepository.findOne({
       where: { username },
       select: ['afkTime', 'playTime'],

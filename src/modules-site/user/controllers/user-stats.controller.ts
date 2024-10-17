@@ -19,13 +19,13 @@ import { GetAdvancementsParamDto, GetUserDto } from '../dtos-request'
 export class UserStatsController {
   constructor(private readonly userStatsService: UserStatsService) {}
 
-  @Get('advencements')
+  @Get('advancements')
   @HttpCode(200)
   async getAdvancements(): Promise<Advancements[]> {
     return this.userStatsService.getAdvancements()
   }
 
-  @Get('advencements:userId')
+  @Get('advancements:userId')
   @HttpCode(200)
   async getUserAdvancementsById(
     @Param() { userId }: GetAdvancementsParamDto,

@@ -13,7 +13,7 @@ import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import {
-  UserAdvancementsController,
+  UserStatsController,
   UserController,
   UserSkinController,
   UserItemsController,
@@ -22,7 +22,7 @@ import {
 } from './controllers'
 
 import {
-  UserAdvancementsService,
+  UserStatsService,
   UserSkinService,
   UserItemsService,
   UserService,
@@ -49,7 +49,7 @@ import { AuthService } from '../auth/services'
   controllers: [
     UserController,
     UserItemsController,
-    UserAdvancementsController,
+    UserStatsController,
     UserSkinController,
     UserShulkersController,
     UserVipController,
@@ -57,7 +57,7 @@ import { AuthService } from '../auth/services'
   providers: [
     UserService,
     UserItemsService,
-    UserAdvancementsService,
+    UserStatsService,
     JwtService,
     TokenService,
     UserSkinService,

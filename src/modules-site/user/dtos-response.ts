@@ -66,3 +66,11 @@ export class GetUserSkinRsponseDto {
   @ApiProperty({ example: TexturesSkin })
   textures: TexturesSkin
 }
+
+export class GetUserPlaytimeByIdResponseDto {
+  @ApiProperty({ example: 634563476345 })
+  afkTime: number
+
+  @ApiProperty({ example: 634563476345 })
+  playTime: number
+}

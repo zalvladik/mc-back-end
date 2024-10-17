@@ -5,12 +5,16 @@ import { Repository } from 'typeorm'
 
 import { Advancements } from 'src/entities/advancements.entity'
 import { User } from 'src/entities/user.entity'
+import { Whitelist } from 'src/entities/whitelist.entity'
 
 @Injectable()
-export class UserAdvancementsService {
+export class UserStatsService {
   constructor(
     @InjectRepository(Advancements)
     private readonly advancementsRepository: Repository<Advancements>,
+
+    @InjectRepository(Whitelist)
+    private readonly whitelistRepository: Repository<Whitelist>,
 
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -44,5 +48,12 @@ export class UserAdvancementsService {
     }
 
     return userAdvancement
+  }
+
+  async getUserPlayTimeByUserName(username: string): Promise<any> {
+    return this.whitelistRepository.findOne({
+      where: { username },
+      select: ['afkTime', 'playTime'],
+    })
   }
 }

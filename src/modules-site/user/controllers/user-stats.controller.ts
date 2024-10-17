@@ -25,7 +25,7 @@ export class UserStatsController {
     return this.userStatsService.getAdvancements()
   }
 
-  @Get('advancements:userId')
+  @Get('advancements/:userId')
   @HttpCode(200)
   async getUserAdvancementsById(
     @Param() { userId }: GetAdvancementsParamDto,

@@ -44,6 +44,22 @@ export class DiscordBotService implements OnModuleInit {
     })
   }
 
+  async sendErrorMessage(member: any, message: string): Promise<void> {
+    try {
+      const embed = new EmbedBuilder()
+        .setDescription(message)
+        .setColor('#FF0000')
+
+      await member.send({ embeds: [embed] })
+    } catch (error) {
+      if (error.code === 50007) {
+        this.logger.verbose(`User ID ${member.id} error send message`)
+      } else {
+        this.logger.error(`Error send message: ${error.message}`)
+      }
+    }
+  }
+
   async pingUserInChannel(discordUserId: string): Promise<void> {
     const channel = await this.client.channels.fetch(this.COMMUNION_CHANNEL_ID)
 
@@ -153,18 +169,11 @@ export class DiscordBotService implements OnModuleInit {
             { refreshToken: null },
           )
 
-          try {
-            const embed = new EmbedBuilder()
-              .setDescription(
-                `> Щоб знову зайти на майнкрафт сервер,
+          await this.sendErrorMessage(
+            member,
+            `> Щоб знову зайти на майнкрафт сервер, 
 вам потрібно вернутись на діскорд сервер Vinland!`,
-              )
-              .setColor('#FF0000')
-
-            member.send({ embeds: [embed] })
-          } catch (e) {
-            this.logger.verbose('Користувач не приймає повідомлення в ПП')
-          }
+          )
         }
       } catch (error) {
         this.logger.error(
@@ -269,18 +278,18 @@ export class DiscordBotService implements OnModuleInit {
           const newUsername = message.content
           const validPattern = /^[a-zA-Z0-9_.-]+$/
 
+          await this.sendErrorMessage(
+            message.author,
+            'Хибний набір символів для нікнейму. :x:',
+          )
+
           if (!validPattern.test(newUsername)) {
             await message.delete()
 
-            try {
-              const embed = new EmbedBuilder()
-                .setDescription(`Хибний набір символів для нікнейму. :x:`)
-                .setColor('#FF0000')
-
-              message.author.send({ embeds: [embed] })
-            } catch (e) {
-              this.logger.verbose('Користувач не приймає повідомлення в ПП')
-            }
+            await this.sendErrorMessage(
+              message.author,
+              'Хибний набір символів для нікнейму. :x:',
+            )
 
             return
           }
@@ -288,15 +297,10 @@ export class DiscordBotService implements OnModuleInit {
           if (message.content.length < 3) {
             await message.delete()
 
-            try {
-              const embed = new EmbedBuilder()
-                .setDescription(`Мінімальна кількість символів **3** :x:`)
-                .setColor('#FF0000')
-
-              message.author.send({ embeds: [embed] })
-            } catch (e) {
-              this.logger.verbose('Користувач не приймає повідомлення в ПП')
-            }
+            await this.sendErrorMessage(
+              message.author,
+              'Мінімальна кількість символів **3** :x:',
+            )
 
             return
           }
@@ -304,15 +308,10 @@ export class DiscordBotService implements OnModuleInit {
           if (message.content.length > 16) {
             await message.delete()
 
-            try {
-              const embed = new EmbedBuilder()
-                .setDescription(`Максимальна кількість символів **16** :x:`)
-                .setColor('#FF0000')
-
-              message.author.send({ embeds: [embed] })
-            } catch (e) {
-              this.logger.verbose('Користувач не приймає повідомлення в ПП')
-            }
+            await this.sendErrorMessage(
+              message.author,
+              'Максимальна кількість символів **16** :x:',
+            )
 
             return
           }
@@ -373,17 +372,10 @@ export class DiscordBotService implements OnModuleInit {
         } else {
           await message.delete()
 
-          try {
-            const embed = new EmbedBuilder()
-              .setDescription(
-                `Попасти в whitelist можна тільки якщо ваш ДС аккаунт був створений 3 місяців назад.`,
-              )
-              .setColor('#FF0000')
-
-            message.author.send({ embeds: [embed] })
-          } catch (e) {
-            this.logger.verbose('Користувач не приймає повідомлення в ПП')
-          }
+          await this.sendErrorMessage(
+            message.author,
+            'Попасти в whitelist можна тільки якщо ваш ДС аккаунт був створений 3 місяців назад.',
+          )
         }
       } catch (error) {
         this.logger.error(error)

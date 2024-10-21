@@ -55,14 +55,14 @@ export class UserPlayerStatsService {
 
   async putPlayTime({
     username,
-    afkTime,
-    playTime,
+    afkTime: newAfkTime,
+    playTime: newPlayTime,
   }: PutPlaytimeProps): Promise<void> {
     const user = await this.whitelistRepository.findOne({ where: { username } })
 
     if (user.isTwink) return
 
-    const isMore48Hourse = playTime - afkTime > 172800
+    const isMore48Hourse = newAfkTime - newPlayTime > 172800
 
     if (isMore48Hourse && user.isNewPlayer) {
       await this.discordBotService.pingUserInChannel(user.discordUserId)
@@ -70,9 +70,15 @@ export class UserPlayerStatsService {
       user.isNewPlayer = false
     }
 
-    user.afkTime = afkTime
-    user.playTime = playTime
+    user.afkTime = newPlayTime
+    user.playTime = newAfkTime
 
-    await this.whitelistRepository.save(user)
+    const { afkTime, playTime, isNewPlayer } = user
+
+    await this.whitelistRepository.update(user.id, {
+      afkTime,
+      playTime,
+      isNewPlayer,
+    })
   }
 }

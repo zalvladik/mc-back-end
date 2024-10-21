@@ -62,20 +62,13 @@ export class UserPlayerStatsService {
 
     if (user.isTwink) return
 
-    const isMore48Hourse = Boolean(newAfkTime - newPlayTime > 172800)
-
-    console.log(user)
-
-    console.log(isMore48Hourse)
+    const isMore48Hourse = newPlayTime - newAfkTime > 172800
 
     if (isMore48Hourse && user.isNewPlayer) {
-      console.log('if done')
       await this.discordBotService.pingUserInChannel(user.discordUserId)
 
       user.isNewPlayer = false
     }
-
-    console.log(user)
 
     await this.whitelistRepository.update(
       { id: user.id },

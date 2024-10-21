@@ -70,9 +70,6 @@ export class UserPlayerStatsService {
       user.isNewPlayer = false
     }
 
-    user.afkTime = newPlayTime
-    user.playTime = newAfkTime
-
     const { afkTime, playTime, isNewPlayer } = user
 
     await this.whitelistRepository.update(user.id, {

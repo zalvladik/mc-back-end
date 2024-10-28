@@ -8,15 +8,25 @@ import { WorldExpansion } from 'src/entities/world-expansion.entity'
 
 import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import { AuthModule } from '../auth/auth.module'
-import { WorldExpansionService } from './services'
-import { WorldExpansionController } from './controllers'
+import {
+  WorldExpansionPaymentsService,
+  WorldExpansionService,
+} from './services'
+import {
+  WorldExpansionController,
+  WorldExpansionPaymentsController,
+} from './controllers'
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, WorldExpansionPayments, WorldExpansion]),
     AuthModule,
   ],
-  controllers: [WorldExpansionController],
-  providers: [WorldExpansionService, McFetchingService],
+  controllers: [WorldExpansionController, WorldExpansionPaymentsController],
+  providers: [
+    WorldExpansionService,
+    WorldExpansionPaymentsService,
+    McFetchingService,
+  ],
 })
 export class WorldExpansionModule {}

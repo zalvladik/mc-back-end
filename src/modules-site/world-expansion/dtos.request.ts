@@ -33,7 +33,7 @@ export class GetWorldsExpansionQueryDto {
   worldType: WorldEnum
 }
 
-export class CreateWorkldExpansionBodyDto {
+export class CreateWorldExpansionBodyDto {
   @IsNotEmpty()
   @IsString()
   @IsEnum(WorldEnum, {
@@ -46,7 +46,7 @@ export class CreateWorkldExpansionBodyDto {
   cost: number
 }
 
-export class CreateWorkldExpansionPaymentsBodyDto {
+export class CreateWorldExpansionPaymentsBodyDto {
   @IsNotEmpty()
   @IsString()
   @IsEnum(WorldEnum, {

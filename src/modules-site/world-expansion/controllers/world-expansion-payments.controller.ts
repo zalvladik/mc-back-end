@@ -10,7 +10,7 @@ import { GetUserDto } from 'src/modules-site/user/dtos-request'
 import type { WorldExpansionPayments } from 'src/entities/world-expansion-payments.entity'
 import { WorldExpansionPaymentsService } from '../services'
 import {
-  CreateWorkldExpansionPaymentsBodyDto,
+  CreateWorldExpansionPaymentsBodyDto,
   GetTopWorldsExpansionPeymentsQueryDto,
 } from '../dtos.request'
 
@@ -37,8 +37,8 @@ export class WorldExpansionPaymentsController {
   @ApiResponse({
     status: 201,
   })
-  async createWorkldExpansionPayments(
-    @Body() { worldType, money }: CreateWorkldExpansionPaymentsBodyDto,
+  async createWorldExpansionPayments(
+    @Body() { worldType, money }: CreateWorldExpansionPaymentsBodyDto,
     @UserDecorator() { id }: GetUserDto,
   ): Promise<WorldExpansionPayments> {
     return this.worldExpansionPaymentsService.createWorldsExpansionPeymants({

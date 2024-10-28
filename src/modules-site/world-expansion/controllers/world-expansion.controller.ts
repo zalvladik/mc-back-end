@@ -8,7 +8,7 @@ import { Roles } from 'src/shared/decorators/roles.decorator'
 import type { WorldExpansion } from 'src/entities/world-expansion.entity'
 import { WorldExpansionService } from '../services'
 import {
-  CreateWorkldExpansionBodyDto,
+  CreateWorldExpansionBodyDto,
   GetWorldsExpansionQueryDto,
 } from '../dtos.request'
 
@@ -35,7 +35,7 @@ export class WorldExpansionController {
     status: 201,
   })
   async createWorkldExpansion(
-    @Body() { worldType, cost }: CreateWorkldExpansionBodyDto,
+    @Body() { worldType, cost }: CreateWorldExpansionBodyDto,
   ): Promise<WorldExpansion> {
     return this.worldExpansionService.createWorldsExpansion(worldType, cost)
   }

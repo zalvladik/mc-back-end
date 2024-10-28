@@ -144,7 +144,7 @@ export class WorldExpansionPaymentsService {
       const newCords = lastExpansion.lvl * 1000 + 11000
 
       const newExpansionCost = Math.round(
-        (prevCords * prevCords - newCords * newCords) * 0.00003047619,
+        (newCords * newCords - prevCords * prevCords) * 0.00003047619,
       )
 
       const newExpansion = this.worldExpansionRepository.create({

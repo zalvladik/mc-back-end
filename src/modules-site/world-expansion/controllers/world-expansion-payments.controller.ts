@@ -40,8 +40,8 @@ export class WorldExpansionPaymentsController {
   async createWorldExpansionPayments(
     @Body() { worldType, money }: CreateWorldExpansionPaymentsBodyDto,
     @UserDecorator() { id }: GetUserDto,
-  ): Promise<WorldExpansionPayments> {
-    return this.worldExpansionPaymentsService.createWorldsExpansionPeymants({
+  ): Promise<void> {
+    await this.worldExpansionPaymentsService.createWorldsExpansionPeymants({
       worldType,
       money,
       userId: id,

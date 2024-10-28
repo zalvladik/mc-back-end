@@ -67,19 +67,19 @@ export class McFetchingService {
   }
 
   async worldExansion({ worldType, lvl }: WorldExansionProps): Promise<void> {
-    const getWorldRadius = (howMuch: number): number => {
+    const getWorldDiameter = (howMuch: number): number => {
       return 1000 * howMuch + 10000
     }
 
-    let radius = getWorldRadius(lvl)
+    let diameter = getWorldDiameter(lvl)
 
     if (worldType === WorldEnum.WORLD_NETHER) {
-      radius /= 8
+      diameter /= 8
     }
 
     await axios.post(`${this.minecraftServerURL}/worldExpansion`, {
       worldType,
-      radius,
+      diameter,
     })
   }
 }

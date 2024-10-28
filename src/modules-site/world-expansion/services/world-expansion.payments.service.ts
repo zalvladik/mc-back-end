@@ -54,7 +54,7 @@ export class WorldExpansionPaymentsService {
     worldType,
     money,
     userId,
-  }: CreateWorldsExpansionPeymantsProps): Promise<WorldExpansionPayments> {
+  }: CreateWorldsExpansionPeymantsProps): Promise<void> {
     const lastExpansion = await this.worldExpansionRepository.findOne({
       where: { worldType },
       order: { createdAt: 'DESC' },
@@ -66,9 +66,14 @@ export class WorldExpansionPaymentsService {
       )
     }
 
-    let moneyForPayment: number = money
+    lastExpansion.moneyStorage = Number(lastExpansion.moneyStorage)
+    lastExpansion.cost = Number(lastExpansion.cost)
+
+    let moneyForPayment: number = Number(money)
 
     const user = await this.userRepository.findOne({ where: { id: userId } })
+
+    user.money = Number(user.money)
 
     const howMuchNeedForComplete =
       lastExpansion.cost - lastExpansion.moneyStorage
@@ -78,10 +83,41 @@ export class WorldExpansionPaymentsService {
     }
 
     lastExpansion.moneyStorage += moneyForPayment
-    lastExpansion.completedAt = new Date()
-    lastExpansion.isCompleted = true
 
     user.money -= moneyForPayment
+
+    if (lastExpansion.moneyStorage >= lastExpansion.cost) {
+      try {
+        await this.mcFetchingService.worldExansion({
+          lvl: lastExpansion.lvl,
+          worldType: lastExpansion.worldType,
+        })
+      } catch (e) {
+        this.logger.error(e)
+
+        throw new InternalServerErrorException('Проблеми з розширенням світу')
+      }
+
+      lastExpansion.completedAt = new Date()
+      lastExpansion.isCompleted = true
+
+      const prevCords = lastExpansion.lvl * 1000 + 10000
+
+      const newCords = lastExpansion.lvl * 1000 + 11000
+
+      const newExpansionCost = Math.round(
+        (prevCords * prevCords - newCords * newCords) * 0.00003047619,
+      )
+
+      const newExpansion = this.worldExpansionRepository.create({
+        createdAt: new Date(),
+        lvl: Number(lastExpansion.lvl) + 1,
+        worldType: lastExpansion.worldType,
+        cost: newExpansionCost,
+      })
+
+      await this.worldExpansionRepository.save(newExpansion)
+    }
 
     const worldExpansionPayment = this.worldExpansionPaymentsRepository.create({
       money: moneyForPayment,
@@ -90,21 +126,8 @@ export class WorldExpansionPaymentsService {
       worldExpansion: lastExpansion,
     })
 
-    try {
-      await this.mcFetchingService.worldExansion({
-        lvl: lastExpansion.lvl,
-        worldType: lastExpansion.worldType,
-      })
-    } catch (e) {
-      this.logger.error(e)
-
-      throw new InternalServerErrorException('Проблеми з розширенням світу')
-    }
-
     await this.userRepository.save(user)
     await this.worldExpansionRepository.save(lastExpansion)
     await this.worldExpansionPaymentsRepository.save(worldExpansionPayment)
-
-    return worldExpansionPayment
   }
 }

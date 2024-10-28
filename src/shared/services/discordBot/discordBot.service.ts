@@ -1,11 +1,13 @@
 import type { OnModuleInit } from '@nestjs/common'
 import { Injectable, ConflictException, Logger } from '@nestjs/common'
+import type { ColorResolvable } from 'discord.js'
 import { Client, GatewayIntentBits, EmbedBuilder } from 'discord.js'
 import { addMonths, isBefore } from 'date-fns'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { User } from 'src/entities/user.entity'
+import { MemberMessageColorsEnum } from 'src/shared/enums'
 
 @Injectable()
 export class DiscordBotService implements OnModuleInit {
@@ -44,11 +46,15 @@ export class DiscordBotService implements OnModuleInit {
     })
   }
 
-  async sendErrorMessage(member: any, message: string): Promise<void> {
+  async sendMessageToMember(
+    member: any,
+    message: string,
+    messageColor: ColorResolvable,
+  ): Promise<void> {
     try {
       const embed = new EmbedBuilder()
         .setDescription(message)
-        .setColor('#FF0000')
+        .setColor(messageColor)
 
       await member.send({ embeds: [embed] })
     } catch (error) {
@@ -169,10 +175,11 @@ export class DiscordBotService implements OnModuleInit {
             { refreshToken: null },
           )
 
-          await this.sendErrorMessage(
+          await this.sendMessageToMember(
             member,
             `> Щоб знову зайти на майнкрафт сервер, 
 вам потрібно вернутись на діскорд сервер Vinland!`,
+            MemberMessageColorsEnum.RED,
           )
         }
       } catch (error) {
@@ -189,10 +196,9 @@ export class DiscordBotService implements OnModuleInit {
         })
 
         if (!isExistUserInWl) {
-          try {
-            const embed = new EmbedBuilder()
-              .setDescription(
-                `> Вітаю, щоб попасти на сервер, просто напишіть в цей канал свій нікНейм: https://discord.com/channels/991308923581779988/1284457173723775063
+          this.sendMessageToMember(
+            member,
+            `> Вітаю, щоб попасти на сервер, просто напишіть в цей канал свій нікНейм: https://discord.com/channels/991308923581779988/1284457173723775063
 
 Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
 Функції функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
@@ -201,12 +207,8 @@ export class DiscordBotService implements OnModuleInit {
 :link: **IP**: vinlad.space
 :desktop: **Сайт**: https://vinland-trade.vercel.app/
 :map: **Карта**: https://map.vinlad.space/`,
-              )
-              .setColor('#097FED')
-            await member.send({ embeds: [embed] })
-          } catch (e) {
-            this.logger.verbose('Користувач не приймає повідомлення в ПП')
-          }
+            MemberMessageColorsEnum.BLUE,
+          )
         }
 
         if (isExistUserInWl) {
@@ -239,10 +241,9 @@ export class DiscordBotService implements OnModuleInit {
 
           member.setNickname(isExistUserInWl.username)
 
-          try {
-            const embed = new EmbedBuilder()
-              .setDescription(
-                `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
+          this.sendMessageToMember(
+            member,
+            `> Вітаю, вам **відновленно** доступ в **whitelist**! :tada: :partying_face: :tada:
 
 Правила майнкрафт-серверу: https://discord.com/channels/991308923581779988/1268922823045546025
 Функції функції на сервері: https://discord.com/channels/991308923581779988/1280103451522633799
@@ -251,12 +252,8 @@ export class DiscordBotService implements OnModuleInit {
 :link: **IP**: vinland.space
 :desktop: **Сайт**: https://vinland-trade.vercel.app/
 :map: **Карта**: https://map.vinland.space/`,
-              )
-              .setColor('#00FF00')
-            await member.send({ embeds: [embed] })
-          } catch (e) {
-            this.logger.verbose('Користувач не приймає повідомлення в ПП')
-          }
+            MemberMessageColorsEnum.GREEN,
+          )
         }
       } catch (error) {
         this.logger.error(
@@ -278,17 +275,19 @@ export class DiscordBotService implements OnModuleInit {
           const newUsername = message.content
           const validPattern = /^[a-zA-Z0-9_.-]+$/
 
-          await this.sendErrorMessage(
+          await this.sendMessageToMember(
             message.author,
             'Хибний набір символів для нікнейму. :x:',
+            MemberMessageColorsEnum.RED,
           )
 
           if (!validPattern.test(newUsername)) {
             await message.delete()
 
-            await this.sendErrorMessage(
+            await this.sendMessageToMember(
               message.author,
               'Хибний набір символів для нікнейму. :x:',
+              MemberMessageColorsEnum.RED,
             )
 
             return
@@ -297,9 +296,10 @@ export class DiscordBotService implements OnModuleInit {
           if (message.content.length < 3) {
             await message.delete()
 
-            await this.sendErrorMessage(
+            await this.sendMessageToMember(
               message.author,
               'Мінімальна кількість символів **3** :x:',
+              MemberMessageColorsEnum.RED,
             )
 
             return
@@ -308,9 +308,10 @@ export class DiscordBotService implements OnModuleInit {
           if (message.content.length > 16) {
             await message.delete()
 
-            await this.sendErrorMessage(
+            await this.sendMessageToMember(
               message.author,
               'Максимальна кількість символів **16** :x:',
+              MemberMessageColorsEnum.RED,
             )
 
             return
@@ -334,16 +335,11 @@ export class DiscordBotService implements OnModuleInit {
               await member.roles.add(this.ROLE_PLAYER_ID)
             }
 
-            try {
-              const embed = new EmbedBuilder()
-                .setDescription(
-                  'Вітаю, вас добавлено в **whitelist**! 🎉 🥳 🎉',
-                )
-                .setColor('#00FF00')
-              await message.author.send({ embeds: [embed] })
-            } catch (e) {
-              this.logger.verbose('Користувач не приймає повідомлення в ПП')
-            }
+            this.sendMessageToMember(
+              message.author,
+              'Вітаю, вас добавлено в **whitelist**! 🎉 🥳 🎉',
+              MemberMessageColorsEnum.GREEN,
+            )
 
             try {
               await message.delete()
@@ -351,15 +347,11 @@ export class DiscordBotService implements OnModuleInit {
               this.logger.error(`Не вдалось видалити повідомлення: ${error}`)
             }
           } catch (error) {
-            try {
-              const embed = new EmbedBuilder()
-                .setDescription(error.message)
-                .setColor('#FF0000')
-
-              message.author.send({ embeds: [embed] })
-            } catch (error) {
-              this.logger.verbose('Користувач не приймає повідомлення в ПП')
-            }
+            this.sendMessageToMember(
+              message.author,
+              error.message,
+              MemberMessageColorsEnum.RED,
+            )
 
             this.logger.error(error)
 
@@ -372,9 +364,10 @@ export class DiscordBotService implements OnModuleInit {
         } else {
           await message.delete()
 
-          await this.sendErrorMessage(
+          await this.sendMessageToMember(
             message.author,
             'Попасти в whitelist можна тільки якщо ваш ДС аккаунт був створений 3 місяців назад.',
+            MemberMessageColorsEnum.RED,
           )
         }
       } catch (error) {

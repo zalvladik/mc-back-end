@@ -95,3 +95,9 @@ export enum EnchantsEnum {
   INFINITY = 'infinity',
   FLAME = 'flame',
 }
+
+export enum MemberMessageColorsEnum {
+  RED = '#FF0000',
+  GREEN = '#00FF00',
+  BLUE = '#097FED',
+}

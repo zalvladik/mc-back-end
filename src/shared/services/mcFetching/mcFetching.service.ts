@@ -77,7 +77,7 @@ export class McFetchingService {
       radius /= 8
     }
 
-    await axios.post(`${this.minecraftServerURL}/worldExtansion`, {
+    await axios.post(`${this.minecraftServerURL}/worldExpansion`, {
       worldType,
       radius,
     })

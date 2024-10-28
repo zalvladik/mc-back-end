@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   InternalServerErrorException,
+  Logger,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { WorldExpansion } from 'src/entities/world-expansion.entity'
@@ -15,6 +16,8 @@ import type { GetTopWorldsExpansionPeymentsQueryDto } from '../dtos.request'
 
 @Injectable()
 export class WorldExpansionPaymentsService {
+  private logger = new Logger('WorldExpansionPaymentsService')
+
   constructor(
     @InjectRepository(WorldExpansion)
     private readonly worldExpansionRepository: Repository<WorldExpansion>,
@@ -92,7 +95,9 @@ export class WorldExpansionPaymentsService {
         lvl: lastExpansion.lvl,
         worldType: lastExpansion.worldType,
       })
-    } catch {
+    } catch (e) {
+      this.logger.error(e)
+
       throw new InternalServerErrorException('Проблеми з розширенням світу')
     }
 

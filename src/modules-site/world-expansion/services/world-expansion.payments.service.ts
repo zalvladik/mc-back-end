@@ -57,7 +57,7 @@ export class WorldExpansionPaymentsService {
     userId,
   }: CreateWorldsExpansionPeymantsProps): Promise<void> {
     const lastExpansion = await this.worldExpansionRepository.findOne({
-      where: { worldType, completedAt: IsNull(), isCompleted: IsNull() },
+      where: { worldType, completedAt: IsNull(), isCompleted: false },
     })
 
     if (!lastExpansion) {

@@ -15,6 +15,7 @@ import { User } from 'src/entities/user.entity'
 import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import { WorldEnum } from 'src/shared/enums'
 import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
+import { WorldUa } from 'src/shared/constants'
 import type { CreateWorldsExpansionPeymantsProps } from '../types'
 import type { GetTopWorldsExpansionPeymentsQueryDto } from '../dtos.request'
 
@@ -100,13 +101,13 @@ export class WorldExpansionPaymentsService {
 
     if (lastExpansion.lvl - 2 === secondWorldExpansion.lvl) {
       throw new ConflictException(
-        `Потрібно спершу підняти рівень для: ${secondWorldExpansion.worldType}`,
+        `Потрібно спершу підняти рівень для: ${WorldUa[secondWorldExpansion.worldType]}`,
       )
     }
 
     if (lastExpansion.lvl - 2 === thirdWorldExpansion.lvl) {
       throw new ConflictException(
-        `Потрібно спершу підняти рівень для: ${thirdWorldExpansion.worldType}`,
+        `Потрібно спершу підняти рівень для: ${WorldUa[thirdWorldExpansion.worldType]}`,
       )
     }
 

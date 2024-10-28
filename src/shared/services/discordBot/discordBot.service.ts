@@ -119,7 +119,8 @@ export class DiscordBotService implements OnModuleInit {
         .setDescription(
           `Розширено **${WorldUa[worldType]}** 
 Ви покращали світ до ${worldLvl} рівня !
-З ${prevCords / 1000}к. до ${(prevCords + 1000) / 1000}к. блоків`,
+
+> З ${prevCords / 1000}к. до ${(prevCords + 1000) / 1000}к. блоків`,
         )
         .setColor(WorldColors[worldType] as ColorResolvable)
 

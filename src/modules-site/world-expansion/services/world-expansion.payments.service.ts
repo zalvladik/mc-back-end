@@ -1,7 +1,9 @@
 import {
   ConflictException,
+  HttpException,
+  HttpStatus,
   Injectable,
-  // InternalServerErrorException,
+  InternalServerErrorException,
   Logger,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -122,21 +124,25 @@ export class WorldExpansionPaymentsService {
       moneyForPayment = howMuchNeedForComplete
     }
 
+    if (moneyForPayment > user.money) {
+      throw new HttpException('Недостатньо коштів', HttpStatus.PAYMENT_REQUIRED)
+    }
+
     lastExpansion.moneyStorage += moneyForPayment
 
     user.money -= moneyForPayment
 
     if (lastExpansion.moneyStorage >= lastExpansion.cost) {
-      // try {
-      //   await this.mcFetchingService.worldExansion({
-      //     lvl: lastExpansion.lvl,
-      //     worldType: lastExpansion.worldType,
-      //   })
-      // } catch (e) {
-      //   this.logger.error(e)
+      try {
+        await this.mcFetchingService.worldExansion({
+          lvl: lastExpansion.lvl,
+          worldType: lastExpansion.worldType,
+        })
+      } catch (e) {
+        this.logger.error(e)
 
-      //   throw new InternalServerErrorException('Проблеми з розширенням світу')
-      // }
+        throw new InternalServerErrorException('Проблеми з розширенням світу')
+      }
 
       lastExpansion.completedAt = new Date()
       lastExpansion.isCompleted = true

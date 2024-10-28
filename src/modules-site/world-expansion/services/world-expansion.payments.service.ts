@@ -7,7 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm'
 import { WorldExpansion } from 'src/entities/world-expansion.entity'
 
-import { Repository } from 'typeorm'
+import { IsNull, Repository } from 'typeorm'
 import { WorldExpansionPayments } from 'src/entities/world-expansion-payments.entity'
 import { User } from 'src/entities/user.entity'
 import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
@@ -57,11 +57,10 @@ export class WorldExpansionPaymentsService {
     userId,
   }: CreateWorldsExpansionPeymantsProps): Promise<void> {
     const lastExpansion = await this.worldExpansionRepository.findOne({
-      where: { worldType },
-      order: { createdAt: 'DESC' },
+      where: { worldType, completedAt: IsNull(), isCompleted: IsNull() },
     })
 
-    if (lastExpansion.completedAt || lastExpansion.isCompleted) {
+    if (!lastExpansion) {
       throw new ConflictException(
         'Ще не був створений збір на розширення світу',
       )

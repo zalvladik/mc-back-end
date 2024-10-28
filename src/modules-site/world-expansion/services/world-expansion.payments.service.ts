@@ -14,6 +14,7 @@ import { WorldExpansionPayments } from 'src/entities/world-expansion-payments.en
 import { User } from 'src/entities/user.entity'
 import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import { WorldEnum } from 'src/shared/enums'
+import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
 import type { CreateWorldsExpansionPeymantsProps } from '../types'
 import type { GetTopWorldsExpansionPeymentsQueryDto } from '../dtos.request'
 
@@ -29,6 +30,7 @@ export class WorldExpansionPaymentsService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly mcFetchingService: McFetchingService,
+    private readonly discordBotService: DiscordBotService,
   ) {}
 
   async getTopWorldsExpansionPeyments({
@@ -161,6 +163,12 @@ export class WorldExpansionPaymentsService {
         worldType: lastExpansion.worldType,
         cost: newExpansionCost,
       })
+
+      await this.discordBotService.pingWorldExpansionInChannel(
+        worldType,
+        prevCords,
+        lastExpansion.lvl,
+      )
 
       await this.worldExpansionRepository.save(newExpansion)
     }

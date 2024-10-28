@@ -8,6 +8,9 @@ import { Repository } from 'typeorm'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { User } from 'src/entities/user.entity'
 import { MemberMessageColorsEnum } from 'src/shared/enums'
+import type { WorldEnum } from 'src/shared/enums'
+
+import { WorldColors, WorldUa } from 'src/shared/constants'
 
 @Injectable()
 export class DiscordBotService implements OnModuleInit {
@@ -18,6 +21,8 @@ export class DiscordBotService implements OnModuleInit {
   private TARGET_CHANNEL_ID = process.env.TARGET_CHANNEL_ID
 
   private COMMUNION_CHANNEL_ID = process.env.COMMUNION_CHANNEL_ID
+
+  private NEWS_CHANNEL_ID = process.env.NEWS_CHANNEL_ID
 
   private ROLE_NOOB_ID = process.env.ROLE_NOOB_ID
 
@@ -95,6 +100,28 @@ export class DiscordBotService implements OnModuleInit {
 Хорошої гри і мирного неба !!!`,
         )
         .setColor('#ee7303')
+
+      await channel.send({ embeds: [embed] })
+    }
+  }
+
+  async pingWorldExpansionInChannel(
+    worldType: WorldEnum,
+    prevCords: number,
+    worldLvl: number,
+  ): Promise<void> {
+    const channel = await this.client.channels.fetch(this.NEWS_CHANNEL_ID)
+
+    if (channel?.isTextBased()) {
+      await channel.send(`||@everyone||`)
+
+      const embed = new EmbedBuilder()
+        .setDescription(
+          `Розширено **${WorldUa[worldType]}** 
+Ви покращали світ до ${worldLvl} рівня !
+З ${prevCords / 1000}к. до ${(prevCords + 1000) / 1000}к. блоків`,
+        )
+        .setColor(WorldColors[worldType] as ColorResolvable)
 
       await channel.send({ embeds: [embed] })
     }

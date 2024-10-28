@@ -1,4 +1,4 @@
-import { EnchantsEnum, VipEnum } from '../enums'
+import { EnchantsEnum, VipEnum, WorldEnum } from '../enums'
 
 export const THIRTY_DAYS = 30 * 24 * 60 * 1000
 
@@ -236,3 +236,15 @@ export const ppEffects = [
   'white_ash',
   'witch',
 ]
+
+export const WorldUa = {
+  [WorldEnum.WORLD]: 'Простий світ',
+  [WorldEnum.WORLD_NETHER]: 'Пекло',
+  [WorldEnum.WORLD_THE_END]: 'Енд',
+}
+
+export const WorldColors = {
+  [WorldEnum.WORLD]: '#00FF00',
+  [WorldEnum.WORLD_NETHER]: '#FF0000',
+  [WorldEnum.WORLD_THE_END]: '#db13f0',
+}

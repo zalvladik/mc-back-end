@@ -7,6 +7,7 @@ import { WorldExpansionPayments } from 'src/entities/world-expansion-payments.en
 import { WorldExpansion } from 'src/entities/world-expansion.entity'
 
 import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
+import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
 import { AuthModule } from '../auth/auth.module'
 import {
   WorldExpansionPaymentsService,
@@ -27,6 +28,7 @@ import {
     WorldExpansionService,
     WorldExpansionPaymentsService,
     McFetchingService,
+    DiscordBotService,
   ],
 })
 export class WorldExpansionModule {}

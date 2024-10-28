@@ -75,9 +75,12 @@ export class WorldExpansionPaymentsService {
       if (worldType !== lastExpansion.worldType) {
         const anotherWorldExpansion =
           await this.worldExpansionRepository.findOne({
-            where: { worldType },
-            order: { createdAt: 'DESC' },
+            where: { worldType, completedAt: IsNull(), isCompleted: false },
           })
+
+        if (!anotherWorldExpansion) {
+          throw new ConflictException('Помилка, визивай Адміна !!!')
+        }
 
         if (!secondWorldExpansion) {
           secondWorldExpansion = anotherWorldExpansion

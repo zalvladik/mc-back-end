@@ -68,7 +68,7 @@ export class McFetchingService {
 
   async worldExansion({ worldType, lvl }: WorldExansionProps): Promise<void> {
     const getWorldRadius = (howMuch: number): number => {
-      return 500 * howMuch + 2500
+      return 1000 * howMuch + 10000
     }
 
     let radius = getWorldRadius(lvl)

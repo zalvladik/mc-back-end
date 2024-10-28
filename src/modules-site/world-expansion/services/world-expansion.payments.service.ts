@@ -1,7 +1,7 @@
 import {
   ConflictException,
   Injectable,
-  InternalServerErrorException,
+  // InternalServerErrorException,
   Logger,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -11,6 +11,7 @@ import { Repository } from 'typeorm'
 import { WorldExpansionPayments } from 'src/entities/world-expansion-payments.entity'
 import { User } from 'src/entities/user.entity'
 import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
+import { WorldEnum } from 'src/shared/enums'
 import type { CreateWorldsExpansionPeymantsProps } from '../types'
 import type { GetTopWorldsExpansionPeymentsQueryDto } from '../dtos.request'
 
@@ -66,6 +67,43 @@ export class WorldExpansionPaymentsService {
       )
     }
 
+    let secondWorldExpansion: WorldExpansion | undefined
+    let thirdWorldExpansion: WorldExpansion | undefined
+
+    await Object.values(WorldEnum).reduce(async (acc, worldType) => {
+      await acc
+
+      if (worldType !== lastExpansion.worldType) {
+        const anotherWorldExpansion =
+          await this.worldExpansionRepository.findOne({
+            where: { worldType },
+            order: { createdAt: 'DESC' },
+          })
+
+        if (!secondWorldExpansion) {
+          secondWorldExpansion = anotherWorldExpansion
+
+          return
+        }
+
+        if (!thirdWorldExpansion) {
+          thirdWorldExpansion = anotherWorldExpansion
+        }
+      }
+    }, Promise.resolve())
+
+    if (lastExpansion.lvl - 2 === secondWorldExpansion.lvl) {
+      throw new ConflictException(
+        `Потрібно спершу підняти рівень для: ${secondWorldExpansion.worldType}`,
+      )
+    }
+
+    if (lastExpansion.lvl - 2 === thirdWorldExpansion.lvl) {
+      throw new ConflictException(
+        `Потрібно спершу підняти рівень для: ${thirdWorldExpansion.worldType}`,
+      )
+    }
+
     lastExpansion.moneyStorage = Number(lastExpansion.moneyStorage)
     lastExpansion.cost = Number(lastExpansion.cost)
 
@@ -87,16 +125,16 @@ export class WorldExpansionPaymentsService {
     user.money -= moneyForPayment
 
     if (lastExpansion.moneyStorage >= lastExpansion.cost) {
-      try {
-        await this.mcFetchingService.worldExansion({
-          lvl: lastExpansion.lvl,
-          worldType: lastExpansion.worldType,
-        })
-      } catch (e) {
-        this.logger.error(e)
+      // try {
+      //   await this.mcFetchingService.worldExansion({
+      //     lvl: lastExpansion.lvl,
+      //     worldType: lastExpansion.worldType,
+      //   })
+      // } catch (e) {
+      //   this.logger.error(e)
 
-        throw new InternalServerErrorException('Проблеми з розширенням світу')
-      }
+      //   throw new InternalServerErrorException('Проблеми з розширенням світу')
+      // }
 
       lastExpansion.completedAt = new Date()
       lastExpansion.isCompleted = true

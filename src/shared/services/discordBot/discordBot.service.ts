@@ -117,8 +117,7 @@ export class DiscordBotService implements OnModuleInit {
 
       const embed = new EmbedBuilder()
         .setDescription(
-          `Розширено **${WorldUa[worldType]}** 
-Ви покращали світ до ${worldLvl} рівня !
+          `**${WorldUa[worldType]}** покращено до ${worldLvl} рівня !
 
 > З ${prevCords / 1000}к. до ${(prevCords + 1000) / 1000}к. блоків`,
         )

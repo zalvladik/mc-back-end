@@ -113,7 +113,7 @@ export class DiscordBotService implements OnModuleInit {
     const channel = await this.client.channels.fetch(this.NEWS_CHANNEL_ID)
 
     if (channel?.isTextBased()) {
-      await channel.send(`||@everyone||`)
+      await channel.send(`||<@&${this.ROLE_PLAYER_ID}>||`)
 
       const embed = new EmbedBuilder()
         .setDescription(

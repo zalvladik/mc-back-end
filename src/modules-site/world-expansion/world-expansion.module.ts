@@ -8,6 +8,7 @@ import { WorldExpansion } from 'src/entities/world-expansion.entity'
 
 import { McFetchingService } from 'src/shared/services/mcFetching/mcFetching.service'
 import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
+import { Whitelist } from 'src/entities/whitelist.entity'
 import { AuthModule } from '../auth/auth.module'
 import {
   WorldExpansionPaymentsService,
@@ -20,15 +21,20 @@ import {
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, WorldExpansionPayments, WorldExpansion]),
+    TypeOrmModule.forFeature([
+      User,
+      WorldExpansionPayments,
+      WorldExpansion,
+      Whitelist,
+    ]),
     AuthModule,
   ],
   controllers: [WorldExpansionController, WorldExpansionPaymentsController],
   providers: [
-    DiscordBotService,
     WorldExpansionService,
     WorldExpansionPaymentsService,
     McFetchingService,
+    DiscordBotService,
   ],
 })
 export class WorldExpansionModule {}

@@ -154,9 +154,13 @@ export class WorldExpansionPaymentsService {
 
       const newCords = lastExpansion.lvl * 1000 + 11000
 
-      const newExpansionCost = Math.round(
+      let newExpansionCost = Math.round(
         (newCords * newCords - prevCords * prevCords) * 0.00003047619,
       )
+
+      if (worldType !== WorldEnum.WORLD_THE_END) {
+        newExpansionCost = Math.round(newExpansionCost / 2)
+      }
 
       const newExpansion = this.worldExpansionRepository.create({
         createdAt: new Date(),

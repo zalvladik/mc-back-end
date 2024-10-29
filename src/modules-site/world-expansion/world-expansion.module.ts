@@ -25,10 +25,10 @@ import {
   ],
   controllers: [WorldExpansionController, WorldExpansionPaymentsController],
   providers: [
+    DiscordBotService,
     WorldExpansionService,
     WorldExpansionPaymentsService,
     McFetchingService,
-    DiscordBotService,
   ],
 })
 export class WorldExpansionModule {}

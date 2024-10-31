@@ -67,39 +67,41 @@ export class UserShulkersService {
     }
 
     try {
-      const items = itemsData.map(
-        (item: ItemDto & { description: string[] | null }) => {
-          const { display_name, categories, description } =
-            itemCategoriesSorter(item.type, item.description)
+      const items = itemsData.map((item: ItemDto) => {
+        const { display_name, categories, description } = itemCategoriesSorter(
+          item.type,
+        )
 
-          const createdNewItem = this.itemRepository.create({
-            ...item,
-            user,
-            display_name: item.display_name || display_name,
-            categories,
-          })
+        const createdNewItem = this.itemRepository.create({
+          ...item,
+          user,
+          display_name: item.display_name || display_name,
+          categories,
+        })
 
-          if (description) createdNewItem.description = description
+        if (description)
+          createdNewItem.description = item?.description?.length
+            ? item.description
+            : description
 
-          if (item.enchants?.length) {
-            const enchantType = getEnchantTypeFromItemType(item.type)
+        if (item.enchants?.length) {
+          const enchantType = getEnchantTypeFromItemType(item.type)
 
-            if (enchantType) {
-              const enchantMetaType = getEnchantMetaType(enchantType)
+          if (enchantType) {
+            const enchantMetaType = getEnchantMetaType(enchantType)
 
-              const newEnchantMeta = this.enchantMetaRepository.create({
-                enchantLength: item.enchants.length,
-                enchantType,
-                [enchantMetaType]: item.enchants.join(','),
-              })
+            const newEnchantMeta = this.enchantMetaRepository.create({
+              enchantLength: item.enchants.length,
+              enchantType,
+              [enchantMetaType]: item.enchants.join(','),
+            })
 
-              createdNewItem.enchantMeta = newEnchantMeta
-            }
+            createdNewItem.enchantMeta = newEnchantMeta
           }
+        }
 
-          return createdNewItem
-        },
-      )
+        return createdNewItem
+      })
 
       const updatedShulkerData = {
         ...shulkerData,

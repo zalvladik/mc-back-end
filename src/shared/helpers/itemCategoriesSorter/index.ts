@@ -26,10 +26,7 @@ const convertCategories = (categories: string[]): CategoryEnum[] => {
   )
 }
 
-export const itemCategoriesSorter = (
-  type: string,
-  description?: string,
-): ItemInCategorieT => {
+export const itemCategoriesSorter = (type: string): ItemInCategorieT => {
   const firstLetter = type.charAt(0)
   const categoryLetterGroup = itemCategories[firstLetter]
 
@@ -37,15 +34,11 @@ export const itemCategoriesSorter = (
     throw new Error(`Item '${type}' not found in item categories.`)
   }
 
-  const {
-    display_name,
-    categories,
-    description: desFromCategory,
-  } = categoryLetterGroup[type]
+  const { display_name, categories, description } = categoryLetterGroup[type]
 
   return {
     display_name: display_name ?? `${new Date()}`,
     categories: convertCategories(categories),
-    description: description ? [description] : desFromCategory,
+    description,
   }
 }

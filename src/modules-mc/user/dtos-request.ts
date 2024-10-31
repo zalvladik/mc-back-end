@@ -94,8 +94,8 @@ export class ItemDto {
 
   @Optional()
   @IsString()
-  @ApiProperty({ example: 'Супер класний меч' })
-  description?: string
+  @ApiProperty({ example: ['Супер класний меч', 'Тривалість польоту: 3'] })
+  description?: string[]
 
   @IsNotEmpty()
   @IsString()

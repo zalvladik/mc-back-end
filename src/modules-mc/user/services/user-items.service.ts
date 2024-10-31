@@ -68,7 +68,7 @@ export class UserItemsService {
       const items = itemsData.map(
         (item: ItemDto & { description: string[] | null }) => {
           const { display_name, categories, description } =
-            itemCategoriesSorter(item.type, item.description)
+            itemCategoriesSorter(item.type)
 
           const createdNewItem = this.itemRepository.create({
             ...item,
@@ -77,7 +77,10 @@ export class UserItemsService {
             categories,
           })
 
-          if (description) createdNewItem.description = description
+          if (description)
+            createdNewItem.description = item?.description?.length
+              ? item.description
+              : description
 
           if (item.enchants?.length) {
             const enchantType = getEnchantTypeFromItemType(item.type)

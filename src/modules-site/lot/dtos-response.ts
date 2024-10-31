@@ -20,6 +20,8 @@ export class CreateLotResponseDto {
   item?: ItemLotResponseDto
 
   shulker?: ShulkerLotResponseDto
+
+  isSold: boolean
 }
 
 export class GetLotsResponseDto {

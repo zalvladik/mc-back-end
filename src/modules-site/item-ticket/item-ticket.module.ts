@@ -6,6 +6,7 @@ import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { User } from 'src/entities/user.entity'
 import { UserService } from 'src/modules-site/user/services'
 
+import { Lot } from 'src/entities/lot.entity'
 import { ItemTicketController } from './controllers'
 
 import { ItemTicketService } from './services'
@@ -13,7 +14,10 @@ import { ItemTicketService } from './services'
 import { AuthModule } from '../auth/auth.module'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ItemTicket, Item, User]), AuthModule],
+  imports: [
+    TypeOrmModule.forFeature([ItemTicket, Item, User, Lot]),
+    AuthModule,
+  ],
   controllers: [ItemTicketController],
   providers: [ItemTicketService, UserService],
 })

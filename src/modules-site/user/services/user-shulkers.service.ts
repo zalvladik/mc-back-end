@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Shulker } from 'src/entities/shulker.entity'
-import { IsNull, Repository } from 'typeorm'
+import { Repository } from 'typeorm'
 import type { GetShulkerItemsFromUserResponseDto } from '../dtos-response'
 
 @Injectable()
@@ -12,17 +12,12 @@ export class UserShulkersService {
   ) {}
 
   async getUserShulkers(id: number): Promise<Shulker[]> {
-    const userShulkersWithoutLot =
-      (await this.shulkerReposetory.find({
-        where: { lot: IsNull(), isTaken: false, user: { id } },
-      })) ?? []
-
-    const userShulkersWithByetLot =
-      (await this.shulkerReposetory.find({
-        where: { lot: { isSold: true }, isTaken: false, user: { id } },
-      })) ?? []
-
-    return [...userShulkersWithoutLot, ...userShulkersWithByetLot]
+    return (
+      this.shulkerReposetory.find({
+        where: { isTaken: false, user: { id } },
+        relations: ['lot'],
+      }) ?? []
+    )
   }
 
   async getShulkerItems(

@@ -11,7 +11,7 @@ import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { itemMeta, SocketTypes } from 'src/shared/constants'
+import { SocketTypes } from 'src/shared/constants'
 import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
@@ -20,6 +20,7 @@ import { getEnchantTypeFromItemType } from 'src/shared/helpers/getEnchantTypeFro
 import { getEnchantMetaType } from 'src/shared/helpers/getEnchantMetaType'
 import { EnchantMeta } from 'src/entities/enchant-meta.entity'
 import { getVipParams } from 'src/shared/helpers/getVipParams'
+import { Lot } from 'src/entities/lot.entity'
 import type { PullShulkerResponseDto } from '../dtos-responses'
 import type { AddShulkerToUserProps, ShulkerPostStorageT } from '../types'
 
@@ -28,6 +29,8 @@ export class UserShulkersService {
   constructor(
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
+    @InjectRepository(Lot)
+    private readonly lotRepository: Repository<Lot>,
     @InjectRepository(EnchantMeta)
     private readonly enchantMetaRepository: Repository<EnchantMeta>,
     @InjectRepository(User)
@@ -148,7 +151,17 @@ export class UserShulkersService {
 
     const savedItemsResult = await this.itemRepository.find({
       where: { shulker: { id: savedUserShulker.id } },
-      select: itemMeta,
+      select: [
+        'id',
+        'amount',
+        'categories',
+        'description',
+        'display_name',
+        'durability',
+        'enchants',
+        'type',
+      ],
+      relations: ['lot'],
     })
 
     this.socketService.updateDataAndNotifyClients({
@@ -172,7 +185,7 @@ export class UserShulkersService {
 
     const userShulker = await this.shulkerRepository.findOne({
       where: { user: { username }, id: shulkerId, isTaken: false },
-      relations: ['items'],
+      relations: ['items', 'lot'],
     })
 
     if (!userShulker) {
@@ -189,12 +202,24 @@ export class UserShulkersService {
   }
 
   async deleteShulker(username: string, shulkerId: number): Promise<void> {
+    const currentShulker = await this.shulkerRepository.findOne({
+      where: { id: shulkerId },
+      relations: ['lot'],
+    })
+
     await this.itemRepository.update(
       { shulker: { id: shulkerId } },
       { isTaken: true },
     )
 
-    await this.shulkerRepository.update({ id: shulkerId }, { isTaken: true })
+    await this.shulkerRepository.update(
+      { id: shulkerId },
+      { isTaken: true, lot: null },
+    )
+
+    if (currentShulker.lot) {
+      await this.lotRepository.delete(currentShulker.lot.id)
+    }
 
     this.socketService.updateDataAndNotifyClients({
       username,

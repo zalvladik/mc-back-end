@@ -87,7 +87,13 @@ export class LotShulkerService {
 
     const { lot, ...rest } = shulkerForLot
 
-    return { id: newLot.id, price, shulker: { ...rest }, username }
+    return {
+      id: newLot.id,
+      price,
+      shulker: { ...rest },
+      username,
+      isSold: false,
+    }
   }
 
   async buyLotShulker({

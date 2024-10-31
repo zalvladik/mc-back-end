@@ -12,7 +12,7 @@ import { Item } from 'src/entities/item.entity'
 import { ItemTicket } from 'src/entities/item-ticket.entity'
 import { User } from 'src/entities/user.entity'
 
-import { itemMeta } from 'src/shared/constants'
+import { Lot } from 'src/entities/lot.entity'
 import type {
   CreateItemTicketResponseDto,
   GetItemsFromTicketResponseDto,
@@ -29,6 +29,8 @@ export class ItemTicketService {
     private readonly itemTicketRepository: Repository<ItemTicket>,
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
+    @InjectRepository(Lot)
+    private readonly lotRepository: Repository<Lot>,
   ) {}
 
   async getItemTickets(id: number): Promise<ItemTicket[]> {
@@ -49,7 +51,7 @@ export class ItemTicketService {
 
     return this.itemRepository.find({
       where: { itemTicket: { id: itemTicketId } },
-      select: itemMeta,
+      select: [],
     })
   }
 
@@ -74,6 +76,7 @@ export class ItemTicketService {
 
     const arrayItems = await this.itemRepository
       .createQueryBuilder('items')
+      .leftJoinAndSelect('items.lot', 'lot')
       .whereInIds(itemIds)
       .andWhere('items.user.id = :userId', { userId })
       .andWhere('items.itemTicket IS NULL')
@@ -85,10 +88,17 @@ export class ItemTicketService {
 
     const newItemTicket = this.itemTicketRepository.create()
 
+    const itemLotIds: number[] = []
+
     const updatedItems = arrayItems.map((itemData: Item) => {
+      if (itemData.lot) {
+        itemLotIds.push(itemData.lot.id)
+      }
+
       return {
         ...itemData,
         itemTicket: newItemTicket,
+        lot: null,
       }
     })
 
@@ -99,7 +109,13 @@ export class ItemTicketService {
     newItemTicket.user = user
     newItemTicket.items = updatedItems
 
+    await this.itemRepository.save(updatedItems)
+
     await this.itemTicketRepository.save(newItemTicket)
+
+    if (itemLotIds.length) {
+      await this.lotRepository.delete(itemLotIds)
+    }
 
     return { id: newItemTicket.id }
   }
@@ -122,7 +138,17 @@ export class ItemTicketService {
 
     return this.itemRepository.find({
       where: { id: In(itemIds), user: { id: userId } },
-      select: itemMeta,
+      select: [
+        'id',
+        'amount',
+        'categories',
+        'description',
+        'display_name',
+        'durability',
+        'enchants',
+        'type',
+        'lot',
+      ],
     })
   }
 

@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { IsNull, Repository } from 'typeorm'
 
 import { Item } from 'src/entities/item.entity'
-import { itemMeta } from 'src/shared/constants'
 import type { GetItemsFromUserResponseDto } from '../dtos-response'
 
 @Injectable()
@@ -15,28 +14,25 @@ export class UserItemsService {
   ) {}
 
   async getItemsFromUser(id: number): Promise<GetItemsFromUserResponseDto[]> {
-    const itemsWithoutLot = await this.itemRepository.find({
+    return this.itemRepository.find({
       where: {
         user: { id },
         itemTicket: IsNull(),
         isTaken: false,
-        lot: IsNull(),
         shulker: IsNull(),
       },
-      select: itemMeta,
+      select: [
+        'id',
+        'amount',
+        'categories',
+        'description',
+        'display_name',
+        'durability',
+        'enchants',
+        'type',
+        'lot',
+      ],
+      relations: ['lot'],
     })
-
-    const itemsWithBuyetLot = await this.itemRepository.find({
-      where: {
-        user: { id },
-        itemTicket: IsNull(),
-        isTaken: false,
-        lot: { isSold: true },
-        shulker: IsNull(),
-      },
-      select: itemMeta,
-    })
-
-    return [...itemsWithoutLot, ...itemsWithBuyetLot]
   }
 }

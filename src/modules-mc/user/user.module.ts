@@ -15,6 +15,7 @@ import { CacheService } from 'src/shared/services/cache'
 import { EnchantMeta } from 'src/entities/enchant-meta.entity'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
+import { Lot } from 'src/entities/lot.entity'
 import {
   UserPlayerStatsController,
   UserItemsController,
@@ -41,6 +42,7 @@ import {
       Shulker,
       EnchantMeta,
       Whitelist,
+      Lot,
     ]),
   ],
   controllers: [

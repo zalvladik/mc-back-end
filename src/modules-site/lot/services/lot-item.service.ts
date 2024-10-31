@@ -87,7 +87,7 @@ export class LotItemService {
 
     const { serialized, lot, ...rest } = itemForLot
 
-    return { id: newLot.id, price, item: { ...rest }, username }
+    return { id: newLot.id, price, item: { ...rest }, username, isSold: false }
   }
 
   async buyLotItem({

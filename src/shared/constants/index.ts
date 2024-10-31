@@ -13,17 +13,6 @@ export enum SocketTypes {
   REMOVE_SHULKER,
 }
 
-export const itemMeta = {
-  id: true,
-  amount: true,
-  categories: true,
-  description: true,
-  display_name: true,
-  durability: true,
-  enchants: true,
-  type: true,
-}
-
 export const enchantsWithMaxLvl: { [key: string]: number } = {
   [EnchantsEnum.BANE_OF_ARTHROPODS]: 5,
   [EnchantsEnum.BLAST_PROTECTION]: 4,

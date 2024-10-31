@@ -153,8 +153,9 @@ export class UserItemsService {
     const itemTicket = this.cacheService.get<ItemTicket>(itemTicketId)
 
     await this.itemTicketRepository.remove(itemTicket)
+
     const updatedItems = itemTicket.items.map(item => {
-      return { ...item, isTaken: true }
+      return { ...item, isTaken: true, lot: null }
     })
 
     await this.itemRepository.save(updatedItems)

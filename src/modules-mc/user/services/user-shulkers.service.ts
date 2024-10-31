@@ -70,7 +70,7 @@ export class UserShulkersService {
       const items = itemsData.map(
         (item: ItemDto & { description: string[] | null }) => {
           const { display_name, categories, description } =
-            itemCategoriesSorter(item.type)
+            itemCategoriesSorter(item.type, item.description)
 
           const createdNewItem = this.itemRepository.create({
             ...item,

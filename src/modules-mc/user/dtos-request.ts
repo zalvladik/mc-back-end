@@ -4,6 +4,7 @@ import { IsNotEmpty, IsString, IsNumber, IsArray } from 'class-validator'
 
 import type { TransformFnParams } from 'class-transformer'
 import { Transform } from 'class-transformer'
+import { Optional } from '@nestjs/common'
 
 export class PullItemsFromUserParamDto {
   @IsNotEmpty()
@@ -90,6 +91,11 @@ export class ItemDto {
   @IsString()
   @ApiProperty({ example: 'Супер класний меч' })
   display_name: string
+
+  @Optional()
+  @IsString()
+  @ApiProperty({ example: 'Супер класний меч' })
+  description?: string
 
   @IsNotEmpty()
   @IsString()

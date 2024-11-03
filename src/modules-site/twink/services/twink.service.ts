@@ -60,6 +60,8 @@ export class TwinkService {
       where: { id: userId },
     })
 
+    currentUser.money = Number(currentUser.money)
+
     const currentUserInWl = await this.whitelistRepository.findOne({
       where: { username: mainUserName },
     })

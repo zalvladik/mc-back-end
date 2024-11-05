@@ -60,7 +60,8 @@ export class UserStatsService {
   ): Promise<GetUserPlaytimeByIdResponseDto> {
     const userStats = await this.userStatsRepository.findOne({
       where: { user: { username } },
-      select: ['afkTime', 'playTime'],
+      select: ['id', 'afkTime', 'playTime'],
+      relations: ['user'],
     })
 
     if (!userStats) {

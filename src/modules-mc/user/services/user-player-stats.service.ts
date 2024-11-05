@@ -85,6 +85,7 @@ export class UserPlayerStatsService {
 
     userStats.afkTime = newAfkTime
     userStats.playTime = newPlayTime
+    userStats.points = Math.floor(newPlayTime - newAfkTime)
 
     await this.whitelistRepository.save(user)
     await this.userStatsRepository.save(userStats)

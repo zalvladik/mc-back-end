@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
@@ -13,7 +13,7 @@ export class UserStats {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne(() => User, { nullable: false })
+  @OneToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'user_id' })
   user: User
 
@@ -24,5 +24,8 @@ export class UserStats {
   playTime: number
 
   @Column({ type: 'smallint', nullable: false, default: 0 })
-  usedHourse: number
+  usedPoints: number
+
+  @Column({ type: 'smallint', nullable: false, default: 0 })
+  points: number
 }

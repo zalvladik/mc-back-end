@@ -83,9 +83,12 @@ export class UserPlayerStatsService {
       })
     }
 
+    const lifeHouse =
+      newPlayTime - newAfkTime === 0 ? 0 : (newPlayTime - newAfkTime) / 3600
+
     userStats.afkTime = newAfkTime
     userStats.playTime = newPlayTime
-    userStats.points = Math.floor(newPlayTime - newAfkTime)
+    userStats.points = Math.floor(lifeHouse)
 
     await this.whitelistRepository.save(user)
     await this.userStatsRepository.save(userStats)

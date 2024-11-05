@@ -4,7 +4,7 @@ import { Crystal } from 'src/entities/crystal.entity'
 import { Repository } from 'typeorm'
 
 @Injectable()
-export class CrystalService {
+export class UserCrystalsService {
   constructor(
     @InjectRepository(Crystal)
     private readonly crystalRepository: Repository<Crystal>,

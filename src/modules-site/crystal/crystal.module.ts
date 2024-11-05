@@ -8,15 +8,15 @@ import { Crystal } from 'src/entities/crystal.entity'
 import { CrystalLootBox } from 'src/entities/crystal-loot-box.entity'
 import { User } from 'src/entities/user.entity'
 import { AuthModule } from '../auth/auth.module'
-import { CrystalController, CrystalLootBoxController } from './controllers'
-import { CrystalLootBoxService, CrystalService } from './services'
+import { CrystalLootBoxController } from './controllers'
+import { CrystalLootBoxService } from './services'
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, Crystal, CrystalLootBox]),
     AuthModule,
   ],
-  controllers: [CrystalController, CrystalLootBoxController],
-  providers: [CrystalService, CrystalLootBoxService, UserService],
+  controllers: [CrystalLootBoxController],
+  providers: [CrystalLootBoxService, UserService],
 })
 export class CrystalModule {}

@@ -6,18 +6,18 @@ import { UserDecorator } from 'src/shared/decorators/user.decorator'
 import { RoleEnum } from 'src/shared/enums'
 import { AuthGuard } from 'src/shared/guards/auth.guard'
 import { RolesGuard } from 'src/shared/guards/roles.guard'
-import { CrystalService } from '../services'
+import { UserCrystalsService } from '../services'
 
-@Controller('crystal')
+@Controller('user/crystals')
 @UseGuards(AuthGuard, RolesGuard)
 @Roles(RoleEnum.USER)
 export class CrystalController {
-  constructor(private readonly crystalService: CrystalService) {}
+  constructor(private readonly userCrystalsService: UserCrystalsService) {}
 
   @Get()
   async getUserCrystals(
     @UserDecorator() { id }: GetUserDto,
   ): Promise<Crystal[]> {
-    return this.crystalService.getUserCrystals(id)
+    return this.userCrystalsService.getUserCrystals(id)
   }
 }

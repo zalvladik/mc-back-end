@@ -13,6 +13,7 @@ import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { UserStats } from 'src/entities/user-stats.entity'
+import { Crystal } from 'src/entities/crystal.entity'
 import {
   UserStatsController,
   UserController,
@@ -29,6 +30,7 @@ import {
   UserService,
   UserShulkersService,
   UserVipService,
+  UserCrystalsService,
 } from './services'
 
 import { AuthModule } from '../auth/auth.module'
@@ -39,6 +41,7 @@ import { AuthService } from '../auth/services'
     TypeOrmModule.forFeature([
       User,
       UserStats,
+      Crystal,
       Advancements,
       SrPlayer,
       Item,
@@ -66,6 +69,7 @@ import { AuthService } from '../auth/services'
     UserShulkersService,
     UserVipService,
     AuthService,
+    UserCrystalsService,
   ],
   exports: [UserVipService, JwtService],
 })

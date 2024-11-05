@@ -11,7 +11,7 @@ import { UserCrystalsService } from '../services'
 @Controller('user/crystals')
 @UseGuards(AuthGuard, RolesGuard)
 @Roles(RoleEnum.USER)
-export class CrystalController {
+export class UserCrystalController {
   constructor(private readonly userCrystalsService: UserCrystalsService) {}
 
   @Get()

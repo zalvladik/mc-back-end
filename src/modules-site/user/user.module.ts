@@ -58,6 +58,7 @@ import { AuthService } from '../auth/services'
     UserSkinController,
     UserShulkersController,
     UserVipController,
+    UserItemsController,
   ],
   providers: [
     UserService,

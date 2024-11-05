@@ -4,6 +4,7 @@ import { UserSkinController } from './user-skin.controller'
 import { UserItemsController } from './user-items.controller'
 import { UserShulkersController } from './user-shulkers.controller'
 import { UserVipController } from './user-vip.controller'
+import { UserCrystalController } from './user-crystals.controller'
 
 export {
   UserController,
@@ -12,4 +13,5 @@ export {
   UserSkinController,
   UserShulkersController,
   UserVipController,
+  UserCrystalController,
 }

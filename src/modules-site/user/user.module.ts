@@ -21,6 +21,7 @@ import {
   UserItemsController,
   UserShulkersController,
   UserVipController,
+  UserCrystalController,
 } from './controllers'
 
 import {
@@ -59,6 +60,7 @@ import { AuthService } from '../auth/services'
     UserShulkersController,
     UserVipController,
     UserItemsController,
+    UserCrystalController,
   ],
   providers: [
     UserService,

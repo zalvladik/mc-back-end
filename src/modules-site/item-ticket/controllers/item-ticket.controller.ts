@@ -33,13 +33,13 @@ import type {
   RemoveItemsFromTicketResponseDto,
 } from '../dtos-response'
 
-@Controller('item_ticket')
+@Controller('user/tickets')
 @UseGuards(AuthGuard, RolesGuard)
 @Roles(RoleEnum.USER)
 export class ItemTicketController {
   constructor(private readonly itemTicketService: ItemTicketService) {}
 
-  @Get('user_tickets')
+  @Get('')
   @HttpCode(200)
   async getItemTickets(
     @UserDecorator() { id }: GetUserDto,

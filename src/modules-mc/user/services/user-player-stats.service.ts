@@ -78,6 +78,8 @@ export class UserPlayerStatsService {
     })
 
     if (!userStats) {
+      const user = await this.userRepository.findOne({ where: { username } })
+
       userStats = this.userStatsRepository.create({
         user,
       })

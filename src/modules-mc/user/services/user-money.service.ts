@@ -11,7 +11,7 @@ import { Repository } from 'typeorm'
 import { User } from 'src/entities/user.entity'
 
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { SocketTypes } from 'src/shared/constants'
+import { SocketEnum } from 'src/shared/enums'
 import { CacheService } from 'src/shared/services/cache'
 import type {
   AddMoneyToUserResponseDto,
@@ -76,7 +76,7 @@ export class UserMoneyService {
     this.socketService.updateDataAndNotifyClients({
       username,
       data: updatedMoney,
-      type: SocketTypes.INCREMENT_MONEY,
+      type: SocketEnum.INCREMENT_MONEY,
     })
     this.cacheService.delete(moneyPostStorageId)
   }
@@ -119,7 +119,7 @@ export class UserMoneyService {
     this.socketService.updateDataAndNotifyClients({
       username,
       data: updatedMoney,
-      type: SocketTypes.DECREMENT_MONEY,
+      type: SocketEnum.DECREMENT_MONEY,
     })
   }
 }

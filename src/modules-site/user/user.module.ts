@@ -12,6 +12,7 @@ import { Item } from 'src/entities/item.entity'
 
 import { Shulker } from 'src/entities/shulker.entity'
 import { Whitelist } from 'src/entities/whitelist.entity'
+import { UserStats } from 'src/entities/user-stats.entity'
 import {
   UserStatsController,
   UserController,
@@ -37,6 +38,7 @@ import { AuthService } from '../auth/services'
   imports: [
     TypeOrmModule.forFeature([
       User,
+      UserStats,
       Advancements,
       SrPlayer,
       Item,

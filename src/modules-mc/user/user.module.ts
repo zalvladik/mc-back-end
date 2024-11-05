@@ -16,6 +16,7 @@ import { EnchantMeta } from 'src/entities/enchant-meta.entity'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
 import { Lot } from 'src/entities/lot.entity'
+import { UserStats } from 'src/entities/user-stats.entity'
 import {
   UserPlayerStatsController,
   UserItemsController,
@@ -33,6 +34,7 @@ import {
 @Module({
   imports: [
     TypeOrmModule.forFeature([
+      UserStats,
       User,
       Advancements,
       SrPlayer,

@@ -1,17 +1,14 @@
-import { EnchantsEnum, VipEnum, WorldEnum } from '../enums'
+import { CrystalTypeEnum, EnchantsEnum, VipEnum, WorldEnum } from '../enums'
+
+enum EnchantMetaTypeEnum {
+  ARMOR = 'armor',
+  TOOLS_AND_MELEE = 'toolsAndMelee',
+  RANGE_WEAPON = 'rangeWeapon',
+}
 
 export const THIRTY_DAYS = 30 * 24 * 60 * 1000
 
 export const WL_END_COST = 64 * 2
-
-export enum SocketTypes {
-  INCREMENT_MONEY,
-  DECREMENT_MONEY,
-  ADD_ITEMS,
-  REMOVE_ITEMS,
-  ADD_SHULKER,
-  REMOVE_SHULKER,
-}
 
 export const enchantsWithMaxLvl: { [key: string]: number } = {
   [EnchantsEnum.BANE_OF_ARTHROPODS]: 5,
@@ -56,12 +53,6 @@ export const enchantsWithMaxLvl: { [key: string]: number } = {
   [EnchantsEnum.MULTISHOT]: 1,
   [EnchantsEnum.INFINITY]: 1,
   [EnchantsEnum.FLAME]: 1,
-}
-
-export enum EnchantMetaTypeEnum {
-  ARMOR = 'armor',
-  TOOLS_AND_MELEE = 'toolsAndMelee',
-  RANGE_WEAPON = 'rangeWeapon',
 }
 
 export const enchantVariables: {
@@ -236,4 +227,43 @@ export const WorldColors = {
   [WorldEnum.WORLD]: '#00FF00',
   [WorldEnum.WORLD_NETHER]: '#FF0000',
   [WorldEnum.WORLD_THE_END]: '#db13f0',
+}
+
+export const CustomModelDataPrefixMap = {
+  [CrystalTypeEnum.AMETIST]: 0,
+  [CrystalTypeEnum.GODDES]: 50,
+  [CrystalTypeEnum.EMERALD]: 100,
+}
+
+export const CustomModelDataSufixMap = {
+  [CrystalTypeEnum.AMETIST]: {
+    abominableblade: 1,
+    abominablegreatsaber: 2,
+    abominablescythe: 3,
+    amethyst_shuriken: 4,
+    arcanethyst: 5,
+    demonlordsgreataxe: 6,
+    demonlordsword: 7,
+    muramasa: 8,
+  },
+  [CrystalTypeEnum.GODDES]: {
+    ancient_royal_great_sword: 1,
+    divineaxerhitta: 2,
+    divinepunisher: 3,
+    divine_justice: 4,
+    divine_reaper: 5,
+    sunbreak: 6,
+    mjolnir: 7,
+    righteous_relic: 8,
+    pharaohs_treasure: 9,
+  },
+  [CrystalTypeEnum.EMERALD]: {
+    enigma: 1,
+    greenscythe: 2,
+    powerfusehammer: 3,
+    powerfusesword: 4,
+    royalchakram: 5,
+    sentinels_will: 6,
+    soulstealer: 7,
+  },
 }

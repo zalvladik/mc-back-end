@@ -1,5 +1,4 @@
-import { EnchantMetaTypeEnum } from 'src/shared/constants'
-import { EnchantsTypesEnum } from 'src/shared/enums'
+import { EnchantMetaTypeEnum, EnchantsTypesEnum } from 'src/shared/enums'
 
 export const getEnchantMetaType = (
   enchantType: EnchantsTypesEnum,

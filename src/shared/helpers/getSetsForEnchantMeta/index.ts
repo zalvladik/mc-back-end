@@ -1,5 +1,5 @@
-import type { EnchantMetaTypeEnum } from 'src/shared/constants'
 import { enchantsWithMaxLvl } from 'src/shared/constants'
+import type { EnchantMetaTypeEnum } from 'src/shared/enums'
 import { getSetsForEnchantTypes } from '../getSetsForEnchantTypes/getSetsForEnchantTypes'
 
 export const getSetsForEnchantMeta = (

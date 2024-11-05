@@ -6,6 +6,7 @@ import { Repository } from 'typeorm'
 import { Advancements } from 'src/entities/advancements.entity'
 import { User } from 'src/entities/user.entity'
 import { Whitelist } from 'src/entities/whitelist.entity'
+import { UserStats } from 'src/entities/user-stats.entity'
 import type { GetUserPlaytimeByIdResponseDto } from '../dtos-response'
 
 @Injectable()
@@ -19,6 +20,9 @@ export class UserStatsService {
 
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+
+    @InjectRepository(UserStats)
+    private readonly userStatsRepository: Repository<UserStats>,
   ) {}
 
   async getAdvancements(): Promise<Advancements[]> {
@@ -54,8 +58,8 @@ export class UserStatsService {
   async getUserPlayTimeByUserName(
     username: string,
   ): Promise<GetUserPlaytimeByIdResponseDto> {
-    return this.whitelistRepository.findOne({
-      where: { username },
+    return this.userStatsRepository.findOne({
+      where: { user: { username } },
       select: ['afkTime', 'playTime'],
     })
   }

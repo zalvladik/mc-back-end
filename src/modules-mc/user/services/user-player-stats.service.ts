@@ -7,6 +7,7 @@ import { Advancements } from 'src/entities/advancements.entity'
 import { User } from 'src/entities/user.entity'
 import { Whitelist } from 'src/entities/whitelist.entity'
 import { DiscordBotService } from 'src/shared/services/discordBot/discordBot.service'
+import { UserStats } from 'src/entities/user-stats.entity'
 import type { PutPlaytimeProps } from '../types'
 
 @Injectable()
@@ -16,6 +17,8 @@ export class UserPlayerStatsService {
     private readonly advancementsRepository: Repository<Advancements>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(UserStats)
+    private readonly userStatsRepository: Repository<UserStats>,
     @InjectRepository(Whitelist)
     private readonly whitelistRepository: Repository<Whitelist>,
     private readonly discordBotService: DiscordBotService,
@@ -70,13 +73,20 @@ export class UserPlayerStatsService {
       user.isNewPlayer = false
     }
 
-    await this.whitelistRepository.update(
-      { id: user.id },
-      {
-        afkTime: newAfkTime,
-        playTime: newPlayTime,
-        isNewPlayer: user.isNewPlayer,
-      },
-    )
+    let userStats = await this.userStatsRepository.findOne({
+      where: { user: { username } },
+    })
+
+    if (!userStats) {
+      userStats = this.userStatsRepository.create({
+        user,
+      })
+    }
+
+    userStats.afkTime = newAfkTime
+    userStats.playTime = newPlayTime
+
+    await this.whitelistRepository.save(user)
+    await this.userStatsRepository.save(userStats)
   }
 }

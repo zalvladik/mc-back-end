@@ -13,6 +13,15 @@ export enum VipEnum {
   NETHERITE = 'netherite',
 }
 
+export enum SocketEnum {
+  INCREMENT_MONEY,
+  DECREMENT_MONEY,
+  ADD_ITEMS,
+  REMOVE_ITEMS,
+  ADD_SHULKER,
+  REMOVE_SHULKER,
+}
+
 export enum CategoryEnum {
   BUILD_BLOCKS = 'build_blocks',
   COLOR_BLOCKS = 'color_blocks',
@@ -25,6 +34,24 @@ export enum CategoryEnum {
   WEAPONS = 'weapons',
   SHULKERS = 'shulkers',
   ENCHANTED_BOOK = 'enchanted_book',
+}
+
+export enum CrystalTypeEnum {
+  AMETIST = 'ametist',
+  EMERALD = 'emerald',
+  GODDES = 'goddes',
+}
+
+export enum CrystalItemTypeEnum {
+  TOOLS_AND_MELEE = 'toolsAndMelee',
+  BOWS = 'bows',
+  CROSSBOW = 'crossbow',
+}
+
+export enum EnchantMetaTypeEnum {
+  ARMOR = 'armor',
+  TOOLS_AND_MELEE = 'toolsAndMelee',
+  RANGE_WEAPON = 'rangeWeapon',
 }
 
 export enum WorldEnum {

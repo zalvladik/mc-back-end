@@ -1,8 +1,7 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
 
-import { EnchantsTypesEnum } from 'src/shared/enums'
+import { EnchantMetaTypeEnum, EnchantsTypesEnum } from 'src/shared/enums'
 import { getSetsForEnchantMeta } from 'src/shared/helpers/getSetsForEnchantMeta'
-import { EnchantMetaTypeEnum } from 'src/shared/constants'
 
 @Entity({ name: 'enchant_meta' })
 export class EnchantMeta {

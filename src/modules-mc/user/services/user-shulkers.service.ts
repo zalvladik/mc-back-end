@@ -11,7 +11,7 @@ import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { SocketTypes } from 'src/shared/constants'
+import { SocketEnum } from 'src/shared/enums'
 import { Item } from 'src/entities/item.entity'
 import { Shulker } from 'src/entities/shulker.entity'
 import { CacheService } from 'src/shared/services/cache'
@@ -167,7 +167,7 @@ export class UserShulkersService {
     this.socketService.updateDataAndNotifyClients({
       username,
       data: { shulker: savedUserShulker, shulkerItems: savedItemsResult },
-      type: SocketTypes.ADD_SHULKER,
+      type: SocketEnum.ADD_SHULKER,
     })
   }
 
@@ -224,7 +224,7 @@ export class UserShulkersService {
     this.socketService.updateDataAndNotifyClients({
       username,
       data: shulkerId,
-      type: SocketTypes.REMOVE_SHULKER,
+      type: SocketEnum.REMOVE_SHULKER,
     })
   }
 }

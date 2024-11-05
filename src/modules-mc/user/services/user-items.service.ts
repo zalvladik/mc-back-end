@@ -13,7 +13,7 @@ import { User } from 'src/entities/user.entity'
 import type { ItemDto } from 'src/modules-mc/user/dtos-request'
 import { itemCategoriesSorter } from 'src/shared/helpers/itemCategoriesSorter'
 import { SocketService } from 'src/shared/services/socket/socket.service'
-import { SocketTypes } from 'src/shared/constants'
+import { SocketEnum } from 'src/shared/enums'
 import { CacheService } from 'src/shared/services/cache'
 
 import { EnchantMeta } from 'src/entities/enchant-meta.entity'
@@ -125,7 +125,7 @@ export class UserItemsService {
     this.socketService.updateDataAndNotifyClients({
       username,
       data: updatedData,
-      type: SocketTypes.ADD_ITEMS,
+      type: SocketEnum.ADD_ITEMS,
     })
   }
 
@@ -165,7 +165,7 @@ export class UserItemsService {
     this.socketService.updateDataAndNotifyClients({
       username,
       data: itemTicketId,
-      type: SocketTypes.REMOVE_ITEMS,
+      type: SocketEnum.REMOVE_ITEMS,
     })
   }
 }

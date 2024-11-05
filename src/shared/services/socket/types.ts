@@ -1,7 +1,7 @@
-import type { SocketTypes } from 'src/shared/constants'
+import type { SocketEnum } from 'src/shared/enums'
 
 export type UpdateDataAndNotifyClientsProps = {
-  type: SocketTypes
+  type: SocketEnum
   data: any
   username: string
 }
